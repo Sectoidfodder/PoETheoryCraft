@@ -17,7 +17,7 @@ namespace PoETheoryCraft.Utils
     }
     public static class ModLogic
     {
-        public const bool InfExaltIgnoreMeta = true;
+        public const bool InfExaltIgnoreMeta = false;
         public const string PrefixLock = "StrMasterItemGenerationCannotChangePrefixes";
         public const string SuffixLock = "DexMasterItemGenerationCannotChangeSuffixes";
         public const string Prefix = "prefix";

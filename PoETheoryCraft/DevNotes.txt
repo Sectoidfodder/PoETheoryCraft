@@ -22,7 +22,7 @@ If not, ModLogic.GetInfluence can be simplified to check name instead of iterati
 It would also allow easy grouping of ModsView by influence.
 
 Need to test what happens when you exalt/regal/aug an item with no valid mods (due to ilvl and/or metamods).
-Currently the simulation just does nothing.
+Currently the simulation just does nothing.  Could be that influence from a conq ex is applied even if no mod is added.
 
 Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up to two decimals if they're nonzero.
 
@@ -36,10 +36,8 @@ Example: Voltaxic's conversion mod is still 100% in definition, but has a "60% o
 
 A mod tag for fossils is "defences" - plural with a 'c', while another tag for catalysts is "jewellery_defense" - singular with an 's'.
 
-PoEDB inconsistency?: dodge mods on armor have the "defences" tag and should be blocked by pristine fossil.
-
-Odd tag behavior on boots: Redeemer's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also doesn't block Redeemer's spell dodge.
-All attack dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.
+Odd tag behavior on boots: Redeemer's/Shaper's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also neither block Redeemer's spell dodge.
+All attack and spell dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.
 
 ItemCraft.CalcProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
 Currently it scans mods, then uses results to update properties and quality, but changing catalyst quality can affect mods that affect properties.
