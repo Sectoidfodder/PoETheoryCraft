@@ -10,28 +10,9 @@ namespace PoETheoryCraft
 {
     public class CraftingBench
     {
-        private bool _extendedmodview;
-        public bool ExtendedModView     //ValidMods will ignore BenchItem's available prefix/suffix space if true
-        {
-            get { return _extendedmodview; }
-            set
-            {
-                if (value != _extendedmodview)
-                {
-                    _extendedmodview = value;
-                    UpdatePreviews();
-                }
-            }
-        }   
         public IDictionary<string, int> CurrencySpent { get; private set; }
-        public IDictionary<PoEModData, int> BaseValidMods { get; private set; } //all valid mods for BenchItem's source PoEBaseItemData, starting point for crafting
-        public IDictionary<PoEModData, int> ValidMods { get; private set; }     //actual valid mods for BenchItem's current state and selected currencies, for view only
-        public IDictionary<PoEModData, IDictionary<string, int>> ValidBenchMods { get; private set; }   //valid bench mods for BenchItem's current state
-        //public IDictionary<PoEModData, string> ValidSpecialMods { get; private set; }   //extra non-weighted mods from fossils/essences
-        private PoEEssenceData PreviewEssence;
-        private IList<PoEFossilData> PreviewFossils;
-        private string PreviewCurrency;
-        private ItemCraft _benchitem;   //item on bench, setting it also updates mod pools
+        public IDictionary<PoEModData, int> BaseValidMods { get; private set; } //starting point for all crafts: a subset of core mods valid for BenchItem's source template
+        private ItemCraft _benchitem;   //item on bench, setting it also updates base mod pool
         public ItemCraft BenchItem { 
             get { return _benchitem; }
             set
@@ -41,14 +22,10 @@ namespace PoETheoryCraft
                 {
                     PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[_benchitem.SourceData];
                     BaseValidMods = ModLogic.FindBaseValidMods(itemtemplate, CraftingDatabase.CoreMods.Values);
-                    ValidBenchMods = ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods);
-                    UpdatePreviews();
                 }
                 else
                 {
                     BaseValidMods.Clear();
-                    ValidMods.Clear();
-                    ValidBenchMods.Clear();
                 }
             }
         }
@@ -56,84 +33,8 @@ namespace PoETheoryCraft
         public CraftingBench()
         {
             CurrencySpent = new Dictionary<string, int>();
-            ExtendedModView = Properties.Settings.Default.IgnoreAffixCap;
         }
-        private void UpdatePreviews()
-        {
-            if (BenchItem == null)
-                return;
-            RollOptions ops = new RollOptions();
-            IDictionary<PoEModData, int> extendedpool = new Dictionary<PoEModData, int>(BaseValidMods);
-            string tagtoremove = null;
-            ISet<string> tagstoadd = new HashSet<string>();
-            ItemInfluence inf = ItemInfluence.Shaper;   //using this for null/invalid since there's no shaper exalt
-            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
-            if (PreviewFossils != null && PreviewFossils.Count > 0)
-            {
-                ISet<IList<PoEModWeight>> modweightgroups = new HashSet<IList<PoEModWeight>>();
-                //ICollection<PoEModData> forcedmods = new List<PoEModData>();
-                foreach (PoEFossilData fossil in PreviewFossils)
-                {
-                    foreach (string t in fossil.added_mods)
-                    {
-                        if (!extendedpool.ContainsKey(CraftingDatabase.AllMods[t]))
-                            extendedpool.Add(CraftingDatabase.AllMods[t], 0);
-                    }
-                    //foreach (string t in fossil.forced_mods)
-                    //{
-                    //    forcedmods.Add(CraftingDatabase.MiscMods[t]);
-                    //}
-                    modweightgroups.Add(fossil.negative_mod_weights);
-                    modweightgroups.Add(fossil.positive_mod_weights);
-                }
-                //forcedmods = ModLogic.FindBaseValidMods(BenchItem.SourceData, forcedmods, true).Keys;   //filter by spawn_weight first
-                ops.ModWeightGroups = modweightgroups;
-            }
-            else if (PreviewEssence != null)
-            {
-                ops.ILvlCap = PreviewEssence.item_level_restriction ?? 200;
-            }
-            else if (PreviewCurrency != null && BenchItem.GetInfluences().Count == 0)
-            {
-                if (PreviewCurrency == "exalt-redeemer")
-                    inf = ItemInfluence.Redeemer;
-                else if (PreviewCurrency == "exalt-hunter")
-                    inf = ItemInfluence.Hunter;
-                else if (PreviewCurrency == "exalt-warlord")
-                    inf = ItemInfluence.Warlord;
-                else if (PreviewCurrency == "exalt-crusader")
-                    inf = ItemInfluence.Crusader;
-                if (inf != ItemInfluence.Shaper)
-                {
-                    string tag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
-                    if (tag != null)    //temporarily add influence tag
-                    {
-                        tagtoremove = tag;
-                        BenchItem.LiveTags.Add(tag);
-                    }
-                    if (ModLogic.InfExaltIgnoreMeta && BenchItem.LiveTags.Contains("no_attack_mods"))
-                    {
-                        BenchItem.LiveTags.Remove("no_attack_mods");
-                        tagstoadd.Add("no_attack_mods");
-                    }
-                    if (ModLogic.InfExaltIgnoreMeta && BenchItem.LiveTags.Contains("no_caster_mods"))
-                    {
-                        BenchItem.LiveTags.Remove("no_caster_mods");
-                        tagstoadd.Add("no_caster_mods");
-                    }
-                }
-            }
-            ValidMods = ModLogic.FindValidMods(BenchItem, extendedpool, ExtendedModView, ops);
-            if (inf != ItemInfluence.Shaper)
-                ValidMods = ModLogic.FilterForInfluence(ValidMods, inf, itemtemplate);
-            if (tagtoremove != null)
-                BenchItem.LiveTags.Remove(tagtoremove);
-            foreach (string s in tagstoadd)
-            {
-                BenchItem.LiveTags.Add(s);
-            }
-        }
-        public string AddMod(PoEModData mod)
+        public string ForceAddMod(PoEModData mod)
         {
             if (mod.generation_type == ModLogic.Prefix)
             {
@@ -151,61 +52,17 @@ namespace PoETheoryCraft
                 if (modtemplate.group == mod.group)
                     return "Item already has a mod in this mod group";
             }
-            BenchItem.AddMod(mod);
-            UpdatePreviews();
-            return null;
-        }
-        public bool RemovePreviewCurrency()
-        {
-            if (PreviewEssence == null && PreviewFossils == null && PreviewCurrency == null)
-                return false;
-            PreviewFossils = null;
-            PreviewEssence = null;
-            PreviewCurrency = null;
-            UpdatePreviews();
-            return BenchItem != null;
-        }
-        public bool SetPreviewCurrency(string c)
-        {
-            if (PreviewEssence == null && PreviewFossils == null && PreviewCurrency == c)
-                return false;
-            PreviewFossils = null;
-            PreviewEssence = null;
-            PreviewCurrency = c;
-            UpdatePreviews();
-            return BenchItem != null;
-        }
-        public bool SetPreviewEssence(PoEEssenceData ess)
-        {
-            if (PreviewEssence == ess && PreviewFossils == null && PreviewCurrency == null)
-                return false;
-            PreviewFossils = null;
-            PreviewCurrency = null;
-            PreviewEssence = ess;
-            UpdatePreviews();
-            return BenchItem != null;
-        }
-        public bool SetPreviewFossils(IList<PoEFossilData> fossils)
-        {
-            if (PreviewCurrency == null && PreviewEssence == null && PreviewFossils != null && PreviewFossils.Count == fossils.Count)
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
+            ItemInfluence? inf = ModLogic.GetInfluence(mod, itemtemplate);
+            if (inf != null)
             {
-                bool skip = true;
-                foreach (PoEFossilData f in fossils)
-                {
-                    if (!PreviewFossils.Contains(f))
-                    {
-                        skip = false;
-                        break;
-                    }
-                }
-                if (skip)
-                    return false;
+                string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag((ItemInfluence)inf)];
+                if (inftag != null)
+                    BenchItem.LiveTags.Add(inftag);
             }
-            PreviewFossils = fossils;
-            PreviewEssence = null;
-            PreviewCurrency = null;
-            UpdatePreviews();
-            return BenchItem != null;
+            BenchItem.AddMod(mod);
+            //UpdatePreviews();
+            return null;
         }
         public string ApplyEssence(PoEEssenceData ess, int tries = 1)
         {
@@ -229,7 +86,6 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, BaseValidMods, ItemRarity.Rare, op);
-                UpdatePreviews();
             }
             else
             {
@@ -331,7 +187,6 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, extendedpool, ItemRarity.Rare, ops);
-                UpdatePreviews();
             }
             else
             {
@@ -473,8 +328,6 @@ namespace PoETheoryCraft
                     MassResults.Add(target);
                 }
             }
-            if (tries == 1)
-                UpdatePreviews();
             return null;
         }
         private string ApplyInfExalt(ItemCraft target, ItemInfluence inf)

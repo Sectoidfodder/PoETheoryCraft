@@ -32,7 +32,7 @@ namespace PoETheoryCraft.Controls
             Magic1.Text = ModLogic.MagicModCountWeights[0].ToString();
             Magic2.Text = ModLogic.MagicModCountWeights[1].ToString();
             Quality.Text = ItemCraft.DefaultQuality.ToString();
-            PerPage.Text = MainWindow.ResultsPerPage.ToString();
+            PerPage.Text = BulkItemsView.ResultsPerPage.ToString();
             Rare4.TextChanged += Validate_Fields;
             Rare5.TextChanged += Validate_Fields;
             Rare6.TextChanged += Validate_Fields;
@@ -56,6 +56,8 @@ namespace PoETheoryCraft.Controls
             RareJ4.Text = 7 + "";
             Magic1.Text = 1 + "";
             Magic2.Text = 1 + "";
+            Quality.Text = 28 + "";
+            PerPage.Text = 25 + "";
         }
         private void Validate_Fields(object sender, RoutedEventArgs e)
         {

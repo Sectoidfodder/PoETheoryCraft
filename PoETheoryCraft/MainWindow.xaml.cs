@@ -26,8 +26,6 @@ namespace PoETheoryCraft
     public partial class MainWindow : Window
     {
         private readonly CraftingBench Bench;
-        private int massviewindex = 0;
-        public static int ResultsPerPage { get; set; } = Properties.Settings.Default.ResultsPerPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,17 +43,13 @@ namespace PoETheoryCraft
             CurrencyBox.LoadFossils(CraftingDatabase.Fossils.Values);
 
             Bench = new CraftingBench();
+            ModPreview.Bench = Bench;
+            ModPreview.Currency = CurrencyBox;
 
             BigBox.Text = "";
             BigBox.FontWeight = FontWeights.Bold;
             BigBox.Foreground = Brushes.Red;
             RepeatCountBox.TextChanged += CheckRepeatCount;
-        }
-        private void UpdateViews()
-        {
-            ItemSlot.UpdateData(Bench.BenchItem);
-            ModsDisplay.UpdateData(Bench.ValidMods);
-            BenchModsDisplay.UpdateData(Bench.ValidBenchMods);
         }
         private void ItemBaseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -86,31 +80,23 @@ namespace PoETheoryCraft
                 infs.Add(ItemInfluence.Crusader);
 
             Bench.BenchItem = new ItemCraft(d.SelectedBase, ilvl, infs);
-            UpdateViews();
+            ItemSlot.UpdateData(Bench.BenchItem);
+            ModPreview.UpdatePreviews();
+            ModPreview.UpdateCrafts();
         }
         private void ForceAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (!((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
-                return;
-
-            PoEModData mod = null;
-            //all this just to find the right typecast in the right listview to grab the key attribute...
-            if (activeview.PrefixList.SelectedItem is KeyValuePair<PoEModData, int>)
-                mod = ((KeyValuePair<PoEModData, int>)activeview.PrefixList.SelectedItem).Key;
-            else if (activeview.PrefixList.SelectedItem is KeyValuePair<PoEModData, IDictionary<string, int>>)
-                mod = ((KeyValuePair<PoEModData, IDictionary<string, int>>)activeview.PrefixList.SelectedItem).Key;
-            else if (activeview.SuffixList.SelectedItem is KeyValuePair<PoEModData, int>)
-                mod = ((KeyValuePair<PoEModData, int>)activeview.SuffixList.SelectedItem).Key;
-            else if (activeview.SuffixList.SelectedItem is KeyValuePair<PoEModData, IDictionary<string, int>>)
-                mod = ((KeyValuePair<PoEModData, IDictionary<string, int>>)activeview.SuffixList.SelectedItem).Key;
-
+            PoEModData mod = ModPreview.GetSelected();
             if (mod == null)
                 return;
-            string res = Bench.AddMod(mod);
+            string res = Bench.ForceAddMod(mod);
             if (res != null)
                 BigBox.Text = res;
             else
-                UpdateViews();
+            {
+                ItemSlot.UpdateData(Bench.BenchItem);
+                ModPreview.UpdatePreviews();
+            }
         }
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
@@ -139,9 +125,9 @@ namespace PoETheoryCraft
             }
             if (int.TryParse(d.PerPage.Text, out n1) && n1 > 0)
             {
-                ResultsPerPage = n1;
+                BulkItemsView.ResultsPerPage = n1;
                 Properties.Settings.Default.ResultsPerPage = n1;
-                MassCraftShowResults();
+                RepeatResults.UpdateDisplay();
             }
             if (int.TryParse(d.Quality.Text, out n1) && n1 > 0)
             {
@@ -153,23 +139,13 @@ namespace PoETheoryCraft
                 {
                     item.BaseQuality = n1;
                 }
-                MassCraftShowResults();
+                RepeatResults.UpdateDisplay();
             }
             Properties.Settings.Default.Save();
         }
         private void Currency_SelectionChanged(object sender, CurrencySelector.CurrencyEventArgs e)
         {
-            bool viewchanged;
-            if (e.Fossils != null && e.Fossils.Count > 0)
-                viewchanged = Bench.SetPreviewFossils(e.Fossils);
-            else if (e.Essence != null)
-                viewchanged = Bench.SetPreviewEssence(e.Essence);
-            else if (e.Currency != null)
-                viewchanged = Bench.SetPreviewCurrency(e.Currency);
-            else
-                viewchanged = Bench.RemovePreviewCurrency();
-            if (viewchanged)
-                UpdateViews();
+            ModPreview.UpdatePreviews();
         }
         private void Repeat_Click(object sender, RoutedEventArgs e)
         {
@@ -215,39 +191,7 @@ namespace PoETheoryCraft
             }
             if (res == null)
             {
-                massviewindex = 0;
-                MassCraftShowResults();
-            }
-        }
-        private void NextPage_Click(object sender, RoutedEventArgs e)
-        {
-            if (Bench.MassResults.Count > massviewindex + ResultsPerPage)
-            {
-                massviewindex += ResultsPerPage;
-                MassCraftShowResults();
-            }
-        }
-        private void PrevPage_Click(object sender, RoutedEventArgs e)
-        {
-            if (massviewindex > 0)
-            {
-                massviewindex = Math.Max(0, massviewindex - ResultsPerPage);
-                MassCraftShowResults();
-            }
-        }
-        private void MassCraftShowResults()
-        {
-            if (Bench.MassResults.Count > 0)
-            {
-                RepeatResults.Children.Clear();
-                int max = Math.Min(Bench.MassResults.Count, massviewindex + ResultsPerPage);
-                PageHeader.Text = "Showing " + (massviewindex + 1) + "-" + max + " of " + Bench.MassResults.Count + " results";
-                for (int k = massviewindex; k < max; k++)
-                {
-                    ItemView panel = new ItemView();
-                    panel.UpdateData(Bench.MassResults[k]);
-                    RepeatResults.Children.Add(panel);
-                }
+                RepeatResults.Items = Bench.MassResults;
             }
         }
         private void CraftButton_Click(object sender, RoutedEventArgs e)
@@ -288,7 +232,10 @@ namespace PoETheoryCraft
                 }
             }
             if (res == null)
-                UpdateViews();
+            {
+                ItemSlot.UpdateData(Bench.BenchItem);
+                ModPreview.UpdatePreviews();
+            }
         }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {

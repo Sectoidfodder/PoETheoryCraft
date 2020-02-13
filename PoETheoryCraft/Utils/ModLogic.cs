@@ -113,20 +113,29 @@ namespace PoETheoryCraft.Utils
         //Returns subset of dict containing mods of given influence for given item type
         public static IDictionary<PoEModData, int> FilterForInfluence(IDictionary<PoEModData, int> dict, ItemInfluence inf, PoEBaseItemData baseitem)
         {
-            string inftag = baseitem.item_class_properties[EnumConverter.InfToTag(inf)];
             IDictionary<PoEModData, int> filtereddict = new Dictionary<PoEModData, int>();
             foreach (PoEModData mod in dict.Keys)
             {
-                foreach (PoEModWeight w in mod.spawn_weights)
+                if (GetInfluence(mod, baseitem) == inf)
                 {
-                    if (w.tag == inftag && w.weight > 0)
-                    {
-                        filtereddict.Add(mod, dict[mod]);
-                        break;
-                    }
+                    filtereddict.Add(mod, dict[mod]);
                 }
             }
             return filtereddict;
+        }
+        //returns the influence type of the mod (or null), which technically COULD depend on the item base, even if it doesn't currently
+        public static ItemInfluence? GetInfluence(PoEModData mod, PoEBaseItemData item)
+        {
+            foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
+            {
+                string inftag = item.item_class_properties[EnumConverter.InfToTag(inf)];
+                foreach (PoEModWeight w in mod.spawn_weights)
+                {
+                    if (w.tag == inftag && w.weight > 0)
+                        return inf;
+                }
+            }
+            return null;
         }
         //Starts from db and checks only the item template's domain and tags, used for pruning so we check against ~300 mods per roll instead of ~3000
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)

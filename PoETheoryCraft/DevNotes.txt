@@ -1,5 +1,4 @@
-﻿
-Notes:
+﻿Notes:
 
 Need to know before implementing beastcrafting:
 > Remove catalyst quality?
@@ -19,7 +18,7 @@ ModLogic saves time by assuming that adding an explicit mod will never increase 
 I'm pretty sure this is true.  Simulation needs to be adjusted if not.
 
 Are there any non-influenced mods with the same name as influences ("of the Hunt", etc)?
-If not, ModLogic.FilterForInfluence can be simplified to check name instead of iterating through spawn_weight tags.
+If not, ModLogic.GetInfluence can be simplified to check name instead of iterating through spawn_weight tags.
 It would also allow easy grouping of ModsView by influence.
 
 Need to test what happens when you exalt/regal/aug an item with no valid mods (due to ilvl and/or metamods).

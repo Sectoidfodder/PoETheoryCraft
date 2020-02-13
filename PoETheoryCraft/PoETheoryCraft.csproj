@@ -83,11 +83,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\BulkItemsView.xaml.cs">
+      <DependentUpon>BulkItemsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CurrencySelector.xaml.cs">
       <DependentUpon>CurrencySelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModsControl.xaml.cs">
+      <DependentUpon>ModsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ModsView.xaml.cs">
       <DependentUpon>ModsView.xaml</DependentUpon>
@@ -107,11 +113,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\BulkItemsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CurrencySelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ModsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

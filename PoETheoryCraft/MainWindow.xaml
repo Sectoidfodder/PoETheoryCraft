@@ -41,37 +41,18 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TabControl Name="ModTabs">
-                        <TabItem Header="Weighted">
-                            <uc:ModsView x:Name="ModsDisplay"></uc:ModsView>
-                        </TabItem>
-                        <TabItem Header="Craftable">
-                            <uc:ModsView x:Name="BenchModsDisplay"></uc:ModsView>
-                        </TabItem>
-                        <TabItem Header="Special">
-                            <TextBlock>Not yet implemented. Will show delve and incursion exclusive mods, non-weighted mods from fossils and essences</TextBlock>
-                        </TabItem>
-                    </TabControl>
+                    <uc:ModsControl x:Name="ModPreview"></uc:ModsControl>
                     <Button Grid.Row="1" Width="150" Name="ForceAddButton" Click="ForceAdd_Click">Add Mod</Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Mass Craft">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Click="PrevPage_Click">&lt;</Button>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Name="PageHeader">Showing 0-0 of 0 Results</TextBlock>
-                        <Button Click="NextPage_Click">&gt;</Button>
-                    </StackPanel>
-                    <ScrollViewer Grid.Row="1">
-                        <WrapPanel Name="RepeatResults">
-                        </WrapPanel>
-                    </ScrollViewer>
-                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <uc:BulkItemsView x:Name="RepeatResults"/>
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
                         <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>
                         <uc:NumberBox Min="1" Max="1001" Width="35" x:Name="RepeatCountBox">100</uc:NumberBox>
