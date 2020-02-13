@@ -1,0 +1,46 @@
+﻿
+Notes:
+
+Need to know before implementing beastcrafting:
+> Remove catalyst quality?
+> Ignore ilvl?  Always, or only when no valid mods under ilvl?  Is that a bug and might be fixed?
+> Interaction with metamod locks?
+> Interaction with fractured mods?
+
+Do Conquerors' Exalts remove catalyst quality?
+
+Catalysts may not cover every mod they're supposed to.  Can't find a list of tags each one works on so it's educated guesswork.
+For instance, Fertile Catalysts not only apply to the new "catalyst_resource" tag, but also the "life" and "mana" tags that fossils use.
+
+Need to figure out a good way to calculate mod tier, don't see a relevant stat in the json.
+Rather not have to build a massive mod ID and item class table to look it up.
+
+ModLogic saves time by assuming that adding an explicit mod will never increase an item's pool of rollable explicit mods.
+I'm pretty sure this is true.  Simulation needs to be adjusted if not.
+
+Are there any non-influenced mods with the same name as influences ("of the Hunt", etc)?
+If not, ModLogic.FilterForInfluence can be simplified to check name instead of iterating through spawn_weight tags.
+It would also allow easy grouping of ModsView by influence.
+
+Need to test what happens when you exalt/regal/aug an item with no valid mods (due to ilvl and/or metamods).
+Currently the simulation just does nothing.
+
+Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up to two decimals if they're nonzero.
+
+Can't bench mod Fishing Rods? Bench mod definitions don't include their class but I haven't tested in-game.
+
+Rune Dagger and Warstaff item classes aren't included in essence definitions, but essences work on them in-game anyway.
+Currently they're explicitly checked as Dagger and Staff in CraftingBench.ApplyEssence.
+
+Funfact: some old nerfs were implemented (on the client side) by adding a handler to the text localization process.
+Example: Voltaxic's conversion mod is still 100% in definition, but has a "60% of Value" handler tacked on.
+
+A mod tag for fossils is "defences" - plural with a 'c', while another tag for catalysts is "jewellery_defense" - singular with an 's'.
+
+PoEDB inconsistency?: dodge mods on armor have the "defences" tag and should be blocked by pristine fossil.
+
+Odd tag behavior on boots: Redeemer's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also doesn't block Redeemer's spell dodge.
+All attack dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.
+
+ItemCraft.CalcProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
+Currently it scans mods, then uses results to update properties and quality, but changing catalyst quality can affect mods that affect properties.

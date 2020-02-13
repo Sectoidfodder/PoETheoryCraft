@@ -1,0 +1,83 @@
+﻿<Window x:Class="PoETheoryCraft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:PoETheoryCraft.Controls"
+        xmlns:local="clr-namespace:PoETheoryCraft"
+        mc:Ignorable="d"
+        Title="TheoryCraft" Height="720" Width="1280">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Options">
+                <MenuItem Header="Settings" Click="Settings_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Width="150" Name="ItemBaseButton" Click="ItemBaseButton_Click">Pick Item Base</Button>
+        </StackPanel>
+        
+        <uc:ItemView Grid.Row="2" x:Name="ItemSlot"></uc:ItemView>
+        <TextBox Grid.Row="3" IsReadOnly="True" Name="BigBox">Test Text</TextBox>
+        <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
+        <Button Grid.Row="5" Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
+
+        <TabControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
+            <TabItem Header="Mods View">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TabControl Name="ModTabs">
+                        <TabItem Header="Weighted">
+                            <uc:ModsView x:Name="ModsDisplay"></uc:ModsView>
+                        </TabItem>
+                        <TabItem Header="Craftable">
+                            <uc:ModsView x:Name="BenchModsDisplay"></uc:ModsView>
+                        </TabItem>
+                        <TabItem Header="Special">
+                            <TextBlock>Not yet implemented. Will show delve and incursion exclusive mods, non-weighted mods from fossils and essences</TextBlock>
+                        </TabItem>
+                    </TabControl>
+                    <Button Grid.Row="1" Width="150" Name="ForceAddButton" Click="ForceAdd_Click">Add Mod</Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Mass Craft">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Click="PrevPage_Click">&lt;</Button>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Name="PageHeader">Showing 0-0 of 0 Results</TextBlock>
+                        <Button Click="NextPage_Click">&gt;</Button>
+                    </StackPanel>
+                    <ScrollViewer Grid.Row="1">
+                        <WrapPanel Name="RepeatResults">
+                        </WrapPanel>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
+                        <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>
+                        <uc:NumberBox Min="1" Max="1001" Width="35" x:Name="RepeatCountBox">100</uc:NumberBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

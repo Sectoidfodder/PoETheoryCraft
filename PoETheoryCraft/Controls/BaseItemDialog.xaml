@@ -1,0 +1,76 @@
+﻿<Window x:Class="PoETheoryCraft.Controls.BaseItemDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PoETheoryCraft.Controls"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Title="Select Item Base" Height="450" Width="820">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="5,5,5,0" Orientation="Horizontal">
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="ShaperCheck">Shaper</CheckBox>
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="ElderCheck">Elder</CheckBox>
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="RedeemerCheck">Redeemer</CheckBox>
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="HunterCheck">Hunter</CheckBox>
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="WarlordCheck">Warlord</CheckBox>
+            <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="CrusaderCheck">Crusader</CheckBox>
+        </StackPanel>
+        <ListView Margin="5,0,5,0" Grid.Row="1" Grid.Column="0" DisplayMemberPath="Value.name" Name="ItemNameView" SelectionChanged="ItemNameView_Select">
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                                                    <TextBlock Text=":" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding ItemCount, Mode=OneWay}"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter/>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">Search:</TextBlock>
+                <TextBox Margin="5,0,0,0" VerticalAlignment="Center" Name="ItemFilter" TextChanged="ItemFilter_TextChanged" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center">Item Level:</TextBlock>
+                <TextBox Margin="5,0,5,0" VerticalAlignment="Center" Width="25" Name="ILvlBox">100</TextBox>
+            </StackPanel>
+        </Grid>
+        <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Height="30" Grid.Row="2" Grid.Column="1">
+            <Button Width="80" Margin="5,5,5,5" IsCancel="True">Cancel</Button>
+            <Button Width="80" Margin="5,5,5,5" Name="OKButton" Click="OK_Click" IsDefault="True">OK</Button>
+        </StackPanel>
+        <TextBox Margin="5,0,5,0" Grid.Row="1" Grid.Column="1" Name="ItemInfoBox"></TextBox>
+    </Grid>
+</Window>

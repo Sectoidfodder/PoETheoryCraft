@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="PoETheoryCraft.Controls.CurrencySelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PoETheoryCraft.Controls"
+             mc:Ignorable="d" 
+             Height="300" Width="300">
+    <UserControl.Resources>
+        <local:FossilTooltipConverter x:Key="FossilTooltipConverter" />
+        <local:EssenceTooltipConverter x:Key="EssenceTooltipConverter" />
+        <local:NameToImageConverter x:Key="NameToImageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <TabControl Name="CurrencyTabs" SelectionChanged="CurrencyTabs_SelectionChanged">
+            <TabItem Header="Basic">
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Name="BasicView"></ListView>
+            </TabItem>
+            <TabItem Header="Fossil">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontWeight="Bold" Name="FossilLabel1">Selected:</TextBlock>
+                        <TextBlock Margin="5,0,0,0" Text="{Binding Path=SelectedItems.Count, ElementName=FossilView, Mode=OneWay}" FontWeight="Bold" Name="FossilLabel2"></TextBlock>
+                    </StackPanel>
+                    <ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="FossilView" SelectionMode="Multiple">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <!--<Image Source="Icons/fossil/ScorchedFossil.png"></Image>-->
+                                <!--<Image Source="{Binding Path=name, Mode=OneTime, Converter={StaticResource NameToImageConverter}}"></Image>-->
+                                <TextBlock Text="{Binding Path=name, Mode=OneWay}" ToolTip="{Binding Path=descriptions, Mode=OneWay, Converter={StaticResource FossilTooltipConverter}}"></TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Essence">
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Name="EssenceView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=name, Mode=OneWay}" ToolTip="{Binding Path=mods, Mode=OneWay, Converter={StaticResource EssenceTooltipConverter}}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Catalyst">
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Name="CatalystView"></ListView>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
