@@ -60,13 +60,13 @@ namespace PoETheoryCraft.Controls
                 if (Bench.BenchItem.GetInfluences().Count == 0)
                 {
                     string currency = (string)c;
-                    if (currency == "exalt-redeemer")
+                    if (currency == "Redeemer's Exalted Orb")
                         inf = ItemInfluence.Redeemer;
-                    else if (currency == "exalt-hunter")
+                    else if (currency == "Hunter's Exalted Orb")
                         inf = ItemInfluence.Hunter;
-                    else if (currency == "exalt-warlord")
+                    else if (currency == "Warlord's Exalted Orb")
                         inf = ItemInfluence.Warlord;
-                    else if (currency == "exalt-crusader")
+                    else if (currency == "Crusader's Exalted Orb")
                         inf = ItemInfluence.Crusader;
                     if (inf != ItemInfluence.Shaper)
                     {

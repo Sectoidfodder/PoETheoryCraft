@@ -46,20 +46,19 @@ namespace PoETheoryCraft
                     _basequality = value;
                     if (QualityType != null)
                     {
-                        IList<string> auxtags = EnumConverter.GetCatalystAuxTags(QualityType);
                         foreach (ModCraft mod in LiveMods)
                         {
-                            UpdateModQuality(mod, QualityType, auxtags);
+                            UpdateModQuality(mod, QualityType);
                         }
                         foreach (ModCraft mod in LiveImplicits)
                         {
-                            UpdateModQuality(mod, QualityType, auxtags);
+                            UpdateModQuality(mod, QualityType);
                         }
                     }
                 }
             }
         }
-        public string QualityType { get; set; } //null for normal qual, or a tag corresponding to a catalyst e.g. "jewellery_defences"
+        public string QualityType { get; set; } //null for normal qual, or the name of a catalyst, ex: "Imbued Catalyst"
         public ItemCraft(PoEBaseItemData data, int level = 100, ISet<ItemInfluence> influences = null)
         {
             SourceData = data.key;
@@ -235,7 +234,7 @@ namespace PoETheoryCraft
             ModCraft m = new ModCraft(data);
             LiveMods.Add(m);
             LiveTags.UnionWith(data.adds_tags);
-            UpdateModQuality(m, QualityType, EnumConverter.GetCatalystAuxTags(QualityType));
+            UpdateModQuality(m, QualityType);
             ItemRarity r = GetMinimumRarity();
             if (r > Rarity)     //upgrade rarity if needed, which triggers name change
                 Rarity = r;
@@ -247,7 +246,7 @@ namespace PoETheoryCraft
             ModCraft m = new ModCraft(data);
             LiveImplicits.Add(m);
             LiveTags.UnionWith(data.adds_tags);
-            UpdateModQuality(m, QualityType, EnumConverter.GetCatalystAuxTags(QualityType));
+            UpdateModQuality(m, QualityType);
         }
         public void ApplyCatalyst(string tag)
         {
@@ -271,13 +270,16 @@ namespace PoETheoryCraft
                 BaseQuality += 1;
             }
         }
-        private void UpdateModQuality(ModCraft mod, string tag, IList<string> auxtags)
+        private void UpdateModQuality(ModCraft mod, string name)
         {
             PoEModData modtemplate = CraftingDatabase.AllMods[mod.SourceData];
+            IList<string> tags;
+            if (name != null && ModLogic.CatalystTags.Keys.Contains(name))
+                tags = ModLogic.CatalystTags[name];
+            else
+                tags = new List<string>();
             bool match = false;
-            if (tag != null && modtemplate.type_tags.Contains(tag))
-                match = true;
-            foreach (string s in auxtags)
+            foreach (string s in tags)
             {
                 if (modtemplate.type_tags.Contains(s))
                 {
@@ -295,9 +297,9 @@ namespace PoETheoryCraft
         public bool HasValidQualityType()
         {
             string itemclass = CraftingDatabase.AllBaseItems[SourceData].item_class;
-            if (CraftingDatabase.ItemClassCatalyst.Contains<string>(itemclass))
+            if (CraftingDatabase.ItemClassCatalyst.Contains(itemclass))
                 return QualityType != null;
-            else if (CraftingDatabase.ItemClassNoQuality.Contains<string>(itemclass))
+            else if (CraftingDatabase.ItemClassNoQuality.Contains(itemclass))
                 return false;
             else
                 return QualityType == null;

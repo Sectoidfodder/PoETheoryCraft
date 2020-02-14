@@ -211,29 +211,29 @@ namespace PoETheoryCraft
                 ItemCraft target = tries == 1 ? BenchItem : BenchItem.Copy();
                 switch (c)
                 {
-                    case "chaos":
+                    case "Chaos Orb":
                         if (target.Rarity != ItemRarity.Rare)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
                         break;
-                    case "alt":
+                    case "Orb of Alteration":
                         if (target.Rarity != ItemRarity.Magic)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
                         break;
-                    case "divine":
+                    case "Divine Orb":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         target.RerollExplicits();
                         break;
-                    case "annul":
+                    case "Orb of Annulment":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         target.RemoveRandomMod();
                         if (target.QualityType != null)
                             target.BaseQuality -= 20;
                         break;
-                    case "augment":
+                    case "Orb of Augmentation":
                         if (target.Rarity != ItemRarity.Magic)
                             return "Invalid item rarity for selected currency";
                         if (target.LiveMods.Count > 1)
@@ -242,7 +242,7 @@ namespace PoETheoryCraft
                         if (target.QualityType != null)
                             target.BaseQuality -= 2;
                         break;
-                    case "regal":
+                    case "Regal Orb":
                         if (target.Rarity != ItemRarity.Magic)
                             return "Invalid item rarity for selected currency";
                         target.Rarity = ItemRarity.Rare;
@@ -250,7 +250,7 @@ namespace PoETheoryCraft
                         if (target.QualityType != null)
                             target.BaseQuality -= 5;
                         break;
-                    case "exalt":
+                    case "Exalted Orb":
                         if (target.Rarity != ItemRarity.Rare)
                             return "Invalid item rarity for selected currency";
                         if (target.LiveMods.Count >= 2 * target.GetAffixLimit())
@@ -259,61 +259,60 @@ namespace PoETheoryCraft
                         if (target.QualityType != null)
                             target.BaseQuality -= 20;
                         break;
-                    case "exalt-redeemer":
+                    case "Redeemer's Exalted Orb":
                         res = ApplyInfExalt(target, ItemInfluence.Redeemer);
                         if (res != null)
                             return res;
                         break;
-                    case "exalt-hunter":
+                    case "Hunter's Exalted Orb":
                         res = ApplyInfExalt(target, ItemInfluence.Hunter);
                         if (res != null)
                             return res;
                         break;
-                    case "exalt-warlord":
+                    case "Warlord's Exalted Orb":
                         res = ApplyInfExalt(target, ItemInfluence.Warlord);
                         if (res != null)
                             return res;
                         break;
-                    case "exalt-crusader":
+                    case "Crusader's Exalted Orb":
                         res = ApplyInfExalt(target, ItemInfluence.Crusader);
                         if (res != null)
                             return res;
                         break;
-                    case "scour":
+                    case "Orb of Scouring":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         target.ClearMods();
                         break;
-                    case "alch":
+                    case "Orb of Alchemy":
                         if (target.Rarity != ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
                         break;
-                    case "transmute":
+                    case "Orb of Transmutation":
                         if (target.Rarity != ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
                         break;
-                    case "remove-crafted":
+                    case "Remove Crafted Mods":
                         target.ClearMods(true);
                         break;
-                    case "blessed":
+                    case "Blessed Orb":
                         target.RerollImplicits();
                         break;
-                    case "abrasive":
-                    case "fertile":
-                    case "imbued":
-                    case "intrinsic":
-                    case "prismatic":
-                    case "tempering":
-                    case "turbulent":
+                    case "Abrasive Catalyst":
+                    case "Fertile Catalyst":
+                    case "Imbued Catalyst":
+                    case "Intrinsic Catalyst":
+                    case "Prismatic Catalyst":
+                    case "Tempering Catalyst":
+                    case "Turbulent Catalyst":
                         PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
-                        if (!CraftingDatabase.ItemClassCatalyst.Contains<string>(itemtemplate.item_class))
+                        if (!CraftingDatabase.ItemClassCatalyst.Contains(itemtemplate.item_class))
                             return "Invalid item type for catalysts";
-                        string tag = EnumConverter.CatalystToTag(c);
-                        if (target.QualityType == tag && target.BaseQuality >= 20)
+                        if (target.QualityType == c && target.BaseQuality >= 20)
                             return "Item already has max catalyst quality";
-                        target.ApplyCatalyst(tag);
+                        target.ApplyCatalyst(c);
                         break;
                     default:
                         return "Unrecognized currency selected";

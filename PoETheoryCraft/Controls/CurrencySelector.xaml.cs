@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -30,14 +31,10 @@ namespace PoETheoryCraft.Controls
             public IList<PoEFossilData> Fossils { get; set; }
         }
 
-        private readonly IList<string> BasicCurrencies = new List<string>() { "chaos", "alch", "scour", "alt", "transmute", "augment", "regal", "exalt", "exalt-redeemer", "exalt-hunter", "exalt-warlord", "exalt-crusader", "annul", "divine", "blessed", "remove-crafted" };
-        private readonly IList<string> Catalysts = new List<string>() { "abrasive", "fertile", "imbued", "intrinsic", "prismatic", "tempering", "turbulent" };
         public event EventHandler<CurrencyEventArgs> CurrencySelectionChanged;
         public CurrencySelector()
         {
             InitializeComponent();
-            BasicView.ItemsSource = BasicCurrencies;
-            CatalystView.ItemsSource = Catalysts;
         }
         public void LoadEssences(ICollection<PoEEssenceData> essences)
         {
@@ -49,12 +46,18 @@ namespace PoETheoryCraft.Controls
             CollectionViewSource.GetDefaultView(fossils).Filter = AllowedFossils;
             FossilView.ItemsSource = fossils;
         }
+        public void LoadCurrencies(ICollection<PoECurrencyData> currencies)
+        {
+            List<PoECurrencyData> clist = currencies.ToList<PoECurrencyData>();
+            clist.Sort((a, b) => CraftingDatabase.CurrencyIndex.IndexOf(a.name).CompareTo(CraftingDatabase.CurrencyIndex.IndexOf(b.name)));
+            BasicView.ItemsSource = clist;
+        }
         public void CurrencyTabs_SelectionChanged(object sender, RoutedEventArgs e)
         {
             switch (CurrencyTabs.SelectedIndex)
             {
                 case 0:
-                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem as string });
+                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null });
                     break;
                 case 1:
                     SolidColorBrush b = FossilView.SelectedItems.Count > 4 ? Brushes.Red : Brushes.Black;
@@ -65,9 +68,6 @@ namespace PoETheoryCraft.Controls
                 case 2:
                     CurrencySelectionChanged(this, new CurrencyEventArgs() { Essence = EssenceView.SelectedItem as PoEEssenceData });
                     break;
-                case 3:
-                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Currency = CatalystView.SelectedItem as string });
-                    break;
                 default:
                     return;
             }
@@ -77,13 +77,11 @@ namespace PoETheoryCraft.Controls
             switch (CurrencyTabs.SelectedIndex)
             {
                 case 0:
-                    return BasicView.SelectedItem;
+                    return BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null;
                 case 1:
                     return FossilView.SelectedItems;
                 case 2:
                     return EssenceView.SelectedItem;
-                case 3:
-                    return CatalystView.SelectedItem;
                 default:
                     return null;
             }
@@ -97,51 +95,6 @@ namespace PoETheoryCraft.Controls
         {
             PoEFossilData f = o as PoEFossilData;
             return (!f.changes_quality && !f.enchants && !f.mirrors && !f.rolls_lucky && !f.rolls_white_sockets && f.sell_price_mods.Count == 0);
-        }
-    }
-
-    public class FossilTooltipConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return string.Join("\n", (HashSet<string>)value);
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public class EssenceTooltipConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            IDictionary<string, string> mods = (IDictionary<string, string>)value;
-            string t = "";
-            foreach (string key in mods.Keys)
-            {
-                t += key + ": " + CraftingDatabase.CoreMods[mods[key]] + "\n";
-            }
-            return t.Trim('\n');
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class NameToImageConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string name = value as string;
-            return "Icons\\fossil\\" + name.Replace(" ", "") + ".png";
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

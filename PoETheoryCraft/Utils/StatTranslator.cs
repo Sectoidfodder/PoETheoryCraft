@@ -55,7 +55,7 @@ namespace PoETheoryCraft.Utils
                 string id = statscopy[0].id;
                 if (!data.ContainsKey(id))
                 {
-                    Debug.WriteLine("skipping stat translation for " + id);
+                    //Debug.WriteLine("skipping stat translation for " + id);
                     statscopy.RemoveAt(0);
                     continue;
                 }

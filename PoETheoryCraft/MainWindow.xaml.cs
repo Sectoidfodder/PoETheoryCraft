@@ -41,6 +41,7 @@ namespace PoETheoryCraft
 
             CurrencyBox.LoadEssences(CraftingDatabase.Essences.Values);
             CurrencyBox.LoadFossils(CraftingDatabase.Fossils.Values);
+            CurrencyBox.LoadCurrencies(CraftingDatabase.Currencies.Values);
 
             Bench = new CraftingBench();
             ModPreview.Bench = Bench;

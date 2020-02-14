@@ -2,17 +2,21 @@
 
 Need to know before implementing beastcrafting:
 > Remove catalyst quality?
-> Ignore ilvl?  Always, or only when no valid mods under ilvl?  Is that a bug and might be fixed?
+> Ignore ilvl?  Uses beast's level?  Always, or only when no valid mods under ilvl?  Is that a bug and might be fixed?
 > Interaction with metamod locks?
 > Interaction with fractured mods?
 
 Do Conquerors' Exalts remove catalyst quality?
 
-Catalysts may not cover every mod they're supposed to.  Can't find a list of tags each one works on so it's educated guesswork.
-For instance, Fertile Catalysts not only apply to the new "catalyst_resource" tag, but also the "life" and "mana" tags that fossils use.
+Catalysts may not cover all the right mods.  Catalyst-tag relationship isn't in any included json, currently using what PoEDB says.
 
 Need to figure out a good way to calculate mod tier, don't see a relevant stat in the json.
 Rather not have to build a massive mod ID and item class table to look it up.
+
+Dark theme?  Item display is black anyway, and currency box is black because the transparent icons look awful on white.
+
+Fossil Helm mods have extra -X% resistance stats attached (same in PoEDB), programmatically indistinguishable from normal resist stats.
+Could manually remove the lines from those specific mod templates if there's no good reason to keep them.
 
 ModLogic saves time by assuming that adding an explicit mod will never increase an item's pool of rollable explicit mods.
 I'm pretty sure this is true.  Simulation needs to be adjusted if not.
@@ -39,5 +43,5 @@ A mod tag for fossils is "defences" - plural with a 'c', while another tag for c
 Odd tag behavior on boots: Redeemer's/Shaper's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also neither block Redeemer's spell dodge.
 All attack and spell dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.
 
-ItemCraft.CalcProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
-Currently it scans mods, then uses results to update properties and quality, but changing catalyst quality can affect mods that affect properties.
+ItemCraft.GetLiveProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
+Currently catalyst quality is only factored in at translation, so mods give their non-qualitied value while calculating properties.

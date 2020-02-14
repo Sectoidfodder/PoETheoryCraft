@@ -101,25 +101,25 @@ namespace PoETheoryCraft.Controls
                 string t;
                 switch (item.QualityType)
                 {
-                    case "jewellery_resistance":
+                    case "Prismatic Catalyst":
                         t = "Quality (Resistance Modifiers): ";
                         break;
-                    case "jewellery_resource":
+                    case "Fertile Catalyst":
                         t = "Quality (Life and Mana Modifiers): ";
                         break;
-                    case "jewellery_attribute":
+                    case "Intrinsic Catalyst":
                         t = "Quality (Attribute Modifiers): ";
                         break;
-                    case "jewellery_defense":
+                    case "Imbued Catalyst":
                         t = "Quality (Defence Modifiers): ";
                         break;
-                    case "jewellery_attack":
+                    case "Abrasive Catalyst":
                         t = "Quality (Attack Modifiers): ";
                         break;
-                    case "jewellery_caster":
+                    case "Turbulent Catalyst":
                         t = "Quality (Caster Modifiers): ";
                         break;
-                    case "jewellery_elemental":
+                    case "Tempering Catalyst":
                         t = "Quality (Elemental Damage): ";
                         break;
                     default:
