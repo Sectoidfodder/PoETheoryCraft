@@ -9,7 +9,7 @@
     <Grid>
         <TabControl Name="CurrencyTabs" SelectionChanged="CurrencyTabs_SelectionChanged">
             <TabItem Header="Basic">
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="BasicView">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="BasicView" SelectionMode="Single">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Background="Black"/>
@@ -47,7 +47,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Essence">
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="EssenceView">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="EssenceView" SelectionMode="Single">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Background="Black"/>

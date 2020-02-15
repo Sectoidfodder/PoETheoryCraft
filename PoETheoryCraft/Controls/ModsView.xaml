@@ -31,7 +31,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="PrefixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged">
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -86,7 +86,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="SuffixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged">
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />

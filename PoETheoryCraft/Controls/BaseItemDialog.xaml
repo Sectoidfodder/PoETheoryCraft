@@ -26,7 +26,7 @@
             <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="WarlordCheck">Warlord</CheckBox>
             <CheckBox Margin="0,0,5,0" VerticalAlignment="Center" Name="CrusaderCheck">Crusader</CheckBox>
         </StackPanel>
-        <ListView Margin="5,0,5,0" Grid.Row="1" Grid.Column="0" DisplayMemberPath="Value.name" Name="ItemNameView" SelectionChanged="ItemNameView_Select">
+        <ListView SelectionMode="Single" Margin="5,0,5,0" Grid.Row="1" Grid.Column="0" DisplayMemberPath="Value.name" Name="ItemNameView" SelectionChanged="ItemNameView_Select">
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
