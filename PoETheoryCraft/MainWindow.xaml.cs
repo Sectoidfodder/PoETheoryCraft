@@ -84,6 +84,8 @@ namespace PoETheoryCraft
             ItemSlot.UpdateData(Bench.BenchItem);
             ModPreview.UpdatePreviews();
             ModPreview.UpdateCrafts();
+            Bench.PostRoll = new PostRollOptions();
+            PostCraftButton.ClearValue(Button.BackgroundProperty);
         }
         private void ForceAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -246,10 +248,16 @@ namespace PoETheoryCraft
                 return;
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
-            PostCraftDialog d = new PostCraftDialog(ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods)) { Owner = this };
+            PostCraftDialog d = new PostCraftDialog(ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods), Bench.PostRoll) { Owner = this };
             bool? res = d.ShowDialog();
             if (!res.HasValue || !res.Value)
                 return;
+            PostRollOptions ops = d.GetPostRollOptions();
+            if (!ops.Maximize && ops.TryCrafts.Count == 0)
+                PostCraftButton.ClearValue(Button.BackgroundProperty);
+            else
+                PostCraftButton.Background = Brushes.Green;
+            Bench.PostRoll = ops;
         }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {

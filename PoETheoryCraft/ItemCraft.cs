@@ -270,6 +270,17 @@ namespace PoETheoryCraft
                 BaseQuality += 1;
             }
         }
+        public void MaximizeMods()
+        {
+            foreach (ModCraft mod in LiveMods)
+            {
+                mod.Maximize();
+            }
+            foreach (ModCraft mod in LiveImplicits)
+            {
+                mod.Maximize();
+            }
+        }
         private void UpdateModQuality(ModCraft mod, string name)
         {
             PoEModData modtemplate = CraftingDatabase.AllMods[mod.SourceData];

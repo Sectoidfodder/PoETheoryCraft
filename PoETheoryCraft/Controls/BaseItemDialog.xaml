@@ -69,7 +69,7 @@
         </Grid>
         <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Height="30" Grid.Row="2" Grid.Column="1">
             <Button Width="80" Margin="5,5,5,5" IsCancel="True">Cancel</Button>
-            <Button Width="80" Margin="5,5,5,5" Name="OKButton" Click="OK_Click" IsDefault="True">OK</Button>
+            <Button Width="80" Margin="0,5,5,5" Name="OKButton" Click="OK_Click" IsDefault="True">OK</Button>
         </StackPanel>
         <TextBox Margin="5,0,5,0" Grid.Row="1" Grid.Column="1" Name="ItemInfoBox"></TextBox>
     </Grid>

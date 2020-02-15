@@ -1,5 +1,7 @@
 ﻿Notes:
 
+Maybe save post-craft options per item class in a dictionary?
+
 Need to know before implementing beastcrafting:
 > Remove catalyst quality?
 > Ignore ilvl?  Uses beast's level?  Always, or only when no valid mods under ilvl?  Is that a bug and might be fixed?
@@ -32,10 +34,15 @@ Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up 
 
 Can't bench mod Fishing Rods? Bench mod definitions don't include their class but I haven't tested in-game.
 
-Rune Dagger and Warstaff item classes aren't included in essence definitions, but essences work on them in-game anyway.
-Currently they're explicitly checked as Dagger and Staff in CraftingBench.ApplyEssence.
+There are FOUR separate sets of attack/caster tags that can all function independently (they're mostly synced for sanity's sake):
+1) mod tags for fossils: "attack", "caster"
+2) item tags, applied by metamods, that mods look for in order to comply: "no_attack_mods", "no_caster_mods"
+3) mod tags for catalysts: "catalyst_attack", "catalyst_caster"
+4) item tags, applied by mods, that other mods look for to adjust spawn rates: "has_attack_mod", "has_caster_mod"
+-- many caster mods have 50% of normal weight on weapons with an attack mod and no caster mods
+-- many attack mods have 65% of normal weight on weapons with a caster mod and no attack mods
 
-Funfact: some old nerfs were implemented (on the client side) by adding a handler to the text localization process.
+Some old nerfs were implemented (on the client side) by adding a handler to the text localization process.
 Example: Voltaxic's conversion mod is still 100% in definition, but has a "60% of Value" handler tacked on.
 
 A mod tag for fossils is "defences" - plural with a 'c', while another tag for catalysts is "jewellery_defense" - singular with an 's'.

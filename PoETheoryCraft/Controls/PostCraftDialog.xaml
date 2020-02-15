@@ -14,7 +14,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <CheckBox Margin="5,5,5,5">Maximize all mod rolls (as if perfectly Blessed and Divined)</CheckBox>
+        <CheckBox Margin="5,5,5,5" Name="MaxCheckBox">Maximize all mod rolls (as if perfectly Blessed and Divined)</CheckBox>
         <Border Grid.Row="1" Margin="5,0,5,5" BorderBrush="Gray" BorderThickness="1">
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top" Margin="5,5,5,5">Select any number of crafting bench mods to try (first valid mod will be added):</TextBlock>
@@ -25,9 +25,9 @@
             </DockPanel>
         </Border>
         <StackPanel Grid.Row="2" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button>Save</Button>
-            <Button>Cancel</Button>
-            <Button>Clear</Button>
+            <Button Width="80" Margin="5,0,0,5" IsCancel="True">Cancel</Button>
+            <Button Width="80" Margin="5,0,0,5" Name="OKButton" IsDefault="True" Click="OK_Click">OK</Button>
+            <Button Width="80" Margin="5,0,0,5" Click="Clear_Click">Clear</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -8,10 +8,16 @@ using PoETheoryCraft.Utils;
 
 namespace PoETheoryCraft
 {
+    public struct PostRollOptions
+    {
+        public bool Maximize;
+        public IList<KeyValuePair<PoEModData, IDictionary<string, int>>> TryCrafts; //ghetto ordered dict
+    }
     public class CraftingBench
     {
         public IDictionary<string, int> CurrencySpent { get; private set; }
         public IDictionary<PoEModData, int> BaseValidMods { get; private set; } //starting point for all crafts: a subset of core mods valid for BenchItem's source template
+        public PostRollOptions PostRoll { get; set; }
         private ItemCraft _benchitem;   //item on bench, setting it also updates base mod pool
         public ItemCraft BenchItem { 
             get { return _benchitem; }
@@ -34,34 +40,34 @@ namespace PoETheoryCraft
         {
             CurrencySpent = new Dictionary<string, int>();
         }
-        public string ForceAddMod(PoEModData mod)
+        public string ForceAddMod(PoEModData mod, ItemCraft target = null)
         {
+            target = target ?? BenchItem;
             if (mod.generation_type == ModLogic.Prefix)
             {
-                if (BenchItem.ModCountByType(ModLogic.Prefix) >= BenchItem.GetAffixLimit(true))
+                if (target.ModCountByType(ModLogic.Prefix) >= target.GetAffixLimit(true))
                     return "Item cannot have another prefix";
             }
             else
             {
-                if (BenchItem.ModCountByType(ModLogic.Suffix) >= BenchItem.GetAffixLimit(true))
+                if (target.ModCountByType(ModLogic.Suffix) >= target.GetAffixLimit(true))
                     return "Item cannot have another suffix";
             }
-            foreach (ModCraft livemod in BenchItem.LiveMods)
+            foreach (ModCraft livemod in target.LiveMods)
             {
                 PoEModData modtemplate = CraftingDatabase.AllMods[livemod.SourceData];
                 if (modtemplate.group == mod.group)
                     return "Item already has a mod in this mod group";
             }
-            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
             ItemInfluence? inf = ModLogic.GetInfluence(mod, itemtemplate);
             if (inf != null)
             {
                 string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag((ItemInfluence)inf)];
                 if (inftag != null)
-                    BenchItem.LiveTags.Add(inftag);
+                    target.LiveTags.Add(inftag);
             }
-            BenchItem.AddMod(mod);
-            //UpdatePreviews();
+            target.AddMod(mod);
             return null;
         }
         public string ApplyEssence(PoEEssenceData ess, int tries = 1)
@@ -86,6 +92,7 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, BaseValidMods, ItemRarity.Rare, op);
+                DoPostRoll(BenchItem);
             }
             else
             {
@@ -94,6 +101,7 @@ namespace PoETheoryCraft
                 {
                     ItemCraft target = BenchItem.Copy();
                     ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare, op);
+                    DoPostRoll(target);
                     MassResults.Add(target);
                 }
             }
@@ -187,6 +195,7 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, extendedpool, ItemRarity.Rare, ops);
+                DoPostRoll(BenchItem);
             }
             else
             {
@@ -195,6 +204,7 @@ namespace PoETheoryCraft
                 {
                     ItemCraft target = BenchItem.Copy();
                     ModLogic.RerollItem(target, extendedpool, ItemRarity.Rare, ops);
+                    DoPostRoll(target);
                     MassResults.Add(target);
                 }
             }
@@ -205,6 +215,7 @@ namespace PoETheoryCraft
             if (BenchItem == null)
                 return "Bench is empty";
             bool hasclearedmassresults = false;
+            bool rolled = false;
             string res;
             for (int n = 0; n < tries; n++)
             {
@@ -215,6 +226,7 @@ namespace PoETheoryCraft
                         if (target.Rarity != ItemRarity.Rare)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
+                        rolled = true;
                         break;
                     case "Orb of Alteration":
                         if (target.Rarity != ItemRarity.Magic)
@@ -288,6 +300,7 @@ namespace PoETheoryCraft
                         if (target.Rarity != ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
+                        rolled = true;
                         break;
                     case "Orb of Transmutation":
                         if (target.Rarity != ItemRarity.Normal)
@@ -326,8 +339,24 @@ namespace PoETheoryCraft
                     }
                     MassResults.Add(target);
                 }
+                if (rolled)
+                    DoPostRoll(target);
             }
             return null;
+        }
+        private void DoPostRoll(ItemCraft item)
+        {
+            if (PostRoll.TryCrafts != null) 
+            {
+                foreach (KeyValuePair<PoEModData, IDictionary<string, int>> kv in PostRoll.TryCrafts)
+                {
+                    string ret = ForceAddMod(kv.Key, item);
+                    if (ret == null)
+                        break;
+                }
+            }
+            if (PostRoll.Maximize)
+                item.MaximizeMods();
         }
         private string ApplyInfExalt(ItemCraft target, ItemInfluence inf)
         {
