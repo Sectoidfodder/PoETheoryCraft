@@ -233,6 +233,17 @@ namespace PoETheoryCraft
                             return "Invalid item rarity for selected currency";
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
                         break;
+                    case "Alt Plus Aug":
+                        if (target.Rarity != ItemRarity.Magic)
+                            return "Invalid item rarity for selected currency";
+                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
+                        if (target.LiveMods.Count == 1)
+                        {
+                            ModLogic.RollAddMod(target, BaseValidMods);
+                            if (target.QualityType != null)
+                                target.BaseQuality -= 2;
+                        }
+                        break;
                     case "Divine Orb":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";

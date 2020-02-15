@@ -92,7 +92,7 @@ namespace PoETheoryCraft
             QualityType = item.QualityType;
             LiveTags = new HashSet<string>(item.LiveTags);
             ItemLevel = item.ItemLevel;
-            Rarity = item.Rarity;
+            _rarity = item.Rarity;
             LiveMods = new List<ModCraft>();
             foreach (ModCraft m in item.LiveMods)
             {

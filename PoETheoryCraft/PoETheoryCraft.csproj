@@ -706,5 +706,15 @@
   <ItemGroup>
     <Resource Include="Icons\tc16.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\currency\RemoveCraftedMods.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\currency\AltPlusAug.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

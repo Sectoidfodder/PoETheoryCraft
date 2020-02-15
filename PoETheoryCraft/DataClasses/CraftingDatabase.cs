@@ -20,7 +20,8 @@ namespace PoETheoryCraft.DataClasses
         {
             "Chaos Orb", "Orb of Alchemy", "Orb of Scouring", "Orb of Transmutation", "Orb of Alteration", "Orb of Augmentation", "Regal Orb", "Exalted Orb", "Orb of Annulment",
             "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb",
-            "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst"
+            "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst",
+            "Alt Plus Aug", "Remove Crafted Mods"
         };
         public static IDictionary<string, PoEModData> CoreMods { get; private set; }    //prefixes and suffixes: ~3k gear, ~200 jewel, ~450 abyss jewel
         public static IDictionary<string, PoEModData> AllMods { get; private set; }     //really big and should only be used for key lookups, not iteration
@@ -128,7 +129,40 @@ namespace PoETheoryCraft.DataClasses
                     Currencies.Add(k, currency);
                 }
             }
+            AppendCurrencies();
             Debug.WriteLine(CoreBaseItems.Count + " core, " + AllBaseItems.Count + " total base items loaded");
+        }
+        //Add special remove-crafted-mods and alt-aug options
+        private static void AppendCurrencies()
+        {
+            PoECurrencyData extra = new PoECurrencyData() { key = "RemoveCraftedMods", name = "Remove Crafted Mods", tooltip = "Remove Crafted Mods" };
+            string extrapath = "Icons/currency/RemoveCraftedMods.png";
+            Uri extrauri = new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, extrapath));
+            try
+            {
+                BitmapImage extraimg = new BitmapImage(extrauri);
+                extra.icon = extraimg;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Can't find image " + extrauri);
+                extra.icon = null;
+            }
+            Currencies.Add("RemoveCraftedMods", extra);
+            extra = new PoECurrencyData() { key = "AltPlusAug", name = "Alt Plus Aug", tooltip = "Alt + Aug in one click" };
+            extrapath = "Icons/currency/AltPlusAug.png";
+            extrauri = new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, extrapath));
+            try
+            {
+                BitmapImage extraimg = new BitmapImage(extrauri);
+                extra.icon = extraimg;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Can't find image " + extrauri);
+                extra.icon = null;
+            }
+            Currencies.Add("AltPlusAug", extra);
         }
 
         //build bench crafting option templates from bench_crafting_options.min.json
