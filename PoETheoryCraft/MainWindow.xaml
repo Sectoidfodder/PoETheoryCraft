@@ -32,7 +32,10 @@
         <uc:ItemView Grid.Row="2" x:Name="ItemSlot"></uc:ItemView>
         <TextBox Grid.Row="3" IsReadOnly="True" Name="BigBox">Test Text</TextBox>
         <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
-        <Button Grid.Row="5" Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click">+</Button>
+            <Button Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
+        </StackPanel>
 
         <TabControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
             <TabItem Header="Mods View">

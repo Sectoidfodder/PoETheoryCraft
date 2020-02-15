@@ -101,7 +101,7 @@ namespace PoETheoryCraft
         }
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsDialog d = new SettingsDialog { Owner = this };
+            SettingsDialog d = new SettingsDialog() { Owner = this };
             bool? res = d.ShowDialog();
             if (!res.HasValue || !res.Value)
                 return;
@@ -237,6 +237,19 @@ namespace PoETheoryCraft
                 ItemSlot.UpdateData(Bench.BenchItem);
                 ModPreview.UpdatePreviews();
             }
+        }
+        private void PostCraftButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Bench.BenchItem == null)
+            {
+                BigBox.Text = "Bench is empty";
+                return;
+            }
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
+            PostCraftDialog d = new PostCraftDialog(ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods)) { Owner = this };
+            bool? res = d.ShowDialog();
+            if (!res.HasValue || !res.Value)
+                return;
         }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {

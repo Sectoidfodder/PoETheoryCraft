@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>tc16.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\tc16.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -102,6 +102,10 @@
       <DependentUpon>ModsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\NumberBox.cs" />
+    <Compile Include="Controls\PostCraftDialog.xaml.cs">
+      <DependentUpon>PostCraftDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchableComboBox.cs" />
     <Compile Include="Controls\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
@@ -134,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ModsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PostCraftDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -689,7 +697,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="tc16.ico" />
+    <Resource Include="Icons\tc16.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
