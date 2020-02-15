@@ -56,6 +56,7 @@
                     </Grid.RowDefinitions>
                     <uc:BulkItemsView x:Name="RepeatResults"/>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Width="20" Name="SearchButton" Click="Search_Click">S</Button>
                         <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
                         <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>
                         <uc:NumberBox Min="1" Max="1001" Width="35" x:Name="RepeatCountBox">100</uc:NumberBox>

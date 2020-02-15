@@ -259,6 +259,13 @@ namespace PoETheoryCraft
                 PostCraftButton.Background = Brushes.Green;
             Bench.PostRoll = ops;
         }
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            SearchDialog d = new SearchDialog(CraftingDatabase.StatTemplates) { Owner = this };
+            bool? res = d.ShowDialog();
+            if (!res.HasValue || !res.Value)
+                return;
+        }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {
             RepeatButton.IsEnabled = RepeatCountBox.Valid;

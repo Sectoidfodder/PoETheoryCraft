@@ -24,20 +24,20 @@ namespace PoETheoryCraft.Utils
     }
     public static class StatTranslator
     {
-        private static IDictionary<string, StatLocalization> data = new Dictionary<string, StatLocalization>();
+        public static IDictionary<string, StatLocalization> Data { get; private set; } = new Dictionary<string, StatLocalization>();
         public static void LoadStatLocalization(string locpath)
         {
             IList<StatLocalization> rawdata = JsonSerializer.Deserialize<List<StatLocalization>>(File.ReadAllText(locpath));
             //index each translation by its stat ids for easy lookup
-            data = new Dictionary<string, StatLocalization>();
+            Data = new Dictionary<string, StatLocalization>();
             foreach (StatLocalization chunk in rawdata)
             {
                 foreach (string id in chunk.ids)
                 {
-                    data.Add(id, chunk);
+                    Data.Add(id, chunk);
                 }
             }
-            Debug.WriteLine(data.Count + " localizations loaded");
+            Debug.WriteLine(Data.Count + " localizations loaded");
         }
         public static void FillTranslationData(PoEModData mod)
         {
@@ -53,13 +53,13 @@ namespace PoETheoryCraft.Utils
             while (statscopy.Count > 0)
             {
                 string id = statscopy[0].id;
-                if (!data.ContainsKey(id))
+                if (!Data.ContainsKey(id))
                 {
                     //Debug.WriteLine("skipping stat translation for " + id);
                     statscopy.RemoveAt(0);
                     continue;
                 }
-                StatLocalization chunk = data[id];
+                StatLocalization chunk = Data[id];
                 IList<int> min = new List<int>();
                 IList<int> max = new List<int>();
                 for (int i = 0; i < chunk.ids.Count; i++)       //copy out minmax and remove handled stats from statcopy
@@ -111,13 +111,13 @@ namespace PoETheoryCraft.Utils
             while (statscopy.Count > 0)
             {
                 string id = statscopy[0].ID;
-                if (!data.ContainsKey(id))
+                if (!Data.ContainsKey(id))
                 {
                     Debug.WriteLine("skipping stat translation for " + id);
                     statscopy.RemoveAt(0);
                     continue;
                 }
-                StatLocalization chunk = data[id];
+                StatLocalization chunk = Data[id];
                 IList<int> rolls = new List<int>();
                 for (int i=0; i<chunk.ids.Count; i++)       //copy out roll and remove handled stats from statcopy
                 {

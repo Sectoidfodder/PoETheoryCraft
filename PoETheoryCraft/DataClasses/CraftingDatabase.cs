@@ -30,13 +30,48 @@ namespace PoETheoryCraft.DataClasses
         public static IDictionary<string, PoEEssenceData> Essences { get; private set; }
         public static IDictionary<string, PoEFossilData> Fossils { get; private set; }
         public static IDictionary<string, PoECurrencyData> Currencies { get; private set; }
-        
-        //build mod data templates from mods.min.json and mod_types.min.json
+        public static ISet<string> StatTemplates { get; private set; }
+
+        private static void IncludeTranslations(PoEModData modtemplate)
+        {
+            IDictionary<string, StatLocalization> trlib = StatTranslator.Data;
+            foreach (PoEModStat stat in modtemplate.stats)
+            {
+                string statkey = stat.id;
+                if (!trlib.ContainsKey(statkey))
+                    continue;
+                StatLocalization sloc = trlib[statkey];
+                foreach (LocalizationDefinition def in sloc.definitions)
+                {
+                    string text = def.text;
+                    if (text.Length <= 10)      //omits league names as stats, not sure why they were there to begin with
+                        continue;
+                    text = text.Replace("{0} to {1}", "{0}");
+                    if (text.Contains("{1}"))   //omits two flask charge when crit mods that aren't listed by trade searches anyway
+                        continue;
+                    if (def.format[0] != "ignore")
+                        text = text.Replace("{0}", def.format[0]);
+                    if (!StatTemplates.Contains(text.Replace("reduced", "increased")))
+                        StatTemplates.Add(text);
+                }
+            }
+        }
+        private static void AppendTranslations()
+        {
+            StatTemplates.UnionWith(new HashSet<string>()
+            {
+                "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance",
+                "[pseudo] +#% Total Elemental Resistance", "[pseudo] +#% Total Resistance"
+            });
+        }
+        //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
+        //MUST BE DONE AFTER TRANSLATION DEFINTIONS ARE LOADED IN STATTRANSLATOR
         public static void LoadMods(string modsfile, string typesfile)
         {
             Dictionary<string, Dictionary<string, HashSet<string>>> typesdata = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, HashSet<string>>>>(File.ReadAllText(typesfile));
             AllMods = JsonSerializer.Deserialize<Dictionary<string, PoEModData>>(File.ReadAllText(modsfile));
             CoreMods = new Dictionary<string, PoEModData>();
+            StatTemplates = new HashSet<string>();
             foreach (string k in AllMods.Keys)
             {
                 PoEModData d = AllMods[k];
@@ -49,8 +84,13 @@ namespace PoETheoryCraft.DataClasses
                 //flag relevant mods to move to core dictionary, "misc" domain is for regular jewels
                 if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     CoreMods.Add(k, AllMods[k]);
+                //every mod worth translating into string templates to search by, doesn't include implicits because idk how to include them w/o also including a ton of useless unique item mods
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                    IncludeTranslations(AllMods[k]);
             }
+            AppendTranslations();
             Debug.WriteLine(CoreMods.Count + " core, " + AllMods.Count + " total mods loaded");
+            Debug.WriteLine(StatTemplates.Count + " statlines loaded");
         }
 
         //build base item data templates from base_items.min.json and item_classes.min.json, also builds core currencies and catalyst data
