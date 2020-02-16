@@ -29,7 +29,7 @@
             <Button Width="150" Name="ItemBaseButton" Click="ItemBaseButton_Click">Pick Item Base</Button>
         </StackPanel>
         
-        <uc:ItemView Grid.Row="2" x:Name="ItemSlot"></uc:ItemView>
+        <uc:ItemView Grid.Row="2" x:Name="ItemSlot" ItemClick="ItemParam_Click"></uc:ItemView>
         <TextBox Grid.Row="3" IsReadOnly="True" Name="BigBox">Test Text</TextBox>
         <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
         <StackPanel Grid.Row="5" Orientation="Horizontal">
@@ -54,8 +54,9 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <uc:BulkItemsView x:Name="RepeatResults"/>
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <uc:BulkItemsView x:Name="RepeatResults" ItemClick="ItemParam_Click"/>
+                    <TextBlock Name="SortIndicator" Grid.Row="1" MaxWidth="300" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis">No sort order selected</TextBlock>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Width="20" Name="SearchButton" Click="Search_Click">S</Button>
                         <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
                         <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>

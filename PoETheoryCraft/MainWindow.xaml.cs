@@ -266,6 +266,14 @@ namespace PoETheoryCraft
             if (!res.HasValue || !res.Value)
                 return;
         }
+        private void ItemParam_Click(object sender, EventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            string sortby = tb.Tag != null ? "[property] " + tb.Tag : StatTranslator.ParseLine(tb.Text.Split('\n')[0]).Key;
+            SortIndicator.Text = "Sorting by: \"" + sortby + "\"";
+            Bench.SortBy = sortby;
+            RepeatResults.Items = Bench.MassResults;
+        }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {
             RepeatButton.IsEnabled = RepeatCountBox.Valid;

@@ -36,6 +36,20 @@ namespace PoETheoryCraft
             }
         }
         public IList<ItemCraft> MassResults { get; } = new List<ItemCraft>();   //storage for mass crafting results
+        private string _sortby;
+        public string SortBy 
+        {
+            get { return _sortby; } 
+            set
+            {
+                _sortby = value;
+                if (MassResults != null && MassResults.Count > 0)
+                {
+                    ((List<ItemCraft>)MassResults).Sort(new ItemCraftComparer() { Key = _sortby });
+                    ((List<ItemCraft>)MassResults).Reverse();
+                }
+            }
+        }
         public CraftingBench()
         {
             CurrencySpent = new Dictionary<string, int>();

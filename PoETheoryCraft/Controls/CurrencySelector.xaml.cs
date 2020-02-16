@@ -57,16 +57,16 @@ namespace PoETheoryCraft.Controls
             switch (CurrencyTabs.SelectedIndex)
             {
                 case 0:
-                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null });
+                    CurrencySelectionChanged?.Invoke(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null });
                     break;
                 case 1:
                     SolidColorBrush b = FossilView.SelectedItems.Count > 4 ? Brushes.Red : Brushes.Black;
                     FossilLabel1.Foreground = b;
                     FossilLabel2.Foreground = b;
-                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Fossils = ((System.Collections.IList)FossilView.SelectedItems).Cast<PoEFossilData>().ToList() });
+                    CurrencySelectionChanged?.Invoke(this, new CurrencyEventArgs() { Fossils = ((System.Collections.IList)FossilView.SelectedItems).Cast<PoEFossilData>().ToList() });
                     break;
                 case 2:
-                    CurrencySelectionChanged(this, new CurrencyEventArgs() { Essence = EssenceView.SelectedItem as PoEEssenceData });
+                    CurrencySelectionChanged?.Invoke(this, new CurrencyEventArgs() { Essence = EssenceView.SelectedItem as PoEEssenceData });
                     break;
                 default:
                     return;

@@ -23,6 +23,7 @@ namespace PoETheoryCraft.Controls
         private int DisplayIndex = 0;
         private IList<ItemCraft> _items;
         public static int ResultsPerPage { get; set; } = Properties.Settings.Default.ResultsPerPage;
+        public event EventHandler ItemClick;
         public IList<ItemCraft> Items 
         { 
             get { return _items; }
@@ -48,6 +49,7 @@ namespace PoETheoryCraft.Controls
                 {
                     ItemView panel = new ItemView();
                     panel.UpdateData(Items[k]);
+                    panel.ItemClick += ChildItem_Click;
                     ContentBox.Children.Add(panel);
                 }
             }
@@ -56,6 +58,10 @@ namespace PoETheoryCraft.Controls
                 ContentBox.Children.Clear();
                 PageHeader.Text = "Showing 0-0 of 0 results";
             }
+        }
+        private void ChildItem_Click(object sender, EventArgs e)
+        {
+            ItemClick?.Invoke(sender, e);
         }
         private void NextPage_Click(object sender, RoutedEventArgs e)
         {

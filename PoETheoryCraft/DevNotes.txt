@@ -1,5 +1,10 @@
 ﻿Notes:
 
+Search terms missing fossil mods
+
+Consider making caches for mass craft results' ToString() and GetLiveProperties() return values.
+Lots of unneccesary repeat calls done while sorting since they're never modified while sorting.
+
 Maybe save post-craft options per item class in a dictionary?
 
 Need to know before implementing beastcrafting:
