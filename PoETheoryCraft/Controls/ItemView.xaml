@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:PoETheoryCraft.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="400" Width="310">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Copy to clipboard" Click="Clipboard_Copy"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Border BorderThickness="2" BorderBrush="Gray">
         <Grid>
             <Grid.RowDefinitions>

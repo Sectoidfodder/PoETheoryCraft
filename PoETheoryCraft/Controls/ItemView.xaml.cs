@@ -25,12 +25,14 @@ namespace PoETheoryCraft.Controls
     {
         private UIElement MouseTarget;
         public event EventHandler ItemClick;
+        public ItemCraft SourceItem { get; private set; }
         public ItemView()
         {
             InitializeComponent();
         }
         public void UpdateData(ItemCraft item)
         {
+            SourceItem = item;
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[item.SourceData];
             if (item != null)
             {
@@ -117,14 +119,20 @@ namespace PoETheoryCraft.Controls
         }
         private void Mouse_Down(object sender, MouseButtonEventArgs e)
         {
-            MouseTarget = (UIElement)sender;
+            if (e.ChangedButton == MouseButton.Left)
+                MouseTarget = (UIElement)sender;
         }
         private void Mouse_Up(object sender, MouseButtonEventArgs e)
         {
-            if (MouseTarget == sender)
+            if (e.ChangedButton == MouseButton.Left && MouseTarget == sender)
             {
                 ItemClick?.Invoke(sender, EventArgs.Empty);
             }
+        }
+        private void Clipboard_Copy(object sender, EventArgs e)
+        {
+            if (SourceItem != null)
+                Clipboard.SetText(SourceItem.GetClipboardString());
         }
         private void FillPropertyBox(ItemCraft item)
         {

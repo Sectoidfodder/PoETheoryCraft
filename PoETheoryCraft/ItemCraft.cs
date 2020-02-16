@@ -452,6 +452,55 @@ namespace PoETheoryCraft
             }
             LiveMods.RemoveAt(n);
         }
+        public string GetClipboardString()
+        {
+            string s = "Rarity: ";
+            if (Rarity == ItemRarity.Rare)
+                s += "Rare";
+            else if (Rarity == ItemRarity.Magic)
+                s += "Magic";
+            else
+                s += "Normal";
+            s += "\n" + ItemName;
+            s += "\n--------";
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
+            s += "\n" + itemtemplate.item_class;
+            ItemProperties props = GetLiveProperties();
+            if (props.block > 0)
+                s += "\nChance to Block: " + props.block + "%";
+            if (props.armour > 0)
+                s += "\nArmour: " + props.armour;
+            if (props.evasion > 0)
+                s += "\nEvasion: " + props.evasion;
+            if (props.energy_shield > 0)
+                s += "\nEnergy Shield: " + props.energy_shield;
+            if (props.physical_damage_max > 0)
+                s += "\nPhysical Damage: " + props.physical_damage_min + "-" + props.physical_damage_max;
+            if (props.critical_strike_chance > 0)
+                s += "\nCritical Strike Chance: " + ((double)props.critical_strike_chance / 100).ToString("N2") + "%";
+            if (props.attack_time > 0)
+                s += "\nAttacks per Second: " + ((double)1000 / props.attack_time).ToString("N2");
+            s += "\n--------";
+            s += "\nItem Level: " + ItemLevel;
+            if (LiveImplicits.Count > 0)
+            {
+                s += "\n--------";
+                foreach (ModCraft m in LiveImplicits)
+                {
+                    s += "\n" + m;
+                }
+            }
+            if (LiveMods.Count > 0)
+            {
+                s += "\n--------";
+                foreach (ModCraft m in LiveMods)
+                {
+                    s += "\n" + m;
+                }
+            }
+            s += "\n";
+            return s;
+        }
         public override string ToString()
         {
             return ItemName;

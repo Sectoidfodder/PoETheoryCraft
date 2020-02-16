@@ -79,5 +79,25 @@ namespace PoETheoryCraft.Controls
                 UpdateDisplay();
             }
         }
+        private void ClipboardPage_Click(object sender, EventArgs e)
+        {
+            string s = "";
+            for (int i=DisplayIndex; i<DisplayIndex + ResultsPerPage; i++)
+            {
+                if (i >= _items.Count)
+                    break;
+                s += _items[i].GetClipboardString() + "\n";
+            }
+            Clipboard.SetText(s);
+        }
+        private void ClipboardAll_Click(object sender, EventArgs e)
+        {
+            string s = "";
+            foreach (ItemCraft item in _items)
+            {
+                s += item.GetClipboardString() + "\n";
+            }
+            Clipboard.SetText(s);
+        }
     }
 }

@@ -6,19 +6,21 @@
              xmlns:local="clr-namespace:PoETheoryCraft.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Copy this page to clipboard" Click="ClipboardPage_Click"/>
+            <MenuItem Header="Copy all results to clipboard" Click="ClipboardAll_Click"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <DockPanel Background="Transparent">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Click="PrevPage_Click">&lt;</Button>
             <TextBlock VerticalAlignment="Center" Margin="5,0,5,0" Name="PageHeader">Showing 0-0 of 0 Results</TextBlock>
             <Button Click="NextPage_Click">&gt;</Button>
         </StackPanel>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer>
             <WrapPanel Name="ContentBox">
             </WrapPanel>
         </ScrollViewer>
-    </Grid>
+    </DockPanel>
 </UserControl>
