@@ -50,7 +50,9 @@ namespace PoETheoryCraft
             BigBox.Text = "";
             BigBox.FontWeight = FontWeights.Bold;
             BigBox.Foreground = Brushes.Red;
+            RepeatCountBox.Max = Properties.Settings.Default.BulkCraftLimit;
             RepeatCountBox.TextChanged += CheckRepeatCount;
+            RepeatCountBox.Text = "100";
         }
         private void ItemBaseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -194,6 +196,7 @@ namespace PoETheoryCraft
             }
             if (res == null)
             {
+                StatTranslator.ClearParseItemCache();
                 RepeatResults.Items = Bench.MassResults;
             }
         }

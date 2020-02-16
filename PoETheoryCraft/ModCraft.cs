@@ -40,7 +40,20 @@ namespace PoETheoryCraft
         public string SourceData { get; }       //key to PoEModData that this is derived from
         public IList<ModRoll> Stats { get; }    //actual statlines granted, including rolls
         public bool IsLocked { get; set; }      //for fractured mods, metamod-locked affixes
-        public int Quality { get; set; }        //value maintained by parent item
+        private int _quality;
+        public int Quality                      //value maintained by parent item, applicable catalyst quality
+        {
+            get { return _quality; }
+            set
+            {
+                _quality = value;
+                Modified = true;
+            }
+        }        
+
+        //cache return value for faster repeated calls, as long as mod hasn't changed
+        private string ToStringCache;
+        private bool Modified = true;
         public ModCraft(PoEModData data)
         {
             SourceData = data.key;
@@ -76,6 +89,7 @@ namespace PoETheoryCraft
             {
                 Stats[i].Roll = Stats[i].Max;
             }
+            Modified = true;
         }
         public void Reroll()
         {
@@ -83,11 +97,16 @@ namespace PoETheoryCraft
             {
                 Stats[i].Roll = RNG.Gen.Next(Stats[i].Min, Stats[i].Max + 1);
             }
+            Modified = true;
         }
         public override string ToString()
         {
+            if (!Modified)
+                return ToStringCache;
             //unlike its parent PoEModData, translation here is done live to allow roll-dependent syntax
-            return StatTranslator.TranslateModCraft(this, Quality);
+            ToStringCache = StatTranslator.TranslateModCraft(this, Quality);
+            Modified = false;
+            return ToStringCache;
         }
     }
 }

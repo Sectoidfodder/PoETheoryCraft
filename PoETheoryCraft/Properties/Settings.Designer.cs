@@ -142,5 +142,17 @@ namespace PoETheoryCraft.Properties {
                 this["ResultsPerPage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5001")]
+        public int BulkCraftLimit {
+            get {
+                return ((int)(this["BulkCraftLimit"]));
+            }
+            set {
+                this["BulkCraftLimit"] = value;
+            }
+        }
     }
 }

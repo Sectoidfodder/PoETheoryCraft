@@ -59,6 +59,10 @@ namespace PoETheoryCraft
             }
         }
         public string QualityType { get; set; } //null for normal qual, or the name of a catalyst, ex: "Imbued Catalyst"
+
+        //cache return value for faster repeated calls as long as item hasn't changed
+        public bool Modified { get; private set; } = true;
+        private ItemProperties GetLivePropertiesCache;
         public ItemCraft(PoEBaseItemData data, int level = 100, ISet<ItemInfluence> influences = null)
         {
             SourceData = data.key;
@@ -154,6 +158,7 @@ namespace PoETheoryCraft
             {
                 m.Reroll();
             }
+            Modified = true;
         }
         //divines each mod, obeying "of prefixes" and "of suffixes" metamods and locked mods
         public void RerollExplicits()
@@ -176,6 +181,7 @@ namespace PoETheoryCraft
                     m.Reroll();
                 }
             }
+            Modified = true;
         }
         //removes one mod at random, obeying prefix/suffix lock, and leaving locked mods
         public void RemoveRandomMod()
@@ -202,6 +208,7 @@ namespace PoETheoryCraft
                 int n = RNG.Gen.Next(choppingblock.Count);
                 LiveMods.Remove(choppingblock[n]);
             }
+            Modified = true;
         }
         //remove all mods or all crafted mods, obeying prefix/suffix lock, leaving locked mods, and downgrading rarity if necessary
         public void ClearMods(bool craftedonly = false)
@@ -228,6 +235,7 @@ namespace PoETheoryCraft
                 Rarity = r;
             else if (Rarity == ItemRarity.Magic)     //magic items names are mod-sensitive, so force update
                 UpdateName();
+            Modified = true;
         }
         public void AddMod(PoEModData data)
         {
@@ -240,6 +248,7 @@ namespace PoETheoryCraft
                 Rarity = r;
             else if (Rarity == ItemRarity.Magic)     //magic items names are mod-sensitive, so force update
                 UpdateName();
+            Modified = true;
         }
         public void AddImplicit(PoEModData data)
         {
@@ -247,6 +256,7 @@ namespace PoETheoryCraft
             LiveImplicits.Add(m);
             LiveTags.UnionWith(data.adds_tags);
             UpdateModQuality(m, QualityType);
+            Modified = true;
         }
         public void ApplyCatalyst(string tag)
         {
@@ -269,6 +279,7 @@ namespace PoETheoryCraft
             {
                 BaseQuality += 1;
             }
+            Modified = true;
         }
         public void MaximizeMods()
         {
@@ -280,6 +291,7 @@ namespace PoETheoryCraft
             {
                 mod.Maximize();
             }
+            Modified = true;
         }
         private void UpdateModQuality(ModCraft mod, string name)
         {
@@ -330,6 +342,8 @@ namespace PoETheoryCraft
         }
         public ItemProperties GetLiveProperties()
         {
+            if (!Modified)
+                return GetLivePropertiesCache;
             IDictionary<string, int> mods = new Dictionary<string, int>();
             IList<string> keys = new List<string>() { "arp", "arf", "evp", "evf", "esp", "esf", "blf", "dp", "mindf", "maxdf", "crp", "asp" }; //all possible property modifiers
             foreach (string s in keys)
@@ -342,7 +356,7 @@ namespace PoETheoryCraft
             }
             int qual = QualityType == null ? GetTotalQuality() : 0;
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
-            return new ItemProperties()
+            GetLivePropertiesCache = new ItemProperties()
             {
                 armour = (itemtemplate.properties.armour + mods["arf"]) * (100 + mods["arp"] + qual) / 100,
                 evasion = (itemtemplate.properties.evasion + mods["evf"]) * (100 + mods["evp"] + qual) / 100,
@@ -353,6 +367,8 @@ namespace PoETheoryCraft
                 critical_strike_chance = itemtemplate.properties.critical_strike_chance * (100 + mods["crp"]) / 100,
                 attack_time = itemtemplate.properties.attack_time * 100 / (100 + mods["asp"])
             };
+            Modified = false;
+            return GetLivePropertiesCache;
         }
         private void ParseProps(ModCraft m, IDictionary<string, int> mods)
         {

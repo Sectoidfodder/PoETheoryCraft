@@ -83,6 +83,8 @@ namespace PoETheoryCraft.Utils
     public static class StatTranslator
     {
         public static IDictionary<string, StatLocalization> Data { get; private set; } = new Dictionary<string, StatLocalization>();
+        //cache to speed up repeated searches on the the same set of items, should be cleared via ClearParseItemCache() after each mass-roll action
+        private static readonly IDictionary<ItemCraft, IDictionary<string, double>> ParseItemCache = new Dictionary<ItemCraft, IDictionary<string, double>>();
         public static KeyValuePair<string, double> ParseLine(string s)
         {
             string rexpr = @"([\+\-]?\d+\.?\d*)\%?\s+to\s+([\+\-]?\d+\.?\d*)\%?";
@@ -98,6 +100,8 @@ namespace PoETheoryCraft.Utils
         }
         public static IDictionary<string, double> ParseItem(ItemCraft item)
         {
+            if (ParseItemCache.ContainsKey(item))
+                return ParseItemCache[item];
             IDictionary<string, double> tr = new Dictionary<string, double>();
             foreach (ModCraft m in item.LiveMods)
             {
@@ -123,7 +127,15 @@ namespace PoETheoryCraft.Utils
                         tr.Add(kv);
                 }
             }
+            //Just in case it didn't get cleared regularly
+            if (ParseItemCache.Count > 2 * Properties.Settings.Default.BulkCraftLimit)
+                ClearParseItemCache();
+            ParseItemCache.Add(item, tr);
             return tr;
+        }
+        public static void ClearParseItemCache()
+        {
+            ParseItemCache.Clear();
         }
         public static void LoadStatLocalization(string locpath)
         {
