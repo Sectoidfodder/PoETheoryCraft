@@ -25,12 +25,12 @@ namespace PoETheoryCraft.Utils
         public static IDictionary<string, IList<string>> CatalystTags { get; } = new Dictionary<string, IList<string>>()
         {
             { "Abrasive Catalyst", new List<string>(){ "jewellery_attack", "attack" } },
-            { "Turbulent Catalyst", new List<string>(){ "jewellery_caster", "caster" } },
+            { "Imbued Catalyst", new List<string>(){ "jewellery_caster", "caster" } },
             { "Fertile Catalyst", new List<string>(){ "jewellery_resource", "life", "mana" } },
-            { "Imbued Catalyst", new List<string>(){ "jewellery_defense" } },   //"defences" fossil tag doesn't count according to PoEDB
+            { "Tempering Catalyst", new List<string>(){ "jewellery_defense" } },   //"defences" fossil tag doesn't count according to PoEDB
             { "Intrinsic Catalyst", new List<string>(){ "jewellery_attribute" } },
             { "Prismatic Catalyst", new List<string>(){ "jewellery_resistance" } },
-            { "Tempering Catalyst", new List<string>(){ "jewellery_elemental" } }
+            { "Turbulent Catalyst", new List<string>(){ "jewellery_elemental" } }
         };
         public static IList<int> ModCountWeights { set; get; } = new List<int>()
         {

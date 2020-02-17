@@ -482,6 +482,39 @@ namespace PoETheoryCraft
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
             s += "\n" + itemtemplate.item_class;
             ItemProperties props = GetLiveProperties();
+            int q = GetTotalQuality();
+            if (q > 0)
+            {
+                string t;
+                switch (QualityType)
+                {
+                    case "Prismatic Catalyst":
+                        t = "Quality (Resistance Modifiers): ";
+                        break;
+                    case "Fertile Catalyst":
+                        t = "Quality (Life and Mana Modifiers): ";
+                        break;
+                    case "Intrinsic Catalyst":
+                        t = "Quality (Attribute Modifiers): ";
+                        break;
+                    case "Tempering Catalyst":
+                        t = "Quality (Defence Modifiers): ";
+                        break;
+                    case "Abrasive Catalyst":
+                        t = "Quality (Attack Modifiers): ";
+                        break;
+                    case "Imbued Catalyst":
+                        t = "Quality (Caster Modifiers): ";
+                        break;
+                    case "Turbulent Catalyst":
+                        t = "Quality (Elemental Damage): ";
+                        break;
+                    default:
+                        t = "Quality: ";
+                        break;
+                }
+                s += "\n" + t + q + "%";
+            }
             if (props.block > 0)
                 s += "\nChance to Block: " + props.block + "%";
             if (props.armour > 0)

@@ -159,16 +159,16 @@ namespace PoETheoryCraft.Controls
                     case "Intrinsic Catalyst":
                         t = "Quality (Attribute Modifiers): ";
                         break;
-                    case "Imbued Catalyst":
+                    case "Tempering Catalyst":
                         t = "Quality (Defence Modifiers): ";
                         break;
                     case "Abrasive Catalyst":
                         t = "Quality (Attack Modifiers): ";
                         break;
-                    case "Turbulent Catalyst":
+                    case "Imbued Catalyst":
                         t = "Quality (Caster Modifiers): ";
                         break;
-                    case "Tempering Catalyst":
+                    case "Turbulent Catalyst":
                         t = "Quality (Elemental Damage): ";
                         break;
                     default:
