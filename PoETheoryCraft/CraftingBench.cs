@@ -82,9 +82,12 @@ namespace PoETheoryCraft
                     target.LiveTags.Add(inftag);
             }
             target.AddMod(mod);
-            foreach (string s in costs.Keys)
+            if (costs != null)
             {
-                TallyCurrency(s, costs[s]);
+                foreach (string s in costs.Keys)
+                {
+                    TallyCurrency(s, costs[s]);
+                }
             }
             return null;
         }
