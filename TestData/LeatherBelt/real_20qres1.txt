@@ -1,0 +1,1833 @@
+Rarity: Rare
+Fate Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 65
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++52 to Strength
++14 to maximum Energy Shield
++33% to Fire Resistance
++12% to Lightning Resistance
+
+Rarity: Rare
+Rift Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 46
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++313 to Armour
++12 to maximum Energy Shield
++18% to Fire Resistance
++10% to Lightning Resistance
+35% increased Stun Duration on Enemies
+
+Rarity: Rare
+Entropy Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 66
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++438 to Armour
++81 to maximum Life
+Regenerate 15.6 Life per second
++52% to Cold Resistance
++49% to Lightning Resistance
+
+Rarity: Rare
+Carrion Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++14 to Strength
++14 to maximum Energy Shield
++46% to Fire Resistance
+18% increased Flask Mana Recovery rate
+
+Rarity: Rare
+Onslaught Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++36 to Strength
++84 to maximum Life
++48 to maximum Mana
++55% to Lightning Resistance
+
+Rarity: Rare
+Foe Snare
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+8% reduced Enemy Stun Threshold
++145 to Armour
++27% to Fire Resistance
++34% to Chaos Resistance
+
+Rarity: Rare
+Fate Twine
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 33
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++25 to maximum Energy Shield
+Regenerate 1.6 Life per second
++26% to Cold Resistance
+17% increased Stun Duration on Enemies
+
+Rarity: Rare
+Skull Twine
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 22
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++16% to Cold Resistance
++19% to Lightning Resistance
+17% increased Stun and Block Recovery
+13% increased Flask Life Recovery rate
+
+Rarity: Rare
+Bramble Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++60 to Strength
++463 to Armour
+Regenerate 3.1 Life per second
++24 to maximum Mana
++21% to Cold Resistance
+
+Rarity: Rare
+Foe Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++331 to Armour
++19 to maximum Energy Shield
++10% to Cold Resistance
+12% increased Stun and Block Recovery
+
+Rarity: Rare
+Apocalypse Bind
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 54
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++176 to Armour
++38 to maximum Energy Shield
++25% to Cold Resistance
+15% increased Flask Life Recovery rate
+
+Rarity: Rare
+Apocalypse Strap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++59 to Strength
++32 to Armour
+28% increased Stun Duration on Enemies
+10% increased Flask Mana Recovery rate
+
+Rarity: Rare
+Blight Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++39 to Strength
++29 to maximum Energy Shield
++95 to maximum Life
++36% to Cold Resistance
+
+Rarity: Rare
+Apocalypse Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++52 to Strength
++43 to maximum Energy Shield
+23% increased Flask Charges gained
+15% increased Flask Mana Recovery rate
+31% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Ambush Twine
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++11 to maximum Energy Shield
++56% to Cold Resistance
+16% increased Stun Duration on Enemies
+28% increased Flask Charges gained
+
+Rarity: Rare
+Entropy Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 64
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++30 to Strength
++50 to maximum Energy Shield
++26% to Chaos Resistance
+28% increased Stun and Block Recovery
+19% increased Flask Life Recovery rate
+
+Rarity: Rare
+Rune Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++41 to Strength
+12% reduced Enemy Stun Threshold
++51% to Fire Resistance
+5% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Brood Buckle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++472 to Armour
++21 to maximum Mana
++49% to Cold Resistance
+15% increased Stun and Block Recovery
+
+Rarity: Rare
+Spirit Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 8
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+5% reduced Enemy Stun Threshold
+13% increased Stun Duration on Enemies
+17% increased Flask Mana Recovery rate
+7% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Carrion Locket
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++42 to Strength
++21 to maximum Energy Shield
++53 to maximum Life
++13% to Cold Resistance
+
+Rarity: Rare
+Corruption Shackle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 17
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++20 to Strength
++7% to Lightning Resistance
+16% reduced Flask Charges used
+Reflects 9 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Dragon Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++5 to Armour
+Regenerate 2 Life per second
++44% to Cold Resistance
+26% increased Stun Duration on Enemies
+
+Rarity: Rare
+Foe Strap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++40 to Strength
++38 to Armour
++30 to maximum Energy Shield
++27% to Cold Resistance
++10% to Lightning Resistance
+12% increased Flask Life Recovery rate
+
+Rarity: Rare
+Onslaught Snare
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++47 to maximum Life
++43% to Fire Resistance
+25% increased Stun Duration on Enemies
+14% increased Flask Life Recovery rate
+48% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Dragon Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 45
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++271 to Armour
++25 to maximum Energy Shield
++65 to maximum Life
+23% increased Stun and Block Recovery
+
+Rarity: Rare
+Gloom Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++5 to maximum Energy Shield
++23 to maximum Life
+27% increased Stun Duration on Enemies
+16% increased Stun and Block Recovery
+
+Rarity: Rare
+Carrion Bond
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+13% reduced Enemy Stun Threshold
++56 to maximum Mana
++45% to Cold Resistance
+11% increased Stun and Block Recovery
+
+Rarity: Rare
+Rapture Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 63
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++4 to maximum Energy Shield
++22 to maximum Mana
++16% to Cold Resistance
+26% increased Stun and Block Recovery
+
+Rarity: Rare
+Grim Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++30 to maximum Mana
++55% to Fire Resistance
++28% to Cold Resistance
+12% increased Flask Effect Duration
+
+Rarity: Rare
+Empyrean Lock
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 59
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++48 to Strength
++14 to maximum Energy Shield
++22% to Cold Resistance
+36% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Havoc Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 45
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++293 to Armour
++28% to Fire Resistance
++32% to Cold Resistance
+20% increased Stun and Block Recovery
+
+Rarity: Rare
+Loath Locket
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 40
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+10% reduced Enemy Stun Threshold
++31 to Armour
++20 to maximum Life
++51 to maximum Mana
+
+Rarity: Rare
+Horror Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+15% reduced Enemy Stun Threshold
++537 to Armour
++41 to maximum Life
++44% to Fire Resistance
+
+Rarity: Rare
+Entropy Strap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++60 to Strength
+13% reduced Enemy Stun Threshold
++3 to maximum Energy Shield
++41 to maximum Mana
++18% to Fire Resistance
+
+Rarity: Rare
+Pandemonium Thread
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++39 to Strength
++35 to maximum Life
+Regenerate 10.5 Life per second
++46 to maximum Mana
+20% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Rift Shackle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++26 to maximum Energy Shield
++31 to maximum Life
+Regenerate 9.3 Life per second
++12% to Cold Resistance
+21% increased Stun and Block Recovery
+
+Rarity: Rare
+Morbid Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++29 to maximum Life
+Regenerate 12.6 Life per second
++33 to maximum Mana
++46% to Cold Resistance
+17% increased Stun and Block Recovery
+32% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Corruption Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 63
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+14% reduced Enemy Stun Threshold
++252 to Armour
++50 to maximum Life
+26% increased Stun and Block Recovery
+
+Rarity: Rare
+Morbid Thread
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 65
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++52 to Strength
++6 to maximum Life
++26% to Lightning Resistance
+14% increased Stun Duration on Enemies
+
+Rarity: Rare
+Death Bond
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 40
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+13% reduced Enemy Stun Threshold
++37 to maximum Mana
++12% to Fire Resistance
++37% to Cold Resistance
+
+Rarity: Rare
+Victory Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 64
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++31 to maximum Energy Shield
++7 to maximum Life
++49 to maximum Mana
++48% to Fire Resistance
++38% to Chaos Resistance
+
+Rarity: Rare
+Morbid Strap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++60 to Strength
++50 to maximum Mana
++40% to Fire Resistance
++46% to Lightning Resistance
+
+Rarity: Rare
+Onslaught Thread
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++87 to maximum Life
+Regenerate 4.4 Life per second
++9% to Fire Resistance
++50% to Lightning Resistance
+
+Rarity: Rare
+Ambush Lock
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 28
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+11% reduced Enemy Stun Threshold
++16 to maximum Energy Shield
++68 to maximum Life
++18% to Lightning Resistance
+22% increased Stun Duration on Enemies
+
+Rarity: Rare
+Behemoth Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 52
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+Regenerate 5.8 Life per second
++57 to maximum Mana
++34% to Lightning Resistance
++34% to Chaos Resistance
+
+Rarity: Rare
+Carrion Bind
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 63
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++21 to Strength
++9 to Armour
++31% to Chaos Resistance
+26% increased Stun and Block Recovery
+
+Rarity: Rare
+Cataclysm Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+9% reduced Enemy Stun Threshold
++94 to Armour
++83 to maximum Life
+Regenerate 4.6 Life per second
++56% to Fire Resistance
+
+Rarity: Rare
+Vortex Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 46
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++37 to Strength
+14% reduced Enemy Stun Threshold
+19% increased Flask Mana Recovery rate
+Reflects 3 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Loath Buckle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++324 to Armour
++21 to maximum Life
++49% to Fire Resistance
++19% to Lightning Resistance
+18% increased Flask Mana Recovery rate
+
+Rarity: Rare
+Brimstone Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++59 to Strength
++24 to maximum Life
++24 to maximum Mana
++57% to Lightning Resistance
+14% increased Stun Duration on Enemies
+
+Rarity: Rare
+Dusk Strap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++15 to Armour
++24 to maximum Energy Shield
++42 to maximum Mana
++55% to Lightning Resistance
+
+Rarity: Rare
+Chimeric Bond
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++36 to Strength
+13% reduced Enemy Stun Threshold
++354 to Armour
++10 to maximum Energy Shield
++55 to maximum Mana
+
+Rarity: Rare
+Agony Lock
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 64
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++49 to maximum Energy Shield
++40 to maximum Mana
++33% to Lightning Resistance
+13% increased Stun and Block Recovery
+
+Rarity: Rare
+Carrion Thread
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++384 to Armour
++27 to maximum Life
++21% to Lightning Resistance
+33% increased Stun Duration on Enemies
+Reflects 4 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Doom Locket
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 65
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++53 to Strength
++61 to maximum Life
++63 to maximum Mana
+14% increased Stun and Block Recovery
+
+Rarity: Rare
+Dusk Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++35 to Strength
++26 to Armour
++49% to Fire Resistance
+11% increased Stun Duration on Enemies
+
+Rarity: Rare
+Ambush Shackle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++84 to maximum Life
+Regenerate 4.4 Life per second
++48% to Cold Resistance
+18% increased Flask Charges gained
+
+Rarity: Rare
+Agony Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+15% reduced Enemy Stun Threshold
++81 to maximum Life
+Regenerate 6.4 Life per second
++55% to Fire Resistance
+
+Rarity: Rare
+Hypnotic Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 64
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++77 to Armour
++14 to maximum Life
++31% to Fire Resistance
+40% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Entropy Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 48
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++13 to maximum Energy Shield
++22 to maximum Mana
++45% to Lightning Resistance
+16% increased Flask Charges gained
+
+Rarity: Rare
+Apocalypse Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 60
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++160 to Armour
++45 to maximum Energy Shield
++65 to maximum Mana
++43% to Lightning Resistance
+
+Rarity: Rare
+Corpse Shackle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++28 to Strength
++339 to Armour
++21 to maximum Life
+Regenerate 2 Life per second
+
+Rarity: Rare
+Rage Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+5% reduced Enemy Stun Threshold
++33 to maximum Energy Shield
++18% to Lightning Resistance
+29% increased Flask Charges gained
+
+Rarity: Rare
+Gloom Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 56
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++347 to Armour
++27 to maximum Life
++7% to Cold Resistance
+21% increased Stun Duration on Enemies
+11% increased Flask Effect Duration
+
+Rarity: Rare
+Ambush Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 16
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+8% reduced Enemy Stun Threshold
++15 to maximum Life
+14% reduced Flask Charges used
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Skull Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 59
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++49 to Strength
++80 to maximum Life
++37% to Cold Resistance
+14% increased Flask Charges gained
+
+Rarity: Rare
+Beast Thread
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++74 to maximum Life
++51 to maximum Mana
++52% to Cold Resistance
+19% increased Flask Life Recovery rate
+
+Rarity: Rare
+Damnation Twine
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++360 to Armour
++40 to maximum Mana
++55% to Fire Resistance
+16% reduced Flask Charges used
+
+Rarity: Rare
+Grim Lock
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 44
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+12% reduced Enemy Stun Threshold
++42% to Lightning Resistance
+25% increased Stun and Block Recovery
+Reflects 1 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Morbid Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 40
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++27 to maximum Energy Shield
++13% to Fire Resistance
+29% increased Stun Duration on Enemies
+14% increased Flask Charges gained
+
+Rarity: Rare
+Vengeance Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 54
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++19 to Armour
++39 to maximum Energy Shield
++19 to maximum Mana
++7% to Cold Resistance
+12% increased Stun and Block Recovery
+
+Rarity: Rare
+Dragon Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 66
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+8% reduced Enemy Stun Threshold
++66 to Armour
+Regenerate 18.7 Life per second
++28 to maximum Mana
++52% to Fire Resistance
+
+Rarity: Rare
+Gale Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++15 to Armour
++39 to maximum Life
++50% to Cold Resistance
+18% increased Stun Duration on Enemies
+
+Rarity: Rare
+Onslaught Locket
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++14 to Strength
++3 to maximum Energy Shield
++30% to Fire Resistance
++51% to Cold Resistance
+
+Rarity: Rare
+Spirit Snare
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 65
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++52 to Strength
++14 to Armour
++13 to maximum Life
+Regenerate 4.1 Life per second
++15% to Cold Resistance
+
+Rarity: Rare
+Honour Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++42 to Strength
++14 to maximum Life
++52% to Cold Resistance
++32% to Lightning Resistance
+
+Rarity: Rare
+Miracle Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++44 to maximum Energy Shield
++19 to maximum Mana
++55% to Fire Resistance
+20% increased Stun and Block Recovery
+44% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Anarchy Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++75 to maximum Life
++30% to Fire Resistance
++33% to Lightning Resistance
+16% reduced Flask Charges used
+
+Rarity: Rare
+Ambush Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+13% reduced Enemy Stun Threshold
++71 to maximum Life
++31 to maximum Mana
+24% increased Stun Duration on Enemies
+
+Rarity: Rare
+Soul Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 40
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++41 to Armour
++51 to maximum Mana
+13% increased Stun Duration on Enemies
+Reflects 2 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Corruption Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 47
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++13 to maximum Life
+Regenerate 11 Life per second
++15 to maximum Mana
+28% increased Stun Duration on Enemies
+14% reduced Flask Charges used
+Reflects 9 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Soul Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++39 to Strength
++54 to maximum Mana
++51% to Fire Resistance
++16% to Lightning Resistance
+
+Rarity: Rare
+Phoenix Lock
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++459 to Armour
++70 to maximum Life
++36 to maximum Mana
++57% to Cold Resistance
+
+Rarity: Rare
+Armageddon Bind
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 55
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++28 to Strength
+10% reduced Enemy Stun Threshold
++17 to maximum Energy Shield
++61 to maximum Mana
+
+Rarity: Rare
+Viper Lash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 44
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++37 to Strength
++35 to maximum Life
++39 to maximum Mana
++19% to Lightning Resistance
+
+Rarity: Rare
+Honour Locket
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 65
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++51 to Strength
++197 to Armour
++14 to maximum Energy Shield
+12% increased Flask Effect Duration
+
+Rarity: Rare
+Empyrean Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++15 to Strength
++29 to maximum Energy Shield
++48 to maximum Mana
++55% to Cold Resistance
+
+Rarity: Rare
+Damnation Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 47
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
+9% reduced Enemy Stun Threshold
++36 to maximum Energy Shield
++11 to maximum Life
++17 to maximum Mana
++25% to Fire Resistance
++15% to Chaos Resistance
+
+Rarity: Rare
+Miracle Bind
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++12 to maximum Energy Shield
++50% to Fire Resistance
++15% to Cold Resistance
+12% increased Flask Life Recovery rate
+
+Rarity: Rare
+Agony Tether
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 66
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++50 to Strength
+9% reduced Enemy Stun Threshold
++401 to Armour
++10 to maximum Life
++43% to Cold Resistance
+
+Rarity: Rare
+Blood Clasp
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++466 to Armour
++17 to maximum Life
+Regenerate 15.4 Life per second
++44% to Fire Resistance
+
+Rarity: Rare
+Sol Trap
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 67
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++60 to Armour
++48 to maximum Energy Shield
++27 to maximum Mana
++56% to Lightning Resistance
+
+Rarity: Rare
+Blood Bond
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 64
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++59 to Armour
++74 to maximum Life
++53 to maximum Mana
++38% to Chaos Resistance
+
+Rarity: Rare
+Maelström Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 35
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++31 to Strength
++24 to maximum Energy Shield
++20 to maximum Mana
+11% increased Stun and Block Recovery
+
+Rarity: Rare
+Beast Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 59
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++47 to maximum Energy Shield
++49% to Fire Resistance
++43% to Lightning Resistance
+Reflects 4 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Woe Harness
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 33
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++21 to Strength
++57 to maximum Life
++45 to maximum Mana
+11% increased Stun Duration on Enemies
+
+Rarity: Rare
+Pain Girdle
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 45
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++252 to Armour
++49 to maximum Life
++22 to maximum Mana
++39% to Cold Resistance
+
+Rarity: Rare
+Brood Leash
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 33
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++25 to maximum Energy Shield
++43 to maximum Life
++47 to maximum Mana
++15% to Fire Resistance
++22% to Cold Resistance
+
+Rarity: Rare
+Apocalypse Cord
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 68
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++37 to Strength
++502 to Armour
++30% to Fire Resistance
+10% increased Flask Charges gained
+19% increased Flask Life Recovery rate
+
+Rarity: Rare
+Demon Bond
+Leather Belt
+--------
+Quality (Resistance Modifiers): +20% (augmented)
+--------
+Requirements:
+Level: 57
+--------
+Item Level: 86
+--------
++40 to maximum Life (implicit)
+--------
++41 to Strength
++43 to maximum Energy Shield
++19 to maximum Mana
++50% to Fire Resistance
+24% increased Stun and Block Recovery
+

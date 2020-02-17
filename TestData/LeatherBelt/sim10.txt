@@ -1,0 +1,1444 @@
+Rarity: Rare
+Spirit Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+22% increased Flask Charges gained
+13% increased Stun and Block Recovery
+Regenerate 6.47 Life per second
++47 to maximum Mana
+
+Rarity: Rare
+Dread Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 1.20 Life per second
++45% to Fire Resistance
++14% to Cold Resistance
++21 to maximum Energy Shield
++48 to Armour
+
+Rarity: Rare
+Agony Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++45% to Lightning Resistance
+35% increased Elemental Damage with Attack Skills
++59 to maximum Mana
++44% to Cold Resistance
++96 to maximum Life
+
+Rarity: Rare
+Horror Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 2.90 Life per second
+43% increased Elemental Damage with Attack Skills
++44 to maximum Energy Shield
++34 to maximum Mana
+
+Rarity: Rare
+Sorrow Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 11.73 Life per second
++34% to Fire Resistance
+30% increased Stun Duration on Enemies
++3 to Armour
+
+Rarity: Rare
+Tempest Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++16% to Lightning Resistance
++30% to Fire Resistance
++5% to Chaos Resistance
++50 to maximum Mana
+
+Rarity: Rare
+Doom Leash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++17 to Armour
+33% increased Stun Duration on Enemies
+Reflects 4 Physical Damage to Melee Attackers
+28% increased Stun and Block Recovery
++53 to Strength
+
+Rarity: Rare
+Ghoul Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++22 to Strength
++25% to Fire Resistance
+28% increased Stun Duration on Enemies
++43 to maximum Mana
+
+Rarity: Rare
+Foe Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++59 to Strength
++18 to maximum Mana
++32% to Cold Resistance
++180 to Armour
+
+Rarity: Rare
+Bramble Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++55 to Strength
++22% to Lightning Resistance
++48 to maximum Mana
+28% increased Stun and Block Recovery
+
+Rarity: Rare
+Vortex Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+47% increased Elemental Damage with Attack Skills
++12% to Fire Resistance
++63 to maximum Life
++59 to maximum Mana
++7% to Cold Resistance
+
+Rarity: Rare
+Victory Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++10 to maximum Energy Shield
++14% to Fire Resistance
++29 to Strength
++29% to Lightning Resistance
+
+Rarity: Rare
+Onslaught Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++86 to maximum Life
++11% to Lightning Resistance
+Reflects 6 Physical Damage to Melee Attackers
+10% increased Flask Life Recovery rate
++46% to Fire Resistance
++13 to Strength
+
+Rarity: Rare
+Hate Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++19 to maximum Energy Shield
+Regenerate 8.15 Life per second
++22 to Strength
++23% to Cold Resistance
+
+Rarity: Rare
+Agony Leash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++35 to maximum Energy Shield
++57 to maximum Mana
++242 to Armour
+16% increased Flask Charges gained
+
+Rarity: Rare
+Phoenix Trap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+7% reduced Enemy Stun Threshold
++21% to Lightning Resistance
+32% increased Elemental Damage with Attack Skills
++20% to Cold Resistance
+
+Rarity: Rare
+Horror Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++27 to Strength
+18% increased Flask Effect Duration
++20% to Cold Resistance
++10 to Armour
++54 to maximum Mana
+
+Rarity: Rare
+Dragon Harness, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 2.60 Life per second
++42 to maximum Life
++34% to Cold Resistance
+26% increased Stun and Block Recovery
++8 to maximum Energy Shield
+
+Rarity: Rare
+Fate Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 4.30 Life per second
++15 to maximum Life
++33 to Strength
++26 to maximum Mana
+
+Rarity: Rare
+Hate Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+26% increased Stun and Block Recovery
++47 to maximum Life
++25% to Fire Resistance
++40 to Strength
+
+Rarity: Rare
+Storm Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++56 to Armour
+13% reduced Enemy Stun Threshold
+48% increased Elemental Damage with Attack Skills
+13% increased Flask Effect Duration
++10 to maximum Energy Shield
+
+Rarity: Rare
+Gloom Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++6% to Cold Resistance
++47 to maximum Life
++60 to Strength
++23 to maximum Energy Shield
+
+Rarity: Rare
+Horror Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++12% to Fire Resistance
+Reflects 3 Physical Damage to Melee Attackers
+21% increased Stun and Block Recovery
++7% to Lightning Resistance
+
+Rarity: Rare
+Brood Leash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 1.73 Life per second
++39 to maximum Mana
+11% reduced Enemy Stun Threshold
++47% to Lightning Resistance
++8 to maximum Life
+
+Rarity: Rare
+Fate Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++56 to maximum Mana
+35% increased Stun Duration on Enemies
+12% reduced Enemy Stun Threshold
++47% to Cold Resistance
++24 to maximum Energy Shield
+
+Rarity: Rare
+Chimeric Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++50 to maximum Life
++28 to Strength
++7% to Lightning Resistance
+24% increased Stun and Block Recovery
+
+Rarity: Rare
+Blight Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++45 to maximum Energy Shield
+16% increased Stun and Block Recovery
++19 to maximum Mana
++43% to Lightning Resistance
+
+Rarity: Rare
+Empyrean Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++4 to maximum Energy Shield
+Regenerate 18.28 Life per second
++14 to Strength
++24 to maximum Mana
+
+Rarity: Rare
+Chimeric Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++67 to maximum Mana
++48% to Lightning Resistance
+28% increased Stun Duration on Enemies
++41 to maximum Energy Shield
+
+Rarity: Rare
+Beast Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++45 to maximum Mana
++31% to Fire Resistance
++3 to maximum Energy Shield
++43% to Lightning Resistance
+
+Rarity: Rare
+Glyph Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+13% increased Flask Effect Duration
++23% to Lightning Resistance
++42% to Fire Resistance
++47 to maximum Energy Shield
+
+Rarity: Rare
+Victory Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++32 to maximum Life
+17% increased Stun and Block Recovery
++30% to Cold Resistance
++6% to Fire Resistance
++44 to Armour
++30 to maximum Mana
+
+Rarity: Rare
+Rune Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+13% increased Stun and Block Recovery
+15% increased Flask Effect Duration
++49 to maximum Mana
++39 to Strength
+
+Rarity: Rare
+Loath Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+13% reduced Flask Charges used
+14% increased Stun and Block Recovery
++93 to maximum Life
++64 to maximum Mana
+
+Rarity: Rare
+Skull Harness, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Reflects 4 Physical Damage to Melee Attackers
++20 to maximum Energy Shield
+15% reduced Enemy Stun Threshold
+22% increased Flask Charges gained
+
+Rarity: Rare
+Blood Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+29% increased Flask Charges gained
++48 to maximum Life
++46 to Strength
++13% to Lightning Resistance
+
+Rarity: Rare
+Grim Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++53 to Strength
++51 to maximum Energy Shield
++42 to Armour
++29% to Fire Resistance
+6% reduced Enemy Stun Threshold
+
+Rarity: Rare
+Damnation Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+13% increased Stun and Block Recovery
++48 to maximum Mana
++470 to Armour
++48 to maximum Energy Shield
+
+Rarity: Rare
+Tempest Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++12 to Strength
+Regenerate 3.17 Life per second
+11% increased Stun and Block Recovery
++7 to Armour
+
+Rarity: Rare
+Fate Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++16 to maximum Energy Shield
++98 to maximum Life
+33% increased Stun Duration on Enemies
++40% to Fire Resistance
+
+Rarity: Rare
+Torment Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+Regenerate 14.45 Life per second
++4 to maximum Energy Shield
+Reflects 10 Physical Damage to Melee Attackers
++14 to Strength
+12% reduced Flask Charges used
+
+Rarity: Rare
+Eagle Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+37% increased Elemental Damage with Attack Skills
++47% to Lightning Resistance
+18% increased Flask Life Recovery rate
++34% to Fire Resistance
+
+Rarity: Rare
+Sorrow Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++25 to maximum Life
+16% increased Flask Effect Duration
+Reflects 8 Physical Damage to Melee Attackers
++12 to maximum Energy Shield
+35% increased Stun Duration on Enemies
+
+Rarity: Rare
+Grim Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+13% reduced Enemy Stun Threshold
++26 to maximum Energy Shield
++43% to Fire Resistance
++48% to Cold Resistance
+
+Rarity: Rare
+Dread Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++35% to Lightning Resistance
++290 to Armour
+35% increased Stun Duration on Enemies
++47 to maximum Life
+
+Rarity: Rare
+Foe Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++13% to Fire Resistance
++54 to Strength
++34% to Cold Resistance
++39 to maximum Energy Shield
+
+Rarity: Rare
+Bramble Trap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+25% increased Elemental Damage with Attack Skills
++30% to Fire Resistance
++46 to maximum Energy Shield
+18% increased Flask Charges gained
+
+Rarity: Rare
+Corpse Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++2 to maximum Energy Shield
+18% increased Stun and Block Recovery
++522 to Armour
+11% increased Flask Life Recovery rate
+
+Rarity: Rare
+Spirit Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++24% to Cold Resistance
++5 to maximum Life
++117 to Armour
++45 to maximum Energy Shield
+
+Rarity: Rare
+Sol Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+35% increased Stun Duration on Enemies
++32 to maximum Energy Shield
++45 to maximum Life
++12% to Lightning Resistance
++57 to maximum Mana
++16% to Fire Resistance
+
+Rarity: Rare
+Rapture Strap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++15 to maximum Mana
++50 to maximum Energy Shield
+Regenerate 19.58 Life per second
++122 to Armour
++21% to Lightning Resistance
+
+Rarity: Rare
+Cataclysm Lock, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++23 to maximum Mana
+14% increased Stun and Block Recovery
++8 to Strength
++236 to Armour
+
+Rarity: Rare
+Spirit Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++375 to Armour
+Regenerate 6.08 Life per second
++38 to Strength
++31 to maximum Mana
+27% increased Stun and Block Recovery
++4 to maximum Energy Shield
+
+Rarity: Rare
+Sol Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++71 to maximum Life
+20% increased Elemental Damage with Attack Skills
++1 to maximum Energy Shield
++14% to Fire Resistance
++54 to Strength
+
+Rarity: Rare
+Loath Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++50 to maximum Energy Shield
++16% to Fire Resistance
+5% increased Elemental Damage with Attack Skills
+5% reduced Enemy Stun Threshold
+26% increased Stun Duration on Enemies
++26 to maximum Mana
+
+Rarity: Rare
+Blight Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++485 to Armour
++9% to Cold Resistance
++18% to Lightning Resistance
++29 to maximum Energy Shield
++82 to maximum Life
+
+Rarity: Rare
+Blight Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++13 to maximum Life
++19 to Strength
+11% increased Flask Effect Duration
+11% reduced Enemy Stun Threshold
++19 to maximum Mana
+
+Rarity: Rare
+Mind Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++30 to maximum Energy Shield
++23 to Strength
+19% increased Flask Life Recovery rate
+27% increased Stun and Block Recovery
+
+Rarity: Rare
+Dusk Lock, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++49 to Strength
+26% increased Stun Duration on Enemies
++12 to maximum Energy Shield
+8% reduced Enemy Stun Threshold
+
+Rarity: Rare
+Victory Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++48 to maximum Mana
++44% to Lightning Resistance
++47% to Cold Resistance
++21 to Strength
+
+Rarity: Rare
+Vortex Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+10% reduced Enemy Stun Threshold
+21% increased Stun Duration on Enemies
++51 to Strength
++348 to Armour
+16% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Demon Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++49 to maximum Life
++45% to Fire Resistance
++45 to Armour
++20 to maximum Energy Shield
+16% increased Stun Duration on Enemies
+
+Rarity: Rare
+Onslaught Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++336 to Armour
++21 to maximum Energy Shield
+28% increased Stun Duration on Enemies
++41 to maximum Life
++11 to Strength
+
+Rarity: Rare
+Morbid Clasp, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++256 to Armour
++45% to Lightning Resistance
++8 to maximum Energy Shield
+18% increased Flask Mana Recovery rate
++19% to Fire Resistance
+
+Rarity: Rare
+Gale Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+27% increased Stun and Block Recovery
++50 to maximum Life
+Reflects 4 Physical Damage to Melee Attackers
+26% increased Stun Duration on Enemies
+
+Rarity: Rare
+Phoenix Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++23 to Strength
++13% to Lightning Resistance
+39% increased Elemental Damage with Attack Skills
++47 to maximum Mana
+
+Rarity: Rare
+Dire Trap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+24% increased Flask Charges gained
++37% to Fire Resistance
++9 to maximum Energy Shield
+9% increased Elemental Damage with Attack Skills
+
+Rarity: Rare
+Cataclysm Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+22% increased Stun and Block Recovery
++492 to Armour
++44 to maximum Energy Shield
++62 to maximum Mana
+Regenerate 17.07 Life per second
+35% increased Stun Duration on Enemies
+
+Rarity: Rare
+Mind Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++43 to Strength
++93 to maximum Life
++435 to Armour
+20% increased Stun and Block Recovery
++44% to Lightning Resistance
+
+Rarity: Rare
+Blood Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++6% to Fire Resistance
++454 to Armour
+23% increased Stun and Block Recovery
++19 to maximum Energy Shield
+
+Rarity: Rare
+Loath Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++30 to maximum Life
++59 to maximum Mana
++47% to Fire Resistance
+14% increased Flask Effect Duration
+
+Rarity: Rare
+Beast Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++21 to maximum Energy Shield
++44 to maximum Mana
++33 to Strength
++9% to Cold Resistance
+26% increased Stun Duration on Enemies
+
+Rarity: Rare
+Corpse Snare, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++5 to maximum Energy Shield
++70 to maximum Life
+Regenerate 1.60 Life per second
++26 to Strength
+
+Rarity: Rare
+Dire Cord, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+18% increased Stun and Block Recovery
++72 to maximum Life
++36% to Lightning Resistance
+Reflects 9 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Damnation Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++304 to Armour
++57 to maximum Life
++52 to Strength
++40 to maximum Mana
++37% to Cold Resistance
+
+Rarity: Rare
+Doom Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++46% to Fire Resistance
++81 to maximum Life
+13% reduced Flask Charges used
++7 to maximum Energy Shield
+23% increased Stun Duration on Enemies
+
+Rarity: Rare
+Kraken Shackle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+15% increased Flask Effect Duration
++455 to Armour
++35% to Cold Resistance
++42 to Strength
+
+Rarity: Rare
+Torment Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++12% to Fire Resistance
++6% to Cold Resistance
++40 to maximum Mana
++48 to maximum Energy Shield
+
+Rarity: Rare
+Corpse Snare, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++39% to Fire Resistance
++94 to maximum Life
+7% reduced Enemy Stun Threshold
++38 to maximum Energy Shield
+
+Rarity: Rare
+Havoc Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++25 to Strength
++48% to Fire Resistance
++22 to maximum Mana
+25% increased Stun and Block Recovery
+
+Rarity: Rare
+Hate Buckle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++270 to Armour
+5% reduced Enemy Stun Threshold
+12% reduced Flask Charges used
+16% increased Stun and Block Recovery
++15 to maximum Mana
+
+Rarity: Rare
+Tempest Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++3 to maximum Energy Shield
++40 to maximum Life
++50 to Strength
++67 to maximum Mana
+
+Rarity: Rare
+Chimeric Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++53 to maximum Mana
+16% increased Stun Duration on Enemies
++30% to Cold Resistance
++6 to maximum Energy Shield
+
+Rarity: Rare
+Maelstrom Lock, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++24% to Lightning Resistance
++7 to maximum Energy Shield
+Regenerate 19.05 Life per second
+26% increased Stun and Block Recovery
+
+Rarity: Rare
+Wrath Girdle, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+8% reduced Enemy Stun Threshold
+Reflects 1 Physical Damage to Melee Attackers
++26% to Cold Resistance
++39 to Strength
+
+Rarity: Rare
+Brimstone Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++60 to maximum Life
+30% increased Flask Charges gained
++34% to Lightning Resistance
++41 to maximum Mana
++38% to Fire Resistance
+
+Rarity: Rare
+Havoc Thread, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+20% increased Stun and Block Recovery
++31 to maximum Energy Shield
+Regenerate 2.17 Life per second
+15% increased Flask Charges gained
++9 to maximum Life
+
+Rarity: Rare
+Sol Lock, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+14% reduced Enemy Stun Threshold
++12% to Lightning Resistance
++61 to maximum Mana
++96 to maximum Life
+
+Rarity: Rare
+Eagle Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++455 to Armour
+Regenerate 19.60 Life per second
++31% to Chaos Resistance
++15 to maximum Energy Shield
+15% reduced Enemy Stun Threshold
++55 to maximum Life
+
+Rarity: Rare
+Spirit Lock, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
+14% increased Stun and Block Recovery
++8 to Strength
++27 to maximum Life
+Regenerate 2.27 Life per second
+
+Rarity: Rare
+Rage Lash, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++29 to maximum Energy Shield
++60 to maximum Mana
+23% increased Stun and Block Recovery
++26 to maximum Life
+
+Rarity: Rare
+Maelstrom Bind, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++57 to Strength
++15 to maximum Mana
+Regenerate 3.28 Life per second
++440 to Armour
+
+Rarity: Rare
+Demon Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++35% to Cold Resistance
++24 to Strength
++39 to maximum Mana
++14 to maximum Energy Shield
+
+Rarity: Rare
+Pandemonium Trap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++21% to Lightning Resistance
++35 to maximum Mana
+Regenerate 1.67 Life per second
+15% increased Stun and Block Recovery
+Reflects 6 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Carrion Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++39% to Lightning Resistance
++16 to maximum Mana
++23 to Strength
++15 to maximum Energy Shield
++98 to maximum Life
+
+Rarity: Rare
+Death Trap, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++51 to maximum Energy Shield
+13% reduced Enemy Stun Threshold
+22% increased Flask Charges gained
++47 to maximum Mana
+
+Rarity: Rare
+Rage Twine, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++33% to Cold Resistance
+Regenerate 2.52 Life per second
++17 to maximum Mana
++345 to Armour
+
+Rarity: Rare
+Fate Tether, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++9% to Lightning Resistance
+Regenerate 18.05 Life per second
+16% increased Stun and Block Recovery
++87 to maximum Life
+
+Rarity: Rare
+Torment Locket, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++57 to Strength
+18% reduced Flask Charges used
++27 to maximum Energy Shield
+Reflects 4 Physical Damage to Melee Attackers
+14% reduced Enemy Stun Threshold
+
+Rarity: Rare
+Plague Bond, Leather Belt
+--------
+Belt
+--------
+Item Level: 86
+--------
++39 to maximum Life
+--------
++54 to maximum Mana
+13% increased Flask Mana Recovery rate
+28% increased Stun Duration on Enemies
++36 to Strength
+
