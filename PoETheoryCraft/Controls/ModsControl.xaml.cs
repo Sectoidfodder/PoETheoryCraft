@@ -54,12 +54,16 @@ namespace PoETheoryCraft.Controls
             ISet<string> tagstoadd = new HashSet<string>();
 
             object c = Currency.GetSelected();
-            if (c is string)    
+            if (c is PoEEssenceData)
+            {
+                ops.ILvlCap = ((PoEEssenceData)c).item_level_restriction ?? 200;
+            }
+            else if (c is PoECurrencyData)    
             {
                 //The only relevant core currencies are conquerors' exalts
                 if (Bench.BenchItem.GetInfluences().Count == 0)
                 {
-                    string currency = (string)c;
+                    string currency = ((PoECurrencyData)c).name;
                     if (currency == "Redeemer's Exalted Orb")
                         inf = ItemInfluence.Redeemer;
                     else if (currency == "Hunter's Exalted Orb")
@@ -88,10 +92,6 @@ namespace PoETheoryCraft.Controls
                         }
                     }
                 }
-            }
-            else if (c is PoEEssenceData)
-            {
-                ops.ILvlCap = ((PoEEssenceData)c).item_level_restriction ?? 200;
             }
             else if (c != null)
             {
@@ -127,12 +127,16 @@ namespace PoETheoryCraft.Controls
 
             WeightedModsDisplay.UpdateData(validmods);
         }
-        public PoEModData GetSelected()
+        public object GetSelected()
         {
             if (!((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
                 return null;
+            if (activeview.PrefixList.SelectedItem != null)
+                return activeview.PrefixList.SelectedItem;
+            else
+                return activeview.SuffixList.SelectedItem;
 
-            PoEModData mod = null;
+            /*PoEModData mod = null;
             //all this just to find the right typecast in the right listview to grab the key attribute...
             if (activeview.PrefixList.SelectedItem is KeyValuePair<PoEModData, int>)
                 mod = ((KeyValuePair<PoEModData, int>)activeview.PrefixList.SelectedItem).Key;
@@ -143,7 +147,7 @@ namespace PoETheoryCraft.Controls
             else if (activeview.SuffixList.SelectedItem is KeyValuePair<PoEModData, IDictionary<string, int>>)
                 mod = ((KeyValuePair<PoEModData, IDictionary<string, int>>)activeview.SuffixList.SelectedItem).Key;
 
-            return mod;
+            return mod;*/
         }
     }
 }

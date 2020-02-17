@@ -152,16 +152,19 @@ namespace PoETheoryCraft
             }
             return infs;
         }
-        public void RerollImplicits()
+        public bool RerollImplicits()
         {
+            if (LiveImplicits.Count == 0)
+                return false;
             foreach (ModCraft m in LiveImplicits)
             {
                 m.Reroll();
             }
             Modified = true;
+            return true;
         }
         //divines each mod, obeying "of prefixes" and "of suffixes" metamods and locked mods
-        public void RerollExplicits()
+        public bool RerollExplicits()
         {
             bool prefixlock = false;
             bool suffixlock = false;
@@ -173,18 +176,22 @@ namespace PoETheoryCraft
                 if (modtemplate.key == ModLogic.SuffixLock)
                     suffixlock = true;
             }
+            bool valid = false;
             foreach (ModCraft m in LiveMods)
             {
                 PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
                 if (!m.IsLocked && !(prefixlock && modtemplate.generation_type == ModLogic.Prefix) && !(suffixlock && modtemplate.generation_type == ModLogic.Suffix))
                 {
                     m.Reroll();
+                    valid = true;
                 }
             }
-            Modified = true;
+            if (valid)
+                Modified = true;
+            return valid;
         }
         //removes one mod at random, obeying prefix/suffix lock, and leaving locked mods
-        public void RemoveRandomMod()
+        public bool RemoveRandomMod()
         {
             bool prefixlock = false;
             bool suffixlock = false;
@@ -207,8 +214,12 @@ namespace PoETheoryCraft
             {
                 int n = RNG.Gen.Next(choppingblock.Count);
                 LiveMods.Remove(choppingblock[n]);
+                Modified = true;
+                return true;
             }
-            Modified = true;
+            else
+                return false;
+            
         }
         //remove all mods or all crafted mods, obeying prefix/suffix lock, leaving locked mods, and downgrading rarity if necessary
         public void ClearMods(bool craftedonly = false)

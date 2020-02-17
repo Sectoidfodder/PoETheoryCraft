@@ -19,9 +19,9 @@ namespace PoETheoryCraft.DataClasses
         public static readonly IList<string> CurrencyIndex = new List<string>()        //names to look for in base_items.json to make up the Currencies dict
         {
             "Chaos Orb", "Orb of Alchemy", "Orb of Scouring", "Orb of Transmutation", "Orb of Alteration", "Orb of Augmentation", "Regal Orb", "Exalted Orb", "Orb of Annulment",
-            "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb",
+            "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb", "Vaal Orb", "Orb of Chance",
             "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst",
-            "Alt Plus Aug", "Remove Crafted Mods"
+            /*"Alt Plus Aug", */"Remove Crafted Mods"
         };
         public static IDictionary<string, PoEModData> CoreMods { get; private set; }    //prefixes and suffixes: ~3k gear, ~200 jewel, ~450 abyss jewel
         public static IDictionary<string, PoEModData> AllMods { get; private set; }     //really big and should only be used for key lookups, not iteration
@@ -62,7 +62,7 @@ namespace PoETheoryCraft.DataClasses
             StatTemplates.UnionWith(new HashSet<string>()
             {
                 "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance",
-                "[pseudo] +#% Total Elemental Resistance", "[pseudo] +#% Total Resistance"
+                //"[pseudo] +#% Total Elemental Resistance", "[pseudo] +#% Total Resistance"
             });
         }
         //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
@@ -86,7 +86,7 @@ namespace PoETheoryCraft.DataClasses
                 if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     CoreMods.Add(k, AllMods[k]);
                 //every mod worth translating into string templates to search by, doesn't include implicits because idk how to include them w/o also including a ton of useless unique item mods
-                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     IncludeTranslations(AllMods[k]);
             }
             AppendTranslations();
@@ -149,7 +149,7 @@ namespace PoETheoryCraft.DataClasses
                 extra.icon = null;
             }
             Currencies.Add("RemoveCraftedMods", extra);
-            extra = new PoECurrencyData() { key = "AltPlusAug", name = "Alt Plus Aug", tooltip = "Alt + Aug in one click" };
+            /*extra = new PoECurrencyData() { key = "AltPlusAug", name = "Alt Plus Aug", tooltip = "Alt + Aug in one click" };
             extrapath = "Icons/currency/AltPlusAug.png";
             extrauri = new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, extrapath));
             try
@@ -162,7 +162,7 @@ namespace PoETheoryCraft.DataClasses
                 Debug.WriteLine("Can't find image " + extrauri);
                 extra.icon = null;
             }
-            Currencies.Add("AltPlusAug", extra);
+            Currencies.Add("AltPlusAug", extra);*/
         }
 
         //build bench crafting option templates from bench_crafting_options.min.json

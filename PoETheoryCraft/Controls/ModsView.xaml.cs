@@ -165,17 +165,37 @@ namespace PoETheoryCraft.Controls
             throw new NotImplementedException();
         }
     }
+    public struct CostObject
+    {
+        public string Label { get; set; }
+        public BitmapImage Icon { get; set; }
+    }
     //Convert either an int weight or a Dictionary<string,int> crafting cost to string
-    public class CostsToStringConverter : IValueConverter
+    public class CostsToDisplayConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            IList<CostObject> objs = new List<CostObject>();
             if (value is int)
-                return ((int)value).ToString();
+                objs.Add(new CostObject() { Label = ((int)value).ToString() });
             else if (value is IDictionary<string, int>)
-                return "cost";
+            {
+                IDictionary<string, int> costdict = (Dictionary<string, int>)value;
+                foreach (string k in costdict.Keys)
+                {
+                    BitmapImage icon = null;
+                    if (CraftingDatabase.Currencies.ContainsKey(k))
+                        icon = CraftingDatabase.Currencies[k].icon;
+                    else if (CraftingDatabase.Fossils.ContainsKey(k))
+                        icon = CraftingDatabase.Fossils[k].icon;
+                    else if (CraftingDatabase.Essences.ContainsKey(k))
+                        icon = CraftingDatabase.Essences[k].icon;
+                    objs.Add(new CostObject() { Label = costdict[k] + "x", Icon = icon });
+                }
+            }
             else
-                return "???";
+                objs.Add(new CostObject() { Label = "???" });
+            return objs;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

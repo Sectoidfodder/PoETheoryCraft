@@ -26,7 +26,7 @@ namespace PoETheoryCraft.Controls
     {
         public class CurrencyEventArgs : EventArgs
         {
-            public string Currency { get; set; }
+            public PoECurrencyData Currency { get; set; }
             public PoEEssenceData Essence { get; set; }
             public IList<PoEFossilData> Fossils { get; set; }
         }
@@ -48,6 +48,7 @@ namespace PoETheoryCraft.Controls
         }
         public void LoadCurrencies(ICollection<PoECurrencyData> currencies)
         {
+            CollectionViewSource.GetDefaultView(currencies).Filter = AllowedCurrencies;
             List<PoECurrencyData> clist = currencies.ToList<PoECurrencyData>();
             clist.Sort((a, b) => CraftingDatabase.CurrencyIndex.IndexOf(a.name).CompareTo(CraftingDatabase.CurrencyIndex.IndexOf(b.name)));
             BasicView.ItemsSource = clist;
@@ -57,7 +58,7 @@ namespace PoETheoryCraft.Controls
             switch (CurrencyTabs.SelectedIndex)
             {
                 case 0:
-                    CurrencySelectionChanged?.Invoke(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null });
+                    CurrencySelectionChanged?.Invoke(this, new CurrencyEventArgs() { Currency = BasicView.SelectedItem as PoECurrencyData });
                     break;
                 case 1:
                     SolidColorBrush b = FossilView.SelectedItems.Count > 4 ? Brushes.Red : Brushes.Black;
@@ -77,7 +78,7 @@ namespace PoETheoryCraft.Controls
             switch (CurrencyTabs.SelectedIndex)
             {
                 case 0:
-                    return BasicView.SelectedItem != null ? ((PoECurrencyData)BasicView.SelectedItem).name : null;
+                    return BasicView.SelectedItem;
                 case 1:
                     return FossilView.SelectedItems;
                 case 2:
@@ -95,6 +96,13 @@ namespace PoETheoryCraft.Controls
         {
             PoEFossilData f = o as PoEFossilData;
             return (!f.changes_quality && !f.enchants && !f.mirrors && !f.rolls_lucky && !f.rolls_white_sockets && f.sell_price_mods.Count == 0);
+        }
+        private bool AllowedCurrencies(object o)
+        {
+            PoECurrencyData c = o as PoECurrencyData;
+            if (c.name == "Vaal Orb" || c.name == "Orb of Chance")
+                return false;
+            return true;
         }
     }
 }

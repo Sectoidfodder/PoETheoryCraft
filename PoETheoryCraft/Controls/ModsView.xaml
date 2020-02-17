@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="Auto" Width="Auto" >
     <UserControl.Resources>
-        <local:CostsToStringConverter x:Key="CostsToStringConverter" />
+        <local:CostsToDisplayConverter x:Key="CostsToDisplayConverter" />
         <local:ModDataToTooltipConverter x:Key="ModDataToTooltipConverter" />
         <local:ShouldExpandConverter x:Key="ShouldExpandConverter" />
     </UserControl.Resources>
@@ -44,12 +44,12 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="{Binding Path=Name, Mode=OneWay, Converter={StaticResource ShouldExpandConverter}}" Expanded="LogExpanded" Collapsed="LogCollapsed" Background="AliceBlue">
+                                        <Expander IsExpanded="{Binding Path=Name, Mode=OneTime, Converter={StaticResource ShouldExpandConverter}}" Expanded="LogExpanded" Collapsed="LogCollapsed" Background="AliceBlue">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name, Mode=OneWay}"></TextBlock>
+                                                    <TextBlock Text="{Binding Name, Mode=OneTime}"></TextBlock>
                                                     <TextBlock Margin="5,0,0,0">(</TextBlock>
-                                                    <TextBlock Text="{Binding ItemCount, Mode=OneWay}"></TextBlock>
+                                                    <TextBlock Text="{Binding ItemCount, Mode=OneTime}"></TextBlock>
                                                     <TextBlock>)</TextBlock>
                                                 </StackPanel>
                                             </Expander.Header>
@@ -69,8 +69,22 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneWay}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource CostsToStringConverter}}" Background="Beige"></TextBlock>
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}" Background="Beige">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=Label}"/>
+                                        <Image MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -99,12 +113,12 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="{Binding Path=Name, Mode=OneWay, Converter={StaticResource ShouldExpandConverter}}" Expanded="LogExpanded" Collapsed="LogCollapsed" Background="AliceBlue">
+                                        <Expander IsExpanded="{Binding Path=Name, Mode=OneTime, Converter={StaticResource ShouldExpandConverter}}" Expanded="LogExpanded" Collapsed="LogCollapsed" Background="AliceBlue">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name, Mode=OneWay}"></TextBlock>
+                                                    <TextBlock Text="{Binding Name, Mode=OneTime}"></TextBlock>
                                                     <TextBlock Margin="5,0,0,0">(</TextBlock>
-                                                    <TextBlock Text="{Binding ItemCount, Mode=OneWay}"></TextBlock>
+                                                    <TextBlock Text="{Binding ItemCount, Mode=OneTime}"></TextBlock>
                                                     <TextBlock>)</TextBlock>
                                                 </StackPanel>
                                             </Expander.Header>
@@ -124,8 +138,22 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneWay}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <TextBlock Grid.Column="1" Text="{Binding Path=Value, Mode=OneWay, Converter={StaticResource CostsToStringConverter}}" Background="Beige"></TextBlock>
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}" Background="Beige">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=Label}"/>
+                                        <Image MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

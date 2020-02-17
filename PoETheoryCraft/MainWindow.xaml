@@ -7,6 +7,9 @@
         xmlns:local="clr-namespace:PoETheoryCraft"
         mc:Ignorable="d"
         Title="TheoryCraft" Height="720" Width="1280">
+    <Window.Resources>
+        <local:KeyToIconConverter x:Key="KeyToIconConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -14,11 +17,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Options">
@@ -30,14 +33,36 @@
         </StackPanel>
         
         <uc:ItemView Grid.Row="2" x:Name="ItemSlot" ItemClick="ItemParam_Click"></uc:ItemView>
-        <TextBox Grid.Row="3" IsReadOnly="True" Name="BigBox">Test Text</TextBox>
+        <DockPanel Grid.Row="3" Width="310" MaxHeight="210">
+            <TextBlock DockPanel.Dock="Top">Currency Spent:</TextBlock>
+            <Button DockPanel.Dock="Bottom" Width="100" Click="CurrencyTally_Clear">Reset</Button>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl Name="CurrencyTally" Background="Black" Foreground="White" MinHeight="40">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                <TextBlock Text="{Binding Path=Value}" VerticalAlignment="Bottom"/>
+                                <TextBlock Text="x" VerticalAlignment="Bottom"/>
+                                <Image MaxHeight="32" MaxWidth="32" Source="{Binding Path=Key, Converter={StaticResource KeyToIconConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+        
         <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
         <StackPanel Grid.Row="5" Orientation="Horizontal">
             <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click">+</Button>
             <Button Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
         </StackPanel>
-
-        <TabControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
+        <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Name="BigBox">Status Text</TextBox>
+        <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="4">
             <TabItem Header="Mods View">
                 <Grid>
                     <Grid.RowDefinitions>

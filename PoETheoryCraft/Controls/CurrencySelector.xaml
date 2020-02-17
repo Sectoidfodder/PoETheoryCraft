@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PoETheoryCraft.Controls"
              mc:Ignorable="d" 
-             Height="300" Width="310">
+             Height="200" Width="310">
     <Grid>
         <TabControl Name="CurrencyTabs" SelectionChanged="CurrencyTabs_SelectionChanged">
             <TabItem Header="Basic">

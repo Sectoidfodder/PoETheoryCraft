@@ -17,6 +17,7 @@ using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Controls;
 using PoETheoryCraft.Utils;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace PoETheoryCraft
 {
@@ -46,6 +47,7 @@ namespace PoETheoryCraft
             Bench = new CraftingBench();
             ModPreview.Bench = Bench;
             ModPreview.Currency = CurrencyBox;
+            CurrencyTally.ItemsSource = Bench.CurrencySpent;
 
             BigBox.Text = "";
             BigBox.FontWeight = FontWeights.Bold;
@@ -91,16 +93,31 @@ namespace PoETheoryCraft
         }
         private void ForceAdd_Click(object sender, RoutedEventArgs e)
         {
-            PoEModData mod = ModPreview.GetSelected();
-            if (mod == null)
+            object kv = ModPreview.GetSelected();
+            if (kv == null)
                 return;
-            string res = Bench.ForceAddMod(mod);
+            string res;
+            if (kv is KeyValuePair<PoEModData, int> kvint)
+            {
+                res = Bench.ForceAddMod(kvint.Key);
+            }
+            else if (kv is KeyValuePair<PoEModData, IDictionary<string, int>> kvdict)
+            {
+
+                res = Bench.ForceAddMod(kvdict.Key, costs: kvdict.Value);
+            }
+            else
+            {
+                BigBox.Text = "Unrecognized key-value format for selected mod";
+                return;
+            }
             if (res != null)
                 BigBox.Text = res;
             else
             {
                 ItemSlot.UpdateData(Bench.BenchItem);
                 ModPreview.UpdatePreviews();
+                CollectionViewSource.GetDefaultView(Bench.CurrencySpent).Refresh();
             }
         }
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -167,15 +184,15 @@ namespace PoETheoryCraft
                 return;
             }
             string res;
-            if (c is string)
+            if (c is PoEEssenceData)
             {
-                res = Bench.ApplyCurrency(c as string, n);
+                res = Bench.ApplyEssence(c as PoEEssenceData, n);
                 if (res != null)
                     BigBox.Text = res;
             }
-            else if (c is PoEEssenceData)
+            else if (c is PoECurrencyData)
             {
-                res = Bench.ApplyEssence(c as PoEEssenceData, n);
+                res = Bench.ApplyCurrency(c as PoECurrencyData, n);
                 if (res != null)
                     BigBox.Text = res;
             }
@@ -210,15 +227,15 @@ namespace PoETheoryCraft
                 return;
             }
             string res;
-            if (c is string)
+            if (c is PoEEssenceData)
             {
-                res = Bench.ApplyCurrency(c as string);
+                res = Bench.ApplyEssence(c as PoEEssenceData);
                 if (res != null)
                     BigBox.Text = res;
             }
-            else if (c is PoEEssenceData)
+            else if (c is PoECurrencyData)
             {
-                res = Bench.ApplyEssence(c as PoEEssenceData);
+                res = Bench.ApplyCurrency(c as PoECurrencyData);
                 if (res != null)
                     BigBox.Text = res;
             }
@@ -240,6 +257,7 @@ namespace PoETheoryCraft
             if (res == null)
             {
                 ItemSlot.UpdateData(Bench.BenchItem);
+                CollectionViewSource.GetDefaultView(Bench.CurrencySpent).Refresh();
                 ModPreview.UpdatePreviews();
             }
         }
@@ -280,6 +298,31 @@ namespace PoETheoryCraft
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {
             RepeatButton.IsEnabled = RepeatCountBox.Valid;
+        }
+        private void CurrencyTally_Clear(object sender, RoutedEventArgs e)
+        {
+            Bench.CurrencySpent.Clear();
+            CollectionViewSource.GetDefaultView(Bench.CurrencySpent).Refresh();
+        }
+    }
+
+    public class KeyToIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string s = value as string;
+            BitmapImage icon = null;
+            if (CraftingDatabase.Currencies.ContainsKey(s))
+                icon = CraftingDatabase.Currencies[s].icon;
+            else if (CraftingDatabase.Fossils.ContainsKey(s))
+                icon = CraftingDatabase.Fossils[s].icon;
+            else if (CraftingDatabase.Essences.ContainsKey(s))
+                icon = CraftingDatabase.Essences[s].icon;
+            return icon;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -54,7 +54,7 @@ namespace PoETheoryCraft
         {
             CurrencySpent = new Dictionary<string, int>();
         }
-        public string ForceAddMod(PoEModData mod, ItemCraft target = null)
+        public string ForceAddMod(PoEModData mod, ItemCraft target = null, IDictionary<string, int> costs = null)
         {
             target = target ?? BenchItem;
             if (mod.generation_type == ModLogic.Prefix)
@@ -82,6 +82,10 @@ namespace PoETheoryCraft
                     target.LiveTags.Add(inftag);
             }
             target.AddMod(mod);
+            foreach (string s in costs.Keys)
+            {
+                TallyCurrency(s, costs[s]);
+            }
             return null;
         }
         public string ApplyEssence(PoEEssenceData ess, int tries = 1)
@@ -106,6 +110,7 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, BaseValidMods, ItemRarity.Rare, op);
+                TallyCurrency(ess.key, 1);
                 DoPostRoll(BenchItem);
             }
             else
@@ -209,6 +214,10 @@ namespace PoETheoryCraft
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, extendedpool, ItemRarity.Rare, ops);
+                foreach (PoEFossilData fossil in fossils)
+                {
+                    TallyCurrency(fossil.key, 1);
+                }
                 DoPostRoll(BenchItem);
             }
             else
@@ -224,12 +233,14 @@ namespace PoETheoryCraft
             }
             return null;
         }
-        public string ApplyCurrency(string c, int tries = 1)
+        public string ApplyCurrency(PoECurrencyData currency, int tries = 1)
         {
             if (BenchItem == null)
                 return "Bench is empty";
+            string c = currency.name;
             bool hasclearedmassresults = false;
             bool rolled = false;
+            bool success;
             string res;
             for (int n = 0; n < tries; n++)
             {
@@ -261,12 +272,16 @@ namespace PoETheoryCraft
                     case "Divine Orb":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
-                        target.RerollExplicits();
+                        success = target.RerollExplicits();
+                        if (!success)
+                            return "No mods can be rerolled";
                         break;
                     case "Orb of Annulment":
                         if (target.Rarity == ItemRarity.Normal)
                             return "Invalid item rarity for selected currency";
-                        target.RemoveRandomMod();
+                        success = target.RemoveRandomMod();
+                        if (!success)
+                            return "No mods can be removed";
                         if (target.QualityType != null)
                             target.BaseQuality -= 20;
                         break;
@@ -336,7 +351,9 @@ namespace PoETheoryCraft
                         target.ClearMods(true);
                         break;
                     case "Blessed Orb":
-                        target.RerollImplicits();
+                        success = target.RerollImplicits();
+                        if (!success)
+                            return "No mods can be rerolled";
                         break;
                     case "Abrasive Catalyst":
                     case "Fertile Catalyst":
@@ -364,10 +381,23 @@ namespace PoETheoryCraft
                     }
                     MassResults.Add(target);
                 }
+                else
+                {
+                    TallyCurrency(currency.key, 1);
+                }
                 if (rolled)
                     DoPostRoll(target);
             }
             return null;
+        }
+        private void TallyCurrency(string k, int n)
+        {
+            if (k == "RemoveCraftedMods")
+                k = "Metadata/Items/Currency/CurrencyConvertToNormal";
+            if (CurrencySpent.ContainsKey(k))
+                CurrencySpent[k] += n;
+            else
+                CurrencySpent.Add(k, n);
         }
         private void DoPostRoll(ItemCraft item)
         {
@@ -375,7 +405,7 @@ namespace PoETheoryCraft
             {
                 foreach (KeyValuePair<PoEModData, IDictionary<string, int>> kv in PostRoll.TryCrafts)
                 {
-                    string ret = ForceAddMod(kv.Key, item);
+                    string ret = ForceAddMod(kv.Key, item, kv.Value);
                     if (ret == null)
                         break;
                 }
