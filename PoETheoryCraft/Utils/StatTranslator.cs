@@ -8,6 +8,10 @@ using PoETheoryCraft.DataClasses;
 
 namespace PoETheoryCraft.Utils
 {
+    /* 
+     * Stores localization data read from stat_translations.min.json
+     * Contains all utility functions that translate mod and item objects into display text
+     */
     public class StatLocalization       //base "chunk" format from json file
     {
         [JsonPropertyName("English")]
@@ -23,120 +27,9 @@ namespace PoETheoryCraft.Utils
         [JsonPropertyName("string")]
         public string text { set; get; }                                //text with {n} placeholder where each number goes
     }
-    public class ItemCraftComparer : IComparer<ItemCraft>
-    {
-        public string Key { get; set; }
-        public int Compare(ItemCraft x, ItemCraft y)
-        {
-            if (Key == null)
-                return 0;
-            else if (Key.Contains("[property]")) 
-            {
-                ItemProperties px = x.GetLiveProperties();
-                ItemProperties py = y.GetLiveProperties();
-                switch (Key.Substring(11))
-                {
-                    case "Quality":
-                        return x.GetTotalQuality().CompareTo(y.GetTotalQuality());
-                    case "Armour":
-                        return px.armour.CompareTo(py.armour);
-                    case "Evasion":
-                        return px.evasion.CompareTo(py.evasion);
-                    case "Energy Shield":
-                        return px.energy_shield.CompareTo(py.energy_shield);
-                    case "Block":
-                        return px.block.CompareTo(py.block);
-                    case "Physical Damage":
-                        return ((double)px.physical_damage_min + px.physical_damage_max).CompareTo((double)py.physical_damage_min + py.physical_damage_max);
-                    case "Critical Strike Chance":
-                        return px.critical_strike_chance.CompareTo(py.critical_strike_chance);
-                    case "Attack Speed":
-                        return py.attack_time.CompareTo(px.attack_time);
-                    case "Physical DPS":
-                        return (((double)px.physical_damage_min + px.physical_damage_max) / px.attack_time).CompareTo((((double)py.physical_damage_min + py.physical_damage_max) / py.attack_time));
-                    default:
-                        return 0;
-                }
-            }
-            else
-            {
-                IDictionary<string, double> tx = StatTranslator.ParseItem(x);
-                IDictionary<string, double> ty = StatTranslator.ParseItem(y);
-                if (tx.Keys.Contains(Key))
-                {
-                    if (ty.Keys.Contains(Key))
-                        return tx[Key].CompareTo(ty[Key]);
-                    else
-                        return 1;
-                }
-                else
-                {
-                    if (ty.Keys.Contains(Key))
-                        return -1;
-                    else
-                        return 0;
-                }
-            }
-            throw new System.NotImplementedException();
-        }
-    }
     public static class StatTranslator
     {
         public static IDictionary<string, StatLocalization> Data { get; private set; } = new Dictionary<string, StatLocalization>();
-        //cache to speed up repeated searches on the the same set of items, should be cleared via ClearParseItemCache() after each mass-roll action
-        private static readonly IDictionary<ItemCraft, IDictionary<string, double>> ParseItemCache = new Dictionary<ItemCraft, IDictionary<string, double>>();
-        public static KeyValuePair<string, double> ParseLine(string s)
-        {
-            string rexpr = @"([\+\-]?\d+\.?\d*)\%?\s+to\s+([\+\-]?\d+\.?\d*)\%?";
-            Match m = Regex.Match(s, rexpr);
-            if (m.Success)
-                return new KeyValuePair<string, double>(s.Replace(m.Value, "#"), (double.Parse(m.Groups[1].ToString()) + double.Parse(m.Groups[2].ToString())) / 2);
-            string expr = @"([\+\-]?\d+\.?\d*)\%?";
-            m = Regex.Match(s, expr);
-            if (m.Success)
-                return new KeyValuePair<string, double>(s.Replace(m.Value, "#"), double.Parse(m.Groups[1].ToString()));
-            return new KeyValuePair<string, double>(s, 1);
-            
-        }
-        public static IDictionary<string, double> ParseItem(ItemCraft item)
-        {
-            if (ParseItemCache.ContainsKey(item))
-                return ParseItemCache[item];
-            IDictionary<string, double> tr = new Dictionary<string, double>();
-            foreach (ModCraft m in item.LiveMods)
-            {
-                string stats = m.ToString();
-                foreach (string s in stats.Split('\n'))
-                {
-                    KeyValuePair<string, double> kv = ParseLine(s);
-                    if (tr.ContainsKey(kv.Key))
-                        tr[kv.Key] += kv.Value;
-                    else
-                        tr.Add(kv);
-                }
-            }
-            foreach (ModCraft m in item.LiveImplicits)
-            {
-                string stats = m.ToString();
-                foreach (string s in stats.Split('\n'))
-                {
-                    KeyValuePair<string, double> kv = ParseLine(s);
-                    if (tr.ContainsKey(kv.Key))
-                        tr[kv.Key] += kv.Value;
-                    else
-                        tr.Add(kv);
-                }
-            }
-            //Just in case it didn't get cleared regularly
-            if (ParseItemCache.Count > 2 * Properties.Settings.Default.BulkCraftLimit)
-                ClearParseItemCache();
-            ParseItemCache.Add(item, tr);
-            return tr;
-        }
-        public static void ClearParseItemCache()
-        {
-            ParseItemCache.Clear();
-        }
         public static void LoadStatLocalization(string locpath)
         {
             IList<StatLocalization> rawdata = JsonSerializer.Deserialize<List<StatLocalization>>(File.ReadAllText(locpath));

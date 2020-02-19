@@ -116,6 +116,8 @@
     <Compile Include="DataClasses\PoECurrencyData.cs" />
     <Compile Include="DataClasses\PoEEssenceData.cs" />
     <Compile Include="DataClasses\PoEFossilData.cs" />
+    <Compile Include="Utils\FilterCondition.cs" />
+    <Compile Include="Utils\ItemParser.cs" />
     <Compile Include="Utils\ModLogic.cs" />
     <Compile Include="Utils\RNG.cs" />
     <Compile Include="Utils\EnumConverter.cs" />

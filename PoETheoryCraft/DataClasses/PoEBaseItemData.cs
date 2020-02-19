@@ -10,6 +10,7 @@ namespace PoETheoryCraft.DataClasses
 {
     public struct ItemProperties
     {
+        public int quality { get; set; }
         public int armour { get; set; }
         public int energy_shield { get; set; }
         public int evasion { get; set; }

@@ -59,10 +59,6 @@ namespace PoETheoryCraft
             }
         }
         public string QualityType { get; set; } //null for normal qual, or the name of a catalyst, ex: "Imbued Catalyst"
-
-        //cache return value for faster repeated calls as long as item hasn't changed
-        public bool Modified { get; private set; } = true;
-        private ItemProperties GetLivePropertiesCache;
         public ItemCraft(PoEBaseItemData data, int level = 100, ISet<ItemInfluence> influences = null)
         {
             SourceData = data.key;
@@ -160,7 +156,6 @@ namespace PoETheoryCraft
             {
                 m.Reroll();
             }
-            Modified = true;
             return true;
         }
         //divines each mod, obeying "of prefixes" and "of suffixes" metamods and locked mods
@@ -186,8 +181,6 @@ namespace PoETheoryCraft
                     valid = true;
                 }
             }
-            if (valid)
-                Modified = true;
             return valid;
         }
         //removes one mod at random, obeying prefix/suffix lock, and leaving locked mods
@@ -214,7 +207,6 @@ namespace PoETheoryCraft
             {
                 int n = RNG.Gen.Next(choppingblock.Count);
                 LiveMods.Remove(choppingblock[n]);
-                Modified = true;
                 return true;
             }
             else
@@ -262,7 +254,6 @@ namespace PoETheoryCraft
                 Rarity = r;
             else if (Rarity == ItemRarity.Magic)    //magic items names are mod-sensitive, so force update
                 UpdateName();
-            Modified = true;
         }
         public void AddMod(PoEModData data)
         {
@@ -275,7 +266,6 @@ namespace PoETheoryCraft
                 Rarity = r;
             else if (Rarity == ItemRarity.Magic)     //magic items names are mod-sensitive, so force update
                 UpdateName();
-            Modified = true;
         }
         public void AddImplicit(PoEModData data)
         {
@@ -283,7 +273,6 @@ namespace PoETheoryCraft
             LiveImplicits.Add(m);
             LiveTags.UnionWith(data.adds_tags);
             UpdateModQuality(m, QualityType);
-            Modified = true;
         }
         public void ApplyCatalyst(string tag)
         {
@@ -306,7 +295,6 @@ namespace PoETheoryCraft
             {
                 BaseQuality += 1;
             }
-            Modified = true;
         }
         public void MaximizeMods()
         {
@@ -318,7 +306,6 @@ namespace PoETheoryCraft
             {
                 mod.Maximize();
             }
-            Modified = true;
         }
         private void UpdateModQuality(ModCraft mod, string name)
         {
@@ -343,123 +330,6 @@ namespace PoETheoryCraft
                 mod.Quality = BaseQuality;
             else
                 mod.Quality = 0;
-        }
-        public bool HasValidQualityType()
-        {
-            string itemclass = CraftingDatabase.AllBaseItems[SourceData].item_class;
-            if (CraftingDatabase.ItemClassCatalyst.Contains(itemclass))
-                return QualityType != null;
-            else if (CraftingDatabase.ItemClassNoQuality.Contains(itemclass))
-                return false;
-            else
-                return QualityType == null;
-        }
-        public int GetTotalQuality()
-        {
-            int modbonus = 0;
-            foreach (ModCraft m in LiveMods)
-            {
-                foreach (ModRoll r in m.Stats)
-                {
-                    if (r.ID == "local_item_quality_+")
-                        modbonus += r.Roll;
-                }
-            }
-            return BaseQuality + modbonus;
-        }
-        public ItemProperties GetLiveProperties()
-        {
-            if (!Modified)
-                return GetLivePropertiesCache;
-            IDictionary<string, int> mods = new Dictionary<string, int>();
-            IList<string> keys = new List<string>() { "arp", "arf", "evp", "evf", "esp", "esf", "blf", "dp", "mindf", "maxdf", "crp", "asp" }; //all possible property modifiers
-            foreach (string s in keys)
-            {
-                mods.Add(s, 0);
-            }
-            foreach (ModCraft m in LiveMods)
-            {
-                ParseProps(m, mods);
-            }
-            int qual = QualityType == null ? GetTotalQuality() : 0;
-            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
-            GetLivePropertiesCache = new ItemProperties()
-            {
-                armour = (itemtemplate.properties.armour + mods["arf"]) * (100 + mods["arp"] + qual) / 100,
-                evasion = (itemtemplate.properties.evasion + mods["evf"]) * (100 + mods["evp"] + qual) / 100,
-                energy_shield = (itemtemplate.properties.energy_shield + mods["esf"]) * (100 + mods["esp"] + qual) / 100,
-                block = itemtemplate.properties.block + mods["blf"],
-                physical_damage_min = (itemtemplate.properties.physical_damage_min + mods["mindf"]) * (100 + mods["dp"] + qual) / 100,
-                physical_damage_max = (itemtemplate.properties.physical_damage_max + mods["maxdf"]) * (100 + mods["dp"] + qual) / 100,
-                critical_strike_chance = itemtemplate.properties.critical_strike_chance * (100 + mods["crp"]) / 100,
-                attack_time = itemtemplate.properties.attack_time * 100 / (100 + mods["asp"])
-            };
-            Modified = false;
-            return GetLivePropertiesCache;
-        }
-        private void ParseProps(ModCraft m, IDictionary<string, int> mods)
-        {
-            foreach (ModRoll s in m.Stats)
-            {
-                switch (s.ID)
-                {
-                    case "local_physical_damage_reduction_rating_+%":
-                        mods["arp"] += s.Roll;
-                        break;
-                    case "local_evasion_rating_+%":
-                        mods["evp"] += s.Roll;
-                        break;
-                    case "local_energy_shield_+%":
-                        mods["esp"] += s.Roll;
-                        break;
-                    case "local_armour_and_evasion_+%":
-                        mods["arp"] += s.Roll;
-                        mods["evp"] += s.Roll;
-                        break;
-                    case "local_armour_and_energy_shield_+%":
-                        mods["arp"] += s.Roll;
-                        mods["esp"] += s.Roll;
-                        break;
-                    case "local_evasion_and_energy_shield_+%":
-                        mods["evp"] += s.Roll;
-                        mods["esp"] += s.Roll;
-                        break;
-                    case "local_armour_and_evasion_and_energy_shield_+%":
-                        mods["arp"] += s.Roll;
-                        mods["evp"] += s.Roll;
-                        mods["esp"] += s.Roll;
-                        break;
-                    case "local_base_physical_damage_reduction_rating":
-                        mods["arf"] += s.Roll;
-                        break;
-                    case "local_base_evasion_rating":
-                        mods["evf"] += s.Roll;
-                        break;
-                    case "local_energy_shield":
-                        mods["esf"] += s.Roll;
-                        break;
-                    case "local_additional_block_chance_%":
-                        mods["blf"] += s.Roll;
-                        break;
-                    case "local_physical_damage_+%":
-                        mods["dp"] += s.Roll;
-                        break;
-                    case "local_minimum_added_physical_damage":
-                        mods["mindf"] += s.Roll;
-                        break;
-                    case "local_maximum_added_physical_damage":
-                        mods["maxdf"] += s.Roll;
-                        break;
-                    case "local_critical_strike_chance_+%":
-                        mods["crp"] += s.Roll;
-                        break;
-                    case "local_attack_speed_+%":
-                        mods["asp"] += s.Roll;
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
         private ItemRarity GetMinimumRarity()
         {
@@ -508,8 +378,8 @@ namespace PoETheoryCraft
             s += "\n--------";
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
             s += "\n" + itemtemplate.item_class;
-            ItemProperties props = GetLiveProperties();
-            int q = GetTotalQuality();
+            ItemProperties props = ItemParser.ParseProperties(this);
+            int q = props.quality;
             if (q > 0)
             {
                 string t;

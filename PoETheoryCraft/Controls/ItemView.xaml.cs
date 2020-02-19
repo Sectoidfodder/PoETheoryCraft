@@ -141,10 +141,10 @@ namespace PoETheoryCraft.Controls
             SolidColorBrush white = new SolidColorBrush(Colors.White);
             SolidColorBrush blue = new SolidColorBrush(Color.FromRgb(136, 136, 255));
             SolidColorBrush gray = new SolidColorBrush(Colors.DarkGray);
-            ItemProperties p = item.GetLiveProperties();
+            ItemProperties p = ItemParser.ParseProperties(item);
             ItemProperties sp = CraftingDatabase.AllBaseItems[item.SourceData].properties;
             StackPanel panel;
-            if (item.GetTotalQuality() > 0 && item.HasValidQualityType())
+            if (p.quality > 0)
             {
                 panel = new StackPanel() { Orientation = Orientation.Horizontal };
                 string t;
@@ -176,7 +176,7 @@ namespace PoETheoryCraft.Controls
                         break;
                 }
                 panel.Children.Add(new TextBlock() { Text = t , FontWeight = FontWeights.Bold, Foreground = gray });
-                TextBlock tb = new TextBlock() { Text = "+" + item.GetTotalQuality() + "%", FontWeight = FontWeights.Bold, Foreground = blue, Tag = "Quality" };
+                TextBlock tb = new TextBlock() { Text = "+" + p.quality + "%", FontWeight = FontWeights.Bold, Foreground = blue, Tag = "Quality" };
                 HookEvents(tb);
                 panel.Children.Add(tb);
                 PropertyBox.Children.Add(panel);

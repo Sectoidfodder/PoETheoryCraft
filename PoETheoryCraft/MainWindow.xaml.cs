@@ -213,7 +213,6 @@ namespace PoETheoryCraft
             }
             if (res == null)
             {
-                StatTranslator.ClearParseItemCache();
                 RepeatResults.Items = Bench.MassResults;
             }
         }
@@ -290,7 +289,7 @@ namespace PoETheoryCraft
         private void ItemParam_Click(object sender, EventArgs e)
         {
             TextBlock tb = (TextBlock)sender;
-            string sortby = tb.Tag != null ? "[property] " + tb.Tag : StatTranslator.ParseLine(tb.Text.Split('\n')[0]).Key;
+            string sortby = tb.Tag != null ? "[property] " + tb.Tag : ItemParser.ParseLine(tb.Text.Split('\n')[0]).Key;
             SortIndicator.Text = "Sorting by: \"" + sortby + "\"";
             Bench.SortBy = sortby;
             RepeatResults.Items = Bench.MassResults;

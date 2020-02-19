@@ -40,8 +40,5 @@ Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up 
 
 Can't bench mod Fishing Rods? Bench mod definitions don't include their class but I haven't tested in-game.
 
-Odd tag behavior on boots: Redeemer's/Shaper's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also neither block Redeemer's spell dodge.
-All attack and spell dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.
-
-ItemCraft.GetLiveProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
+ItemParser.ParseProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
 Currently catalyst quality is only factored in at translation, so mods give their non-qualitied value while calculating properties.
