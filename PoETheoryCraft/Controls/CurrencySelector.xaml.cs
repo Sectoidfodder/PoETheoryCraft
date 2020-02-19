@@ -40,6 +40,8 @@ namespace PoETheoryCraft.Controls
         {
             CollectionViewSource.GetDefaultView(essences).Filter = AllowedEssences;
             EssenceView.ItemsSource = essences;
+            if (EssenceView.Items.Count > 0)
+                EssenceView.SelectedIndex = 0;
         }
         public void LoadFossils(ICollection<PoEFossilData> fossils)
         {
@@ -52,6 +54,8 @@ namespace PoETheoryCraft.Controls
             List<PoECurrencyData> clist = currencies.ToList<PoECurrencyData>();
             clist.Sort((a, b) => CraftingDatabase.CurrencyIndex.IndexOf(a.name).CompareTo(CraftingDatabase.CurrencyIndex.IndexOf(b.name)));
             BasicView.ItemsSource = clist;
+            if (BasicView.Items.Count > 0)
+                BasicView.SelectedIndex = 0;
         }
         public void CurrencyTabs_SelectionChanged(object sender, RoutedEventArgs e)
         {

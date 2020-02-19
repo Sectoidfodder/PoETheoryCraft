@@ -10,14 +10,13 @@ namespace PoETheoryCraft.Utils
 {
     public class RollOptions
     {
-        public bool IgnoreMeta { get; set; } = false;               //ignore metamods
+        public bool IgnoreMeta { get; set; } = false;               //ignore metamod locks
         public IList<PoEModData> ForceMods { get; set; } = null;    //always add these
         public ISet<IList<PoEModWeight>> ModWeightGroups { get; set; }  //first matching tag of each list is applied
         public int ILvlCap { get; set; } = 200;                     //if lower than item's ilvl, use this instead
     }
     public static class ModLogic
     {
-        public const bool InfExaltIgnoreMeta = false;
         public const string PrefixLock = "StrMasterItemGenerationCannotChangePrefixes";
         public const string SuffixLock = "DexMasterItemGenerationCannotChangeSuffixes";
         public const string Prefix = "prefix";
@@ -52,7 +51,7 @@ namespace PoETheoryCraft.Utils
         public static void RerollItem(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemRarity rarity, RollOptions op = null)
         {
             if (op != null && op.IgnoreMeta)     //to ignore metamods, simply remove them first
-                item.ClearMods(true);
+                item.ClearCraftedMods();
             item.ClearMods();
             item.Rarity = rarity;
 
@@ -95,16 +94,6 @@ namespace PoETheoryCraft.Utils
                 return false;
             item.LiveTags.Add(inftag);
             ISet<string> tagstoadd = new HashSet<string>();
-            if (InfExaltIgnoreMeta && item.LiveTags.Contains("no_attack_mods"))
-            {
-                item.LiveTags.Remove("no_attack_mods");
-                tagstoadd.Add("no_attack_mods");
-            }
-            if (InfExaltIgnoreMeta && item.LiveTags.Contains("no_caster_mods"))
-            {
-                item.LiveTags.Remove("no_caster_mods");
-                tagstoadd.Add("no_caster_mods");
-            }
             IDictionary<PoEModData, int> mods = FindValidMods(item, basemods);
             IDictionary<PoEModData, int> infmods = FilterForInfluence(mods, inf, itemtemplate);
             foreach (string s in tagstoadd)
@@ -148,6 +137,7 @@ namespace PoETheoryCraft.Utils
             return null;
         }
         //Starts from db and checks only the item template's domain and tags, used for pruning so we check against ~300 mods per roll instead of ~3000
+        //ignoredomain used for forced fossil mods from "delve" domain, only filtering them by spawn weight based on tags and base item
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
@@ -169,14 +159,14 @@ namespace PoETheoryCraft.Utils
             return mods;
         }
         //Starts from basemods and checks ilvl, live tags (including influence), existing mod groups, option to ignore prefix/suffix space, checks ilvlcap and modweightgroups from RollOptions
-        public static IDictionary<PoEModData, int> FindValidMods(ItemCraft item, IDictionary<PoEModData, int> basemods, bool ignorespace = false, RollOptions op = null)
+        public static IDictionary<PoEModData, int> FindValidMods(ItemCraft item, IDictionary<PoEModData, int> basemods, bool ignorerarity = false, RollOptions op = null)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
             if (item == null)
                 return mods;
             //check for open prefix/suffix
-            bool openprefix = ignorespace || item.ModCountByType(Prefix) < item.GetAffixLimit();
-            bool opensuffix = ignorespace || item.ModCountByType(Suffix) < item.GetAffixLimit();
+            bool openprefix = item.ModCountByType(Prefix) < item.GetAffixLimit(ignorerarity);
+            bool opensuffix = item.ModCountByType(Suffix) < item.GetAffixLimit(ignorerarity);
             //list existing mod groups
             ISet<string> groups = new HashSet<string>();
             foreach (ModCraft m in item.LiveMods)
@@ -254,7 +244,7 @@ namespace PoETheoryCraft.Utils
             }
             return 0;
         }
-        private static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null)
+        public static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null)
         {
             int weight = 0;
             if (mod.spawn_weights != null)

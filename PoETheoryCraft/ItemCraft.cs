@@ -221,8 +221,24 @@ namespace PoETheoryCraft
                 return false;
             
         }
+        //remove crafted mods, ignoring metamod locks
+        public bool ClearCraftedMods()
+        {
+            int removedcount = 0;
+            for (int i = LiveMods.Count - 1; i >= 0; i--)
+            {
+                ModCraft m = LiveMods[i];
+                PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
+                if (!m.IsLocked && modtemplate.domain == "crafted")
+                {
+                    RemoveModAt(i);
+                    removedcount++;
+                }
+            }
+            return removedcount > 0;
+        }
         //remove all mods or all crafted mods, obeying prefix/suffix lock, leaving locked mods, and downgrading rarity if necessary
-        public void ClearMods(bool craftedonly = false)
+        public void ClearMods()
         {
             bool prefixlock = false;
             bool suffixlock = false;
@@ -238,13 +254,13 @@ namespace PoETheoryCraft
             {
                 ModCraft m = LiveMods[i];
                 PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
-                if (!m.IsLocked && !(prefixlock && modtemplate.generation_type == ModLogic.Prefix) && !(suffixlock && modtemplate.generation_type == ModLogic.Suffix) && !(craftedonly && modtemplate.domain != "crafted"))
+                if (!m.IsLocked && !(prefixlock && modtemplate.generation_type == ModLogic.Prefix) && !(suffixlock && modtemplate.generation_type == ModLogic.Suffix))
                     RemoveModAt(i);
             }
-            ItemRarity r = craftedonly ? Rarity : GetMinimumRarity();
-            if (r < Rarity)     //downgrade rarity if needed, which triggers name change
+            ItemRarity r = GetMinimumRarity();
+            if (r < Rarity)                         //downgrade rarity if needed, which triggers name change
                 Rarity = r;
-            else if (Rarity == ItemRarity.Magic)     //magic items names are mod-sensitive, so force update
+            else if (Rarity == ItemRarity.Magic)    //magic items names are mod-sensitive, so force update
                 UpdateName();
             Modified = true;
         }
@@ -571,7 +587,7 @@ namespace PoETheoryCraft
             ItemName = itemtemplate.name;
             if (Rarity == ItemRarity.Rare)
             {
-                ItemName = GenRareName() + ", " + itemtemplate.name;
+                ItemName = GenRareName() + "\n" + itemtemplate.name;
             }
             else if (Rarity == ItemRarity.Magic)
             {

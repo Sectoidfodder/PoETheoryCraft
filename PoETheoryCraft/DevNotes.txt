@@ -1,9 +1,12 @@
-﻿Notes:
+﻿v0.2.0 Changelog:
 
-Search terms missing fossil mods
+Made mod preview ignore existing mods on item when reroll currencies are selected (chaos, alch, alt, trans, essences, fossils).
 
-Consider making caches for mass craft results' ToString() and GetLiveProperties() return values.
-Lots of unneccesary repeat calls done while sorting since they're never modified while sorting.
+Fixed problem exporting items to PoB due to bad rare item name formatting.
+Added missing crafted mod restrictions based on spawn weight (such as Int+Quality craft being blocked by delve Quality mod).
+
+
+Notes:
 
 Maybe save post-craft options per item class in a dictionary?
 
@@ -14,8 +17,6 @@ Need to know before implementing beastcrafting:
 > Interaction with fractured mods?
 
 Do Conquerors' Exalts remove catalyst quality?
-
-Catalysts may not cover all the right mods.  Catalyst-tag relationship isn't in any included json, currently using what PoEDB says.
 
 Need to figure out a good way to calculate mod tier, don't see a relevant stat in the json.
 Rather not have to build a massive mod ID and item class table to look it up.
@@ -38,19 +39,6 @@ Currently the simulation just does nothing.  Could be that influence from a conq
 Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up to two decimals if they're nonzero.
 
 Can't bench mod Fishing Rods? Bench mod definitions don't include their class but I haven't tested in-game.
-
-There are FOUR separate sets of attack/caster tags that can all function independently (they're mostly synced for sanity's sake):
-1) mod tags for fossils: "attack", "caster"
-2) item tags, applied by metamods, that mods look for in order to comply: "no_attack_mods", "no_caster_mods"
-3) mod tags for catalysts: "catalyst_attack", "catalyst_caster"
-4) item tags, applied by mods, that other mods look for to adjust spawn rates: "has_attack_mod", "has_caster_mod"
--- many caster mods have 50% of normal weight on weapons with an attack mod and no caster mods
--- many attack mods have 65% of normal weight on weapons with a caster mod and no attack mods
-
-Some old nerfs were implemented (on the client side) by adding a handler to the text localization process.
-Example: Voltaxic's conversion mod is still 100% in definition, but has a "60% of Value" handler tacked on.
-
-A mod tag for fossils is "defences" - plural with a 'c', while another tag for catalysts is "jewellery_defense" - singular with an 's'.
 
 Odd tag behavior on boots: Redeemer's/Shaper's attack dodge blocks Elder's spell dodge, but is not blocked BY it. Also neither block Redeemer's spell dodge.
 All attack and spell dodge mods add a "spell_dodge_tag" to item, but only Elder's spell dodge boot mods ever check against it.

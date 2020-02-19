@@ -73,6 +73,11 @@ namespace PoETheoryCraft
                 if (modtemplate.group == mod.group)
                     return "Item already has a mod in this mod group";
             }
+            if (mod.domain == "crafted")   //if crafted, make sure it's weight-legal
+            {
+                if (ModLogic.CalcGenWeight(mod, target.LiveTags) <= 0)
+                    return "Invalid craft for current item and/or item mods";
+            }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
             ItemInfluence? inf = ModLogic.GetInfluence(mod, itemtemplate);
             if (inf != null)
@@ -351,7 +356,9 @@ namespace PoETheoryCraft
                         ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
                         break;
                     case "Remove Crafted Mods":
-                        target.ClearMods(true);
+                        success = target.ClearCraftedMods();
+                        if (!success)
+                            return "No crafted mods to remove";
                         break;
                     case "Blessed Orb":
                         success = target.RerollImplicits();

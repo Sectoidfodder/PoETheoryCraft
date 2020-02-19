@@ -45,25 +45,25 @@ namespace PoETheoryCraft.Controls
                 WeightedModsDisplay.UpdateData(new Dictionary<PoEModData, int>());
                 return;
             }
+            ItemCraft itemcopy = Bench.BenchItem.Copy();
             RollOptions ops = new RollOptions();
             IDictionary<PoEModData, int> extendedpool = new Dictionary<PoEModData, int>(Bench.BaseValidMods);
-            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[itemcopy.SourceData];
             //Shaper = null/invalid; inf and temp tags used for the 4 conquerors' exalts
             ItemInfluence inf = ItemInfluence.Shaper;
-            string tagtoremove = null;
-            ISet<string> tagstoadd = new HashSet<string>();
 
             object c = Currency.GetSelected();
             if (c is PoEEssenceData)
             {
                 ops.ILvlCap = ((PoEEssenceData)c).item_level_restriction ?? 200;
+                itemcopy.ClearCraftedMods();
+                itemcopy.ClearMods();
             }
             else if (c is PoECurrencyData)    
             {
-                //The only relevant core currencies are conquerors' exalts
-                if (Bench.BenchItem.GetInfluences().Count == 0)
+                string currency = ((PoECurrencyData)c).name;
+                if (itemcopy.GetInfluences().Count == 0)
                 {
-                    string currency = ((PoECurrencyData)c).name;
                     if (currency == "Redeemer's Exalted Orb")
                         inf = ItemInfluence.Redeemer;
                     else if (currency == "Hunter's Exalted Orb")
@@ -77,20 +77,15 @@ namespace PoETheoryCraft.Controls
                         string tag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
                         if (tag != null)    //temporarily add influence tag
                         {
-                            tagtoremove = tag;
-                            Bench.BenchItem.LiveTags.Add(tag);
-                        }
-                        if (ModLogic.InfExaltIgnoreMeta && Bench.BenchItem.LiveTags.Contains("no_attack_mods"))
-                        {
-                            Bench.BenchItem.LiveTags.Remove("no_attack_mods");
-                            tagstoadd.Add("no_attack_mods");
-                        }
-                        if (ModLogic.InfExaltIgnoreMeta && Bench.BenchItem.LiveTags.Contains("no_caster_mods"))
-                        {
-                            Bench.BenchItem.LiveTags.Remove("no_caster_mods");
-                            tagstoadd.Add("no_caster_mods");
+                            itemcopy.LiveTags.Add(tag);
                         }
                     }
+                }
+                if (inf == ItemInfluence.Shaper)    //if selected item isn't a conq exalt
+                {
+                    //if it's a reroll currency, preview as if the item has been scoured
+                    if (currency == "Chaos Orb" || currency == "Orb of Alchemy" || currency == "Orb of Transmutation" || currency == "Orb of Alteration")
+                        itemcopy.ClearMods();
                 }
             }
             else if (c != null)
@@ -113,17 +108,13 @@ namespace PoETheoryCraft.Controls
                     modweightgroups.Add(fossil.positive_mod_weights);
                 }
                 ops.ModWeightGroups = modweightgroups;
+                itemcopy.ClearCraftedMods();
+                itemcopy.ClearMods();
             }
             
-            IDictionary<PoEModData, int> validmods = ModLogic.FindValidMods(Bench.BenchItem, extendedpool, true, ops);
-            if (inf != ItemInfluence.Shaper)
+            IDictionary<PoEModData, int> validmods = ModLogic.FindValidMods(itemcopy, extendedpool, true, ops);
+            if (inf != ItemInfluence.Shaper)    //if a conq exalt is selected, only show influenced mods
                 validmods = ModLogic.FilterForInfluence(validmods, inf, itemtemplate);
-            if (tagtoremove != null)
-                Bench.BenchItem.LiveTags.Remove(tagtoremove);
-            foreach (string s in tagstoadd)
-            {
-                Bench.BenchItem.LiveTags.Add(s);
-            }
 
             WeightedModsDisplay.UpdateData(validmods);
         }
