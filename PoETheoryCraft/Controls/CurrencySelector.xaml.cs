@@ -50,9 +50,9 @@ namespace PoETheoryCraft.Controls
         }
         public void LoadCurrencies(ICollection<PoECurrencyData> currencies)
         {
-            CollectionViewSource.GetDefaultView(currencies).Filter = AllowedCurrencies;
             List<PoECurrencyData> clist = currencies.ToList<PoECurrencyData>();
             clist.Sort((a, b) => CraftingDatabase.CurrencyIndex.IndexOf(a.name).CompareTo(CraftingDatabase.CurrencyIndex.IndexOf(b.name)));
+            CollectionViewSource.GetDefaultView(clist).Filter = AllowedCurrencies;
             BasicView.ItemsSource = clist;
             if (BasicView.Items.Count > 0)
                 BasicView.SelectedIndex = 0;

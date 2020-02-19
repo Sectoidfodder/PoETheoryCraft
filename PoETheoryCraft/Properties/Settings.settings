@@ -17,9 +17,6 @@
     <Setting Name="JMW4" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="IgnoreAffixCap" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="MMW1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>

@@ -85,18 +85,6 @@ namespace PoETheoryCraft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool IgnoreAffixCap {
-            get {
-                return ((bool)(this["IgnoreAffixCap"]));
-            }
-            set {
-                this["IgnoreAffixCap"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int MMW1 {
             get {
