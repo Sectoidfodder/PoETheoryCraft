@@ -26,6 +26,8 @@ namespace PoETheoryCraft.Controls
     {
         //track and sync expanded groups across all instances
         public static readonly ISet<string> ExpandedGroups = new HashSet<string>();
+        public static int psum = 0;
+        public static int ssum = 0;
         public ModsView()
         {
             InitializeComponent();
@@ -54,8 +56,8 @@ namespace PoETheoryCraft.Controls
             CollectionViewSource.GetDefaultView(s).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
             PrefixList.ItemsSource = p;
             SuffixList.ItemsSource = s;
-            int psum = 0;
-            int ssum = 0;
+            psum = 0;
+            ssum = 0;
             foreach (int n in p.Values)
             {
                 psum += n;
@@ -64,8 +66,8 @@ namespace PoETheoryCraft.Controls
             {
                 ssum += n;
             }
-            PrefixTally.Content = psum;
-            SuffixTally.Content = ssum;
+            PrefixTally.Content = psum + " (" + ((double)psum * 100 / (psum + ssum)).ToString("N2") + "%)";
+            SuffixTally.Content = ssum + " (" + ((double)ssum * 100 / (psum + ssum)).ToString("N2") + "%)";
         }
         //Shows a list of mods along with their crafting costs
         public void UpdateData(IDictionary<PoEModData, IDictionary<string, int>> mods)
@@ -176,8 +178,11 @@ namespace PoETheoryCraft.Controls
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             IList<CostObject> objs = new List<CostObject>();
-            if (value is int)
-                objs.Add(new CostObject() { Label = ((int)value).ToString() });
+            if (value is int v)
+            {
+                double p = (double)v * 100 / Math.Max(1, ModsView.psum + ModsView.ssum);
+                objs.Add(new CostObject() { Label = v + " (" + p.ToString("N2") + "%)" });
+            }
             else if (value is IDictionary<string, int>)
             {
                 IDictionary<string, int> costdict = (Dictionary<string, int>)value;

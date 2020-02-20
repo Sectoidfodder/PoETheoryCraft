@@ -79,8 +79,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Label}"/>
-                                        <Image MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Label}"/>
+                                        <Image VerticalAlignment="Center" MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -148,8 +148,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Label}"/>
-                                        <Image MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Path=Label}"/>
+                                        <Image VerticalAlignment="Center" MaxHeight="16" MaxWidth="16" Source="{Binding Path=Icon}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
