@@ -10,10 +10,11 @@ namespace PoETheoryCraft.Utils
 {
     public class RollOptions
     {
-        public bool IgnoreMeta { get; set; } = false;               //ignore metamod locks
-        public IList<PoEModData> ForceMods { get; set; } = null;    //always add these
+        public bool IgnoreMeta { get; set; } = false;                   //ignore metamod locks
+        public IList<PoEModData> ForceMods { get; set; } = null;        //always add these
         public ISet<IList<PoEModWeight>> ModWeightGroups { get; set; }  //first matching tag of each list is applied
-        public int ILvlCap { get; set; } = 200;                     //if lower than item's ilvl, use this instead
+        public int ILvlCap { get; set; } = 200;                         //if lower than item's ilvl, use this instead
+        public int GlyphicCount { get; set; } = 0;                      //100 if glyphic, 10 if tangled, 110 if both
     }
     public static class ModLogic
     {
@@ -62,6 +63,16 @@ namespace PoETheoryCraft.Utils
                     item.AddMod(f);
                 }
             }
+            if (op != null && op.GlyphicCount > 0)
+            {
+                for (int i = 0; i < op.GlyphicCount / 100 + ((RNG.Gen.Next(100) < op.GlyphicCount % 100) ? 1 : 0); i++)
+                {
+                    PoEModData glyphicmod = RollGlyphicMod(item, op.ModWeightGroups);
+                    if (glyphicmod == null)
+                        break;
+                    item.AddMod(glyphicmod);
+                }
+            }
 
             int modcount = RollModCount(item.Rarity, CraftingDatabase.AllBaseItems[item.SourceData].item_class);
             while (item.LiveMods.Count < modcount)  
@@ -73,6 +84,71 @@ namespace PoETheoryCraft.Utils
                 item.AddMod(mod);
             }
             item.UpdateName();
+        }
+        //rolls a corrupted fossil mod for the given item and fossil weight modifiers, or null if none possible
+        public static PoEModData RollGlyphicMod(ItemCraft item, ISet<IList<PoEModWeight>> weightmods)
+        {
+            IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
+            string itemclass = CraftingDatabase.AllBaseItems[item.SourceData].item_class;
+            if (itemclass == "Rune Dagger")
+                itemclass = "Dagger";
+            if (itemclass == "Warstaff")
+                itemclass = "Staff";
+            //check for open prefix/suffix
+            bool openprefix = item.ModCountByType(Prefix) < item.GetAffixLimit(true);
+            bool opensuffix = item.ModCountByType(Suffix) < item.GetAffixLimit(true);
+            //track existing mod groups
+            ISet<string> groups = new HashSet<string>();
+            foreach (ModCraft m in item.LiveMods)
+            {
+                PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
+                groups.Add(modtemplate.group);
+            }
+            foreach (PoEEssenceData ess in CraftingDatabase.Essences.Values)
+            {
+                if (ess.type.is_corruption_only && ess.mods.Keys.Contains(itemclass))
+                {
+                    PoEModData m = CraftingDatabase.CoreMods[ess.mods[itemclass]];
+                    if (m.generation_type == Prefix && !openprefix)
+                        continue;
+                    if (m.generation_type == Suffix && !opensuffix)
+                        continue;
+                    if (groups.Contains(m.group))
+                        continue;
+                    int weight = 1000;
+                    if (weightmods != null)
+                    {
+                        double sumnegs = 0;
+                        int sumadds = 0;
+                        foreach (IList<PoEModWeight> l in weightmods)
+                        {
+                            foreach (PoEModWeight w in l)
+                            {
+                                if (m.type_tags.Contains(w.tag))
+                                {
+                                    if (w.weight > 100)
+                                        sumadds += w.weight;
+                                    else if (w.weight != 0)
+                                        sumnegs += (double)100 / w.weight;
+                                    else
+                                        weight = 0;
+                                    //weight = weight * w.weight / 100;
+                                    break;
+                                }
+                            }
+                            if (weight == 0)
+                                break;
+                        }
+                        weight = weight * Math.Max(sumadds, 100) / 100;
+                        weight = (int)(weight / Math.Max(sumnegs, 1));
+                    }
+                    mods.Add(m, weight);
+                }
+            }
+            if (mods.Count == 0)
+                return null;
+            else
+                return ChooseMod(mods);
         }
         //adds one mod to item, automatically updates rarity, basemods is a superset of valid mods, only dict keys are used, values(weights) are recalculated
         public static bool RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods)
@@ -271,7 +347,30 @@ namespace PoETheoryCraft.Utils
             }
             if (weightgroups != null)
             {
+                double sumnegs = 0;
+                int sumadds = 0;
                 foreach (IList<PoEModWeight> l in weightgroups)
+                {
+                    foreach (PoEModWeight w in l)
+                    {
+                        if (mod.type_tags.Contains(w.tag))
+                        {
+                            if (w.weight > 100)
+                                sumadds += w.weight;
+                            else if (w.weight != 0)
+                                sumnegs += (double)100 / w.weight;
+                            else
+                                weight = 0;
+                                //weight = weight * w.weight / 100;
+                            break;
+                        }
+                    }
+                    if (weight == 0)
+                        break;
+                }
+                weight = weight * Math.Max(sumadds, 100) / 100;
+                weight = (int)(weight / Math.Max(sumnegs, 1));
+                /*foreach (IList<PoEModWeight> l in weightgroups)
                 {
                     foreach (PoEModWeight w in l)
                     {
@@ -283,7 +382,7 @@ namespace PoETheoryCraft.Utils
                     }
                     if (weight == 0)
                         break;
-                }
+                }*/
             }
             return weight;
         }

@@ -143,8 +143,8 @@ namespace PoETheoryCraft
                 return "Cannot apply fossils to a magic item";
             }
             ISet<IList<PoEModWeight>> modweightgroups = new HashSet<IList<PoEModWeight>>();
-            ISet<PoEModData> fossilmods = new HashSet<PoEModData>();  //forced mods from fossils
-            ISet<PoEModData> cessmods = new HashSet<PoEModData>();    //forced mods from essences (glyphic, tangled)
+            ISet<PoEModData> fossilmods = new HashSet<PoEModData>();    //forced mods from fossils
+            int cesscount = 0;                                          //glyphic/tangled corrupted mod count
             IDictionary<PoEModData, int> extendedpool = new Dictionary<PoEModData, int>(BaseValidMods); //extra rollable mods
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
             foreach (PoEFossilData fossil in fossils)
@@ -177,34 +177,14 @@ namespace PoETheoryCraft
                 {
                     fossilmods.Add(CraftingDatabase.AllMods[t]);
                 }
-                if (fossil.corrupted_essence_chance > 0 && RNG.Gen.Next(100) < fossil.corrupted_essence_chance)
+                if (fossil.corrupted_essence_chance > 0)
                 {
-                    IList<PoEModData> c = new List<PoEModData>();
-                    string itemclass = itemtemplate.item_class;
-                    if (itemclass == "Rune Dagger")
-                        itemclass = "Dagger";
-                    if (itemclass == "Warstaff")
-                        itemclass = "Staff";
-                    foreach (PoEEssenceData ess in CraftingDatabase.Essences.Values)
-                    {
-                        if (ess.type.is_corruption_only && ess.mods.Keys.Contains(itemclass))
-                        {
-                            PoEModData m = CraftingDatabase.CoreMods[ess.mods[itemclass]];
-                            if (!cessmods.Contains(m))
-                                c.Add(m);
-                        }
-                    }
-                    if (c.Count > 0)
-                        cessmods.Add(c[RNG.Gen.Next(c.Count)]);
+                    cesscount += fossil.corrupted_essence_chance;
                 }
                 modweightgroups.Add(fossil.negative_mod_weights);
                 modweightgroups.Add(fossil.positive_mod_weights);
             }
             IList<PoEModData> forcedmods = new List<PoEModData>(ModLogic.FindBaseValidMods(itemtemplate, fossilmods, true).Keys);   //filter by spawn_weight first
-            foreach (PoEModData m in cessmods)  //add corrupted essence mods after filter (they wouldn't pass filter)
-            {
-                forcedmods.Add(m);
-            }
             int fprefix = 0;
             int fsuffix = 0;
             foreach (PoEModData m in forcedmods)
@@ -218,7 +198,16 @@ namespace PoETheoryCraft
                 return "Item does not have space for forced prefix";
             else if (BenchItem.ModCountByType(ModLogic.Suffix, true) + fsuffix > BenchItem.GetAffixLimit(true))
                 return "Item does not have space for forced suffix";
-            RollOptions ops = new RollOptions() { ForceMods = forcedmods, IgnoreMeta = true, ModWeightGroups = modweightgroups };
+            if (cesscount > 0)
+            {
+                //check that the item can roll a corrupted ess mod
+                ItemCraft clone = BenchItem.Copy();
+                clone.ClearMods();
+                PoEModData glyphicmod = ModLogic.RollGlyphicMod(clone, modweightgroups);
+                if (glyphicmod == null)
+                    return "Item cannot roll forced corrupted essence mods";
+            }
+            RollOptions ops = new RollOptions() { ForceMods = forcedmods, IgnoreMeta = true, ModWeightGroups = modweightgroups, GlyphicCount = cesscount };
             if (tries == 1)
             {
                 ModLogic.RerollItem(BenchItem, extendedpool, ItemRarity.Rare, ops);
