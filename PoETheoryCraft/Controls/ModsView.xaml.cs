@@ -180,7 +180,7 @@ namespace PoETheoryCraft.Controls
             IList<CostObject> objs = new List<CostObject>();
             if (value is int v)
             {
-                double p = (double)v * 100 / Math.Max(1, ModsView.psum + ModsView.ssum);
+                double p = (double)v * 100 / (ModsView.psum + ModsView.ssum);
                 objs.Add(new CostObject() { Label = v + " (" + p.ToString("N2") + "%)" });
             }
             else if (value is IDictionary<string, int>)

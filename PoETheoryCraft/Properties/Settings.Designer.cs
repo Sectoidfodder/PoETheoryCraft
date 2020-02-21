@@ -142,5 +142,17 @@ namespace PoETheoryCraft.Properties {
                 this["BulkCraftLimit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double CatalystEffect {
+            get {
+                return ((double)(this["CatalystEffect"]));
+            }
+            set {
+                this["CatalystEffect"] = value;
+            }
+        }
     }
 }

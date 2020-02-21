@@ -16,8 +16,8 @@ namespace PoETheoryCraft.Utils
         public string Key { get; set; }
         public int Compare(ItemCraft x, ItemCraft y)
         {
-            double? vx = ItemParser.GetValueByName(Key, ItemParser.ParseProperties(x), ItemParser.ParseItem(x));
-            double? vy = ItemParser.GetValueByName(Key, ItemParser.ParseProperties(y), ItemParser.ParseItem(y));
+            double? vx = ItemParser.GetValueByName(Key, x, ItemParser.ParseProperties(x), ItemParser.ParseItem(x));
+            double? vy = ItemParser.GetValueByName(Key, y, ItemParser.ParseProperties(y), ItemParser.ParseItem(y));
             if (vx != null)
             {
                 if (vy != null)
@@ -36,7 +36,7 @@ namespace PoETheoryCraft.Utils
     }
     public static class ItemParser
     {
-        public static double? GetValueByName(string s, ItemProperties props, IDictionary<string, double> stats)
+        public static double? GetValueByName(string s, ItemCraft item, ItemProperties props, IDictionary<string, double> stats)
         {
             if (s.IndexOf("[property]") == 0)
             {
@@ -60,6 +60,14 @@ namespace PoETheoryCraft.Utils
                         return (double)1000 / props.attack_time;
                     case "Physical DPS":
                         return ((double)props.physical_damage_min + props.physical_damage_max) * 1000 / 2 / props.attack_time;
+                    case "# Prefixes":
+                        return item.ModCountByType(ModLogic.Prefix);
+                    case "# Suffixes":
+                        return item.ModCountByType(ModLogic.Suffix);
+                    case "# Open Prefixes":
+                        return item.GetAffixLimit(true) - item.ModCountByType(ModLogic.Prefix);
+                    case "# Open Suffixes":
+                        return item.GetAffixLimit(true) - item.ModCountByType(ModLogic.Suffix);
                     default:
                         return null;
                 }
@@ -89,10 +97,16 @@ namespace PoETheoryCraft.Utils
             //zero out quality if item class is mismatched
             if (CraftingDatabase.ItemClassNoQuality.Contains(itemtemplate.item_class))
                 qual = 0;
-            else if (CraftingDatabase.ItemClassCatalyst.Contains(itemtemplate.item_class) && item.QualityType == null)
-                qual = 0;
-            else if (item.QualityType != null)
-                qual = 0;
+            else if (CraftingDatabase.ItemClassCatalyst.Contains(itemtemplate.item_class))
+            {
+                if (item.QualityType == null)
+                    qual = 0;
+            }
+            else
+            {
+                if (item.QualityType != null)
+                    qual = 0;
+            }
             int propqual = item.QualityType == null ? qual : 0;
             return new ItemProperties()
             {

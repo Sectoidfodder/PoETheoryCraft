@@ -110,6 +110,9 @@
     <Compile Include="Controls\SearchDialog.xaml.cs">
       <DependentUpon>SearchDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SearchGroup.xaml.cs">
+      <DependentUpon>SearchGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
@@ -117,7 +120,7 @@
     <Compile Include="DataClasses\PoECurrencyData.cs" />
     <Compile Include="DataClasses\PoEEssenceData.cs" />
     <Compile Include="DataClasses\PoEFossilData.cs" />
-    <Compile Include="Utils\FilterCondition.cs" />
+    <Compile Include="Utils\FilterEvaluator.cs" />
     <Compile Include="Utils\ItemParser.cs" />
     <Compile Include="Utils\ModLogic.cs" />
     <Compile Include="Utils\RNG.cs" />
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SearchDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

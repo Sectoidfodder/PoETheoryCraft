@@ -269,6 +269,7 @@ namespace PoETheoryCraft
         }
         public void AddImplicit(PoEModData data)
         {
+            //return;
             ModCraft m = new ModCraft(data);
             LiveImplicits.Add(m);
             LiveTags.UnionWith(data.adds_tags);
@@ -324,7 +325,7 @@ namespace PoETheoryCraft
                     break;
                 }
             }
-            if (modtemplate.type_tags.Contains("jewellery_quality_ignore"))
+            if (modtemplate.type_tags.Contains(ModLogic.CatalystIgnore))
                 match = false;
             if (match)
                 mod.Quality = BaseQuality;
@@ -346,7 +347,7 @@ namespace PoETheoryCraft
         private void RemoveModAt(int n)
         {
             PoEModData modtemplate = CraftingDatabase.AllMods[LiveMods[n].SourceData];
-            foreach (string tag in modtemplate.adds_tags)    //for each tag, only remove if no other live mods are applying the tag
+            foreach (string tag in modtemplate.adds_tags)    //for each tag, only remove if no other live mods or implicits are applying the tag
             {
                 bool shouldremove = true;
                 for (int i = 0; i < LiveMods.Count; i++)
@@ -354,6 +355,15 @@ namespace PoETheoryCraft
                     if (i == n)
                         continue;
                     PoEModData othertemplate = CraftingDatabase.AllMods[LiveMods[i].SourceData];
+                    if (othertemplate.adds_tags.Contains(tag))
+                    {
+                        shouldremove = false;
+                        break;
+                    }
+                }
+                for (int i = 0; i < LiveImplicits.Count; i++)
+                {
+                    PoEModData othertemplate = CraftingDatabase.AllMods[LiveImplicits[i].SourceData];
                     if (othertemplate.adds_tags.Contains(tag))
                     {
                         shouldremove = false;

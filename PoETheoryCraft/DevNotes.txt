@@ -1,9 +1,18 @@
 ﻿v0.2.0 Changelog:
 
+Simulation:
+Positive fossil modifiers now stack additively, to be consistent with test results.
+Corrupted Essence mods from Glyphic/Tangled now obey weight modifiers from other fossils.
+Added missing crafted mod restrictions based on spawn weight (such as Int+Quality craft being blocked by delve Quality mod).
+Tentatively added 1% mod weight per 1% matching catalyst quality.
+
+UI:
+Mod preview now shows each weight as a percent of total rollable affix weight.
 Made mod preview ignore existing mods on item when reroll currencies are selected (chaos, alch, alt, trans, essences, fossils).
 
+Misc:
 Fixed problem exporting items to PoB due to bad rare item name formatting.
-Added missing crafted mod restrictions based on spawn weight (such as Int+Quality craft being blocked by delve Quality mod).
+
 
 
 Notes:

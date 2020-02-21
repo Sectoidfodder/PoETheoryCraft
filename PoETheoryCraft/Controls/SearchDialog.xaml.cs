@@ -20,12 +20,16 @@ namespace PoETheoryCraft.Controls
     /// </summary>
     public partial class SearchDialog : Window
     {
+        private readonly ISet<string> Stats;
         public SearchDialog(ISet<string> stats)
         {
             InitializeComponent();
-            StatsView.ItemsSource = stats;
-            CollectionViewSource.GetDefaultView(stats).Filter = FilterText;
-            CollectionViewSource.GetDefaultView(stats).SortDescriptions.Clear();
+            Stats = stats;
+            StatsView.ItemsSource = new List<string>(Stats);
+            CollectionViewSource.GetDefaultView(StatsView.ItemsSource).Filter = FilterText;
+
+            GroupTypeBox.ItemsSource = Enum.GetValues(typeof(SearchGroup.GroupType)).Cast<SearchGroup.GroupType>();
+            GroupTypeBox.SelectedIndex = 0;
         }
 
         private bool FilterText(object obj)
@@ -37,7 +41,22 @@ namespace PoETheoryCraft.Controls
         }
         private void Search_TextChanged(object sender, RoutedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(StatsView.ItemsSource).Refresh();
+            if (StatsView != null && StatsView.ItemsSource != null)
+                CollectionViewSource.GetDefaultView(StatsView.ItemsSource).Refresh();
+        }
+        private void AddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            if (GroupTypeBox.SelectedItem is SearchGroup.GroupType type)
+            {
+                SearchGroup s = new SearchGroup(type, Stats);
+                s.RemoveGroupClick += RemoveGroup_Click;
+                GroupsPanel.Children.Add(s);
+            }
+        }
+        private void RemoveGroup_Click(object sender, EventArgs e)
+        {
+            if (sender is UIElement && GroupsPanel.Children.Contains(sender as UIElement))
+                GroupsPanel.Children.Remove(sender as UIElement);
         }
         private void OK_Click(object sender, RoutedEventArgs e)
         {
@@ -45,7 +64,7 @@ namespace PoETheoryCraft.Controls
         }
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-
+            GroupsPanel.Children.Clear();
         }
 
     }

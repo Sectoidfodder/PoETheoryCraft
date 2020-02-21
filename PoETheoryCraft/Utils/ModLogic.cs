@@ -18,8 +18,10 @@ namespace PoETheoryCraft.Utils
     }
     public static class ModLogic
     {
+        private static readonly double CatalystEffect = Properties.Settings.Default.CatalystEffect;
         public const string PrefixLock = "StrMasterItemGenerationCannotChangePrefixes";
         public const string SuffixLock = "DexMasterItemGenerationCannotChangeSuffixes";
+        public const string CatalystIgnore = "jewellery_quality_ignore";
         public const string Prefix = "prefix";
         public const string Suffix = "suffix";
         public static IDictionary<string, IList<string>> CatalystTags { get; } = new Dictionary<string, IList<string>>()
@@ -104,6 +106,9 @@ namespace PoETheoryCraft.Utils
                 PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
                 groups.Add(modtemplate.group);
             }
+            IList<string> catalysttags = null;
+            if (item.QualityType != null && CatalystTags.ContainsKey(item.QualityType))
+                catalysttags = CatalystTags[item.QualityType];
             foreach (PoEEssenceData ess in CraftingDatabase.Essences.Values)
             {
                 if (ess.type.is_corruption_only && ess.mods.Keys.Contains(itemclass))
@@ -115,34 +120,9 @@ namespace PoETheoryCraft.Utils
                         continue;
                     if (groups.Contains(m.group))
                         continue;
-                    int weight = 1000;
-                    if (weightmods != null)
-                    {
-                        double sumnegs = 0;
-                        int sumadds = 0;
-                        foreach (IList<PoEModWeight> l in weightmods)
-                        {
-                            foreach (PoEModWeight w in l)
-                            {
-                                if (m.type_tags.Contains(w.tag))
-                                {
-                                    if (w.weight > 100)
-                                        sumadds += w.weight;
-                                    else if (w.weight != 0)
-                                        sumnegs += (double)100 / w.weight;
-                                    else
-                                        weight = 0;
-                                    //weight = weight * w.weight / 100;
-                                    break;
-                                }
-                            }
-                            if (weight == 0)
-                                break;
-                        }
-                        weight = weight * Math.Max(sumadds, 100) / 100;
-                        weight = (int)(weight / Math.Max(sumnegs, 1));
-                    }
-                    mods.Add(m, weight);
+                    int weight = CalcGenWeight(m, item.LiveTags, weightmods, catalysttags, item.BaseQuality, 1000);
+                    if (weight > 0)
+                        mods.Add(m, weight);
                 }
             }
             if (mods.Count == 0)
@@ -257,8 +237,11 @@ namespace PoETheoryCraft.Utils
                 if (!openprefix && mod.generation_type == Prefix || !opensuffix && mod.generation_type == Suffix)
                     continue;
                 if (mod.required_level > levelcap || groups.Contains(mod.group))
-                    continue;   
-                int w = (op != null) ? CalcGenWeight(mod, item.LiveTags, op.ModWeightGroups) : CalcGenWeight(mod, item.LiveTags);
+                    continue;
+                IList<string> catalysttags = null;
+                if (item.QualityType != null && CatalystTags.ContainsKey(item.QualityType))
+                    catalysttags = CatalystTags[item.QualityType];
+                int w = CalcGenWeight(mod, item.LiveTags, op?.ModWeightGroups, catalysttags, item.BaseQuality);
                 if (w > 0)
                     mods.Add(mod, w);
             }
@@ -320,7 +303,8 @@ namespace PoETheoryCraft.Utils
             }
             return 0;
         }
-        public static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null)
+        //baseweightoverride used for corrupted essence mods from glyphic/tangled because their templates have no base weights
+        public static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null, IList<string> catalysttags = null, int catalystquality = 0, int? baseweightoverride = null)
         {
             int weight = 0;
             if (mod.spawn_weights != null)
@@ -334,6 +318,8 @@ namespace PoETheoryCraft.Utils
                     }
                 }
             }
+            if (baseweightoverride != null)
+                weight = baseweightoverride.Value;
             if (mod.generation_weights != null)
             {
                 foreach (PoEModWeight w in mod.generation_weights)
@@ -344,6 +330,20 @@ namespace PoETheoryCraft.Utils
                         break;
                     }
                 }
+            }
+            if (!mod.type_tags.Contains(CatalystIgnore) && catalysttags != null)
+            {
+                bool applycatqual = false;
+                foreach (string t in mod.type_tags)
+                {
+                    if (catalysttags.Contains(t))
+                    {
+                        applycatqual = true;
+                        break;
+                    }
+                }
+                if (applycatqual)
+                    weight = (int)(weight * (100 + catalystquality * CatalystEffect) / 100);
             }
             if (weightgroups != null)
             {
@@ -361,7 +361,6 @@ namespace PoETheoryCraft.Utils
                                 sumnegs += (double)100 / w.weight;
                             else
                                 weight = 0;
-                                //weight = weight * w.weight / 100;
                             break;
                         }
                     }
@@ -370,19 +369,6 @@ namespace PoETheoryCraft.Utils
                 }
                 weight = weight * Math.Max(sumadds, 100) / 100;
                 weight = (int)(weight / Math.Max(sumnegs, 1));
-                /*foreach (IList<PoEModWeight> l in weightgroups)
-                {
-                    foreach (PoEModWeight w in l)
-                    {
-                        if (mod.type_tags.Contains(w.tag))
-                        {
-                            weight = weight * w.weight / 100;
-                            break;
-                        }
-                    }
-                    if (weight == 0)
-                        break;
-                }*/
             }
             return weight;
         }

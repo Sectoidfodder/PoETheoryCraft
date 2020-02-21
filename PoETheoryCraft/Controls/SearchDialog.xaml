@@ -12,14 +12,36 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Width="80" Margin="5,0,0,5" IsCancel="True">Cancel</Button>
-                <Button Width="80" Margin="5,0,0,5" Name="OKButton" IsDefault="True" Click="OK_Click">OK</Button>
+                <Button Width="80" Margin="5,0,0,5" Name="OKButton" Click="OK_Click">OK</Button>
                 <Button Width="80" Margin="5,0,0,5" Click="Clear_Click">Clear</Button>
             </StackPanel>
-            <DockPanel DockPanel.Dock="Right" Width="500">
-                <TextBox Name="SearchBox" DockPanel.Dock="Top" TextChanged="Search_TextChanged"></TextBox>
-                <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" Name="StatsView"></ListView>
-            </DockPanel>
-            <StackPanel Background="AliceBlue"></StackPanel>
+            <Border DockPanel.Dock="Right" Width="400" BorderBrush="Black" BorderThickness="1" Margin="3">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="Wrap" Margin="5,0,0,0">
+                        Sorry the default WPF drop-down listboxes only autocomplete if you type from the beginning of a stat.
+                        Here's a proper search field so you can find the right stat to type in, while I cobble together a better UI.
+                    </TextBlock>
+                    <TextBox Grid.Row="1" Name="SearchBox" DockPanel.Dock="Top" TextChanged="Search_TextChanged">resist</TextBox>
+                    <ListView Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" Name="StatsView"></ListView>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="3">
+                <DockPanel Background="AliceBlue">
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Click="AddGroup_Click">Add Group</Button>
+                        <ComboBox Width="80" Name="GroupTypeBox">
+                        </ComboBox>
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Name="GroupsPanel"></StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
         </DockPanel>
     </Grid>
 </Window>

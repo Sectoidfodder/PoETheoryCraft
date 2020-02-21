@@ -11,16 +11,27 @@ namespace PoETheoryCraft.Controls
 {
     public class NumberBox : TextBox
     {
-        public int Min { get; set; }
-        public int Max { get; set; }
+        public double Min { get; set; }
+        public double Max { get; set; }
         public bool Valid { get; private set; }
+        public bool AllowDouble { get; set; } = false;
         public NumberBox() : base()
         {
             this.TextChanged += CheckText;
         }
         private void CheckText(object sender, RoutedEventArgs e)
         {
-            bool valid = int.TryParse(Text, out int n);
+            bool valid;
+            double n;
+            if (AllowDouble)
+            {
+                valid = double.TryParse(Text, out n);
+            }
+            else
+            {
+                valid = int.TryParse(Text, out int m);
+                n = m;
+            }
             if (valid && n >= Min && n < Max)
             {
                 Foreground = Brushes.Black;
