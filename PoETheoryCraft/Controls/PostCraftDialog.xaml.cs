@@ -58,7 +58,7 @@ namespace PoETheoryCraft.Controls
             b.Click += Remove_Click;
             DockPanel.SetDock(b, Dock.Left);
             p.Children.Add(b);
-            SearchableComboBox c = new SearchableComboBox() { ItemsSource = new CollectionView(BenchCrafts.Keys), HorizontalAlignment = HorizontalAlignment.Stretch, IsEditable = true, StaysOpenOnEdit = true, IsTextSearchEnabled = false };
+            SearchableComboBox c = new SearchableComboBox() { ItemsSource = new List<PoEModData>(BenchCrafts.Keys), HorizontalAlignment = HorizontalAlignment.Stretch, IsEditable = true, IsTextSearchEnabled = false };
             if (mod != null)
                 c.SelectedItem = mod;
             p.Children.Add(c);

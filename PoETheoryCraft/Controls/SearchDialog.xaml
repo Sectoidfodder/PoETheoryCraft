@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
-        Title="Search/Filter WIP - Nothing to see here, yet." Height="600" Width="900">
+        Title="Search/Filter WIP - Nothing to see here, yet." Height="600" Width="500">
     <Grid>
         <DockPanel>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
@@ -15,7 +15,7 @@
                 <Button Width="80" Margin="5,0,0,5" Name="OKButton" Click="OK_Click">OK</Button>
                 <Button Width="80" Margin="5,0,0,5" Click="Clear_Click">Clear</Button>
             </StackPanel>
-            <Border DockPanel.Dock="Right" Width="400" BorderBrush="Black" BorderThickness="1" Margin="3">
+            <!--<Border DockPanel.Dock="Right" Width="400" BorderBrush="Black" BorderThickness="1" Margin="3">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -29,7 +29,7 @@
                     <TextBox Grid.Row="1" Name="SearchBox" DockPanel.Dock="Top" TextChanged="Search_TextChanged">resist</TextBox>
                     <ListView Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" Name="StatsView"></ListView>
                 </Grid>
-            </Border>
+            </Border>-->
             <Border BorderBrush="Black" BorderThickness="1" Margin="3">
                 <DockPanel Background="AliceBlue">
                     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">

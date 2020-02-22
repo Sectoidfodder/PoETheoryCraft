@@ -199,7 +199,7 @@ namespace PoETheoryCraft.Controls
             b.Click += RemoveRow_Click;
             Grid.SetColumn(b, 0);
             g.Children.Add(b);
-            SearchableComboBox label = new SearchableComboBox() { ItemsSource = new List<string>(Stats), IsEditable = true, StaysOpenOnEdit = true };
+            SearchableComboBox label = new SearchableComboBox() { ItemsSource = new List<string>(Stats), IsEditable = true, IsTextSearchEnabled = false };
             if (Stats.Contains(l))
                 label.SelectedItem = l;
             label.ItemsPanel = new ItemsPanelTemplate(new FrameworkElementFactory(typeof(VirtualizingStackPanel)));
