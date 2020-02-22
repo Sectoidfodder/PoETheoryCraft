@@ -40,7 +40,8 @@ namespace PoETheoryCraft.Utils
         {
             if (s.IndexOf("[property]") == 0)
             {
-                switch (s.Substring(11))
+                string p = s.Substring(11);
+                switch (p)
                 {
                     case "Quality":
                         return props.quality;
@@ -69,8 +70,26 @@ namespace PoETheoryCraft.Utils
                     case "# Open Suffixes":
                         return item.GetAffixLimit(true) - item.ModCountByType(ModLogic.Suffix);
                     default:
-                        return null;
+                        if (item.TempProps != null && item.TempProps.ContainsKey(p))
+                            return item.TempProps[p];
+                        else
+                            return null;
                 }
+            }
+            else if (s.IndexOf("[pseudo]") == 0)
+            {
+                double total = 0;
+                if (CraftingDatabase.PseudoStats.ContainsKey(s))
+                {
+                    IDictionary<string, double> definition = CraftingDatabase.PseudoStats[s];
+                    foreach (string k in definition.Keys)
+                    {
+                        double? v = GetValueByName(k, item, props, stats);
+                        if (v != null)
+                            total += v.Value * definition[k];
+                    }
+                }
+                return total;
             }
             else
             {
@@ -190,7 +209,7 @@ namespace PoETheoryCraft.Utils
         }
         public static IDictionary<string, double> ParseItem(ItemCraft item)
         {
-            IDictionary<string, double> tr = new Dictionary<string, double>();
+            IDictionary<string, double> tr = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
             foreach (ModCraft m in item.LiveMods)
             {
                 string stats = m.ToString();
@@ -219,14 +238,32 @@ namespace PoETheoryCraft.Utils
         }
         public static KeyValuePair<string, double> ParseLine(string s)
         {
-            string rexpr = @"([\+\-]?\d+\.?\d*)\%?\s+to\s+([\+\-]?\d+\.?\d*)\%?";
+            string rexpr = @"(\d+\.?\d*)\s+to\s+(\d+\.?\d*)";
             Match m = Regex.Match(s, rexpr);
             if (m.Success)
-                return new KeyValuePair<string, double>(s.Replace(m.Value, "#"), (double.Parse(m.Groups[1].ToString()) + double.Parse(m.Groups[2].ToString())) / 2);
-            string expr = @"([\+\-]?\d+\.?\d*)\%?";
+            {
+                string t = s.Replace(m.Value, "#");
+                double v = (double.Parse(m.Groups[1].ToString()) + double.Parse(m.Groups[2].ToString())) / 2;
+                return new KeyValuePair<string, double>(t, v);
+            }
+            string expr = @"[\+\-]?(\d+\.?\d*)\%?";
             m = Regex.Match(s, expr);
             if (m.Success)
-                return new KeyValuePair<string, double>(s.Replace(m.Value, "#"), double.Parse(m.Groups[1].ToString()));
+            {
+                string t = s.Replace(m.Groups[1].ToString(), "#");
+                double v = double.Parse(m.Groups[1].ToString());
+                if (t.Contains("-#"))
+                {
+                    t = t.Replace("-#", "+#");
+                    v *= -1;
+                }
+                if (t.Contains("reduced") && !t.Contains("Hinder"))     //don't convert the "with 30% reduced movement speed" reminder text for hinder
+                {
+                    t = t.Replace("reduced", "increased");
+                    v *= -1;
+                }
+                return new KeyValuePair<string, double>(t, v);
+            }
             return new KeyValuePair<string, double>(s, 1);
         }
     }

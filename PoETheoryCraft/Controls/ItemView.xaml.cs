@@ -92,6 +92,15 @@ namespace PoETheoryCraft.Controls
                     ItemModBox.Children.Add(dock);
                 }
                 FillPropertyBox(item);
+                if (item.TempProps != null)
+                {
+                    foreach (string tp in item.TempProps.Keys)
+                    {
+                        TextBlock tb = new TextBlock() { TextWrapping = TextWrapping.Wrap, FontWeight = FontWeights.Bold, Foreground = Brushes.DarkGray, Text = tp + ": " + item.TempProps[tp], Tag = tp };
+                        HookEvents(tb);
+                        TempPropBox.Children.Add(tb);
+                    }
+                }
             }
             else {
                 ItemNameBox.Foreground = Brushes.White;
@@ -100,6 +109,7 @@ namespace PoETheoryCraft.Controls
                 PropertyBox.Children.Clear();
                 ImplicitBox.Children.Clear();
                 ItemModBox.Children.Clear();
+                TempPropBox.Children.Clear();
             }
         }
         private void HookEvents(TextBlock tb)

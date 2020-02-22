@@ -1,0 +1,41 @@
+{
+  "[pseudo] +#% to total Elemental Resistances": {
+    "+#% to Fire Resistance" : 1,
+	"+#% to Cold Resistance" : 1,
+	"+#% to Lightning Resistance" : 1,
+	"+#% to Fire and Cold Resistances" : 2,
+	"+#% to Fire and Lightning Resistances" : 2,
+	"+#% to Cold and Lightning Resistances" : 2,
+	"+#% to all Elemental Resistances" : 3
+  },
+  "[pseudo] +#% to total Resistances": {
+    "[pseudo] +#% to total Elemental Resistances" : 1,
+	"+#% to Chaos Resistance" : 1,
+	"+#% to Fire and Chaos Resistances" : 1,
+	"+#% to Cold and Chaos Resistances" : 1,
+	"+#% to Lightning and Chaos Resistances" : 1
+  },
+  "[pseudo] #% increased Fire Spell Damage": {
+    "#% increased Fire Damage" : 1,
+	"#% increased Elemental Damage" : 1,
+	"#% increased Damage" : 1,
+	"#% increased Spell Damage" : 1
+  },
+  "[pseudo] #% increased Cold Spell Damage": {
+    "#% increased Cold Damage" : 1,
+	"#% increased Elemental Damage" : 1,
+	"#% increased Damage" : 1,
+	"#% increased Spell Damage" : 1
+  },
+  "[pseudo] #% increased Lightning Spell Damage": {
+    "#% increased Lightning Damage" : 1,
+	"#% increased Elemental Damage" : 1,
+	"#% increased Damage" : 1,
+	"#% increased Spell Damage" : 1
+  },
+  "[pseudo] #% increased Chaos Spell Damage": {
+    "#% increased Chaos Damage" : 1,
+	"#% increased Damage" : 1,
+	"#% increased Spell Damage" : 1
+  }
+}

@@ -21,7 +21,7 @@ namespace PoETheoryCraft.DataClasses
             "Chaos Orb", "Orb of Alchemy", "Orb of Scouring", "Orb of Transmutation", "Orb of Alteration", "Orb of Augmentation", "Regal Orb", "Exalted Orb", "Orb of Annulment",
             "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb", "Vaal Orb", "Orb of Chance",
             "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst",
-            /*"Alt Plus Aug", */"Remove Crafted Mods"
+            "Remove Crafted Mods"
         };
         public static IDictionary<string, PoEModData> CoreMods { get; private set; }    //prefixes and suffixes: ~3k gear, ~200 jewel, ~450 abyss jewel
         public static IDictionary<string, PoEModData> AllMods { get; private set; }     //really big and should only be used for key lookups, not iteration
@@ -32,7 +32,27 @@ namespace PoETheoryCraft.DataClasses
         public static IDictionary<string, PoEFossilData> Fossils { get; private set; }
         public static IDictionary<string, PoECurrencyData> Currencies { get; private set; }
         public static ISet<string> StatTemplates { get; private set; }
-
+        public static IDictionary<string, Dictionary<string, double>> PseudoStats { get; private set; }
+        public static void LoadPseudoStats(string pseudofile, string userpseudofile)
+        {
+            JsonSerializerOptions jsonoptions = new JsonSerializerOptions() { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip };
+            PseudoStats = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(pseudofile), jsonoptions);
+            int n = PseudoStats.Count;
+            try
+            {
+                IDictionary<string, Dictionary<string, double>> userpseudostats = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(userpseudofile), jsonoptions);
+                foreach (string k in userpseudostats.Keys)
+                {
+                    if (!PseudoStats.ContainsKey(k))
+                        PseudoStats.Add(k, userpseudostats[k]);
+                }
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Error loading user pseudo stats");
+            }
+            Debug.WriteLine(PseudoStats.Count + " pseudo stats loaded (" + (PseudoStats.Count - n) + " user defined)");
+        }
         private static void IncludeTranslations(PoEModData modtemplate)
         {
             IDictionary<string, StatLocalization> trlib = StatTranslator.Data;
@@ -45,15 +65,16 @@ namespace PoETheoryCraft.DataClasses
                 foreach (LocalizationDefinition def in sloc.definitions)
                 {
                     string text = def.text;
-                    if (text.Length <= 10)      //omits league names as stats, not sure why they were there to begin with
+                    if (text.Length <= 10)          //omits league names as stats, not sure why they were there to begin with
                         continue;
                     text = text.Replace("{0} to {1}", "{0}");
-                    if (text.Contains("{1}"))   //omits two flask charge when crit mods that aren't listed by trade searches anyway
+                    if (text.Contains("{1}"))       //omits two flask charge when crit mods that aren't listed by trade searches anyway
                         continue;
                     if (def.format[0] != "ignore")
                         text = text.Replace("{0}", def.format[0]);
-                    if (!StatTemplates.Contains(text.Replace("reduced", "increased")))
-                        StatTemplates.Add(text);
+                    if (!text.Contains("Hinder"))   //don't replace "reduced" in the reminder text for hinder
+                        text = text.Replace("reduced", "increased");
+                    StatTemplates.Add(text);
                 }
             }
         }
@@ -61,9 +82,12 @@ namespace PoETheoryCraft.DataClasses
         {
             StatTemplates.UnionWith(new HashSet<string>()
             {
-                "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance",
-                //"[pseudo] +#% Total Elemental Resistance", "[pseudo] +#% Total Resistance"
+                "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance"
             });
+            foreach (string k in PseudoStats.Keys)
+            {
+                StatTemplates.Add(k);
+            }
         }
         //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
         //MUST BE DONE AFTER TRANSLATION DEFINTIONS ARE LOADED IN STATTRANSLATOR
@@ -132,7 +156,7 @@ namespace PoETheoryCraft.DataClasses
             AppendCurrencies();
             Debug.WriteLine(CoreBaseItems.Count + " core, " + AllBaseItems.Count + " total base items loaded");
         }
-        //Add special remove-crafted-mods and alt-aug options
+        //Add special remove-crafted-mods option
         private static void AppendCurrencies()
         {
             PoECurrencyData extra = new PoECurrencyData() { key = "RemoveCraftedMods", name = "Remove Crafted Mods", tooltip = "Remove Crafted Mods" };
@@ -149,20 +173,6 @@ namespace PoETheoryCraft.DataClasses
                 extra.icon = null;
             }
             Currencies.Add("RemoveCraftedMods", extra);
-            /*extra = new PoECurrencyData() { key = "AltPlusAug", name = "Alt Plus Aug", tooltip = "Alt + Aug in one click" };
-            extrapath = "Icons/currency/AltPlusAug.png";
-            extrauri = new Uri(System.IO.Path.Combine(Environment.CurrentDirectory, extrapath));
-            try
-            {
-                BitmapImage extraimg = new BitmapImage(extrauri);
-                extra.icon = extraimg;
-            }
-            catch (Exception)
-            {
-                Debug.WriteLine("Can't find image " + extrauri);
-                extra.icon = null;
-            }
-            Currencies.Add("AltPlusAug", extra);*/
         }
 
         //build bench crafting option templates from bench_crafting_options.min.json

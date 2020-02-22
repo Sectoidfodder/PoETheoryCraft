@@ -304,7 +304,7 @@ namespace PoETheoryCraft.Utils
             return 0;
         }
         //baseweightoverride used for corrupted essence mods from glyphic/tangled because their templates have no base weights
-        public static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null, IList<string> catalysttags = null, int catalystquality = 0, int? baseweightoverride = null)
+        private static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null, IList<string> catalysttags = null, int catalystquality = 0, int? baseweightoverride = null)
         {
             int weight = 0;
             if (mod.spawn_weights != null)

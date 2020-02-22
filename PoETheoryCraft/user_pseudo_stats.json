@@ -1,0 +1,19 @@
+﻿{
+    /* You can add your own pseudo definitions here, like the provided examples
+     * They work basically the same way as a weighted search
+     * Stat matching is not case sensitive, but symbols like +#% do need to match existing definitions
+     */
+    "[pseudo] my purifying flame build weapon power": {
+        "[pseudo] #% increased Fire Spell Damage": 1,
+        "#% increased Area Damage": 1,
+        "#% increased Global Physical Damage": 1,
+        "#% increased Cast speed": 3,
+        "+#% to Global Critical Strike Multiplier": 1.5,
+        "Damage penetrates #% Fire Resistance": 5,
+        "Gain #% of Physical Damage as extra Fire Damage": 5
+    },
+    "[pseudo] belt defensiveness": {
+        "[pseudo] +#% to total Elemental Resistances": 1,
+        "+# to Maximum Life": 1
+    }
+}

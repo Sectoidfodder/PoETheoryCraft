@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PoETheoryCraft.Utils;
 
 namespace PoETheoryCraft.Controls
 {
@@ -21,7 +22,7 @@ namespace PoETheoryCraft.Controls
     public partial class SearchDialog : Window
     {
         private readonly ISet<string> Stats;
-        public SearchDialog(ISet<string> stats)
+        public SearchDialog(ISet<string> stats, FilterCondition filter)
         {
             InitializeComponent();
             Stats = stats;
@@ -30,8 +31,29 @@ namespace PoETheoryCraft.Controls
 
             GroupTypeBox.ItemsSource = Enum.GetValues(typeof(SearchGroup.GroupType)).Cast<SearchGroup.GroupType>();
             GroupTypeBox.SelectedIndex = 0;
-        }
 
+            if (filter is AndCondition)
+            {
+                foreach (FilterCondition c in ((AndCondition)filter).Subconditions)
+                {
+                    SearchGroup s = new SearchGroup(c, Stats);
+                    s.RemoveGroupClick += RemoveGroup_Click;
+                    GroupsPanel.Children.Add(s);
+                }
+            }
+        }
+        public FilterCondition GetFilterCondition()
+        {
+            IList<FilterCondition> subconditions = new List<FilterCondition>();
+            foreach (UIElement e in GroupsPanel.Children)
+            {
+                subconditions.Add(((SearchGroup)e).GetFilterCondition());
+            }
+            if (subconditions.Count > 0)
+                return new AndCondition() { Subconditions = subconditions };
+            else
+                return null;
+        }
         private bool FilterText(object obj)
         {
             if (string.IsNullOrWhiteSpace(SearchBox.Text))

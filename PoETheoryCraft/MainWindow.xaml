@@ -80,8 +80,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <uc:BulkItemsView x:Name="RepeatResults" ItemClick="ItemParam_Click"/>
-                    <TextBlock Name="SortIndicator" Grid.Row="1" MaxWidth="300" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis">No sort order selected</TextBlock>
-                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Width="20" Name="SearchButton" Click="Search_Click">S</Button>
                         <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
                         <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>

@@ -62,7 +62,8 @@ namespace PoETheoryCraft.Utils
     public class CountCondition : FilterCondition
     {
         public IList<FilterCondition> Subconditions { get; set; }
-        public int Target { get; set; } = 0;
+        public int? Min { get; set; }
+        public int? Max { get; set; }
         public FilterResult Evaluate(ItemCraft item, ItemProperties props, IDictionary<string, double> stats)
         {
             if (Subconditions == null)
@@ -89,8 +90,9 @@ namespace PoETheoryCraft.Utils
                     }
                 }
             }
-            info["count"] = count;
-            return new FilterResult() { Match = count >= Target, Info = info };
+            info["Count"] = count;
+            bool match = (Min == null || count >= Min) && (Max == null || count <= Max);
+            return new FilterResult() { Match = match, Info = info };
         }
     }
 
@@ -130,8 +132,8 @@ namespace PoETheoryCraft.Utils
     public class ClampCondition : FilterCondition
     {
         public string Template { get; set; }
-        public int? Min { get; set; } = null;
-        public int? Max { get; set; } = null;
+        public double? Min { get; set; } = null;
+        public double? Max { get; set; } = null;
         public FilterResult Evaluate(ItemCraft item, ItemProperties props, IDictionary<string, double> stats)
         {
             if (Template == null)
@@ -139,21 +141,21 @@ namespace PoETheoryCraft.Utils
             double? v = ItemParser.GetValueByName(Template, item, props, stats);
             if (v == null)
                 return new FilterResult() { Match = false };
-            if (Min != null && v < Min)
-                return new FilterResult() { Match = false };
-            if (Max != null && v > Max)
-                return new FilterResult() { Match = false };
             IDictionary<string, double> info = null;
             if (Template.IndexOf("[pseudo]") == 0)
                 info = new Dictionary<string, double>() { { Template, v.Value } };
+            if (Min != null && v < Min)
+                return new FilterResult() { Match = false , Info = info};
+            if (Max != null && v > Max)
+                return new FilterResult() { Match = false , Info = info};
             return new FilterResult() { Match = true , Info = info};
         }
     }
 
     public class WeightCondition : FilterCondition
     {
-        public int? Min { get; set; } = null;
-        public int? Max { get; set; } = null;
+        public double? Min { get; set; } = null;
+        public double? Max { get; set; } = null;
         public IDictionary<string, double> Weights { get; set; }
         public FilterResult Evaluate(ItemCraft item, ItemProperties props, IDictionary<string, double> stats)
         {
@@ -171,7 +173,7 @@ namespace PoETheoryCraft.Utils
                     tally += v.Value * Weights[template];
                 }
             }
-            info.Add("weight", tally);
+            info.Add("Weight", tally);
             bool match = (Min == null || tally >= Min) && (Max == null || tally <= Max);
             return new FilterResult() { Match = match, Info = info };
         }

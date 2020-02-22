@@ -34,6 +34,7 @@ namespace PoETheoryCraft
             //must be done first so mod templates are translated as they're loaded
             StatTranslator.LoadStatLocalization(@"Data\stat_translations.min.json");
 
+            CraftingDatabase.LoadPseudoStats(@"Data\pseudo_stats.json", @"user_pseudo_stats.json");
             CraftingDatabase.LoadMods(@"Data\mods.min.json", @"Data\mod_types.min.json");
             CraftingDatabase.LoadBaseItems(@"Data\base_items.min.json", @"Data\item_classes.min.json");
             CraftingDatabase.LoadBenchOptions(@"Data\crafting_bench_options.min.json");
@@ -155,13 +156,19 @@ namespace PoETheoryCraft
             {
                 ItemCraft.DefaultQuality = n1;
                 Properties.Settings.Default.ItemQuality = n1;
-                Bench.BenchItem.BaseQuality = n1;
-                ItemSlot.UpdateData(Bench.BenchItem);
-                foreach (ItemCraft item in Bench.MassResults)
+                if (Bench.BenchItem != null)
                 {
-                    item.BaseQuality = n1;
+                    Bench.BenchItem.BaseQuality = n1;
+                    ItemSlot.UpdateData(Bench.BenchItem);
                 }
-                RepeatResults.UpdateDisplay();
+                if (Bench.MassResults != null && Bench.MassResults.Count > 0) { 
+                    foreach (ItemCraft item in Bench.MassResults)
+                    {
+                        item.BaseQuality = n1;
+                    }
+                    RepeatResults.SortAndFilter();
+                    RepeatResults.UpdateDisplay();
+                }
             }
             Properties.Settings.Default.Save();
         }
@@ -281,18 +288,22 @@ namespace PoETheoryCraft
         }
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            SearchDialog d = new SearchDialog(CraftingDatabase.StatTemplates) { Owner = this };
+            SearchDialog d = new SearchDialog(CraftingDatabase.StatTemplates, RepeatResults.Filter) { Owner = this };
             bool? res = d.ShowDialog();
             if (!res.HasValue || !res.Value)
                 return;
+            FilterCondition filter = d.GetFilterCondition();
+            if (filter == null)
+                SearchButton.ClearValue(Button.BackgroundProperty);
+            else
+                SearchButton.Background = Brushes.Green;
+            RepeatResults.Filter = filter;
         }
         private void ItemParam_Click(object sender, EventArgs e)
         {
             TextBlock tb = (TextBlock)sender;
             string sortby = tb.Tag != null ? "[property] " + tb.Tag : ItemParser.ParseLine(tb.Text.Split('\n')[0]).Key;
-            SortIndicator.Text = "Sorting by: \"" + sortby + "\"";
-            Bench.SortBy = sortby;
-            RepeatResults.Items = Bench.MassResults;
+            RepeatResults.SortBy = sortby;
         }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {

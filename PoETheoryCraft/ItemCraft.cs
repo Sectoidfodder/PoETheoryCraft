@@ -58,7 +58,10 @@ namespace PoETheoryCraft
                 }
             }
         }
-        public string QualityType { get; set; } //null for normal qual, or the name of a catalyst, ex: "Imbued Catalyst"
+        //null for normal qual, or the name of a catalyst, ex: "Imbued Catalyst"
+        public string QualityType { get; set; }
+        //temporary properties managed by item filter/search functions, so pseudos and weights can be shown
+        public IDictionary<string, double> TempProps { get; set; } = new Dictionary<string, double>();
         public ItemCraft(PoEBaseItemData data, int level = 100, ISet<ItemInfluence> influences = null)
         {
             SourceData = data.key;

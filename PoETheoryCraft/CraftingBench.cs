@@ -36,20 +36,6 @@ namespace PoETheoryCraft
             }
         }
         public IList<ItemCraft> MassResults { get; } = new List<ItemCraft>();   //storage for mass crafting results
-        private string _sortby;
-        public string SortBy 
-        {
-            get { return _sortby; } 
-            set
-            {
-                _sortby = value;
-                if (MassResults != null && MassResults.Count > 0)
-                {
-                    ((List<ItemCraft>)MassResults).Sort(new ItemCraftComparer() { Key = _sortby });
-                    ((List<ItemCraft>)MassResults).Reverse();
-                }
-            }
-        }
         public CraftingBench()
         {
             CurrencySpent = new Dictionary<string, int>();
@@ -73,10 +59,19 @@ namespace PoETheoryCraft
                 if (modtemplate.group == mod.group)
                     return "Item already has a mod in this mod group";
             }
-            if (mod.domain == "crafted")   //if crafted, make sure it's weight-legal
+            if (mod.domain == "crafted")   //if crafted check the specific case of quality craft on item w/ quality mod
             {
-                if (ModLogic.CalcGenWeight(mod, target.LiveTags) <= 0)
-                    return "Invalid craft for current item and/or item mods";
+                if (target.LiveTags.Contains("local_item_quality"))
+                {
+                    foreach (PoEModWeight w in mod.spawn_weights)
+                    {
+                        if (w.tag == "local_item_quality" && w.weight == 0)
+                            return "Cannot craft quality on an item with another quality mod";
+                    }
+                }
+                //This check turned out to the too restrictive. Many crafted mods have 0 spawn weight on item types they should be craftable on.
+                //if (ModLogic.CalcGenWeight(mod, target.LiveTags) <= 0)
+                //    return "Invalid craft for current item and/or item mods";
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
             ItemInfluence? inf = ModLogic.GetInfluence(mod, itemtemplate);
