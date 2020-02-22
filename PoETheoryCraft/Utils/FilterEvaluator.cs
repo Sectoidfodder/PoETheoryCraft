@@ -69,7 +69,7 @@ namespace PoETheoryCraft.Utils
             if (Subconditions == null)
                 return new FilterResult() { Match = true };
             int count = 0;
-            IDictionary<string, double> info = new Dictionary<string, double>() { { "count", 0 } };
+            IDictionary<string, double> info = new Dictionary<string, double>() { { "Count", 0 } };
             foreach (FilterCondition c in Subconditions)
             {
                 FilterResult r = c.Evaluate(item, props, stats);

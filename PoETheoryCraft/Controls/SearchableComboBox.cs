@@ -24,24 +24,36 @@ namespace PoETheoryCraft.Controls
 
             if (textBox != null)
             {
-                textBox.TextChanged += delegate
+                textBox.TextChanged += (o, ev) =>
                 {
-                    this.IsDropDownOpen = true;
-
-                    this.Items.Filter += a =>
+                    bool filter = true;
+                    foreach (TextChange tc in ev.Changes)
                     {
-                        if (a.ToString().ToUpper().Contains(textBox.Text.ToUpper()))
+                        if (tc.RemovedLength > 0)
                         {
-                            return true;
+                            filter = false;
+                            break;
                         }
-                        else
-                        {
-                            return false;
-                        }
-                    };
+                    }
+                    if (filter)
+                    {
+                        this.IsDropDownOpen = true;
 
-                    textBox.SelectionLength = 0;
-                    textBox.CaretIndex = textBox.Text.Length;
+                        this.Items.Filter += a =>
+                        {
+                            if (a.ToString().ToUpper().Contains(textBox.Text.ToUpper()))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        };
+
+                        textBox.SelectionLength = 0;
+                        textBox.CaretIndex = textBox.Text.Length;
+                    }
                 };
             }
         }

@@ -191,7 +191,7 @@ namespace PoETheoryCraft.Controls
         }
         private void AddRow(string l, double? v1, double? v2)
         {
-            int fields = Type == GroupType.Count ? 0 : Type == GroupType.Weight ? 1 : 2;
+            int fields = Type == GroupType.Weight ? 1 : 2;
             Grid g = new Grid();
             g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
             g.ColumnDefinitions.Add(new ColumnDefinition());
