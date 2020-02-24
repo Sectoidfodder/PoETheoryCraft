@@ -2,6 +2,33 @@
 A crafting simulator for Path of Exile
 
 
+v0.2.0
+- Search/Filter Enabled -
+
+> You can now search through your mass crafting results just like on a trade site.
+      Example: https://imgur.com/a/qqjlVE8
+> There are only a few pseudo stats pre-defined for searching at the moment.
+      You can define your own in user_pseudo_stats.json, following the format of the examples.
+      They're basically custom weighted searches that you can save for repeated use.
+
+Simulation:
+> Positive fossil modifiers now stack additively, to be consistent with test results.
+> Corrupted Essence mods from Glyphic/Tangled now obey weight modifiers from other fossils.
+> Prevented crafting +quality mods on an item that already has a +quality mod.
+> Tentatively added 1% mod weight per 1% matching catalyst quality for all currencies.
+      All I got from testing with 200 rolls is that the effect is very little, if any at all.
+      It could be that catalyst quality only affects currencies that remove quality - that'll be the next thing to test.
+      You can turn the bonus off or change it to anything in App.config
+
+UI:
+> Mod preview now shows each weight as a percent of total rollable affix weight.
+> Made mod preview ignore existing mods on item when reroll currencies are selected (chaos, alch, alt, trans, essences, fossils).
+
+Misc:
+> Fixed problem exporting items to PoB due to bad rare item name formatting.  Right-click anywhere on an item or the mass-craft area for the option to copy one or all items to clipboard.
+
+
+
 v0.1.0
 - Initial Features -
 
