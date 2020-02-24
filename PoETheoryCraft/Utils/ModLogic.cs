@@ -10,7 +10,6 @@ namespace PoETheoryCraft.Utils
 {
     public class RollOptions
     {
-        public bool IgnoreMeta { get; set; } = false;                   //ignore metamod locks
         public IList<PoEModData> ForceMods { get; set; } = null;        //always add these
         public ISet<IList<PoEModWeight>> ModWeightGroups { get; set; }  //first matching tag of each list is applied
         public int ILvlCap { get; set; } = 200;                         //if lower than item's ilvl, use this instead
@@ -50,19 +49,16 @@ namespace PoETheoryCraft.Utils
             Properties.Settings.Default.MMW1,
             Properties.Settings.Default.MMW2
         };
-        //rerolls item to new one of given rarity, basemods is a superset of valid mods, only dict keys are used, values(weights) are recalculated
-        public static void RerollItem(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemRarity rarity, RollOptions op = null)
+
+        //Fills item with mods based on its rarity, pulling from basemods, destructively modifies basemods to reflect the rollable pool for new item
+        public static bool RollItem(ItemCraft item, IDictionary<PoEModData, int> basemods, RollOptions op = null)
         {
-            if (op != null && op.IgnoreMeta)     //to ignore metamods, simply remove them first
-                item.ClearCraftedMods();
-            item.ClearMods();
-            item.Rarity = rarity;
 
             if (op != null && op.ForceMods != null)
             {
                 foreach (PoEModData f in op.ForceMods)
                 {
-                    item.AddMod(f);
+                    AddModAndTrim(item, basemods, f);
                 }
             }
             if (op != null && op.GlyphicCount > 0)
@@ -72,20 +68,90 @@ namespace PoETheoryCraft.Utils
                     PoEModData glyphicmod = RollGlyphicMod(item, op.ModWeightGroups);
                     if (glyphicmod == null)
                         break;
-                    item.AddMod(glyphicmod);
+                    AddModAndTrim(item, basemods, glyphicmod);
                 }
             }
 
             int modcount = RollModCount(item.Rarity, CraftingDatabase.AllBaseItems[item.SourceData].item_class);
             while (item.LiveMods.Count < modcount)  
             {
-                basemods = FindValidMods(item, basemods, op: op);   //assumes that no explicit can increase an item's pool of valid explicits
                 PoEModData mod = ChooseMod(basemods);
                 if (mod == null)
                     break;
-                item.AddMod(mod);
+                AddModAndTrim(item, basemods, mod);
             }
-            item.UpdateName();
+            return true;
+        }
+
+        //Adds mod to item, destructively modifies basemods to reflect the new rollable pool
+        private static void AddModAndTrim(ItemCraft item, IDictionary<PoEModData, int> basemods, PoEModData mod)
+        {
+            ISet<string> newtags = new HashSet<string>(mod.adds_tags);
+            ISet<string> oldtags = new HashSet<string>(item.LiveTags);
+            foreach (string s in oldtags)
+            {
+                newtags.Remove(s);
+            }
+            string addedgroup = mod.group;
+            item.AddMod(mod);
+            string affixfill = null;
+            if (mod.generation_type == Prefix && item.ModCountByType(Prefix) >= item.GetAffixLimit())
+                affixfill = Prefix;
+            else if (mod.generation_type == Suffix && item.ModCountByType(Suffix) >= item.GetAffixLimit())
+                affixfill = Suffix;
+            TrimMods(basemods, oldtags, newtags, addedgroup, affixfill);
+        }
+        //Destructively modifies basedmods according to tags added, group added, and prefix/suffix filled if neccesary
+        private static void TrimMods(IDictionary<PoEModData, int> basemods, ISet<string> oldtags, ISet<string> newtags, string addedgroup, string affixfill)
+        {
+            foreach (PoEModData mod in basemods.Keys.ToList<PoEModData>())
+            {
+                if (mod.group == addedgroup || mod.generation_type == affixfill)
+                {
+                    basemods.Remove(mod);
+                    continue;
+                }
+                if (newtags.Count > 0)
+                {
+                    //if tags were added, adjust weight by the ratio of the new/old spawn and generation weights
+                    int weight = basemods[mod];
+                    int oldw = -1;
+                    int neww = -1;
+                    foreach (PoEModWeight w in mod.spawn_weights)
+                    {
+                        if (oldw == -1 && oldtags.Contains(w.tag))
+                        {
+                            oldw = w.weight;
+                            break;
+                        }
+                        if (neww == -1 && newtags.Contains(w.tag))
+                            neww = w.weight;
+                    }
+                    if (neww != -1)
+                        weight = weight * neww / oldw;
+                    if (mod.generation_weights != null)
+                    {
+                        oldw = -1;
+                        neww = -1;
+                        foreach (PoEModWeight w in mod.generation_weights)
+                        {
+                            if (oldw == -1 && oldtags.Contains(w.tag))
+                            {
+                                oldw = w.weight;
+                                break;
+                            }
+                            if (neww == -1 && newtags.Contains(w.tag))
+                                neww = w.weight;
+                        }
+                        if (neww != -1)
+                            weight = weight * neww / oldw;
+                    }
+                    if (weight > 0)
+                        basemods[mod] = weight;
+                    else
+                        basemods.Remove(mod);
+                }
+            }
         }
         //rolls a corrupted fossil mod for the given item and fossil weight modifiers, or null if none possible
         public static PoEModData RollGlyphicMod(ItemCraft item, ISet<IList<PoEModWeight>> weightmods)
@@ -130,68 +196,69 @@ namespace PoETheoryCraft.Utils
             else
                 return ChooseMod(mods);
         }
-        //adds one mod to item, automatically updates rarity, basemods is a superset of valid mods, only dict keys are used, values(weights) are recalculated
-        public static bool RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods)
+        //adds one mod from basemods to item, updates rarity, destructively modifies basemods to reflect new rollable pool, returns false if no mod was able to be added
+        public static bool RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemInfluence? inf = null)
         {
-            PoEModData mod = ChooseMod(FindValidMods(item, basemods));
+            PoEModData mod = ChooseMod(basemods, inf);
             if (mod != null)
             {
-                item.AddMod(mod);
+                AddModAndTrim(item, basemods, mod);
                 return true;
             }
             return false;
         }
-        //adds one influenced mod to item, basemods is a superset of valid mods, only dict keys are used, values(weights) are recalculated
-        public static bool RollAddInfMod(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemInfluence inf)
-        {
-            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[item.SourceData];
-            string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
-            if (inftag == null)
-                return false;
-            item.LiveTags.Add(inftag);
-            ISet<string> tagstoadd = new HashSet<string>();
-            IDictionary<PoEModData, int> mods = FindValidMods(item, basemods);
-            IDictionary<PoEModData, int> infmods = FilterForInfluence(mods, inf, itemtemplate);
-            foreach (string s in tagstoadd)
-            {
-                item.LiveTags.Add(s);
-            }
-            PoEModData fmod = ChooseMod(infmods);
-            if (fmod != null)
-            {
-                item.AddMod(fmod);
-                return true;
-            }
-            item.LiveTags.Remove(inftag);   //undo influence if no valid mod found
-            return false;
-        }
+        //adds one influenced mod from basemods to item, returns trimmed pool of influenced mods
+        //public static IDictionary<PoEModData, int> RollAddInfMod(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemInfluence inf)
+        //{
+        //    PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[item.SourceData];
+        //    string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
+        //    if (inftag == null)
+        //        return false;
+        //    item.LiveTags.Add(inftag);
+        //    ISet<string> tagstoadd = new HashSet<string>();
+        //    IDictionary<PoEModData, int> mods = FindValidMods(item, basemods);
+        //    IDictionary<PoEModData, int> infmods = FilterForInfluence(mods, inf, itemtemplate);
+        //    foreach (string s in tagstoadd)
+        //    {
+        //        item.LiveTags.Add(s);
+        //    }
+        //    PoEModData fmod = ChooseMod(infmods);
+        //    if (fmod != null)
+        //    {
+        //        item.AddMod(fmod);
+        //        return true;
+        //    }
+        //    item.LiveTags.Remove(inftag);   //undo influence if no valid mod found
+        //    return false;
+        //}
         //Returns subset of dict containing mods of given influence for given item type
-        public static IDictionary<PoEModData, int> FilterForInfluence(IDictionary<PoEModData, int> dict, ItemInfluence inf, PoEBaseItemData baseitem)
+        public static IDictionary<PoEModData, int> FilterForInfluence(IDictionary<PoEModData, int> dict, ItemInfluence inf)
         {
             IDictionary<PoEModData, int> filtereddict = new Dictionary<PoEModData, int>();
+            IList<string> infnames = EnumConverter.InfToNames(inf);
             foreach (PoEModData mod in dict.Keys)
             {
-                if (GetInfluence(mod, baseitem) == inf)
+                if (infnames.Contains(mod.name))
                 {
                     filtereddict.Add(mod, dict[mod]);
                 }
             }
             return filtereddict;
         }
-        //returns the influence type of the mod (or null), which technically COULD depend on the item base, even if it doesn't currently
-        public static ItemInfluence? GetInfluence(PoEModData mod, PoEBaseItemData item)
-        {
-            foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
-            {
-                string inftag = item.item_class_properties[EnumConverter.InfToTag(inf)];
-                foreach (PoEModWeight w in mod.spawn_weights)
-                {
-                    if (w.tag == inftag && w.weight > 0)
-                        return inf;
-                }
-            }
-            return null;
-        }
+        ////returns the influence type of the mod (or null), which technically COULD depend on the item base, even if it doesn't currently
+        //public static ItemInfluence? GetInfluence(PoEModData mod, PoEBaseItemData item)
+        //{
+        //    foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
+        //    {
+        //        string inftag = item.item_class_properties[EnumConverter.InfToTag(inf)];
+        //        foreach (PoEModWeight w in mod.spawn_weights)
+        //        {
+        //            if (w.tag == inftag && w.weight > 0)
+        //                return inf;
+        //        }
+        //    }
+        //    return null;
+        //}
         //Starts from db and checks only the item template's domain and tags, used for pruning so we check against ~300 mods per roll instead of ~3000
         //ignoredomain used for forced fossil mods from "delve" domain, only filtering them by spawn weight based on tags and base item
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)
@@ -263,24 +330,24 @@ namespace PoETheoryCraft.Utils
             return mods;
         }
         //picks from a dictionary of mod templates and weights
-        private static PoEModData ChooseMod(IDictionary<PoEModData, int> mods)
+        private static PoEModData ChooseMod(IDictionary<PoEModData, int> mods, ItemInfluence? inf = null)
         {
-            int totalweight = mods.Values.Sum();
+            IDictionary<PoEModData, int> targetmods = (inf == null) ? mods : FilterForInfluence(mods, inf.Value);
+            int totalweight = targetmods.Values.Sum();
             int roll = RNG.Gen.Next(totalweight);
-            Debug.Write("rolled " + roll + " out of " + totalweight + ", ");
             int counter = 0;
-            foreach (PoEModData mod in mods.Keys)
+            foreach (PoEModData mod in targetmods.Keys)
             {
-                counter += mods[mod];
+                counter += targetmods[mod];
                 if (counter > roll)
                 {
-                    Debug.WriteLine(mod.key);
+                    //Debug.Write("rolled " + roll + " out of " + totalweight + ", ");
+                    //Debug.WriteLine(mod.key);
                     return mod;
                 }
             }
             return null;
         }
-        //applies a list of tags to mod template to calculate final weight
         private static int RollModCount(ItemRarity r, string itemclass)
         {
             if (r == ItemRarity.Magic)

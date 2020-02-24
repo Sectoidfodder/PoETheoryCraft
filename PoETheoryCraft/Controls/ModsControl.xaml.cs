@@ -114,7 +114,7 @@ namespace PoETheoryCraft.Controls
             
             IDictionary<PoEModData, int> validmods = ModLogic.FindValidMods(itemcopy, extendedpool, true, ops);
             if (inf != ItemInfluence.Shaper)    //if a conq exalt is selected, only show influenced mods
-                validmods = ModLogic.FilterForInfluence(validmods, inf, itemtemplate);
+                validmods = ModLogic.FilterForInfluence(validmods, inf);
 
             WeightedModsDisplay.UpdateData(validmods);
         }
@@ -126,19 +126,6 @@ namespace PoETheoryCraft.Controls
                 return activeview.PrefixList.SelectedItem;
             else
                 return activeview.SuffixList.SelectedItem;
-
-            /*PoEModData mod = null;
-            //all this just to find the right typecast in the right listview to grab the key attribute...
-            if (activeview.PrefixList.SelectedItem is KeyValuePair<PoEModData, int>)
-                mod = ((KeyValuePair<PoEModData, int>)activeview.PrefixList.SelectedItem).Key;
-            else if (activeview.PrefixList.SelectedItem is KeyValuePair<PoEModData, IDictionary<string, int>>)
-                mod = ((KeyValuePair<PoEModData, IDictionary<string, int>>)activeview.PrefixList.SelectedItem).Key;
-            else if (activeview.SuffixList.SelectedItem is KeyValuePair<PoEModData, int>)
-                mod = ((KeyValuePair<PoEModData, int>)activeview.SuffixList.SelectedItem).Key;
-            else if (activeview.SuffixList.SelectedItem is KeyValuePair<PoEModData, IDictionary<string, int>>)
-                mod = ((KeyValuePair<PoEModData, IDictionary<string, int>>)activeview.SuffixList.SelectedItem).Key;
-
-            return mod;*/
         }
     }
 }

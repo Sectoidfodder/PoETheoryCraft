@@ -10,6 +10,7 @@ namespace PoETheoryCraft
 {
     public struct PostRollOptions
     {
+        public bool FillAffix;
         public bool Maximize;
         public IList<KeyValuePair<PoEModData, IDictionary<string, int>>> TryCrafts; //ghetto ordered dict
     }
@@ -23,11 +24,14 @@ namespace PoETheoryCraft
             get { return _benchitem; }
             set
             {
-                _benchitem = value;
-                if (_benchitem != null)
+                if (value != null)
                 {
-                    PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[_benchitem.SourceData];
-                    BaseValidMods = ModLogic.FindBaseValidMods(itemtemplate, CraftingDatabase.CoreMods.Values);
+                    if (_benchitem == null || _benchitem.SourceData != value.SourceData)
+                    {
+                        PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[value.SourceData];
+                        BaseValidMods = ModLogic.FindBaseValidMods(itemtemplate, CraftingDatabase.CoreMods.Values);
+                        _benchitem = value;
+                    }
                 }
                 else
                 {
@@ -59,7 +63,7 @@ namespace PoETheoryCraft
                 if (modtemplate.group == mod.group)
                     return "Item already has a mod in this mod group";
             }
-            if (mod.domain == "crafted")   //if crafted check the specific case of quality craft on item w/ quality mod
+            if (mod.domain == "crafted")   //if crafted check the specific cases of quality craft on item w/ quality mod, and conversion glove mod
             {
                 if (target.LiveTags.Contains("local_item_quality"))
                 {
@@ -69,19 +73,28 @@ namespace PoETheoryCraft
                             return "Cannot craft quality on an item with another quality mod";
                     }
                 }
+                if (target.LiveTags.Contains("has_physical_conversion_mod") && mod.adds_tags.Contains("has_physical_conversion_mod"))
+                    return "Item already has a physical conversion mod";
                 //This check turned out to the too restrictive. Many crafted mods have 0 spawn weight on item types they should be craftable on.
                 //if (ModLogic.CalcGenWeight(mod, target.LiveTags) <= 0)
                 //    return "Invalid craft for current item and/or item mods";
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
-            ItemInfluence? inf = ModLogic.GetInfluence(mod, itemtemplate);
-            if (inf != null)
+            //if it's an influenced mod, add the appropriate tag
+            foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
             {
-                string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag((ItemInfluence)inf)];
-                if (inftag != null)
-                    target.LiveTags.Add(inftag);
+                if (EnumConverter.InfToNames(inf).Contains(mod.name))
+                {
+                    string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag((ItemInfluence)inf)];
+                    if (inftag != null)
+                        target.LiveTags.Add(inftag);
+                    break;
+                }
             }
             target.AddMod(mod);
+            ItemRarity newrarity = target.GetMinimumRarity();
+            if (newrarity > target.Rarity)
+                target.Rarity = newrarity;
             if (costs != null)
             {
                 foreach (string s in costs.Keys)
@@ -90,6 +103,87 @@ namespace PoETheoryCraft
                 }
             }
             return null;
+        }
+        private void DoReroll(RollOptions ops, IDictionary<PoEModData, int> pool, ItemRarity targetrarity, bool ignoremeta, int count)
+        {
+            if (count == 1)
+            {
+                if (ignoremeta)
+                    BenchItem.ClearCraftedMods();
+                BenchItem.ClearMods();
+                BenchItem.Rarity = targetrarity;
+                pool = ModLogic.FindValidMods(BenchItem, pool, op: ops);
+                ModLogic.RollItem(BenchItem, pool, ops);
+                DoPostRoll(BenchItem, pool);
+                BenchItem.GenerateName();
+            }
+            else
+            {
+                MassResults.Clear();
+                ItemCraft dummy = BenchItem.Copy();
+                if (ignoremeta)
+                    dummy.ClearCraftedMods();
+                dummy.ClearMods();
+                dummy.Rarity = targetrarity;
+                //FindValidMods is very expensive, so do it once here and pass prevalidated : true to RerollItem
+                IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, pool, op: ops);
+                for (int n = 0; n < count; n++)
+                {
+                    ItemCraft target = dummy.Copy();
+                    //Pass a copy of dict because RollItem is destructive
+                    IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
+                    ModLogic.RollItem(target, poolcopy, ops);
+                    DoPostRoll(target, poolcopy);
+                    target.GenerateName();
+                    MassResults.Add(target);
+                }
+            }
+        }
+        private bool DoAddMod(ItemRarity targetrarity, bool rename, int count, int qualityconsumed, ItemInfluence? inf = null)
+        {
+            bool success = true;
+            string inftag = null;
+            if (inf != null)
+            {
+                inftag = CraftingDatabase.AllBaseItems[BenchItem.SourceData].item_class_properties[EnumConverter.InfToTag(inf.Value)];
+            }
+            if (count == 1)
+            {
+                if (inftag != null)
+                    BenchItem.LiveTags.Add(inftag);
+                BenchItem.Rarity = targetrarity;
+                IDictionary<PoEModData, int> pool = ModLogic.FindValidMods(BenchItem, BaseValidMods);
+                success = ModLogic.RollAddMod(BenchItem, pool, inf);
+                if (BenchItem.QualityType != null)
+                    BenchItem.BaseQuality -= qualityconsumed;
+                DoPostRoll(BenchItem, pool);
+                if (rename)
+                    BenchItem.GenerateName();
+            }
+            else
+            {
+                MassResults.Clear();
+                ItemCraft dummy = BenchItem.Copy();
+                if (inftag != null)
+                    dummy.LiveTags.Add(inftag);
+                dummy.Rarity = targetrarity;
+                //FindValidMods is very expensive, so do it once here and pass prevalidated : true to RerollItem
+                IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, BaseValidMods);
+                for (int n = 0; n < count; n++)
+                {
+                    ItemCraft target = dummy.Copy();
+                    //Pass a copy of dict because RollAddMod is destructive
+                    IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
+                    success = ModLogic.RollAddMod(target, poolcopy, inf);
+                    if (target.QualityType != null)
+                        target.BaseQuality -= qualityconsumed;
+                    DoPostRoll(target, poolcopy);
+                    if (rename)
+                        BenchItem.GenerateName();
+                    MassResults.Add(target);
+                }
+            }
+            return success;
         }
         public string ApplyEssence(PoEEssenceData ess, int tries = 1)
         {
@@ -109,24 +203,10 @@ namespace PoETheoryCraft
                 return "Item does not have space for forced prefix";
             else if (mod.generation_type == ModLogic.Suffix && BenchItem.ModCountByType(ModLogic.Suffix, true) >= BenchItem.GetAffixLimit(true))
                 return "Item does not have space for forced suffix";
-            RollOptions op = new RollOptions() { IgnoreMeta = true, ForceMods = new List<PoEModData>() { mod }, ILvlCap = ess.item_level_restriction ?? 200 };
+            RollOptions op = new RollOptions() { ForceMods = new List<PoEModData>() { mod }, ILvlCap = ess.item_level_restriction ?? 200 };
             if (tries == 1)
-            {
-                ModLogic.RerollItem(BenchItem, BaseValidMods, ItemRarity.Rare, op);
                 TallyCurrency(ess.key, 1);
-                DoPostRoll(BenchItem);
-            }
-            else
-            {
-                MassResults.Clear();
-                for (int n = 0; n < tries; n++)
-                {
-                    ItemCraft target = BenchItem.Copy();
-                    ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare, op);
-                    DoPostRoll(target);
-                    MassResults.Add(target);
-                }
-            }
+            DoReroll(op, BaseValidMods, ItemRarity.Rare, true, tries);
             return null;
         }
         public string ApplyFossils(IList<PoEFossilData> fossils, int tries = 1)
@@ -202,27 +282,15 @@ namespace PoETheoryCraft
                 if (glyphicmod == null)
                     return "Item cannot roll forced corrupted essence mods";
             }
-            RollOptions ops = new RollOptions() { ForceMods = forcedmods, IgnoreMeta = true, ModWeightGroups = modweightgroups, GlyphicCount = cesscount };
+            RollOptions ops = new RollOptions() { ForceMods = forcedmods, ModWeightGroups = modweightgroups, GlyphicCount = cesscount };
             if (tries == 1)
             {
-                ModLogic.RerollItem(BenchItem, extendedpool, ItemRarity.Rare, ops);
                 foreach (PoEFossilData fossil in fossils)
                 {
                     TallyCurrency(fossil.key, 1);
                 }
-                DoPostRoll(BenchItem);
             }
-            else
-            {
-                MassResults.Clear();
-                for (int n = 0; n < tries; n++)
-                {
-                    ItemCraft target = BenchItem.Copy();
-                    ModLogic.RerollItem(target, extendedpool, ItemRarity.Rare, ops);
-                    DoPostRoll(target);
-                    MassResults.Add(target);
-                }
-            }
+            DoReroll(ops, extendedpool, ItemRarity.Rare, true, tries);
             return null;
         }
         public string ApplyCurrency(PoECurrencyData currency, int tries = 1)
@@ -230,159 +298,139 @@ namespace PoETheoryCraft
             if (BenchItem == null)
                 return "Bench is empty";
             string c = currency.name;
-            bool hasclearedmassresults = false;
-            bool rolled = false;
-            bool success;
             string res;
-            for (int n = 0; n < tries; n++)
+            switch (c)
             {
-                ItemCraft target = tries == 1 ? BenchItem : BenchItem.Copy();
-                switch (c)
-                {
-                    case "Chaos Orb":
-                        if (target.Rarity != ItemRarity.Rare)
-                            return "Invalid item rarity for selected currency";
-                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
-                        rolled = true;
-                        break;
-                    case "Orb of Alteration":
-                        if (target.Rarity != ItemRarity.Magic)
-                            return "Invalid item rarity for selected currency";
-                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
-                        break;
-                    case "Alt Plus Aug":
-                        if (target.Rarity != ItemRarity.Magic)
-                            return "Invalid item rarity for selected currency";
-                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
-                        if (target.LiveMods.Count == 1)
-                        {
-                            ModLogic.RollAddMod(target, BaseValidMods);
-                            if (target.QualityType != null)
-                                target.BaseQuality -= 2;
-                        }
-                        break;
-                    case "Divine Orb":
-                        if (target.Rarity == ItemRarity.Normal)
-                            return "Invalid item rarity for selected currency";
-                        success = target.RerollExplicits();
-                        if (!success)
-                            return "No mods can be rerolled";
-                        break;
-                    case "Orb of Annulment":
-                        if (target.Rarity == ItemRarity.Normal)
-                            return "Invalid item rarity for selected currency";
-                        success = target.RemoveRandomMod();
-                        if (!success)
-                            return "No mods can be removed";
-                        if (target.QualityType != null)
-                            target.BaseQuality -= 20;
-                        break;
-                    case "Orb of Augmentation":
-                        if (target.Rarity != ItemRarity.Magic)
-                            return "Invalid item rarity for selected currency";
-                        if (target.LiveMods.Count > 1)
-                            return "Item cannot have another mod";
-                        ModLogic.RollAddMod(target, BaseValidMods);
-                        if (target.QualityType != null)
-                            target.BaseQuality -= 2;
-                        break;
-                    case "Regal Orb":
-                        if (target.Rarity != ItemRarity.Magic)
-                            return "Invalid item rarity for selected currency";
-                        target.Rarity = ItemRarity.Rare;
-                        ModLogic.RollAddMod(target, BaseValidMods);
-                        if (target.QualityType != null)
-                            target.BaseQuality -= 5;
-                        break;
-                    case "Exalted Orb":
-                        if (target.Rarity != ItemRarity.Rare)
-                            return "Invalid item rarity for selected currency";
-                        if (target.LiveMods.Count >= 2 * target.GetAffixLimit())
-                            return "Item cannot have another mod";
-                        ModLogic.RollAddMod(target, BaseValidMods);
-                        if (target.QualityType != null)
-                            target.BaseQuality -= 20;
-                        break;
-                    case "Redeemer's Exalted Orb":
-                        res = ApplyInfExalt(target, ItemInfluence.Redeemer);
-                        if (res != null)
-                            return res;
-                        break;
-                    case "Hunter's Exalted Orb":
-                        res = ApplyInfExalt(target, ItemInfluence.Hunter);
-                        if (res != null)
-                            return res;
-                        break;
-                    case "Warlord's Exalted Orb":
-                        res = ApplyInfExalt(target, ItemInfluence.Warlord);
-                        if (res != null)
-                            return res;
-                        break;
-                    case "Crusader's Exalted Orb":
-                        res = ApplyInfExalt(target, ItemInfluence.Crusader);
-                        if (res != null)
-                            return res;
-                        break;
-                    case "Orb of Scouring":
-                        if (target.Rarity == ItemRarity.Normal)
-                            return "Invalid item rarity for selected currency";
-                        target.ClearMods();
-                        break;
-                    case "Orb of Alchemy":
-                        if (target.Rarity != ItemRarity.Normal)
-                            return "Invalid item rarity for selected currency";
-                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Rare);
-                        rolled = true;
-                        break;
-                    case "Orb of Transmutation":
-                        if (target.Rarity != ItemRarity.Normal)
-                            return "Invalid item rarity for selected currency";
-                        ModLogic.RerollItem(target, BaseValidMods, ItemRarity.Magic);
-                        break;
-                    case "Remove Crafted Mods":
-                        success = target.ClearCraftedMods();
-                        if (!success)
-                            return "No crafted mods to remove";
-                        break;
-                    case "Blessed Orb":
-                        success = target.RerollImplicits();
-                        if (!success)
-                            return "No mods can be rerolled";
-                        break;
-                    case "Abrasive Catalyst":
-                    case "Fertile Catalyst":
-                    case "Imbued Catalyst":
-                    case "Intrinsic Catalyst":
-                    case "Prismatic Catalyst":
-                    case "Tempering Catalyst":
-                    case "Turbulent Catalyst":
-                        PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[target.SourceData];
-                        if (!CraftingDatabase.ItemClassCatalyst.Contains(itemtemplate.item_class))
-                            return "Invalid item type for catalysts";
-                        if (target.QualityType == c && target.BaseQuality >= 20)
-                            return "Item already has max catalyst quality";
-                        target.ApplyCatalyst(c);
-                        break;
-                    default:
-                        return "Unrecognized currency selected";
-                }
-                if (tries != 1)
-                {
-                    if (!hasclearedmassresults)         //wait until here to clear old list so it stays if the first iteration returns an error message
-                    {
-                        MassResults.Clear();
-                        hasclearedmassresults = true;
-                    }
-                    MassResults.Add(target);
-                }
-                else
-                {
-                    TallyCurrency(currency.key, 1);
-                }
-                if (rolled)
-                    DoPostRoll(target);
+                case "Chaos Orb":
+                    if (BenchItem.Rarity != ItemRarity.Rare)
+                        return "Invalid item rarity for selected currency";
+                    DoReroll(null, BaseValidMods, ItemRarity.Rare, false, tries);
+                    break;
+                case "Orb of Alteration":
+                    if (BenchItem.Rarity != ItemRarity.Magic)
+                        return "Invalid item rarity for selected currency";
+                    DoReroll(null, BaseValidMods, ItemRarity.Magic, false, tries);
+                    break;
+                case "Orb of Alchemy":
+                    if (BenchItem.Rarity != ItemRarity.Normal)
+                        return "Invalid item rarity for selected currency";
+                    DoReroll(null, BaseValidMods, ItemRarity.Rare, false, tries);
+                    break;
+                case "Orb of Transmutation":
+                    if (BenchItem.Rarity != ItemRarity.Normal)
+                        return "Invalid item rarity for selected currency";
+                    DoReroll(null, BaseValidMods, ItemRarity.Magic, false, tries);
+                    break;
+                case "Exalted Orb":
+                    if (BenchItem.Rarity != ItemRarity.Rare)
+                        return "Invalid item rarity for selected currency";
+                    if (BenchItem.LiveMods.Count >= 2 * BenchItem.GetAffixLimit())
+                        return "Item cannot have another mod";
+                    res = DoAddMod(ItemRarity.Rare, false, tries, 20) ? null : "Item has no valid rollable mods";
+                    if (res != null)
+                        return res;
+                    break;
+                case "Regal Orb":
+                    if (BenchItem.Rarity != ItemRarity.Magic)
+                        return "Invalid item rarity for selected currency";
+                    DoAddMod(ItemRarity.Rare, true, tries, 5);
+                    break;
+                case "Orb of Augmentation":
+                    if (BenchItem.Rarity != ItemRarity.Magic)
+                        return "Invalid item rarity for selected currency";
+                    if (BenchItem.LiveMods.Count >= 2 * BenchItem.GetAffixLimit())
+                        return "Item cannot have another mod";
+                    DoAddMod(ItemRarity.Magic, true, tries, 2);
+                    break;
+                case "Redeemer's Exalted Orb":
+                    res = ApplyInfExalt(ItemInfluence.Redeemer, tries);
+                    if (res != null)
+                        return res;
+                    break;
+                case "Hunter's Exalted Orb":
+                    res = ApplyInfExalt(ItemInfluence.Hunter, tries);
+                    if (res != null)
+                        return res;
+                    break;
+                case "Warlord's Exalted Orb":
+                    res = ApplyInfExalt(ItemInfluence.Warlord, tries);
+                    if (res != null)
+                        return res;
+                    break;
+                case "Crusader's Exalted Orb":
+                    res = ApplyInfExalt(ItemInfluence.Crusader, tries);
+                    if (res != null)
+                        return res;
+                    break;
+                case "Orb of Annulment":
+                    if (BenchItem.Rarity == ItemRarity.Normal)
+                        return "Invalid item rarity for selected currency";
+                    res = BenchItem.RemoveRandomMod() ? null : "No mods can be removed";
+                    if (res != null)
+                        return res;
+                    if (BenchItem.QualityType != null)
+                        BenchItem.BaseQuality -= 20;
+                    break;
+                case "Divine Orb":
+                    if (BenchItem.Rarity == ItemRarity.Normal)
+                        return "Invalid item rarity for selected currency";
+                    res = BenchItem.RerollExplicits() ? null : "No mods can be rerolled";
+                    if (res != null)
+                        return res;
+                    break;
+                case "Blessed Orb":
+                    res = BenchItem.RerollImplicits() ? null : "No mods can be rerolled";
+                    if (res != null)
+                        return res;
+                    break;
+                case "Orb of Scouring":
+                    if (BenchItem.Rarity == ItemRarity.Normal)
+                        return "Invalid item rarity for selected currency";
+                    BenchItem.ClearMods();
+                    BenchItem.Rarity = BenchItem.GetMinimumRarity();
+                    BenchItem.GenerateName();
+                    break;
+                case "Remove Crafted Mods":
+                    res = BenchItem.ClearCraftedMods() ? null : "No crafted mods to remove";
+                    if (res != null)
+                        return res;
+                    break;
+                case "Abrasive Catalyst":
+                case "Fertile Catalyst":
+                case "Imbued Catalyst":
+                case "Intrinsic Catalyst":
+                case "Prismatic Catalyst":
+                case "Tempering Catalyst":
+                case "Turbulent Catalyst":
+                    PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
+                    if (!CraftingDatabase.ItemClassCatalyst.Contains(itemtemplate.item_class))
+                        return "Invalid item type for catalysts";
+                    if (BenchItem.QualityType == c && BenchItem.BaseQuality >= 20)
+                        return "Item already has max catalyst quality";
+                    BenchItem.ApplyCatalyst(c);
+                    break;
+                default:
+                    return "Unrecognized currency selected";
             }
+            if (tries == 1)
+                TallyCurrency(currency.key, 1);
             return null;
+        }
+        private string ApplyInfExalt(ItemInfluence inf, int tries)
+        {
+            if (BenchItem.Rarity != ItemRarity.Rare)
+                return "Invalid item rarity for selected currency";
+            if (BenchItem.ItemLevel < 68)
+                return "Item must be ilvl 68+";
+            if (BenchItem.LiveMods.Count >= 2 * BenchItem.GetAffixLimit())
+                return "Item cannot have another mod";
+            if (BenchItem.GetInfluences().Count > 0)
+                return "Item already has influence";
+            bool res = DoAddMod(ItemRarity.Rare, false, tries, 20, inf);
+            if (res)
+                return null;
+            else
+                return "Item has no valid rollable mods";
         }
         private void TallyCurrency(string k, int n)
         {
@@ -393,7 +441,7 @@ namespace PoETheoryCraft
             else
                 CurrencySpent.Add(k, n);
         }
-        private void DoPostRoll(ItemCraft item)
+        private void DoPostRoll(ItemCraft item, IDictionary<PoEModData, int> pool)
         {
             if (PostRoll.TryCrafts != null) 
             {
@@ -404,24 +452,22 @@ namespace PoETheoryCraft
                         break;
                 }
             }
+            if (PostRoll.FillAffix)
+            {
+                while (item.LiveMods.Count < item.GetAffixLimit() * 2)
+                {
+                    ModLogic.RollAddMod(item, pool);
+                    if (item.QualityType != null)
+                    {
+                        if (item.Rarity == ItemRarity.Rare)
+                            item.BaseQuality -= 20;
+                        else
+                            item.BaseQuality -= 2;
+                    }
+                }
+            }
             if (PostRoll.Maximize)
                 item.MaximizeMods();
-        }
-        private string ApplyInfExalt(ItemCraft target, ItemInfluence inf)
-        {
-            if (target.Rarity != ItemRarity.Rare)
-                return "Invalid item rarity for selected currency";
-            if (target.ItemLevel < 68)
-                return "Item must be ilvl 68+";
-            if (target.LiveMods.Count >= 2 * target.GetAffixLimit())
-                return "Item cannot have another mod";
-            if (target.GetInfluences().Count > 0)
-                return "Item already has influence";
-            bool res = ModLogic.RollAddInfMod(target, BaseValidMods, inf);
-            if (res)
-                return null;
-            else
-                return "Item has no valid rollable mods";
         }
     }
 }

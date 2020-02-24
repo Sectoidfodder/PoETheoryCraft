@@ -17,19 +17,7 @@ namespace PoETheoryCraft
         public string SourceData { get; }           //key to PoEBaseItemData this is derived from
         public ISet<string> LiveTags { get; }       //derived from template but can change during crafting
         public int ItemLevel { get; }
-        private ItemRarity _rarity;
-        public ItemRarity Rarity                    //always rename when rarity changes
-        {
-            get { return _rarity; }
-            set
-            {
-                if (value != _rarity)
-                {
-                    _rarity = value;
-                    UpdateName();
-                }
-            }
-        }
+        public ItemRarity Rarity { get; set; }
         public IList<ModCraft> LiveMods { get; }
         public IList<ModCraft> LiveImplicits { get; }
         public string ItemName { get; private set; }
@@ -95,7 +83,7 @@ namespace PoETheoryCraft
             QualityType = item.QualityType;
             LiveTags = new HashSet<string>(item.LiveTags);
             ItemLevel = item.ItemLevel;
-            _rarity = item.Rarity;
+            Rarity = item.Rarity;
             LiveMods = new List<ModCraft>();
             foreach (ModCraft m in item.LiveMods)
             {
@@ -252,11 +240,6 @@ namespace PoETheoryCraft
                 if (!m.IsLocked && !(prefixlock && modtemplate.generation_type == ModLogic.Prefix) && !(suffixlock && modtemplate.generation_type == ModLogic.Suffix))
                     RemoveModAt(i);
             }
-            ItemRarity r = GetMinimumRarity();
-            if (r < Rarity)                         //downgrade rarity if needed, which triggers name change
-                Rarity = r;
-            else if (Rarity == ItemRarity.Magic)    //magic items names are mod-sensitive, so force update
-                UpdateName();
         }
         public void AddMod(PoEModData data)
         {
@@ -264,15 +247,9 @@ namespace PoETheoryCraft
             LiveMods.Add(m);
             LiveTags.UnionWith(data.adds_tags);
             UpdateModQuality(m, QualityType);
-            ItemRarity r = GetMinimumRarity();
-            if (r > Rarity)     //upgrade rarity if needed, which triggers name change
-                Rarity = r;
-            else if (Rarity == ItemRarity.Magic)     //magic items names are mod-sensitive, so force update
-                UpdateName();
         }
         public void AddImplicit(PoEModData data)
         {
-            //return;
             ModCraft m = new ModCraft(data);
             LiveImplicits.Add(m);
             LiveTags.UnionWith(data.adds_tags);
@@ -335,7 +312,7 @@ namespace PoETheoryCraft
             else
                 mod.Quality = 0;
         }
-        private ItemRarity GetMinimumRarity()
+        public ItemRarity GetMinimumRarity()
         {
             int prefixcount = ModCountByType(ModLogic.Prefix);
             int suffixcount = ModCountByType(ModLogic.Suffix);
@@ -464,7 +441,7 @@ namespace PoETheoryCraft
         {
             return ItemName;
         }
-        public void UpdateName()
+        public void GenerateName()
         {
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[SourceData];
             ItemName = itemtemplate.name;

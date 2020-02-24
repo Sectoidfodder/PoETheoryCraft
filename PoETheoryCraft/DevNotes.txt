@@ -1,4 +1,11 @@
-﻿v0.2.0 Changelog:
+﻿> added "fill affixes" post-craft option for alt-aug or metacrafting
+
+> progress bar for mass craft
+> continuous crafting
+> locking affixes
+> force removing affixes
+
+v0.2.0 Changelog:
 
 Simulation:
 Positive fossil modifiers now stack additively, to be consistent with test results.
@@ -41,9 +48,6 @@ I'm pretty sure this is true.  Simulation needs to be adjusted if not.
 Are there any non-influenced mods with the same name as influences ("of the Hunt", etc)?
 If not, ModLogic.GetInfluence can be simplified to check name instead of iterating through spawn_weight tags.
 It would also allow easy grouping of ModsView by influence.
-
-Need to test what happens when you exalt/regal/aug an item with no valid mods (due to ilvl and/or metamods).
-Currently the simulation just does nothing.  Could be that influence from a conq ex is applied even if no mod is added.
 
 Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up to two decimals if they're nonzero.
 

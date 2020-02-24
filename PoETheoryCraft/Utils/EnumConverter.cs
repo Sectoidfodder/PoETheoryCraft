@@ -54,5 +54,23 @@ namespace PoETheoryCraft.Utils
                     return "crusader_tag";
             }
         }
+        public static IList<string> InfToNames(ItemInfluence inf)
+        {
+            switch (inf)
+            {
+                case ItemInfluence.Shaper:
+                    return new List<string>() { "The Shaper's", "of Shaping" };
+                case ItemInfluence.Elder:
+                    return new List<string>() { "Eldritch", "of the Elder" };
+                case ItemInfluence.Redeemer:
+                    return new List<string>() { "Redeemer's", "of Redemption" };
+                case ItemInfluence.Hunter:
+                    return new List<string>() { "Hunter's", "of the Hunt" };
+                case ItemInfluence.Warlord:
+                    return new List<string>() { "Warlord's", "of the Conquest" };
+                default:
+                    return new List<string>() { "Crusader's", "of the Crusade" };
+            }
+        }
     }
 }

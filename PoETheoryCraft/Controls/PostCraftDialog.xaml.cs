@@ -49,7 +49,7 @@ namespace PoETheoryCraft.Controls
                     }
                 }
             }
-            return new PostRollOptions() { Maximize = MaxCheckBox.IsChecked ?? false, TryCrafts = mods };
+            return new PostRollOptions() {FillAffix = FillCheckBox.IsChecked ?? false, Maximize = MaxCheckBox.IsChecked ?? false, TryCrafts = mods };
         }
         private void AddRow(PoEModData mod = null)
         {

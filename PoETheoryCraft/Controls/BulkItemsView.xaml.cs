@@ -107,22 +107,29 @@ namespace PoETheoryCraft.Controls
             ContentBox.Children.Clear();
             if (Items != null && Items.Count > 0)
             {
-                int max = Math.Min(FilteredItems.Count, DisplayIndex + ResultsPerPage);
-                if (Filter != null)
-                    PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";
-                else
-                    PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " results";
-                for (int k = DisplayIndex; k < max; k++)
+                if (FilteredItems.Count > 0)
                 {
-                    ItemView panel = new ItemView();
-                    panel.UpdateData(FilteredItems[k]);
-                    panel.ItemClick += ChildItem_Click;
-                    ContentBox.Children.Add(panel);
+                    int max = Math.Min(FilteredItems.Count, DisplayIndex + ResultsPerPage);
+                    if (Filter != null)
+                        PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";
+                    else
+                        PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " results";
+                    for (int k = DisplayIndex; k < max; k++)
+                    {
+                        ItemView panel = new ItemView();
+                        panel.UpdateData(FilteredItems[k]);
+                        panel.ItemClick += ChildItem_Click;
+                        ContentBox.Children.Add(panel);
+                    }
+                }
+                else
+                {
+                    PageHeader.Text = "0-0 of 0 matches in " + Items.Count + " results";
                 }
             }
             else
             {
-                PageHeader.Text = "Showing 0-0 of 0 results";
+                PageHeader.Text = "0-0 of 0 results";
             }
             if (SortBy != null)
                 SortIndicator.Text = "Sorting by " + (_sortasc ? ">" : "<") + " : " + SortBy.Replace("[property] ", "") + " (click again to reverse)";
