@@ -1,41 +1,91 @@
 {
-  "[pseudo] +#% to total Elemental Resistances": {
-    "+#% to Fire Resistance" : 1,
-	"+#% to Cold Resistance" : 1,
-	"+#% to Lightning Resistance" : 1,
-	"+#% to Fire and Cold Resistances" : 2,
-	"+#% to Fire and Lightning Resistances" : 2,
-	"+#% to Cold and Lightning Resistances" : 2,
-	"+#% to all Elemental Resistances" : 3
-  },
-  "[pseudo] +#% to total Resistances": {
-    "[pseudo] +#% to total Elemental Resistances" : 1,
-	"+#% to Chaos Resistance" : 1,
-	"+#% to Fire and Chaos Resistances" : 1,
-	"+#% to Cold and Chaos Resistances" : 1,
-	"+#% to Lightning and Chaos Resistances" : 1
-  },
-  "[pseudo] #% increased Fire Spell Damage": {
-    "#% increased Fire Damage" : 1,
-	"#% increased Elemental Damage" : 1,
-	"#% increased Damage" : 1,
-	"#% increased Spell Damage" : 1
-  },
-  "[pseudo] #% increased Cold Spell Damage": {
-    "#% increased Cold Damage" : 1,
-	"#% increased Elemental Damage" : 1,
-	"#% increased Damage" : 1,
-	"#% increased Spell Damage" : 1
-  },
-  "[pseudo] #% increased Lightning Spell Damage": {
-    "#% increased Lightning Damage" : 1,
-	"#% increased Elemental Damage" : 1,
-	"#% increased Damage" : 1,
-	"#% increased Spell Damage" : 1
-  },
-  "[pseudo] #% increased Chaos Spell Damage": {
-    "#% increased Chaos Damage" : 1,
-	"#% increased Damage" : 1,
-	"#% increased Spell Damage" : 1
-  }
+	"[pseudo] +#% total to Fire Resistance": {
+		"+#% to Fire Resistance": 1,
+		"+#% to Fire and Cold Resistances": 1,
+		"+#% to Fire and Lightning Resistances": 1,
+		"+#% to All Elemental Resistances": 1,
+		"+#% to Fire and Chaos Resistances": 1
+	},
+	"[pseudo] +#% total to Cold Resistance": {
+		"+#% to Cold Resistance": 1,
+		"+#% to Fire and Cold Resistances": 1,
+		"+#% to Cold and Lightning Resistances": 1,
+		"+#% to All Elemental Resistances": 1,
+		"+#% to Cold and Chaos Resistances": 1
+	},
+	"[pseudo] +#% total to Lightning Resistance": {
+		"+#% to Lightning Resistance": 1,
+		"+#% to Fire and Lightning Resistances": 1,
+		"+#% to Cold and Lightning Resistances": 1,
+		"+#% to All Elemental Resistances": 1,
+		"+#% to Lightning and Chaos Resistances": 1
+	},
+	"[pseudo] +#% total to Chaos Resistance": {
+		"+#% to Chaos Resistance": 1,
+		"+#% to Fire and Chaos Resistances": 1,
+		"+#% to Cold and Chaos Resistances": 1,
+		"+#% to Lightning and Chaos Resistances": 1
+	},
+	"[pseudo] +#% total Elemental Resistance": {
+		"[pseudo] +#% total to Fire Resistance": 1,
+		"[pseudo] +#% total to Cold Resistance": 1,
+		"[pseudo] +#% total to Lightning Resistance": 1
+	},
+	"[pseudo] +#% total Resistance": {
+		"[pseudo] +#% total Elemental Resistance": 1,
+		"[pseudo] +#% total to Chaos Resistance": 1
+	},
+	"[pseudo] +# total to Strength": {
+		"+# to Strength": 1,
+		"+# to Strength and Dexterity": 1,
+		"+# to Strength and Intelligence": 1,
+		"+# to all Attributes": 1
+	},
+	"[pseudo] +# total to Dexterity": {
+		"+# to Dexterity": 1,
+		"+# to Strength and Dexterity": 1,
+		"+# to Dexterity and Intelligence": 1,
+		"+# to all Attributes": 1
+	},
+	"[pseudo] +# total to Intelligence": {
+		"+# to Intelligence": 1,
+		"+# to Strength and Intelligence": 1,
+		"+# to Dexterity and Intelligence": 1,
+		"+# to all Attributes": 1
+	},
+	"[pseudo] +# total maximum Life": {
+		"+# to maximum Life": 1,
+		"[pseudo] +# total to Strength": 0.5
+	},
+	"[pseudo] +# total maximum Mana": {
+		"+# to maximum Mana": 1,
+		"[pseudo] +# total to Intelligence": 0.5
+	},
+	"[pseudo] #% total increased maximum Energy Shield": {
+		"#% increased maximum Energy Shield": 1,
+		"[pseudo] +# total to Intelligence": 0.2
+	},
+	"[pseudo] #% increased Fire Spell Damage": {
+		"#% increased Fire Damage": 1,
+		"#% increased Elemental Damage": 1,
+		"#% increased Damage": 1,
+		"#% increased Spell Damage": 1
+	},
+	"[pseudo] #% increased Cold Spell Damage": {
+		"#% increased Cold Damage": 1,
+		"#% increased Elemental Damage": 1,
+		"#% increased Damage": 1,
+		"#% increased Spell Damage": 1
+	},
+	"[pseudo] #% increased Lightning Spell Damage": {
+		"#% increased Lightning Damage": 1,
+		"#% increased Elemental Damage": 1,
+		"#% increased Damage": 1,
+		"#% increased Spell Damage": 1
+	},
+	"[pseudo] #% increased Chaos Spell Damage": {
+		"#% increased Chaos Damage": 1,
+		"#% increased Damage": 1,
+		"#% increased Spell Damage": 1
+	}
 }

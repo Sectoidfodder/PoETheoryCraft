@@ -82,7 +82,8 @@ namespace PoETheoryCraft.DataClasses
         {
             StatTemplates.UnionWith(new HashSet<string>()
             {
-                "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance"
+                "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance",
+                "[property] # Prefixes", "[property] # Suffixes", "[property] # Open Prefixes", "[property] # Open Suffixes"
             });
             foreach (string k in PseudoStats.Keys)
             {
