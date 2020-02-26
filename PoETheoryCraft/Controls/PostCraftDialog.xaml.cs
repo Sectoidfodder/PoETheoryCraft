@@ -33,7 +33,7 @@ namespace PoETheoryCraft.Controls
                     AddRow(kv.Key);
                 }
             }
-
+            FillCheckBox.IsChecked = ops.FillAffix;
         }
         public PostRollOptions GetPostRollOptions()
         {

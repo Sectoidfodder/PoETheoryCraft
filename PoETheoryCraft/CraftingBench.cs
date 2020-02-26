@@ -40,6 +40,7 @@ namespace PoETheoryCraft
             }
         }
         public IList<ItemCraft> MassResults { get; } = new List<ItemCraft>();   //storage for mass crafting results
+        private delegate void CurrencyAction(ItemCraft item);
         public CraftingBench()
         {
             CurrencySpent = new Dictionary<string, int>();
@@ -104,86 +105,73 @@ namespace PoETheoryCraft
             }
             return null;
         }
-        private void DoReroll(RollOptions ops, IDictionary<PoEModData, int> pool, ItemRarity targetrarity, bool ignoremeta, int count)
+        private void ApplyCurrency(CurrencyAction action, int count)
         {
             if (count == 1)
             {
-                if (ignoremeta)
-                    BenchItem.ClearCraftedMods();
-                BenchItem.ClearMods();
-                BenchItem.Rarity = targetrarity;
-                pool = ModLogic.FindValidMods(BenchItem, pool, op: ops);
-                ModLogic.RollItem(BenchItem, pool, ops);
-                DoPostRoll(BenchItem, pool);
-                BenchItem.GenerateName();
+                action(BenchItem);
             }
             else
             {
                 MassResults.Clear();
-                ItemCraft dummy = BenchItem.Copy();
-                if (ignoremeta)
-                    dummy.ClearCraftedMods();
-                dummy.ClearMods();
-                dummy.Rarity = targetrarity;
-                //FindValidMods is very expensive, so do it once here and pass prevalidated : true to RerollItem
-                IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, pool, op: ops);
                 for (int n = 0; n < count; n++)
                 {
-                    ItemCraft target = dummy.Copy();
-                    //Pass a copy of dict because RollItem is destructive
-                    IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
-                    ModLogic.RollItem(target, poolcopy, ops);
-                    DoPostRoll(target, poolcopy);
-                    target.GenerateName();
-                    MassResults.Add(target);
+                    ItemCraft copy = BenchItem.Copy();
+                    action(copy);
+                    MassResults.Add(copy);
                 }
             }
         }
+        private void DoReroll(RollOptions ops, IDictionary<PoEModData, int> pool, ItemRarity targetrarity, bool ignoremeta, int count)
+        {
+            ItemCraft dummy = BenchItem.Copy();
+            if (ignoremeta)
+                dummy.ClearCraftedMods();
+            dummy.ClearMods();
+            dummy.Rarity = targetrarity;
+            IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, pool, op: ops);
+            ApplyCurrency((item) => 
+            {
+                if (ignoremeta)
+                    item.ClearCraftedMods();
+                item.ClearMods();
+                item.Rarity = targetrarity;
+                IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
+                ModLogic.RollItem(item, poolcopy, ops);
+                DoPostRoll(item, poolcopy);
+                item.GenerateName();
+            }, count);
+        }
         private bool DoAddMod(ItemRarity targetrarity, bool rename, int count, int qualityconsumed, ItemInfluence? inf = null)
         {
-            bool success = true;
             string inftag = null;
             if (inf != null)
             {
                 inftag = CraftingDatabase.AllBaseItems[BenchItem.SourceData].item_class_properties[EnumConverter.InfToTag(inf.Value)];
             }
-            if (count == 1)
+            ItemCraft dummy = BenchItem.Copy();
+            if (inftag != null)
+                dummy.LiveTags.Add(inftag);
+            dummy.Rarity = targetrarity;
+            IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, BaseValidMods);
+            if (inf != null)
+                validatedpool = ModLogic.FilterForInfluence(validatedpool, inf.Value);
+            if (validatedpool.Count == 0)
+                return false;
+            ApplyCurrency((item) =>
             {
                 if (inftag != null)
-                    BenchItem.LiveTags.Add(inftag);
-                BenchItem.Rarity = targetrarity;
-                IDictionary<PoEModData, int> pool = ModLogic.FindValidMods(BenchItem, BaseValidMods);
-                success = ModLogic.RollAddMod(BenchItem, pool, inf);
-                if (BenchItem.QualityType != null)
-                    BenchItem.BaseQuality -= qualityconsumed;
-                DoPostRoll(BenchItem, pool);
+                    item.LiveTags.Add(inftag);
+                item.Rarity = targetrarity;
+                IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
+                ModLogic.RollAddMod(item, poolcopy);
+                if (item.QualityType != null)
+                    item.BaseQuality -= qualityconsumed;
+                DoPostRoll(item, poolcopy);
                 if (rename)
-                    BenchItem.GenerateName();
-            }
-            else
-            {
-                MassResults.Clear();
-                ItemCraft dummy = BenchItem.Copy();
-                if (inftag != null)
-                    dummy.LiveTags.Add(inftag);
-                dummy.Rarity = targetrarity;
-                //FindValidMods is very expensive, so do it once here and pass prevalidated : true to RerollItem
-                IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, BaseValidMods);
-                for (int n = 0; n < count; n++)
-                {
-                    ItemCraft target = dummy.Copy();
-                    //Pass a copy of dict because RollAddMod is destructive
-                    IDictionary<PoEModData, int> poolcopy = new Dictionary<PoEModData, int>(validatedpool);
-                    success = ModLogic.RollAddMod(target, poolcopy, inf);
-                    if (target.QualityType != null)
-                        target.BaseQuality -= qualityconsumed;
-                    DoPostRoll(target, poolcopy);
-                    if (rename)
-                        BenchItem.GenerateName();
-                    MassResults.Add(target);
-                }
-            }
-            return success;
+                    item.GenerateName();
+            }, count);
+            return true;
         }
         public string ApplyEssence(PoEEssenceData ess, int tries = 1)
         {
@@ -365,35 +353,42 @@ namespace PoETheoryCraft
                 case "Orb of Annulment":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    res = BenchItem.RemoveRandomMod() ? null : "No mods can be removed";
-                    if (res != null)
-                        return res;
-                    if (BenchItem.QualityType != null)
-                        BenchItem.BaseQuality -= 20;
+                    ApplyCurrency((item) =>
+                    {
+                        item.RemoveRandomMod();
+                        if (item.QualityType != null)
+                            item.BaseQuality -= 20;
+                    }, tries);
                     break;
                 case "Divine Orb":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    res = BenchItem.RerollExplicits() ? null : "No mods can be rerolled";
-                    if (res != null)
-                        return res;
+                    ApplyCurrency((item) =>
+                    {
+                        item.RerollExplicits();
+                    }, tries);
                     break;
                 case "Blessed Orb":
-                    res = BenchItem.RerollImplicits() ? null : "No mods can be rerolled";
-                    if (res != null)
-                        return res;
+                    ApplyCurrency((item) =>
+                    {
+                        item.RerollImplicits();
+                    }, tries);
                     break;
                 case "Orb of Scouring":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    BenchItem.ClearMods();
-                    BenchItem.Rarity = BenchItem.GetMinimumRarity();
-                    BenchItem.GenerateName();
+                    ApplyCurrency((item) =>
+                    {
+                        item.ClearMods();
+                        item.Rarity = item.GetMinimumRarity();
+                        item.GenerateName();
+                    }, tries);
                     break;
                 case "Remove Crafted Mods":
-                    res = BenchItem.ClearCraftedMods() ? null : "No crafted mods to remove";
-                    if (res != null)
-                        return res;
+                    ApplyCurrency((item) =>
+                    {
+                        item.ClearCraftedMods();
+                    }, tries);
                     break;
                 case "Abrasive Catalyst":
                 case "Fertile Catalyst":
@@ -407,7 +402,10 @@ namespace PoETheoryCraft
                         return "Invalid item type for catalysts";
                     if (BenchItem.QualityType == c && BenchItem.BaseQuality >= 20)
                         return "Item already has max catalyst quality";
-                    BenchItem.ApplyCatalyst(c);
+                    ApplyCurrency((item) =>
+                    {
+                        item.ApplyCatalyst(c);
+                    }, tries);
                     break;
                 default:
                     return "Unrecognized currency selected";

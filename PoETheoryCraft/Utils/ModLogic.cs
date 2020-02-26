@@ -197,41 +197,14 @@ namespace PoETheoryCraft.Utils
                 return ChooseMod(mods);
         }
         //adds one mod from basemods to item, updates rarity, destructively modifies basemods to reflect new rollable pool, returns false if no mod was able to be added
-        public static bool RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemInfluence? inf = null)
+        public static void RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods)
         {
-            PoEModData mod = ChooseMod(basemods, inf);
+            PoEModData mod = ChooseMod(basemods);
             if (mod != null)
             {
                 AddModAndTrim(item, basemods, mod);
-                return true;
             }
-            return false;
         }
-        //adds one influenced mod from basemods to item, returns trimmed pool of influenced mods
-        //public static IDictionary<PoEModData, int> RollAddInfMod(ItemCraft item, IDictionary<PoEModData, int> basemods, ItemInfluence inf)
-        //{
-        //    PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[item.SourceData];
-        //    string inftag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
-        //    if (inftag == null)
-        //        return false;
-        //    item.LiveTags.Add(inftag);
-        //    ISet<string> tagstoadd = new HashSet<string>();
-        //    IDictionary<PoEModData, int> mods = FindValidMods(item, basemods);
-        //    IDictionary<PoEModData, int> infmods = FilterForInfluence(mods, inf, itemtemplate);
-        //    foreach (string s in tagstoadd)
-        //    {
-        //        item.LiveTags.Add(s);
-        //    }
-        //    PoEModData fmod = ChooseMod(infmods);
-        //    if (fmod != null)
-        //    {
-        //        item.AddMod(fmod);
-        //        return true;
-        //    }
-        //    item.LiveTags.Remove(inftag);   //undo influence if no valid mod found
-        //    return false;
-        //}
-        //Returns subset of dict containing mods of given influence for given item type
         public static IDictionary<PoEModData, int> FilterForInfluence(IDictionary<PoEModData, int> dict, ItemInfluence inf)
         {
             IDictionary<PoEModData, int> filtereddict = new Dictionary<PoEModData, int>();
@@ -245,22 +218,6 @@ namespace PoETheoryCraft.Utils
             }
             return filtereddict;
         }
-        ////returns the influence type of the mod (or null), which technically COULD depend on the item base, even if it doesn't currently
-        //public static ItemInfluence? GetInfluence(PoEModData mod, PoEBaseItemData item)
-        //{
-        //    foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
-        //    {
-        //        string inftag = item.item_class_properties[EnumConverter.InfToTag(inf)];
-        //        foreach (PoEModWeight w in mod.spawn_weights)
-        //        {
-        //            if (w.tag == inftag && w.weight > 0)
-        //                return inf;
-        //        }
-        //    }
-        //    return null;
-        //}
-        //Starts from db and checks only the item template's domain and tags, used for pruning so we check against ~300 mods per roll instead of ~3000
-        //ignoredomain used for forced fossil mods from "delve" domain, only filtering them by spawn weight based on tags and base item
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
@@ -330,15 +287,14 @@ namespace PoETheoryCraft.Utils
             return mods;
         }
         //picks from a dictionary of mod templates and weights
-        private static PoEModData ChooseMod(IDictionary<PoEModData, int> mods, ItemInfluence? inf = null)
+        private static PoEModData ChooseMod(IDictionary<PoEModData, int> mods)
         {
-            IDictionary<PoEModData, int> targetmods = (inf == null) ? mods : FilterForInfluence(mods, inf.Value);
-            int totalweight = targetmods.Values.Sum();
+            int totalweight = mods.Values.Sum();
             int roll = RNG.Gen.Next(totalweight);
             int counter = 0;
-            foreach (PoEModData mod in targetmods.Keys)
+            foreach (PoEModData mod in mods.Keys)
             {
-                counter += targetmods[mod];
+                counter += mods[mod];
                 if (counter > roll)
                 {
                     //Debug.Write("rolled " + roll + " out of " + totalweight + ", ");
