@@ -59,7 +59,7 @@ namespace PoETheoryCraft
             BigBox.Foreground = Brushes.Red;
             RepeatCountBox.Max = Properties.Settings.Default.BulkCraftLimit;
             RepeatCountBox.TextChanged += CheckRepeatCount;
-            RepeatCountBox.Text = "100";
+            RepeatCountBox.Text = "10000";
         }
         private void ItemBaseButton_Click(object sender, RoutedEventArgs e)
         {

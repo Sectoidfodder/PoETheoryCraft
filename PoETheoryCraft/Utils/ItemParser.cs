@@ -13,11 +13,42 @@ namespace PoETheoryCraft.Utils
      */
     public class ItemCraftComparer : IComparer<ItemCraft>
     {
+        private struct ItemParams
+        {
+            public ItemProperties Properties;
+            public IDictionary<string, double> Stats;
+        }
+        //Cache for each item encountered by this compararer, so the expensive functions only get called once per item
+        private readonly IDictionary<ItemCraft, ItemParams> Cache = new Dictionary<ItemCraft, ItemParams>();
         public string Key { get; set; }
         public int Compare(ItemCraft x, ItemCraft y)
         {
-            double? vx = ItemParser.GetValueByName(Key, x, ItemParser.ParseProperties(x), ItemParser.ParseItem(x));
-            double? vy = ItemParser.GetValueByName(Key, y, ItemParser.ParseProperties(y), ItemParser.ParseItem(y));
+            ItemProperties props;
+            IDictionary<string, double> stats;
+            if (Cache.ContainsKey(x))
+            {
+                props = Cache[x].Properties;
+                stats = Cache[x].Stats;
+            }
+            else
+            {
+                props = ItemParser.ParseProperties(x);
+                stats = ItemParser.ParseItem(x);
+                Cache.Add(x, new ItemParams() { Properties = props, Stats = stats });
+            }
+            double? vx = ItemParser.GetValueByName(Key, x, props, stats);
+            if (Cache.ContainsKey(y))
+            {
+                props = Cache[y].Properties;
+                stats = Cache[y].Stats;
+            }
+            else
+            {
+                props = ItemParser.ParseProperties(y);
+                stats = ItemParser.ParseItem(y);
+                Cache.Add(y, new ItemParams() { Properties = props, Stats = stats });
+            }
+            double? vy = ItemParser.GetValueByName(Key, y, props, stats);
             if (vx != null)
             {
                 if (vy != null)

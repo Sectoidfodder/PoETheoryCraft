@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PoETheoryCraft.Controls;
 using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Utils;
 
@@ -121,11 +122,25 @@ namespace PoETheoryCraft
             else
             {
                 MassResults.Clear();
-                for (int n = 0; n < count; n++)
+                if (count > 10000)
                 {
-                    ItemCraft copy = BenchItem.Copy();
-                    action(copy);
-                    MassResults.Add(copy);
+                    ProgressDialog p = new ProgressDialog() { Steps = count, ReportStep = Math.Max(count / 100, 1) };
+                    p.Increment = () =>
+                    {
+                        ItemCraft copy = BenchItem.Copy();
+                        action(copy);
+                        MassResults.Add(copy);
+                    };
+                    p.ShowDialog();
+                }
+                else
+                {
+                    for (int n = 0; n < count; n++)
+                    {
+                        ItemCraft copy = BenchItem.Copy();
+                        action(copy);
+                        MassResults.Add(copy);
+                    }
                 }
             }
         }

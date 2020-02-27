@@ -133,7 +133,7 @@ namespace PoETheoryCraft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50001")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100001")]
         public int BulkCraftLimit {
             get {
                 return ((int)(this["BulkCraftLimit"]));

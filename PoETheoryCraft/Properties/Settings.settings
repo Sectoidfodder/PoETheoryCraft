@@ -30,7 +30,7 @@
       <Value Profile="(Default)">25</Value>
     </Setting>
     <Setting Name="BulkCraftLimit" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50001</Value>
+      <Value Profile="(Default)">100001</Value>
     </Setting>
     <Setting Name="CatalystEffect" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
