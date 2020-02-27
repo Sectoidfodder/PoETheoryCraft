@@ -25,7 +25,9 @@ namespace PoETheoryCraft.Controls
     {
         private UIElement MouseTarget;
         public event EventHandler ItemClick;
+        public event EventHandler ItemEdited;
         public ItemCraft SourceItem { get; private set; }
+        public bool AllowEdit { get; set; } = false;
         public ItemView()
         {
             InitializeComponent();
@@ -75,7 +77,16 @@ namespace PoETheoryCraft.Controls
                     TextBlock affix = new TextBlock() { FontWeight = FontWeights.Bold, Foreground = Brushes.DarkGray, Text = header };
                     DockPanel.SetDock(affix, Dock.Right);
                     dock.Children.Add(affix);
-
+                    if (AllowEdit)
+                    {
+                        Button lockbutton = new Button() { Width = 20, Tag = m };
+                        Image lockimg = new Image { Source = m.IsLocked ? Icons.Lock : Icons.Unlock };
+                        lockbutton.Content = lockimg;
+                        lockbutton.Background = m.IsLocked ? Brushes.Red : Brushes.Green;
+                        lockbutton.Click += LockButton_Click;
+                        DockPanel.SetDock(lockbutton, Dock.Left);
+                        dock.Children.Add(lockbutton);
+                    }
                     StackPanel sp = new StackPanel();
                     IList<string> statlines= m.ToString().Split('\n');
                     foreach (string s in statlines)
@@ -118,6 +129,14 @@ namespace PoETheoryCraft.Controls
             tb.MouseLeave += Mouse_Revert;
             tb.MouseDown += Mouse_Down;
             tb.MouseUp += Mouse_Up;
+        }
+        private void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModCraft m = (ModCraft)((Button)sender).Tag;
+            m.IsLocked = !m.IsLocked;
+            ((Image)((Button)sender).Content).Source = m.IsLocked ? Icons.Lock : Icons.Unlock;
+            ((Button)sender).Background = m.IsLocked ? Brushes.Red : Brushes.Green;
+            ItemEdited?.Invoke(this, EventArgs.Empty);
         }
         private void Mouse_Revert(object sender, MouseEventArgs e)
         {

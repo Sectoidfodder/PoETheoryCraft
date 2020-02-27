@@ -29,6 +29,8 @@ namespace PoETheoryCraft
         private readonly CraftingBench Bench;
         public MainWindow()
         {
+            Icons.LoadImages();
+
             InitializeComponent();
 
             //must be done first so mod templates are translated as they're loaded
@@ -50,6 +52,8 @@ namespace PoETheoryCraft
             ModPreview.Currency = CurrencyBox;
             CurrencyTally.ItemsSource = Bench.CurrencySpent;
 
+            PostCraftButton.Content = new Image() { Source = Icons.Plus };
+            SearchButton.Content = new Image() { Source = Icons.Search };
             BigBox.Text = "";
             BigBox.FontWeight = FontWeights.Bold;
             BigBox.Foreground = Brushes.Red;
@@ -304,6 +308,25 @@ namespace PoETheoryCraft
             TextBlock tb = (TextBlock)sender;
             string sortby = tb.Tag != null ? "[property] " + tb.Tag : ItemParser.ParseLine(tb.Text.Split('\n')[0]).Key;
             RepeatResults.SortBy = sortby;
+        }
+        private void BenchMove_Click(object sender, EventArgs e)
+        {
+            ItemCraft item = ((MenuItem)sender).Tag as ItemCraft;
+            bool samebase = item != null && Bench.BenchItem != null && item.SourceData == Bench.BenchItem.SourceData;
+
+            Bench.BenchItem = item.Copy();
+            ItemSlot.UpdateData(Bench.BenchItem);
+            ModPreview.UpdatePreviews();
+            if (!samebase)
+            {
+                ModPreview.UpdateCrafts();
+                Bench.PostRoll = new PostRollOptions();
+                PostCraftButton.ClearValue(Button.BackgroundProperty);
+            }
+        }
+        private void BenchItem_Edited(object sender, EventArgs e)
+        {
+            ModPreview.UpdatePreviews();
         }
         private void CheckRepeatCount(object sender, RoutedEventArgs e)
         {

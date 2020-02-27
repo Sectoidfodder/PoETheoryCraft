@@ -32,7 +32,7 @@
             <Button Width="150" Name="ItemBaseButton" Click="ItemBaseButton_Click">Pick Item Base</Button>
         </StackPanel>
         
-        <uc:ItemView Grid.Row="2" x:Name="ItemSlot" ItemClick="ItemParam_Click"></uc:ItemView>
+        <uc:ItemView Grid.Row="2" x:Name="ItemSlot" AllowEdit="True" ItemClick="ItemParam_Click" ItemEdited="BenchItem_Edited"></uc:ItemView>
         <DockPanel Grid.Row="3" Width="310" MaxHeight="210">
             <TextBlock DockPanel.Dock="Top">Currency Spent:</TextBlock>
             <Button DockPanel.Dock="Bottom" Width="100" Click="CurrencyTally_Clear">Reset</Button>
@@ -58,7 +58,7 @@
         
         <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
         <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click">+</Button>
+            <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click"></Button>
             <Button Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
         </StackPanel>
         <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Name="BigBox">Status Text</TextBox>
@@ -79,9 +79,9 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <uc:BulkItemsView x:Name="RepeatResults" ItemClick="ItemParam_Click"/>
+                    <uc:BulkItemsView x:Name="RepeatResults" ItemClick="ItemParam_Click" BenchMoveClick="BenchMove_Click"/>
                     <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button Width="20" Name="SearchButton" Click="Search_Click">S</Button>
+                        <Button Width="20" Name="SearchButton" Click="Search_Click"></Button>
                         <Button Width="100" Name="RepeatButton" Click="Repeat_Click">Try Currency</Button>
                         <TextBlock Margin="5,0,5,0" FontWeight="Bold">x</TextBlock>
                         <uc:NumberBox Min="1" Width="35" x:Name="RepeatCountBox"></uc:NumberBox>

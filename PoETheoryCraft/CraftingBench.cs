@@ -26,17 +26,18 @@ namespace PoETheoryCraft
             {
                 if (value != null)
                 {
+                    //if base type changed, update basevalidmods
                     if (_benchitem == null || _benchitem.SourceData != value.SourceData)
                     {
                         PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[value.SourceData];
                         BaseValidMods = ModLogic.FindBaseValidMods(itemtemplate, CraftingDatabase.CoreMods.Values);
-                        _benchitem = value;
                     }
                 }
                 else
                 {
                     BaseValidMods.Clear();
                 }
+                _benchitem = value;
             }
         }
         public IList<ItemCraft> MassResults { get; } = new List<ItemCraft>();   //storage for mass crafting results
@@ -45,7 +46,8 @@ namespace PoETheoryCraft
         {
             CurrencySpent = new Dictionary<string, int>();
         }
-        public string ForceAddMod(PoEModData mod, ItemCraft target = null, IDictionary<string, int> costs = null)
+        //Adds a mod directly to target item (or bench item) if legal; updates costs if provided; modifies mod pool accordingly if provided
+        public string ForceAddMod(PoEModData mod, ItemCraft target = null, IDictionary<string, int> costs = null, IDictionary<PoEModData, int> pool = null)
         {
             target = target ?? BenchItem;
             if (mod.generation_type == ModLogic.Prefix)
@@ -92,11 +94,15 @@ namespace PoETheoryCraft
                     break;
                 }
             }
-            target.AddMod(mod);
+            //if a mod pool is provided, updated it accordingly, otherwise just add the mod directly
+            if (pool != null)
+                ModLogic.AddModAndTrim(target, pool, mod);
+            else
+                target.AddMod(mod);
             ItemRarity newrarity = target.GetMinimumRarity();
             if (newrarity > target.Rarity)
                 target.Rarity = newrarity;
-            if (costs != null)
+            if (costs != null && target == BenchItem)
             {
                 foreach (string s in costs.Keys)
                 {
@@ -105,6 +111,7 @@ namespace PoETheoryCraft
             }
             return null;
         }
+        //Performs an action once on BenchItem, or many times on copies of it to build mass results
         private void ApplyCurrency(CurrencyAction action, int count)
         {
             if (count == 1)
@@ -167,7 +174,6 @@ namespace PoETheoryCraft
                 ModLogic.RollAddMod(item, poolcopy);
                 if (item.QualityType != null)
                     item.BaseQuality -= qualityconsumed;
-                DoPostRoll(item, poolcopy);
                 if (rename)
                     item.GenerateName();
             }, count);
@@ -390,6 +396,13 @@ namespace PoETheoryCraft
                         item.ClearCraftedMods();
                     }, tries);
                     break;
+                case "Do Nothing":
+                    IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(BenchItem, BaseValidMods);
+                    ApplyCurrency((item) => 
+                    {
+                        DoPostRoll(item, new Dictionary<PoEModData, int>(validatedpool));
+                    }, tries);
+                    break;
                 case "Abrasive Catalyst":
                 case "Fertile Catalyst":
                 case "Imbued Catalyst":
@@ -411,7 +424,14 @@ namespace PoETheoryCraft
                     return "Unrecognized currency selected";
             }
             if (tries == 1)
-                TallyCurrency(currency.key, 1);
+            {
+                string currencykey = currency.key;
+                if (currencykey == "RemoveCraftedMods")
+                    currencykey = "Metadata/Items/Currency/CurrencyConvertToNormal";
+                if (currencykey != "DoNothing")
+                    TallyCurrency(currency.key, 1);
+            }
+                
             return null;
         }
         private string ApplyInfExalt(ItemInfluence inf, int tries)
@@ -445,7 +465,7 @@ namespace PoETheoryCraft
             {
                 foreach (KeyValuePair<PoEModData, IDictionary<string, int>> kv in PostRoll.TryCrafts)
                 {
-                    string ret = ForceAddMod(kv.Key, item, kv.Value);
+                    string ret = ForceAddMod(kv.Key, item, kv.Value, pool);
                     if (ret == null)
                         break;
                 }

@@ -84,7 +84,7 @@ namespace PoETheoryCraft.Utils
         }
 
         //Adds mod to item, destructively modifies basemods to reflect the new rollable pool
-        private static void AddModAndTrim(ItemCraft item, IDictionary<PoEModData, int> basemods, PoEModData mod)
+        public static void AddModAndTrim(ItemCraft item, IDictionary<PoEModData, int> basemods, PoEModData mod)
         {
             ISet<string> newtags = new HashSet<string>(mod.adds_tags);
             ISet<string> oldtags = new HashSet<string>(item.LiveTags);
@@ -218,6 +218,7 @@ namespace PoETheoryCraft.Utils
             }
             return filtereddict;
         }
+        //returns all valid mods for the given base item template, covering all possible influences
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();

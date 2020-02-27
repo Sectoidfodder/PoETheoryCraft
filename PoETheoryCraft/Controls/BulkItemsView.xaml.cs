@@ -60,6 +60,7 @@ namespace PoETheoryCraft.Controls
             }
         }
         public event EventHandler ItemClick;
+        public event EventHandler BenchMoveClick;
         private IList<ItemCraft> _items;
         public IList<ItemCraft> Items 
         { 
@@ -119,6 +120,9 @@ namespace PoETheoryCraft.Controls
                         ItemView panel = new ItemView();
                         panel.UpdateData(FilteredItems[k]);
                         panel.ItemClick += ChildItem_Click;
+                        MenuItem menumove = new MenuItem() { Header = "Move to Bench", Tag = panel.SourceItem };
+                        menumove.Click += BenchMove_Click;
+                        panel.ContextMenu.Items.Add(menumove);
                         ContentBox.Children.Add(panel);
                     }
                 }
@@ -135,6 +139,10 @@ namespace PoETheoryCraft.Controls
                 SortIndicator.Text = "Sorting by " + (_sortasc ? ">" : "<") + " : " + SortBy.Replace("[property] ", "") + " (click again to reverse)";
             else
                 SortIndicator.Text = "Click on any stat to sort";
+        }
+        private void BenchMove_Click(object sender, EventArgs e)
+        {
+            BenchMoveClick?.Invoke(sender, e);
         }
         private void ChildItem_Click(object sender, EventArgs e)
         {

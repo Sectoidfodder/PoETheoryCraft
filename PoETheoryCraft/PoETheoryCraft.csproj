@@ -121,6 +121,7 @@
     <Compile Include="DataClasses\PoEEssenceData.cs" />
     <Compile Include="DataClasses\PoEFossilData.cs" />
     <Compile Include="Utils\FilterEvaluator.cs" />
+    <Compile Include="Utils\Icons.cs" />
     <Compile Include="Utils\ItemParser.cs" />
     <Compile Include="Utils\ModLogic.cs" />
     <Compile Include="Utils\RNG.cs" />
@@ -734,6 +735,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Icons\currency\VaalOrb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\lock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Icons\plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Icons\unlock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icons\currency\DoNothing.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
