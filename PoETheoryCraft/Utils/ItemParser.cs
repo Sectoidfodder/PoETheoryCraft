@@ -67,6 +67,38 @@ namespace PoETheoryCraft.Utils
     }
     public static class ItemParser
     {
+        public static List<double> GetSortedValues(IList<ItemCraft> items, string s, double defaultvalue = 0)
+        {
+            List<double> values = new List<double>();
+            foreach (ItemCraft item in items)
+            {
+                InsertSorted(GetValueByName(s, item, ParseProperties(item), ParseItem(item)) ?? defaultvalue, values, 0, values.Count);
+            }
+            return values;
+        }
+        private static void InsertSorted(double d, List<double> values, int first, int last)
+        {
+            if (values.Count == 0)
+            {
+                values.Add(d);
+            }
+            else if (d <= values[first])
+            {
+                values.Insert(first, d);
+            }
+            else if (d >= values[last - 1])
+            {
+                values.Insert(last, d);
+            }
+            else
+            {
+                int mid = first + (last - first) / 2;
+                if (d >= values[mid])
+                    InsertSorted(d, values, mid, last);
+                else
+                    InsertSorted(d, values, first, mid);
+            }
+        }
         public static double? GetValueByName(string s, ItemCraft item, ItemProperties props, IDictionary<string, double> stats)
         {
             if (s.IndexOf("[property]") == 0)

@@ -21,6 +21,7 @@ namespace PoETheoryCraft.Controls
     /// </summary>
     public partial class BulkItemsView : UserControl
     {
+        private StatGraphs GraphsWindow;
         private int DisplayIndex = 0;
         public static int ResultsPerPage { get; set; } = Properties.Settings.Default.ResultsPerPage;
         private bool _sortasc = true;
@@ -39,9 +40,19 @@ namespace PoETheoryCraft.Controls
                 {
                     _sortasc = !_sortasc;
                 }
-                DisplayIndex = 0;
-                SortAndFilter();
-                UpdateDisplay();
+                if (_sortby != null && FilteredItems != null)
+                {
+                    if (GraphsWindow == null || !GraphsWindow.IsLoaded)
+                    {
+                        GraphsWindow = new StatGraphs();
+                        GraphsWindow.Show();
+                    }
+                    List<double> sortedv = ItemParser.GetSortedValues(FilteredItems, _sortby);
+                    GraphsWindow.UpdateData(sortedv, _sortby);
+                }
+                //DisplayIndex = 0;
+                //SortItems();
+                //UpdateDisplay();
             }
         }
         private FilterCondition _filter;
@@ -54,7 +65,8 @@ namespace PoETheoryCraft.Controls
                 {
                     _filter = value;
                     DisplayIndex = 0;
-                    SortAndFilter();
+                    FilterItems();
+                    SortItems();
                     UpdateDisplay();
                 }
             }
@@ -70,7 +82,8 @@ namespace PoETheoryCraft.Controls
                 _items = value;
                 _sortby = null;
                 DisplayIndex = 0;
-                SortAndFilter();
+                FilterItems();
+                SortItems();
                 UpdateDisplay();
             }
         }
@@ -80,12 +93,10 @@ namespace PoETheoryCraft.Controls
             InitializeComponent();
             SortIndicator.Text = "Click on any stat to sort";
         }
-        public void SortAndFilter()
+        private void FilterItems()
         {
             FilteredItems = Items;
-            if (FilteredItems == null)
-                return;
-            if (Filter != null)
+            if (FilteredItems != null && Filter != null)
             {
                 FilteredItems = new List<ItemCraft>();
                 foreach (ItemCraft item in Items)
@@ -96,12 +107,15 @@ namespace PoETheoryCraft.Controls
                         FilteredItems.Add(item);
                 }
             }
-            if (SortBy != null)
-            {
-                ((List<ItemCraft>)FilteredItems).Sort(new ItemCraftComparer() { Key = SortBy });
-                if (_sortasc)
-                    ((List<ItemCraft>)FilteredItems).Reverse();
-            }
+        }
+        private void SortItems()
+        {
+            //if (SortBy != null)
+            //{
+            //    ((List<ItemCraft>)FilteredItems).Sort(new ItemCraftComparer() { Key = SortBy });
+            //    if (_sortasc)
+            //        ((List<ItemCraft>)FilteredItems).Reverse();
+            //}
         }
         public void UpdateDisplay()
         {

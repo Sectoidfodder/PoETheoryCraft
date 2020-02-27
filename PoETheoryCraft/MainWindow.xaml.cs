@@ -165,14 +165,6 @@ namespace PoETheoryCraft
                     Bench.BenchItem.BaseQuality = n1;
                     ItemSlot.UpdateData(Bench.BenchItem);
                 }
-                if (Bench.MassResults != null && Bench.MassResults.Count > 0) { 
-                    foreach (ItemCraft item in Bench.MassResults)
-                    {
-                        item.BaseQuality = n1;
-                    }
-                    RepeatResults.SortAndFilter();
-                    RepeatResults.UpdateDisplay();
-                }
             }
             Properties.Settings.Default.Save();
         }
@@ -224,6 +216,7 @@ namespace PoETheoryCraft
             }
             if (res == null)
             {
+                RepeatResults.SortBy = null;
                 RepeatResults.Items = Bench.MassResults;
             }
         }
