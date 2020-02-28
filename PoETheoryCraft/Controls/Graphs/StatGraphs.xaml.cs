@@ -38,7 +38,7 @@ namespace PoETheoryCraft.Controls.Graphs
             CurrencyText.Text = s.Trim(new char[]{ ',',' '});
             if (filter == null)
             {
-                FilterText.Text = "Filter: None";
+                FilterText.Text = "None";
             }
             else
             {

@@ -10,6 +10,7 @@
         <local:CostsToDisplayConverter x:Key="CostsToDisplayConverter" />
         <local:ModDataToTooltipConverter x:Key="ModDataToTooltipConverter" />
         <local:ShouldExpandConverter x:Key="ShouldExpandConverter" />
+        <local:ModDataToBrushConverter x:Key="ModDataToBrushConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,7 +32,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="PrefixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -69,8 +70,8 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}" Background="Beige">
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}" ToolTip="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"></StackPanel>
@@ -100,7 +101,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="SuffixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -138,8 +139,8 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="Aqua" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}" Background="Beige">
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}"  ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"></StackPanel>

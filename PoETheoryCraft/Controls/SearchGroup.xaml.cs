@@ -102,7 +102,7 @@ namespace PoETheoryCraft.Controls
             Grid g = new Grid();
             g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
             g.ColumnDefinitions.Add(new ColumnDefinition());
-            Button b = new Button() { Content = "X", Width = 20 };
+            Button b = new Button() { Content = "X", Width = 20, Height = 20 };
             b.Click += RemoveGroup_Click;
             Grid.SetColumn(b, 0);
             g.Children.Add(b);
@@ -133,7 +133,7 @@ namespace PoETheoryCraft.Controls
                     if (lines[i].Label != null && lines[i].Value1 != null && !c.Weights.ContainsKey(lines[i].Label))
                         c.Weights.Add(lines[i].Label, lines[i].Value1.Value);
                 }
-                return c;
+                return c.Weights.Count > 0 ? c : null;
             }
             else
             {
@@ -145,7 +145,11 @@ namespace PoETheoryCraft.Controls
                         subconditions.Add(new ClampCondition() { Template = lines[i].Label, Min = lines[i].Value1, Max = lines[i].Value2 });
                     }
                 }
-                if (Type == GroupType.And)
+                if (subconditions.Count == 0)
+                {
+                    return null;
+                }
+                else if (Type == GroupType.And)
                 {
                     return new AndCondition() { Subconditions = subconditions };
                 }
@@ -195,7 +199,7 @@ namespace PoETheoryCraft.Controls
             Grid g = new Grid();
             g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
             g.ColumnDefinitions.Add(new ColumnDefinition());
-            Button b = new Button() { Content = "X", Width = 20 };
+            Button b = new Button() { Content = "X", Width = 20, Height = 20 };
             b.Click += RemoveRow_Click;
             Grid.SetColumn(b, 0);
             g.Children.Add(b);

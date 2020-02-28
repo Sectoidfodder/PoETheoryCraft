@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Utils;
 
@@ -140,6 +133,33 @@ namespace PoETheoryCraft.Controls
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ModDataToBrushConverter : IValueConverter
+    {
+        private static readonly SolidColorBrush WarlordBrush = new SolidColorBrush(Color.FromRgb(255, 255, 120));
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            PoEModData data = value as PoEModData;
+            if (data.name == "Subterranean" || data.name == "of the Underground")
+                return Brushes.Gold;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Shaper).Contains(data.name))
+                return Brushes.DodgerBlue;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Elder).Contains(data.name))
+                return Brushes.Gray;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Redeemer).Contains(data.name))
+                return Brushes.LightBlue;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Hunter).Contains(data.name))
+                return Brushes.LightGreen;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Warlord).Contains(data.name))
+                return WarlordBrush;
+            if (Utils.EnumConverter.InfToNames(ItemInfluence.Crusader).Contains(data.name))
+                return Brushes.Pink;
+            return Brushes.Transparent;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
