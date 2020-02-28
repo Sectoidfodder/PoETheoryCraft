@@ -27,13 +27,19 @@
       <Value Profile="(Default)">28</Value>
     </Setting>
     <Setting Name="ResultsPerPage" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">25</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="BulkCraftLimit" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100001</Value>
     </Setting>
     <Setting Name="CatalystEffect" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ExpandGroups" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProgressBarThreshold" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

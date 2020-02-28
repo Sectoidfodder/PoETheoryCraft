@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PoETheoryCraft.Controls;
 using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Utils;
@@ -122,9 +119,9 @@ namespace PoETheoryCraft
             else
             {
                 MassResults.Clear();
-                if (count > 10000)
+                if (count > Properties.Settings.Default.ProgressBarThreshold)
                 {
-                    ProgressDialog p = new ProgressDialog() { Steps = count, ReportStep = Math.Max(count / 100, 1) };
+                    ProgressDialog p = new ProgressDialog() {Title = "Rolling...", Steps = count, ReportStep = Math.Max(count / 100, 1) };
                     p.Increment = () =>
                     {
                         ItemCraft copy = BenchItem.Copy();

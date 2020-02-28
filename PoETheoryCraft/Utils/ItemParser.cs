@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using PoETheoryCraft.Controls;
 using PoETheoryCraft.DataClasses;
 
 namespace PoETheoryCraft.Utils
@@ -70,9 +68,23 @@ namespace PoETheoryCraft.Utils
         public static List<double> GetSortedValues(IList<ItemCraft> items, string s, double defaultvalue = 0)
         {
             List<double> values = new List<double>();
-            foreach (ItemCraft item in items)
+            if (items.Count > Properties.Settings.Default.ProgressBarThreshold)
             {
-                InsertSorted(GetValueByName(s, item, ParseProperties(item), ParseItem(item)) ?? defaultvalue, values, 0, values.Count);
+                int i = 0;
+                ProgressDialog p = new ProgressDialog() { Title = "Processing...", Steps = items.Count, ReportStep = Math.Max(items.Count / 100, 1) };
+                p.Increment = () =>
+                {
+                    InsertSorted(GetValueByName(s, items[i], ParseProperties(items[i]), ParseItem(items[i])) ?? defaultvalue, values, 0, values.Count);
+                    i++;
+                };
+                p.ShowDialog();
+            }
+            else
+            {
+                foreach (ItemCraft item in items)
+                {
+                    InsertSorted(GetValueByName(s, item, ParseProperties(item), ParseItem(item)) ?? defaultvalue, values, 0, values.Count);
+                }
             }
             return values;
         }
@@ -119,7 +131,7 @@ namespace PoETheoryCraft.Utils
                     case "Physical Damage":
                         return ((double)props.physical_damage_min + props.physical_damage_max) / 2;
                     case "Critical Strike Chance":
-                        return props.critical_strike_chance;
+                        return (double)props.critical_strike_chance / 100;
                     case "Attack Speed":
                         return (double)1000 / props.attack_time;
                     case "Physical DPS":
@@ -299,13 +311,21 @@ namespace PoETheoryCraft.Utils
             }
             return tr;
         }
+        public static string ReplaceFirst(string s, string target, string newtext)
+        {
+            int n = s.IndexOf(target);
+            if (n < 0)
+                return s;
+            else
+                return s.Substring(0, n) + newtext + s.Substring(n + target.Length);
+        }
         public static KeyValuePair<string, double> ParseLine(string s)
         {
             string rexpr = @"(\d+\.?\d*)\s+to\s+(\d+\.?\d*)";
             Match m = Regex.Match(s, rexpr);
             if (m.Success)
             {
-                string t = s.Replace(m.Value, "#");
+                string t = ReplaceFirst(s, m.Value, "#");
                 double v = (double.Parse(m.Groups[1].ToString()) + double.Parse(m.Groups[2].ToString())) / 2;
                 return new KeyValuePair<string, double>(t, v);
             }
@@ -313,7 +333,7 @@ namespace PoETheoryCraft.Utils
             m = Regex.Match(s, expr);
             if (m.Success)
             {
-                string t = s.Replace(m.Groups[1].ToString(), "#");
+                string t = ReplaceFirst(s, m.Groups[1].ToString(), "#");
                 double v = double.Parse(m.Groups[1].ToString());
                 if (t.Contains("-#"))
                 {

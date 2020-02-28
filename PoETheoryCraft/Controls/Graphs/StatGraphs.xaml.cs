@@ -25,7 +25,7 @@ namespace PoETheoryCraft.Controls.Graphs
         {
             InitializeComponent();
 
-            Title = "Plotting ";
+            Title = "";
             if (dat.Count == total)
                 Title += total + " items";
             else

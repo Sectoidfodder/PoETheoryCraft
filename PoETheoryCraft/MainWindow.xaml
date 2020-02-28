@@ -58,8 +58,8 @@
         
         <uc:CurrencySelector Grid.Row="4" x:Name="CurrencyBox" CurrencySelectionChanged="Currency_SelectionChanged"></uc:CurrencySelector>
         <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click"></Button>
             <Button Width="150" Name="CraftButton" HorizontalAlignment="Left" Click="CraftButton_Click">Apply Currency</Button>
+            <Button Width="20" Name="PostCraftButton" Click="PostCraftButton_Click"></Button>
         </StackPanel>
         <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Name="BigBox">Status Text</TextBox>
         <TabControl Grid.Column="1" Grid.Row="2" Grid.RowSpan="4">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoETheoryCraft.Controls"
         mc:Ignorable="d"
-        Title="Rolling..." Height="130" Width="300"
+        Title="" Height="130" Width="300"
         ContentRendered="Do_Task" Closed="Stop_Task">
     <Grid>
         <Grid.RowDefinitions>

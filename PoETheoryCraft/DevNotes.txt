@@ -1,9 +1,21 @@
-﻿> added "fill affixes" post-craft option for alt-aug or metacrafting
+﻿
 
-> progress bar for mass craft
-> continuous crafting
-> locking affixes
-> force removing affixes
+v0.3.0 Changelog:
+
+Function:
+Can now graph the distribution of any mod stat, item property, or weighted total that you specify.
+Added most pseudo-stats from the official trade site to filter options.
+
+Simulation:
+Significantly improved mass-sim speed when different mod groups rarely interact.  That's most cases aside from weapons and jewels.
+Added option to fill prefixes/suffixes, for simulating metacrafting or alt-aug rolling.
+Enabled manually locking affixes, for scuffed Awakener's Orb sim or for fractured mods.  Manual locks DO apply to fossils and essences, unlike metamods.
+
+UI:
+Color-coded influenced mods and fossil mods in mod view.
+Added progress bar popup while processing large batches (default >20k items, adjustable in .config).
+Added .config option for mod view to expand all mod groups by default.
+
 
 v0.2.0 Changelog:
 

@@ -64,7 +64,7 @@
             </StackPanel>
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center">Item Level:</TextBlock>
-                <TextBox Margin="5,0,5,0" VerticalAlignment="Center" Width="25" Name="ILvlBox">100</TextBox>
+                <TextBox Margin="5,0,5,0" VerticalAlignment="Center" Width="25" Name="ILvlBox">86</TextBox>
             </StackPanel>
         </Grid>
         <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Height="30" Grid.Row="2" Grid.Column="1">

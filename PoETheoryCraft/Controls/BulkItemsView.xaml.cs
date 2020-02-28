@@ -99,12 +99,29 @@ namespace PoETheoryCraft.Controls
             if (FilteredItems != null && Filter != null)
             {
                 FilteredItems = new List<ItemCraft>();
-                foreach (ItemCraft item in Items)
+                if (Items.Count > Properties.Settings.Default.ProgressBarThreshold)
                 {
-                    FilterResult res = FilterEvaluator.Evaluate(item, Filter);
-                    item.TempProps = res.Info;
-                    if (res.Match)
-                        FilteredItems.Add(item);
+                    int i = 0;
+                    ProgressDialog p = new ProgressDialog() { Title = "Filtering...", Steps = Items.Count, ReportStep = Math.Max(Items.Count / 100, 1) };
+                    p.Increment = () =>
+                    {
+                        FilterResult res = FilterEvaluator.Evaluate(Items[i], Filter);
+                        Items[i].TempProps = res.Info;
+                        if (res.Match)
+                            FilteredItems.Add(Items[i]);
+                        i++;
+                    };
+                    p.ShowDialog();
+                }
+                else
+                {
+                    foreach (ItemCraft item in Items)
+                    {
+                        FilterResult res = FilterEvaluator.Evaluate(item, Filter);
+                        item.TempProps = res.Info;
+                        if (res.Match)
+                            FilteredItems.Add(item);
+                    }
                 }
             }
             GraphWindows.Clear();

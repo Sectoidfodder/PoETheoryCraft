@@ -121,7 +121,7 @@ namespace PoETheoryCraft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int ResultsPerPage {
             get {
                 return ((int)(this["ResultsPerPage"]));
@@ -152,6 +152,30 @@ namespace PoETheoryCraft.Properties {
             }
             set {
                 this["CatalystEffect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExpandGroups {
+            get {
+                return ((bool)(this["ExpandGroups"]));
+            }
+            set {
+                this["ExpandGroups"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20000")]
+        public int ProgressBarThreshold {
+            get {
+                return ((int)(this["ProgressBarThreshold"]));
+            }
+            set {
+                this["ProgressBarThreshold"] = value;
             }
         }
     }

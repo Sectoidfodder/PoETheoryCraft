@@ -18,6 +18,7 @@ namespace PoETheoryCraft.Controls
     public partial class ModsView : UserControl
     {
         //track and sync expanded groups across all instances
+        public static readonly bool DefaultExpand = Properties.Settings.Default.ExpandGroups;
         public static readonly ISet<string> ExpandedGroups = new HashSet<string>();
         public static int psum = 0;
         public static int ssum = 0;
@@ -104,7 +105,10 @@ namespace PoETheoryCraft.Controls
             if ((sender as Expander).Header is StackPanel p)
             {
                 string s = (p.Children[0] as TextBlock).Text;
-                ExpandedGroups.Add(s);
+                if (DefaultExpand)
+                    ExpandedGroups.Remove(s);
+                else
+                    ExpandedGroups.Add(s);
             }
         }
         private void LogCollapsed(object sender, RoutedEventArgs e)
@@ -112,7 +116,10 @@ namespace PoETheoryCraft.Controls
             if ((sender as Expander).Header is StackPanel p)
             {
                 string s = (p.Children[0] as TextBlock).Text;
-                ExpandedGroups.Remove(s);
+                if (DefaultExpand)
+                    ExpandedGroups.Add(s);
+                else
+                    ExpandedGroups.Remove(s);
             }
         }
         private void RefreshListViews(object sender, DependencyPropertyChangedEventArgs e)
@@ -129,7 +136,7 @@ namespace PoETheoryCraft.Controls
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ModsView.ExpandedGroups.Contains(value as string);
+            return ModsView.ExpandedGroups.Contains(value as string) ^ ModsView.DefaultExpand;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -157,7 +164,7 @@ namespace PoETheoryCraft.Controls
                 return WarlordBrush;
             if (Utils.EnumConverter.InfToNames(ItemInfluence.Crusader).Contains(data.name))
                 return Brushes.Pink;
-            return Brushes.Transparent;
+            return Brushes.White;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -78,13 +78,13 @@ namespace PoETheoryCraft.DataClasses
                 }
             }
         }
-        private static void AppendTranslations()
+        private static void InitStatTemplates()
         {
-            StatTemplates.UnionWith(new HashSet<string>()
+            StatTemplates = new HashSet<string>()
             {
                 "[property] Armour", "[property] Evasion", "[property] Energy Shield", "[property] Block", "[property] Physical Damage", "[property] Physical DPS", "[property] Attack Speed", "[property] Critical Strike Chance",
                 "[property] # Prefixes", "[property] # Suffixes", "[property] # Open Prefixes", "[property] # Open Suffixes"
-            });
+            };
             foreach (string k in PseudoStats.Keys)
             {
                 StatTemplates.Add(k);
@@ -97,7 +97,7 @@ namespace PoETheoryCraft.DataClasses
             Dictionary<string, Dictionary<string, HashSet<string>>> typesdata = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, HashSet<string>>>>(File.ReadAllText(typesfile));
             AllMods = JsonSerializer.Deserialize<Dictionary<string, PoEModData>>(File.ReadAllText(modsfile));
             CoreMods = new Dictionary<string, PoEModData>();
-            StatTemplates = new HashSet<string>();
+            InitStatTemplates();
             foreach (string k in AllMods.Keys)
             {
                 PoEModData d = AllMods[k];
@@ -114,7 +114,6 @@ namespace PoETheoryCraft.DataClasses
                 if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     IncludeTranslations(AllMods[k]);
             }
-            AppendTranslations();
             Debug.WriteLine(CoreMods.Count + " core, " + AllMods.Count + " total mods loaded");
             Debug.WriteLine(StatTemplates.Count + " statlines loaded");
         }
