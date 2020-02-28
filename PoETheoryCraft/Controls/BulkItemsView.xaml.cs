@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using PoETheoryCraft.Controls.Graphs;
+using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Utils;
 
 namespace PoETheoryCraft.Controls
@@ -21,34 +13,42 @@ namespace PoETheoryCraft.Controls
     /// </summary>
     public partial class BulkItemsView : UserControl
     {
-        private StatGraphs GraphsWindow;
+        private readonly IDictionary<string, StatGraphs> GraphWindows = new Dictionary<string, StatGraphs>();
         private int DisplayIndex = 0;
         public static int ResultsPerPage { get; set; } = Properties.Settings.Default.ResultsPerPage;
-        private bool _sortasc = true;
+        public IList<PoECurrencyData> CurrenciesUsed { get; set; }
+        //private bool _sortasc = true;
         private string _sortby;
         public string SortBy
         {
             get { return _sortby; }
             set
             {
-                if (value != _sortby)
-                {
-                    _sortby = value;
-                    _sortasc = true;
-                }
-                else
-                {
-                    _sortasc = !_sortasc;
-                }
+                //if (value != _sortby)
+                //{
+                //    _sortby = value;
+                //    _sortasc = true;
+                //}
+                //else
+                //{
+                //    _sortasc = !_sortasc;
+                //}
+                _sortby = value;
                 if (_sortby != null && FilteredItems != null)
                 {
-                    if (GraphsWindow == null || !GraphsWindow.IsLoaded)
+                    if (GraphWindows.ContainsKey(_sortby) && GraphWindows[_sortby].IsLoaded)
                     {
-                        GraphsWindow = new StatGraphs();
-                        GraphsWindow.Show();
+                        GraphWindows[_sortby].Focus();
                     }
-                    List<double> sortedv = ItemParser.GetSortedValues(FilteredItems, _sortby);
-                    GraphsWindow.UpdateData(sortedv, _sortby);
+                    else
+                    {
+                        StatGraphs graph = new StatGraphs(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, _sortby, CurrenciesUsed, Filter);
+                        if (GraphWindows.ContainsKey(_sortby))
+                            GraphWindows[_sortby] = graph;
+                        else
+                            GraphWindows.Add(_sortby, graph);
+                        graph.Show();
+                    }
                 }
                 //DisplayIndex = 0;
                 //SortItems();
@@ -66,7 +66,7 @@ namespace PoETheoryCraft.Controls
                     _filter = value;
                     DisplayIndex = 0;
                     FilterItems();
-                    SortItems();
+                    //SortItems();
                     UpdateDisplay();
                 }
             }
@@ -83,7 +83,7 @@ namespace PoETheoryCraft.Controls
                 _sortby = null;
                 DisplayIndex = 0;
                 FilterItems();
-                SortItems();
+                //SortItems();
                 UpdateDisplay();
             }
         }
@@ -91,7 +91,7 @@ namespace PoETheoryCraft.Controls
         public BulkItemsView()
         {
             InitializeComponent();
-            SortIndicator.Text = "Click on any stat to sort";
+            //SortIndicator.Text = "Click on any stat to sort";
         }
         private void FilterItems()
         {
@@ -107,16 +107,17 @@ namespace PoETheoryCraft.Controls
                         FilteredItems.Add(item);
                 }
             }
+            GraphWindows.Clear();
         }
-        private void SortItems()
-        {
-            //if (SortBy != null)
-            //{
-            //    ((List<ItemCraft>)FilteredItems).Sort(new ItemCraftComparer() { Key = SortBy });
-            //    if (_sortasc)
-            //        ((List<ItemCraft>)FilteredItems).Reverse();
-            //}
-        }
+        //private void SortItems()
+        //{
+        //    if (SortBy != null)
+        //    {
+        //        ((List<ItemCraft>)FilteredItems).Sort(new ItemCraftComparer() { Key = SortBy });
+        //        if (_sortasc)
+        //            ((List<ItemCraft>)FilteredItems).Reverse();
+        //    }
+        //}
         public void UpdateDisplay()
         {
             ContentBox.Children.Clear();
@@ -149,10 +150,10 @@ namespace PoETheoryCraft.Controls
             {
                 PageHeader.Text = "0-0 of 0 results";
             }
-            if (SortBy != null)
-                SortIndicator.Text = "Sorting by " + (_sortasc ? ">" : "<") + " : " + SortBy.Replace("[property] ", "") + " (click again to reverse)";
-            else
-                SortIndicator.Text = "Click on any stat to sort";
+            //if (SortBy != null)
+            //    SortIndicator.Text = "Sorting by " + (_sortasc ? ">" : "<") + " : " + SortBy.Replace("[property] ", "") + " (click again to reverse)";
+            //else
+            //    SortIndicator.Text = "Click on any stat to sort";
         }
         private void BenchMove_Click(object sender, EventArgs e)
         {

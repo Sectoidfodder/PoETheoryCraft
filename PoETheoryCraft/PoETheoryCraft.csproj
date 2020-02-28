@@ -99,6 +99,9 @@
     <Compile Include="Controls\CurrencySelector.xaml.cs">
       <DependentUpon>CurrencySelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Graphs\StatTooltip.xaml.cs">
+      <DependentUpon>StatTooltip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ItemView.xaml.cs">
       <DependentUpon>ItemView.xaml</DependentUpon>
     </Compile>
@@ -125,7 +128,7 @@
     <Compile Include="Controls\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\StatGraphs.xaml.cs">
+    <Compile Include="Controls\Graphs\StatGraphs.xaml.cs">
       <DependentUpon>StatGraphs.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\PoEBenchOption.cs" />
@@ -148,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CurrencySelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Graphs\StatTooltip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,7 +190,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\StatGraphs.xaml">
+    <Page Include="Controls\Graphs\StatGraphs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

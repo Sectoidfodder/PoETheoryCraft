@@ -24,6 +24,7 @@ namespace PoETheoryCraft.Utils
     public interface FilterCondition
     {
         FilterResult Evaluate(ItemCraft item, ItemProperties props, IDictionary<string, double> stats);
+        IList<string> ToStringLines();
     }
 
     public class AndCondition : FilterCondition
@@ -56,6 +57,26 @@ namespace PoETheoryCraft.Utils
                 }
             }
             return new FilterResult() { Match = match, Info = info };
+        }
+        public IList<string> ToStringLines()
+        {
+            IList<string> stringlines = new List<string>
+            {
+                "And"
+            };
+            foreach (FilterCondition f in Subconditions)
+            {
+                IList<string> lines = f.ToStringLines();
+                foreach (string l in lines)
+                {
+                    stringlines.Add("**" + l);
+                }
+            }
+            return stringlines;
+        }
+        public override string ToString()
+        {
+            return string.Join("\n", ToStringLines());
         }
     }
 
@@ -94,6 +115,26 @@ namespace PoETheoryCraft.Utils
             bool match = (Min == null || count >= Min) && (Max == null || count <= Max);
             return new FilterResult() { Match = match, Info = info };
         }
+        public IList<string> ToStringLines()
+        {
+            IList<string> stringlines = new List<string>
+            {
+                "Count [ " + (Min == null ? "_" : Min.ToString()) + " , " + (Max == null ? "_" : Max.ToString()) + " ]"
+            };
+            foreach (FilterCondition f in Subconditions)
+            {
+                IList<string> lines = f.ToStringLines();
+                foreach (string l in lines)
+                {
+                    stringlines.Add("**" + l);
+                }
+            }
+            return stringlines;
+        }
+        public override string ToString()
+        {
+            return string.Join("\n", ToStringLines());
+        }
     }
 
     public class NotCondition : FilterCondition
@@ -127,6 +168,26 @@ namespace PoETheoryCraft.Utils
             }
             return new FilterResult() { Match = match, Info = info };
         }
+        public IList<string> ToStringLines()
+        {
+            IList<string> stringlines = new List<string>
+            {
+                "Not"
+            };
+            foreach (FilterCondition f in Subconditions)
+            {
+                IList<string> lines = f.ToStringLines();
+                foreach (string l in lines)
+                {
+                    stringlines.Add("**" + l);
+                }
+            }
+            return stringlines;
+        }
+        public override string ToString()
+        {
+            return string.Join("\n", ToStringLines());
+        }
     }
 
     public class ClampCondition : FilterCondition
@@ -149,6 +210,14 @@ namespace PoETheoryCraft.Utils
             if (Max != null && v > Max)
                 return new FilterResult() { Match = false , Info = info};
             return new FilterResult() { Match = true , Info = info};
+        }
+        public IList<string> ToStringLines()
+        {
+            return new List<string>() { Template + " [ " + (Min == null ? "_" : Min.ToString()) + " , " + (Max == null ? "_" : Max.ToString()) + " ]" };
+        }
+        public override string ToString()
+        {
+            return ToStringLines()[0];
         }
     }
 
@@ -176,6 +245,22 @@ namespace PoETheoryCraft.Utils
             info.Add("Weight", tally);
             bool match = (Min == null || tally >= Min) && (Max == null || tally <= Max);
             return new FilterResult() { Match = match, Info = info };
+        }
+        public IList<string> ToStringLines()
+        {
+            IList<string> stringlines = new List<string>
+            {
+                "Weight [ " + (Min == null ? "_" : Min.ToString()) + " , " + (Max == null ? "_" : Max.ToString()) + " ]"
+            };
+            foreach (string s in Weights.Keys)
+            {
+                stringlines.Add("**" + s + " [ " + Weights[s].ToString() + " ]");
+            }
+            return stringlines;
+        }
+        public override string ToString()
+        {
+            return string.Join("\n", ToStringLines());
         }
     }
 }

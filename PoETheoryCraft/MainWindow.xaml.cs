@@ -216,6 +216,10 @@ namespace PoETheoryCraft
             }
             if (res == null)
             {
+                if (c is PoECurrencyData data)
+                    RepeatResults.CurrenciesUsed = new List<PoECurrencyData>() { data };
+                else
+                    RepeatResults.CurrenciesUsed = ((System.Collections.IList)c).Cast<PoECurrencyData>().ToList();
                 RepeatResults.SortBy = null;
                 RepeatResults.Items = Bench.MassResults;
             }

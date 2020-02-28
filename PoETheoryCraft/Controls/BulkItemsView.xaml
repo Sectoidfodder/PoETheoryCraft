@@ -13,7 +13,12 @@
         </ContextMenu>
     </UserControl.ContextMenu>
     <DockPanel Background="Transparent">
-        <Grid DockPanel.Dock="Top">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Click="PrevPage_Click">&lt;</Button>
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="5,0,5,0" Name="PageHeader" Width="250">Showing 0-0 of 0 Results</TextBlock>
+            <Button Click="NextPage_Click">&gt;</Button>
+        </StackPanel>
+        <!--<Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -24,7 +29,7 @@
                 <Button Click="NextPage_Click">&gt;</Button>
             </StackPanel>
             <TextBlock Grid.Column="1" Name="SortIndicator" VerticalAlignment="Center" TextAlignment="Center" TextTrimming="CharacterEllipsis">asdfasdfasdfadsf</TextBlock>
-        </Grid>
+        </Grid>-->
         <ScrollViewer>
             <WrapPanel Name="ContentBox">
             </WrapPanel>
