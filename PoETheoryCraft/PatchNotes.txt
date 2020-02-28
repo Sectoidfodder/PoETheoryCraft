@@ -1,0 +1,96 @@
+﻿
+
+v0.3.0 - Graphs and Performance improvements
+
+> You can now graph the distribution of any mod stat, item property, or weighted total that you specify.
+> Added most searchable pseudo-stats and item properties from the official trade site to filter options.
+
+Simulation:
+> Significantly improved simulation speed when different mod groups rarely interact (that's most crafts aside from weapons and jewels).
+> Added option to fill prefixes/suffixes, for simulating metacrafting or alt-aug rolling.
+> Enabled manually locking affixes, for scuffed Awakener's Orb sim or for fractured mods.
+
+UI:
+> Color-coded influenced mods and fossil mods in mod view.
+> Added progress bar popup while processing large batches (default >20k items, adjustable in .config).
+> Added .config option for mod view to expand all mod groups by default.
+
+
+
+v0.2.0 - Search/Filter Enabled -
+
+> You can now search through your mass crafting results just like on a trade site.
+      Example: https://imgur.com/a/qqjlVE8
+> There are only a few pseudo stats pre-defined for searching at the moment.
+      You can define your own in user_pseudo_stats.json, following the format of the examples.
+      They're basically custom weighted searches that you can save for repeated use.
+
+Simulation:
+> Positive fossil modifiers now stack additively, to be consistent with test results.
+> Corrupted Essence mods from Glyphic/Tangled now obey weight modifiers from other fossils.
+> Prevented crafting +quality mods on an item that already has a +quality mod.
+> Tentatively added 1% mod weight per 1% matching catalyst quality for all currencies.
+      All I got from testing with 200 rolls is that the effect is very little, if any at all.
+      It could be that catalyst quality only affects currencies that remove quality - that'll be the next thing to test.
+      You can turn the bonus off or change it to anything in App.config
+
+UI:
+> Mod preview now shows each weight as a percent of total rollable affix weight.
+> Made mod preview ignore existing mods on item when reroll currencies are selected (chaos, alch, alt, trans, essences, fossils).
+
+Misc:
+> Fixed problem exporting items to PoB due to bad rare item name formatting.  Right-click anywhere on an item or the mass-craft area for the option to copy one or all items to clipboard.
+
+
+
+v0.1.0
+- Initial Features -
+
+Mechanics:
+> All craftable gear and jewel bases.
+> All relevant currencies and essences; all relevant fossils except Sanctified Fossil.
+> Tentative Catalyst support - will change mod values, but no effect on roll weights (needs much more testing).
+
+Functions:
+> Mod View - Shows all mods that can be rolled on a given item and their weights; can force-add any mod to item.
+> Crafted Mod View - Shows all bench crafts that can be applied and their costs.
+> Mass Craft - Apply selected currency to an item any number of times (in parallel) and show results.
+      Click on any stat line or item property to sort all results by that condition.
+      Copy one item, one page, or all results to clipboard via right-click context menu.
+> Post-roll Actions - Automatically apply specified bench mods, or maximize mod rolls (as if divining) for better comparison.
+> Currency tracker - Tallies currency spent (except when mass crafting), can be reset whenever.
+
+
+- In Progress (coming soon) -
+
+> Stash page; moving items between bench, mass craft results, and stash.
+> Trade-site-esque search/filter functions for mass craft results.
+> Ability to lock mods on an item while rolling.
+      Not like metamod locks, can't be ignored by essences/fossils.
+      Useful for simulating Awakener's Orb (force add, lock two influenced mods, then roll w/ chaos).
+      Also kinda usable for fractured mods, but the simulator is unlikely to ever support legacy rolls not in current game data.
+
+
+
+Dev Notes:
+
+Need to know before implementing beastcrafting:
+> Remove catalyst quality?
+> Ignore ilvl?  Uses beast's level?  Always, or only when no valid mods under ilvl?  Is that a bug and might be fixed?
+> Interaction with metamod locks?
+> Interaction with fractured mods?
+
+Do Conquerors' Exalts remove catalyst quality?
+
+Need to figure out a good way to calculate mod tier, don't see a relevant stat in the json.
+Rather not have to build a massive mod ID and item class table to look it up.
+
+ModLogic saves time by assuming that adding an explicit mod will never increase an item's pool of rollable explicit mods.
+I'm pretty sure this is true.  Simulation needs to be adjusted if not.
+
+Translation currently ignores digits of precision 0dp/1dp/2dp, just displays up to two decimals if they're nonzero.
+
+Can't bench mod Fishing Rods? Bench mod definitions don't include their class but I haven't tested in-game.
+
+ItemParser.ParseProperties will need adjusting if items with properties can ever get catalyst quality (currently not the case).
+Currently catalyst quality is only factored in at translation, so mods give their non-qualitied value while calculating properties.

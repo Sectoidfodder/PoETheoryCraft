@@ -280,7 +280,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DevNotes.txt" />
+    <None Include="PatchNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icons\currency\OrbofAnnulment.png">
