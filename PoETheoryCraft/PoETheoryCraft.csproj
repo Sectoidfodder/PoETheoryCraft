@@ -116,6 +116,9 @@
     <Compile Include="Controls\PostCraftDialog.xaml.cs">
       <DependentUpon>PostCraftDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PricesDialog.xaml.cs">
+      <DependentUpon>PricesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PostCraftDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PricesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -789,7 +796,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.json /XD * /E /IS /MOVE
+    <PostBuildEvent>if $(ConfigurationName) == Release del "$(TargetDir)App.config" "$(TargetDir)*.pdb"
+ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.json /XD * /E /IS /MOVE
 if %25errorlevel%25 leq 4 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
 </Project>

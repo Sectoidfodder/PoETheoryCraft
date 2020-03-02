@@ -42,6 +42,7 @@ namespace PoETheoryCraft
             CraftingDatabase.LoadBenchOptions(@"Data\crafting_bench_options.min.json");
             CraftingDatabase.LoadEssences(@"Data\essences.min.json");
             CraftingDatabase.LoadFossils(@"Data\fossils.min.json");
+            CraftingDatabase.LoadPrices("pricedata.json");
 
             CurrencyBox.LoadEssences(CraftingDatabase.Essences.Values);
             CurrencyBox.LoadFossils(CraftingDatabase.Fossils.Values);
@@ -124,6 +125,11 @@ namespace PoETheoryCraft
                 ModPreview.UpdatePreviews();
                 CollectionViewSource.GetDefaultView(Bench.CurrencySpent).Refresh();
             }
+        }
+        private void Prices_Click(object sender, RoutedEventArgs e)
+        {
+            PricesDialog d = new PricesDialog() { Owner = this };
+            d.ShowDialog();
         }
         private void Settings_Click(object sender, RoutedEventArgs e)
         {

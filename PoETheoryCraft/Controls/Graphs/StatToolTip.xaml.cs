@@ -76,4 +76,19 @@ namespace PoETheoryCraft.Controls.Graphs
             throw new NotImplementedException();
         }
     }
+    public class CostTooltipConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is StatPoint s))
+                return "???";
+            double p = (double)s.Count * 100 / s.Total;
+            double inv = 100 / p;
+            return "Avg cost: " + (inv * s.Cost).ToString("N1") + "c";
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

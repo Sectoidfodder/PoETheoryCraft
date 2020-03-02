@@ -23,6 +23,7 @@ namespace PoETheoryCraft.DataClasses
             "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst",
             "Remove Crafted Mods", "Do Nothing"
         };
+        public static IDictionary<string, double> PriceData { get; set; }               //data pulled from saved local json or poe.ninja
         public static IDictionary<string, PoEModData> CoreMods { get; private set; }    //prefixes and suffixes: ~3k gear, ~200 jewel, ~450 abyss jewel
         public static IDictionary<string, PoEModData> AllMods { get; private set; }     //really big and should only be used for key lookups, not iteration
         public static IDictionary<string, PoEBaseItemData> CoreBaseItems { get; private set; }
@@ -33,7 +34,19 @@ namespace PoETheoryCraft.DataClasses
         public static IDictionary<string, PoECurrencyData> Currencies { get; private set; }
         public static ISet<string> StatTemplates { get; private set; }
         public static IDictionary<string, Dictionary<string, double>> PseudoStats { get; private set; }
-        public static void LoadPseudoStats(string pseudofile, string userpseudofile)
+        public static int LoadPrices(string pricesfile)
+        {
+            try
+            {
+                PriceData = JsonSerializer.Deserialize<Dictionary<string, double>>(File.ReadAllText(pricesfile));
+            }
+            catch (Exception) 
+            {
+                return -1;
+            }
+            return PriceData.Count;
+        }
+        public static int LoadPseudoStats(string pseudofile, string userpseudofile)
         {
             JsonSerializerOptions jsonoptions = new JsonSerializerOptions() { AllowTrailingCommas = true, ReadCommentHandling = JsonCommentHandling.Skip };
             PseudoStats = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, double>>>(File.ReadAllText(pseudofile), jsonoptions);
@@ -52,6 +65,7 @@ namespace PoETheoryCraft.DataClasses
                 Debug.WriteLine("Error loading user pseudo stats");
             }
             Debug.WriteLine(PseudoStats.Count + " pseudo stats loaded (" + (PseudoStats.Count - n) + " user defined)");
+            return PseudoStats.Count;
         }
         private static void IncludeTranslations(PoEModData modtemplate)
         {
@@ -91,8 +105,8 @@ namespace PoETheoryCraft.DataClasses
             }
         }
         //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
-        //MUST BE DONE AFTER TRANSLATION DEFINTIONS ARE LOADED IN STATTRANSLATOR
-        public static void LoadMods(string modsfile, string typesfile)
+        //MUST BE DONE AFTER TRANSLATION DEFINITIONS ARE LOADED IN STATTRANSLATOR
+        public static int LoadMods(string modsfile, string typesfile)
         {
             Dictionary<string, Dictionary<string, HashSet<string>>> typesdata = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, HashSet<string>>>>(File.ReadAllText(typesfile));
             AllMods = JsonSerializer.Deserialize<Dictionary<string, PoEModData>>(File.ReadAllText(modsfile));
@@ -116,10 +130,11 @@ namespace PoETheoryCraft.DataClasses
             }
             Debug.WriteLine(CoreMods.Count + " core, " + AllMods.Count + " total mods loaded");
             Debug.WriteLine(StatTemplates.Count + " statlines loaded");
+            return CoreMods.Count;
         }
 
         //build base item data templates from base_items.min.json and item_classes.min.json, also builds core currencies and catalyst data
-        public static void LoadBaseItems(string basesfile, string classesfile)
+        public static int LoadBaseItems(string basesfile, string classesfile)
         {
             Dictionary<string, Dictionary<string, string>> classesdata = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(File.ReadAllText(classesfile));
             AllBaseItems = JsonSerializer.Deserialize<Dictionary<string, PoEBaseItemData>>(File.ReadAllText(basesfile));
@@ -155,6 +170,7 @@ namespace PoETheoryCraft.DataClasses
             }
             AppendCurrencies();
             Debug.WriteLine(CoreBaseItems.Count + " core, " + AllBaseItems.Count + " total base items loaded");
+            return CoreBaseItems.Count;
         }
         //Add special "currency" options
         private static void AppendCurrencies()
@@ -190,14 +206,15 @@ namespace PoETheoryCraft.DataClasses
         }
 
         //build bench crafting option templates from bench_crafting_options.min.json
-        public static void LoadBenchOptions(string benchfile)
+        public static int LoadBenchOptions(string benchfile)
         {
             BenchOptions = JsonSerializer.Deserialize<HashSet<PoEBenchOption>>(File.ReadAllText(benchfile));
             Debug.WriteLine(BenchOptions.Count + " crafting bench options loaded");
+            return BenchOptions.Count;
         }
 
         //build essence templates from essences.min.json
-        public static void LoadEssences(string essfile)
+        public static int LoadEssences(string essfile)
         {
             Essences = JsonSerializer.Deserialize<Dictionary<string, PoEEssenceData>>(File.ReadAllText(essfile));
             foreach (string k in Essences.Keys)
@@ -224,10 +241,11 @@ namespace PoETheoryCraft.DataClasses
                 }
             }
             Debug.WriteLine(Essences.Count + " essences loaded");
+            return Essences.Count;
         }
 
         //build fossil templates from fossils.min.json
-        public static void LoadFossils(string fosfile)
+        public static int LoadFossils(string fosfile)
         {
             Fossils = JsonSerializer.Deserialize<Dictionary<string, PoEFossilData>>(File.ReadAllText(fosfile));
             foreach (string k in Fossils.Keys)
@@ -248,6 +266,7 @@ namespace PoETheoryCraft.DataClasses
                 }
             }
             Debug.WriteLine(Fossils.Count + " fossils loaded");
+            return Fossils.Count;
         }
     }
 }

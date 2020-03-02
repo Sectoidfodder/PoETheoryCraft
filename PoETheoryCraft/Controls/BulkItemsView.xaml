@@ -13,10 +13,13 @@
         </ContextMenu>
     </UserControl.ContextMenu>
     <DockPanel Background="Transparent">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Click="PrevPage_Click">&lt;</Button>
-            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="5,0,5,0" Name="PageHeader" Width="250">Showing 0-0 of 0 Results</TextBlock>
-            <Button Click="NextPage_Click">&gt;</Button>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Name="StatBox">Currencies: None.  Cost per roll: N/A</TextBlock>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Click="PrevPage_Click">&lt;</Button>
+                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Margin="5,0,5,0" Name="PageHeader" Width="250">Showing 0-0 of 0 Results</TextBlock>
+                <Button Click="NextPage_Click">&gt;</Button>
+            </StackPanel>
         </StackPanel>
         <!--<Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>

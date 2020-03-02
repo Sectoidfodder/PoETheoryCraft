@@ -42,7 +42,7 @@ namespace PoETheoryCraft.Controls
                     }
                     else
                     {
-                        StatGraphs graph = new StatGraphs(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, _sortby, CurrenciesUsed, Filter);
+                        StatGraphs graph = new StatGraphs(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, _sortby, CurrenciesUsed, GetCurrencyCost(), Filter);
                         if (GraphWindows.ContainsKey(_sortby))
                             GraphWindows[_sortby] = graph;
                         else
@@ -92,6 +92,18 @@ namespace PoETheoryCraft.Controls
         {
             InitializeComponent();
             //SortIndicator.Text = "Click on any stat to sort";
+        }
+        private double GetCurrencyCost()
+        {
+            if (CurrenciesUsed == null || CraftingDatabase.PriceData == null)
+                return 0;
+            double total = 0;
+            foreach (PoECurrencyData c in CurrenciesUsed)
+            {
+                if (CraftingDatabase.PriceData.ContainsKey(c.name))
+                    total += CraftingDatabase.PriceData[c.name];
+            }
+            return total;
         }
         private void FilterItems()
         {
@@ -143,10 +155,26 @@ namespace PoETheoryCraft.Controls
                 if (FilteredItems.Count > 0)
                 {
                     int max = Math.Min(FilteredItems.Count, DisplayIndex + ResultsPerPage);
+                    double costperroll = GetCurrencyCost();
+                    StatBox.Text = "Currency: ";
+                    foreach (PoECurrencyData c in CurrenciesUsed)
+                    {
+                        StatBox.Text += c.name + ", ";
+                    }
+                    StatBox.Text = StatBox.Text.Trim(new char[] { ',', ' ' });
+                    StatBox.Text += ". Cost per roll: " + costperroll.ToString("#.#") + "c.";
                     if (Filter != null)
+                    {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";
+                        double countpermatch = (double)Items.Count / FilteredItems.Count;
+                        StatBox.Text += " Match rate: 1/" + countpermatch.ToString("#.#") + ". Avg cost: " + (costperroll * countpermatch).ToString("#.#") + "c";
+                    }
                     else
+                    {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " results";
+                        
+                    }
+                    
                     for (int k = DisplayIndex; k < max; k++)
                     {
                         ItemView panel = new ItemView();

@@ -11,33 +11,38 @@
     <UserControl.Resources>
         <local:MatchTooltipConverter x:Key="MatchTooltipConverter" />
         <local:TotalTooltipConverter x:Key="TotalTooltipConverter" />
+        <local:CostTooltipConverter x:Key="CostTooltipConverter" />
     </UserControl.Resources>
     <ItemsControl ItemsSource="{Binding Data.Points}" TextBlock.FontWeight="Bold">
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type wpf:DataPointViewModel}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock>Value: >=</TextBlock>
-                        <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.X), StringFormat={}{0:#.##}}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,3,0">Count:</TextBlock>
-                        <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.Count)}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource MatchTooltipConverter}}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="3" Orientation="Horizontal">
-                        <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource TotalTooltipConverter}}"/>
-                    </StackPanel>
-                    
-                </Grid>
+                <Border BorderThickness="2" Background="White" BorderBrush="Black">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock>Value: >=</TextBlock>
+                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.X), StringFormat={}{0:#.##}}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Margin="0,0,3,0">Count:</TextBlock>
+                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.Count)}"/>
+                        </StackPanel>
+                        <!--<StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource MatchTooltipConverter}}"/>
+                        </StackPanel>-->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource TotalTooltipConverter}}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource CostTooltipConverter}}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

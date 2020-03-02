@@ -17,11 +17,12 @@ namespace PoETheoryCraft.Controls.Graphs
         public int Count { get; set; }
         public int Matches { get; set; }
         public int Total { get; set; }
+        public double Cost { get; set; }
     }
     public partial class StatGraphs : Window
     {
         public ChartValues<StatPoint> CDF { get; set; }
-        public StatGraphs(List<double> dat, int total, string statname, IList<PoECurrencyData> currencies, FilterCondition filter)
+        public StatGraphs(List<double> dat, int total, string statname, IList<PoECurrencyData> currencies, double cost, FilterCondition filter)
         {
             InitializeComponent();
 
@@ -56,13 +57,13 @@ namespace PoETheoryCraft.Controls.Graphs
             {
                 double x = dat[0];
                 double incr = (dat[dat.Count - 1] - x) / 100;
-                CDF.Add(new StatPoint() { X = x, Count = dat.Count, Matches = dat.Count, Total = total });
+                CDF.Add(new StatPoint() { X = x, Count = dat.Count, Matches = dat.Count, Total = total, Cost = cost });
                 for (int i = 0; i < dat.Count; i++)
                 {
                     double newx = dat[i];
                     if (newx <= x + incr)
                         continue;
-                    CDF.Add(new StatPoint() { X = newx, Count = dat.Count - i, Matches = dat.Count, Total = total });
+                    CDF.Add(new StatPoint() { X = newx, Count = dat.Count - i, Matches = dat.Count, Total = total, Cost = cost });
                     x = newx;
                 }
             }

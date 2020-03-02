@@ -26,6 +26,7 @@
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Options">
                 <MenuItem Header="Settings" Click="Settings_Click"/>
+                <MenuItem Header="Currency Data" Click="Prices_Click"/>
             </MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
