@@ -35,11 +35,11 @@ namespace PoETheoryCraft.Controls
             if (mods != null)
             {
                 foreach (PoEModData m in mods.Keys)
-                {
-                    if (m.generation_type == ModLogic.Prefix)
-                        p.Add(m, mods[m]);
-                    else if (m.generation_type == ModLogic.Suffix)
+                { 
+                    if (m.generation_type == ModLogic.Suffix)
                         s.Add(m, mods[m]);
+                    else
+                        p.Add(m, mods[m]);
                 }
             }
             CollectionViewSource.GetDefaultView(p).GroupDescriptions.Add(new PropertyGroupDescription("Key.group"));

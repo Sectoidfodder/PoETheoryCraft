@@ -54,6 +54,15 @@ namespace PoETheoryCraft.Controls
                     ItemDataBox.Text += "  Warlord";
                 if (item.LiveTags.Contains(itemtemplate.item_class_properties[EnumConverter.InfToTag(ItemInfluence.Crusader)]))
                     ItemDataBox.Text += "  Crusader";
+                EnchantmentBox.Children.Clear();
+                foreach (ModCraft m in item.LiveEnchantments)
+                {
+                    TextBlock tb = new TextBlock() { TextWrapping = TextWrapping.Wrap, FontWeight = FontWeights.Bold, Foreground = new SolidColorBrush(Color.FromRgb(184, 218, 242)) };
+                    tb.Text = m.ToString();
+                    tb.ToolTip = CraftingDatabase.AllMods[m.SourceData].ToString();
+                    //HookEvents(tb);
+                    EnchantmentBox.Children.Add(tb);
+                }
                 ImplicitBox.Children.Clear();
                 foreach (ModCraft m in item.LiveImplicits)
                 {

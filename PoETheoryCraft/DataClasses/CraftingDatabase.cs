@@ -24,6 +24,7 @@ namespace PoETheoryCraft.DataClasses
             "Remove Crafted Mods", "Do Nothing"
         };
         public static IDictionary<string, double> PriceData { get; set; }               //data pulled from saved local json or poe.ninja
+        public static IDictionary<string, PoEModData> Enchantments { get; private set; }
         public static IDictionary<string, PoEModData> CoreMods { get; private set; }    //prefixes and suffixes: ~3k gear, ~200 jewel, ~450 abyss jewel
         public static IDictionary<string, PoEModData> AllMods { get; private set; }     //really big and should only be used for key lookups, not iteration
         public static IDictionary<string, PoEBaseItemData> CoreBaseItems { get; private set; }
@@ -111,6 +112,7 @@ namespace PoETheoryCraft.DataClasses
             Dictionary<string, Dictionary<string, HashSet<string>>> typesdata = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, HashSet<string>>>>(File.ReadAllText(typesfile));
             AllMods = JsonSerializer.Deserialize<Dictionary<string, PoEModData>>(File.ReadAllText(modsfile));
             CoreMods = new Dictionary<string, PoEModData>();
+            Enchantments = new Dictionary<string, PoEModData>();
             InitStatTemplates();
             foreach (string k in AllMods.Keys)
             {
@@ -121,6 +123,8 @@ namespace PoETheoryCraft.DataClasses
                 d.type_tags = typesdata[d.type]["tags"];
                 //set key field
                 d.key = k;
+                if (d.generation_type == ModLogic.Enchantment)
+                    Enchantments.Add(k, AllMods[k]);
                 //flag relevant mods to move to core dictionary, "misc" domain is for regular jewels
                 if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     CoreMods.Add(k, AllMods[k]);
@@ -128,7 +132,7 @@ namespace PoETheoryCraft.DataClasses
                 if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     IncludeTranslations(AllMods[k]);
             }
-            Debug.WriteLine(CoreMods.Count + " core, " + AllMods.Count + " total mods loaded");
+            Debug.WriteLine(CoreMods.Count + " core, " + Enchantments.Count + " enchantment, " + AllMods.Count + " total mods loaded");
             Debug.WriteLine(StatTemplates.Count + " statlines loaded");
             return CoreMods.Count;
         }

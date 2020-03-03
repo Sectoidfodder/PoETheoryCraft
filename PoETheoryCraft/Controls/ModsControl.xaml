@@ -14,8 +14,19 @@
             <TabItem Header="Craftable">
                 <local:ModsView x:Name="CraftedModsDisplay"></local:ModsView>
             </TabItem>
-            <TabItem Header="Special">
-                <TextBlock>Not yet implemented. Will show delve and incursion exclusive mods, non-weighted mods from fossils and essences</TextBlock>
+            <TabItem Header="Enchantment">
+                <ListView Name="EnchantmentsView" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Key, Mode=OneTime}"/>
+                                <TextBlock Text="{Binding Value, Mode=OneTime}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<local:ModsView x:Name="EnchantmentsDisplay"></local:ModsView>-->
+                <!--<TextBlock>Not yet implemented. Will show delve and incursion exclusive mods, non-weighted mods from fossils and essences</TextBlock>-->
             </TabItem>
         </TabControl>
     </Grid>

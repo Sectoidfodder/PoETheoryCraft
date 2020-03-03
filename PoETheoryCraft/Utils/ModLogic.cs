@@ -23,6 +23,7 @@ namespace PoETheoryCraft.Utils
         public const string CatalystIgnore = "jewellery_quality_ignore";
         public const string Prefix = "prefix";
         public const string Suffix = "suffix";
+        public const string Enchantment = "enchantment";
         public static IDictionary<string, IList<string>> CatalystTags { get; } = new Dictionary<string, IList<string>>()
         {
             { "Abrasive Catalyst", new List<string>(){ "jewellery_attack", "attack" } },
@@ -217,6 +218,19 @@ namespace PoETheoryCraft.Utils
                 }
             }
             return filtereddict;
+        }
+        public static IDictionary<PoEModData, int> FindValidEnchantments(PoEBaseItemData baseitem, IDictionary<string, PoEModData> db)
+        {
+            IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
+            if (baseitem == null)
+                return mods;
+            foreach (PoEModData mod in db.Values)
+            {
+                int w = CalcGenWeight(mod, baseitem.tags);
+                if (w > 0)
+                    mods.Add(mod, w);
+            }
+            return mods;
         }
         //returns all valid mods for the given base item template, covering all possible influences
         public static IDictionary<PoEModData, int> FindBaseValidMods(PoEBaseItemData baseitem, ICollection<PoEModData> db, bool ignoredomain = false)

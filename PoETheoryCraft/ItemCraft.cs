@@ -20,6 +20,7 @@ namespace PoETheoryCraft
         public ItemRarity Rarity { get; set; }
         public IList<ModCraft> LiveMods { get; }
         public IList<ModCraft> LiveImplicits { get; }
+        public IList<ModCraft> LiveEnchantments { get; }
         public string ItemName { get; private set; }
         private int _basequality;
         public int BaseQuality                      //clamp min and max; update mods if catalyst qual changed
@@ -70,6 +71,7 @@ namespace PoETheoryCraft
             }
             LiveMods = new List<ModCraft>();
             LiveImplicits = new List<ModCraft>();
+            LiveEnchantments = new List<ModCraft>();
             foreach (string s in data.implicits)
             {
                 AddImplicit(CraftingDatabase.AllMods[s]);
@@ -93,6 +95,11 @@ namespace PoETheoryCraft
             foreach (ModCraft m in item.LiveImplicits)
             {
                 LiveImplicits.Add(m.Copy());
+            }
+            LiveEnchantments = new List<ModCraft>();
+            foreach (ModCraft m in item.LiveEnchantments)
+            {
+                LiveEnchantments.Add(m.Copy());
             }
             ItemName = item.ItemName;
         }
@@ -252,6 +259,13 @@ namespace PoETheoryCraft
         {
             ModCraft m = new ModCraft(data);
             LiveImplicits.Add(m);
+            LiveTags.UnionWith(data.adds_tags);
+            UpdateModQuality(m, QualityType);
+        }
+        public void AddEnchantment(PoEModData data)
+        {
+            ModCraft m = new ModCraft(data);
+            LiveEnchantments.Add(m);
             LiveTags.UnionWith(data.adds_tags);
             UpdateModQuality(m, QualityType);
         }

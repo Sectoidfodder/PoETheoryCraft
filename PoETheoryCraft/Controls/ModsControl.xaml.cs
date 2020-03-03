@@ -28,6 +28,18 @@ namespace PoETheoryCraft.Controls
         {
             InitializeComponent();
         }
+        public void UpdateEnchantments()
+        {
+            if (Bench == null || Bench.BenchItem == null)
+            {
+                EnchantmentsView.ItemsSource = new Dictionary<PoEModData, int>();
+                //EnchantmentsDisplay.UpdateData(new Dictionary<PoEModData, int>());
+                return;
+            }
+            PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
+            EnchantmentsView.ItemsSource = ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments);
+            //EnchantmentsDisplay.UpdateData(ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments));
+        }
         public void UpdateCrafts()
         {
             if (Bench == null || Bench.BenchItem == null)
@@ -120,12 +132,19 @@ namespace PoETheoryCraft.Controls
         }
         public object GetSelected()
         {
-            if (!((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
-                return null;
-            if (activeview.PrefixList.SelectedItem != null)
-                return activeview.PrefixList.SelectedItem;
-            else
-                return activeview.SuffixList.SelectedItem;
+            if (((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
+            {
+                if (activeview.PrefixList.SelectedItem != null)
+                    return activeview.PrefixList.SelectedItem;
+                else
+                    return activeview.SuffixList.SelectedItem;
+            }
+            else if (((ModTabs.SelectedItem as TabItem).Content is ListView listview))
+            {
+                return listview.SelectedItem;
+            }
+            return null;
+            
         }
     }
 }

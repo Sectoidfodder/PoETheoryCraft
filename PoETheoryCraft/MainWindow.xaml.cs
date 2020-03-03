@@ -94,6 +94,7 @@ namespace PoETheoryCraft
             ItemSlot.UpdateData(Bench.BenchItem);
             ModPreview.UpdatePreviews();
             ModPreview.UpdateCrafts();
+            ModPreview.UpdateEnchantments();
             Bench.PostRoll = new PostRollOptions();
             PostCraftButton.ClearValue(Button.BackgroundProperty);
         }
@@ -102,10 +103,13 @@ namespace PoETheoryCraft
             object kv = ModPreview.GetSelected();
             if (kv == null)
                 return;
-            string res;
+            string res = null;
             if (kv is KeyValuePair<PoEModData, int> kvint)
             {
-                res = Bench.ForceAddMod(kvint.Key);
+                if (kvint.Key.generation_type == ModLogic.Enchantment)
+                    Bench.BenchItem.AddEnchantment(kvint.Key);
+                else
+                    res = Bench.ForceAddMod(kvint.Key);
             }
             else if (kv is KeyValuePair<PoEModData, IDictionary<string, int>> kvdict)
             {
@@ -355,6 +359,7 @@ namespace PoETheoryCraft
             if (!samebase)
             {
                 ModPreview.UpdateCrafts();
+                ModPreview.UpdateEnchantments();
                 Bench.PostRoll = new PostRollOptions();
                 PostCraftButton.ClearValue(Button.BackgroundProperty);
             }

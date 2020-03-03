@@ -18,6 +18,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition />
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -36,12 +37,15 @@
                 </Grid>
             </Border>
             <Border Grid.Row="3" BorderThickness="0,1,0,0" BorderBrush="DarkGray">
+                <StackPanel Background="Black" Name="EnchantmentBox"></StackPanel>
+            </Border>
+            <Border Grid.Row="4" BorderThickness="0,1,0,0" BorderBrush="DarkGray">
                 <StackPanel Background="Black" Name="ImplicitBox"></StackPanel>
             </Border>
-            <Border BorderThickness="0,1,0,0" BorderBrush="DarkGray" Grid.Row="4">
+            <Border BorderThickness="0,1,0,0" BorderBrush="DarkGray" Grid.Row="5">
                 <StackPanel Background="Black" Name="ItemModBox"></StackPanel>
             </Border>
-            <Border BorderThickness="0,1,0,0" BorderBrush="DarkGray" Grid.Row="5">
+            <Border BorderThickness="0,1,0,0" BorderBrush="DarkGray" Grid.Row="6">
                 <StackPanel Background="Black" Name="TempPropBox"></StackPanel>
             </Border>
         </Grid>
