@@ -128,7 +128,7 @@ namespace PoETheoryCraft
         }
         private void Prices_Click(object sender, RoutedEventArgs e)
         {
-            PricesDialog d = new PricesDialog() { Owner = this };
+            PricesDialog d = new PricesDialog(CraftingDatabase.PriceData) { Owner = this };
             d.ShowDialog();
         }
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -225,7 +225,39 @@ namespace PoETheoryCraft
                 if (c is PoECurrencyData data)
                     RepeatResults.CurrenciesUsed = new List<PoECurrencyData>() { data };
                 else
-                    RepeatResults.CurrenciesUsed = ((System.Collections.IList)c).Cast<PoECurrencyData>().ToList();
+                {
+                    //Resonators aren't implemented as actual currencies so just tack their names on to be counted for costs
+                    List<PoECurrencyData> fossils = ((System.Collections.IList)c).Cast<PoECurrencyData>().ToList();
+                    if (fossils.Count == 1)
+                    {
+                        if (Bench.BenchItem.Rarity == ItemRarity.Normal)
+                            fossils.Add(new PoECurrencyData() { name = "Primitive Alchemical Resonator" });
+                        else
+                            fossils.Add(new PoECurrencyData() { name = "Primitive Chaotic Resonator" });
+                    }
+                    else if (fossils.Count == 2)
+                    {
+                        if (Bench.BenchItem.Rarity == ItemRarity.Normal)
+                            fossils.Add(new PoECurrencyData() { name = "Potent Alchemical Resonator" });
+                        else
+                            fossils.Add(new PoECurrencyData() { name = "Potent Chaotic Resonator" });
+                    }
+                    else if (fossils.Count == 3)
+                    {
+                        if (Bench.BenchItem.Rarity == ItemRarity.Normal)
+                            fossils.Add(new PoECurrencyData() { name = "Powerful Alchemical Resonator" });
+                        else
+                            fossils.Add(new PoECurrencyData() { name = "Powerful Chaotic Resonator" });
+                    }
+                    else
+                    {
+                        if (Bench.BenchItem.Rarity == ItemRarity.Normal)
+                            fossils.Add(new PoECurrencyData() { name = "Prime Alchemical Resonator" });
+                        else
+                            fossils.Add(new PoECurrencyData() { name = "Prime Chaotic Resonator" });
+                    }
+                    RepeatResults.CurrenciesUsed = fossils;
+                }
                 RepeatResults.SortBy = null;
                 RepeatResults.Items = Bench.MassResults;
             }

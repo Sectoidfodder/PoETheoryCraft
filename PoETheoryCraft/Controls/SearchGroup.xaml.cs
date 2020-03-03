@@ -112,7 +112,7 @@ namespace PoETheoryCraft.Controls
             for (int i = 0; i < fields; i++)
             {
                 g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                NumberBox n = new NumberBox() { Min = int.MinValue, Max = int.MaxValue, AllowDouble = (Type != GroupType.Count), Width = 60, TextAlignment = TextAlignment.Center };
+                NumberBox n = new NumberBox() { AllowDouble = (Type != GroupType.Count), Width = 60, TextAlignment = TextAlignment.Center };
                 if (i == 0 && v1 != null)
                     n.Text = v1.ToString();
                 if (i == 1 && v2 != null)
@@ -212,7 +212,7 @@ namespace PoETheoryCraft.Controls
             for (int i = 0; i < fields; i++)
             {
                 g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                NumberBox n = new NumberBox() { Min = int.MinValue, Max = int.MaxValue, AllowDouble = true, Width = 60, TextAlignment = TextAlignment.Center };
+                NumberBox n = new NumberBox() { AllowDouble = true, Width = 60, TextAlignment = TextAlignment.Center };
                 if (i == 0 && v1 != null)
                     n.Text = v1.ToString();
                 if (i == 1 && v2 != null)

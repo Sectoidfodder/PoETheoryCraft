@@ -162,12 +162,12 @@ namespace PoETheoryCraft.Controls
                         StatBox.Text += c.name + ", ";
                     }
                     StatBox.Text = StatBox.Text.Trim(new char[] { ',', ' ' });
-                    StatBox.Text += ". Cost per roll: " + costperroll.ToString("#.#") + "c.";
+                    StatBox.Text += ". Cost per roll: " + costperroll.ToString("0.#") + "c.";
                     if (Filter != null)
                     {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";
                         double countpermatch = (double)Items.Count / FilteredItems.Count;
-                        StatBox.Text += " Match rate: 1/" + countpermatch.ToString("#.#") + ". Avg cost: " + (costperroll * countpermatch).ToString("#.#") + "c";
+                        StatBox.Text += " Match rate: 1/" + countpermatch.ToString("0.#") + ". Avg cost: " + (costperroll * countpermatch).ToString("0.#") + "c";
                     }
                     else
                     {

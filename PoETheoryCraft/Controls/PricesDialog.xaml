@@ -5,9 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoETheoryCraft.Controls"
         mc:Ignorable="d"
-        Title="PricesDialog" Height="450" Width="800"
-        ContentRendered="GetPrices">
-    <Grid>
-        <TextBlock Name="DataBlock"></TextBlock>
-    </Grid>
+        Title="Chaos Conversions" Height="450" Width="400">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Width="140" HorizontalAlignment="Left" Click="GetPrices">Load from poe.ninja</Button>
+            <!--<Button Grid.Column="1">Load from local file</Button>-->
+        </Grid>
+        <StackPanel Margin="2" DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Width="80" IsCancel="True">Cancel</Button>
+            <Button Width="80" IsDefault="True" Click="OK_Click">OK</Button>
+        </StackPanel>
+        <Border BorderThickness="1" Margin="2" BorderBrush="Black">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Name="DataPanel"></StackPanel>
+                <!--<ItemsControl Name="DataControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" Margin="3,1,3,1" Text="{Binding Key, Mode=OneTime}"/>
+                                <local:NumberBox Width="40" AllowDouble="True" Min="0" Grid.Column="1" Text="{Binding Value, Mode=OneTime}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>-->
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
 </Window>
