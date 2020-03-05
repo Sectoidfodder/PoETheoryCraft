@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,12 @@ namespace PoETheoryCraft.Controls
                 return;
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
-            EnchantmentsView.ItemsSource = ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments);
+            IDictionary<PoEModData, int> enchs = ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments);
+            //CollectionViewSource.GetDefaultView(enchs).GroupDescriptions.Add(new PropertyGroupDescription("Key.group"));
+            //CollectionViewSource.GetDefaultView(enchs).SortDescriptions.Add(new SortDescription("Key.group", ListSortDirection.Ascending));
+            //CollectionViewSource.GetDefaultView(enchs).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
+            CollectionViewSource.GetDefaultView(enchs).Filter = FilterEnchantments;
+            EnchantmentsView.ItemsSource = enchs;
             //EnchantmentsDisplay.UpdateData(ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments));
         }
         public void UpdateCrafts()
@@ -86,7 +92,7 @@ namespace PoETheoryCraft.Controls
                         inf = ItemInfluence.Crusader;
                     if (inf != ItemInfluence.Shaper)
                     {
-                        string tag = itemtemplate.item_class_properties[EnumConverter.InfToTag(inf)];
+                        string tag = itemtemplate.item_class_properties[Utils.EnumConverter.InfToTag(inf)];
                         if (tag != null)    //temporarily add influence tag
                         {
                             itemcopy.LiveTags.Add(tag);
@@ -139,12 +145,29 @@ namespace PoETheoryCraft.Controls
                 else
                     return activeview.SuffixList.SelectedItem;
             }
-            else if (((ModTabs.SelectedItem as TabItem).Content is ListView listview))
+            else if (ModTabs.SelectedIndex == 2)
             {
-                return listview.SelectedItem;
+                return EnchantmentsView.SelectedItem;
             }
             return null;
             
+        }
+        private bool FilterEnchantments(object o)
+        {
+            if (String.IsNullOrEmpty(EnchSearchBox.Text))
+                return true;
+            else
+            {
+                KeyValuePair<PoEModData, int>? kv = o as KeyValuePair<PoEModData, int>?;
+                if (kv == null)
+                    return false;
+                else
+                    return (kv.Value.Key.ToString().IndexOf(EnchSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            } 
+        }
+        private void Enchantments_Filter(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(EnchantmentsView.ItemsSource).Refresh();
         }
     }
 }

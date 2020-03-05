@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using LiveCharts;
@@ -70,10 +71,19 @@ namespace PoETheoryCraft.Controls.Graphs
 
             CartesianMapper<StatPoint> statmapper = Mappers.Xy<StatPoint>();
             statmapper.X(value => value.X);
-            statmapper.Y(value => value.Count);
+            //statmapper.Y(value => Math.Log(value.Total * value.Cost / value.Count, 10));
+            statmapper.Y(value => (double)value.Count / value.Total);
             Charting.For<StatPoint>(statmapper);
 
             DataContext = this;
+        }
+        public string ChaosFormat(double v)
+        {
+            return Math.Pow(10, v).ToString("N0") + "c";
+        }
+        public string PercentageFormat(double v)
+        {
+            return v.ToString("P");
         }
     }
 }

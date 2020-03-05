@@ -221,7 +221,7 @@ namespace PoETheoryCraft
                 PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
                 if (!m.IsLocked && modtemplate.domain == "crafted")
                 {
-                    RemoveModAt(i);
+                    RemoveModAt(LiveMods, i);
                     removedcount++;
                 }
             }
@@ -245,29 +245,22 @@ namespace PoETheoryCraft
                 ModCraft m = LiveMods[i];
                 PoEModData modtemplate = CraftingDatabase.AllMods[m.SourceData];
                 if (!m.IsLocked && !(prefixlock && modtemplate.generation_type == ModLogic.Prefix) && !(suffixlock && modtemplate.generation_type == ModLogic.Suffix))
-                    RemoveModAt(i);
+                    RemoveModAt(LiveMods, i);
             }
         }
         public void AddMod(PoEModData data)
         {
-            ModCraft m = new ModCraft(data);
-            LiveMods.Add(m);
-            LiveTags.UnionWith(data.adds_tags);
-            UpdateModQuality(m, QualityType);
+            InsertMod(LiveMods, data);
         }
         public void AddImplicit(PoEModData data)
         {
-            ModCraft m = new ModCraft(data);
-            LiveImplicits.Add(m);
-            LiveTags.UnionWith(data.adds_tags);
-            UpdateModQuality(m, QualityType);
+            InsertMod(LiveImplicits, data);
         }
         public void AddEnchantment(PoEModData data)
         {
-            ModCraft m = new ModCraft(data);
-            LiveEnchantments.Add(m);
-            LiveTags.UnionWith(data.adds_tags);
-            UpdateModQuality(m, QualityType);
+            InsertMod(LiveEnchantments, data);
+            if (LiveEnchantments.Count > 1)
+                RemoveModAt(LiveEnchantments, 0);
         }
         public void ApplyCatalyst(string tag)
         {
@@ -337,10 +330,25 @@ namespace PoETheoryCraft
             else
                 return ItemRarity.Rare;
         }
-        //removes a mod and updates the item's tags accordingly
-        private void RemoveModAt(int n)
+        private void InsertMod(IList<ModCraft> modlist, PoEModData template)
         {
-            PoEModData modtemplate = CraftingDatabase.AllMods[LiveMods[n].SourceData];
+            ModCraft m = new ModCraft(template);
+            int i = 0;
+            while (i < modlist.Count)
+            {
+                if ((template.generation_type == ModLogic.Prefix && CraftingDatabase.AllMods[modlist[i].SourceData].generation_type != ModLogic.Prefix) ||
+                    (template.generation_type == ModLogic.Suffix && CraftingDatabase.AllMods[modlist[i].SourceData].generation_type != ModLogic.Prefix && CraftingDatabase.AllMods[modlist[i].SourceData].generation_type != ModLogic.Suffix))
+                    break;
+                i++;
+            }
+            modlist.Insert(i, new ModCraft(template));
+            LiveTags.UnionWith(template.adds_tags);
+            UpdateModQuality(m, QualityType);
+        }
+        //removes a mod and updates the item's tags accordingly
+        private void RemoveModAt(IList<ModCraft> modlist, int n)
+        {
+            PoEModData modtemplate = CraftingDatabase.AllMods[modlist[n].SourceData];
             foreach (string tag in modtemplate.adds_tags)    //for each tag, only remove if no other live mods or implicits are applying the tag
             {
                 bool shouldremove = true;
@@ -364,10 +372,19 @@ namespace PoETheoryCraft
                         break;
                     }
                 }
+                for (int i = 0; i < LiveEnchantments.Count; i++)
+                {
+                    PoEModData othertemplate = CraftingDatabase.AllMods[LiveEnchantments[i].SourceData];
+                    if (othertemplate.adds_tags.Contains(tag))
+                    {
+                        shouldremove = false;
+                        break;
+                    }
+                }
                 if (shouldremove)
                     LiveTags.Remove(tag);
             }
-            LiveMods.RemoveAt(n);
+            modlist.RemoveAt(n);
         }
         public string GetClipboardString()
         {

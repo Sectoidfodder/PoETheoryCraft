@@ -23,11 +23,19 @@
                 <local:StatTooltip></local:StatTooltip>
             </lvc:CartesianChart.DataTooltip>
             <lvc:CartesianChart.Series>
-                <lvc:LineSeries Title="Count:" Values="{Binding CDF}" LineSmoothness="0"/>
+                <lvc:LineSeries Title="Count:" Values="{Binding CDF}" LineSmoothness="0" Fill="Transparent"/>
             </lvc:CartesianChart.Series>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis FontSize="18" FontWeight="Bold" Title="# Items" MinValue="0"></lvc:Axis>
+                <lvc:Axis FontSize="18" FontWeight="Bold" Title="% of Results" LabelFormatter="PercentageFormat">
+                </lvc:Axis>
             </lvc:CartesianChart.AxisY>
+            <!--<lvc:CartesianChart.AxisY>
+                <lvc:LogarithmicAxis Base="10" FontSize="18" FontWeight="Bold" Title="Cost" LabelFormatter="ChaosFormat">
+                    <lvc:LogarithmicAxis.Separator>
+                        <lvc:Separator StrokeThickness="1" IsEnabled="True"></lvc:Separator>
+                    </lvc:LogarithmicAxis.Separator>
+                </lvc:LogarithmicAxis>
+            </lvc:CartesianChart.AxisY>-->
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis FontSize="18" FontWeight="Bold" Title="Stat" Name="StatName"></lvc:Axis>
             </lvc:CartesianChart.AxisX>

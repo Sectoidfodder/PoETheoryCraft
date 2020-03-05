@@ -26,7 +26,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <TextBlock>Value: >=</TextBlock>
-                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.X), StringFormat={}{0:#.##}}"/>
+                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.X), StringFormat={}{0:0.##}}"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <TextBlock Margin="0,0,3,0">Count:</TextBlock>

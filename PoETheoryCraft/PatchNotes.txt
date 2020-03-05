@@ -1,4 +1,14 @@
-﻿
+﻿v0.3.1 - Currency Prices
+
+> You can import currency rates (chaos equivalents) from poe.ninja and edit them, via Options -> Currency Data.
+      Mass craft results and graphs show expected costs alongside probabilities
+
+Misc:
+> Items mods ordered prefixes before suffixes.
+> Graph Y axis shows % of rolls instead of total number of matches.
+> Implemented enchantments and added a tab in Mods View to show them w/ weights.  This is mostly prep for cluster jewels.
+
+
 
 v0.3.0 - Graphs and Performance improvements
 
@@ -17,7 +27,7 @@ UI:
 
 
 
-v0.2.0 - Search/Filter Enabled -
+v0.2.0 - Search/Filter Enabled
 
 > You can now search through your mass crafting results just like on a trade site.
       Example: https://imgur.com/a/qqjlVE8
