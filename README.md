@@ -4,7 +4,7 @@
 
 ![Album of search/filter examples - 0.2.0](https://imgur.com/a/qqjlVE8)
 
-![](https://i.imgur.com/9l2Jx54.png)
+![](https://i.imgur.com/No4mEra.png)
 
 ## Supported Mechanics
 
