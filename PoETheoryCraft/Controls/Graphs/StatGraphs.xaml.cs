@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Configurations;
+using LiveCharts.Wpf;
 using PoETheoryCraft.DataClasses;
 using PoETheoryCraft.Utils;
 
@@ -22,22 +24,14 @@ namespace PoETheoryCraft.Controls.Graphs
     }
     public partial class StatGraphs : Window
     {
-        public ChartValues<StatPoint> CDF { get; set; }
-        public StatGraphs(List<double> dat, int total, string statname, IList<PoECurrencyData> currencies, double cost, FilterCondition filter)
+        private readonly CartesianMapper<StatPoint> PercentMapper;
+        private readonly CartesianMapper<StatPoint> CostMapper;
+        private double Min, Max, Incr;
+        public StatGraphs(string statname, FilterCondition filter)
         {
             InitializeComponent();
 
-            Title = "";
-            if (dat.Count == total)
-                Title += total + " items";
-            else
-                Title += dat.Count + " matches out of " + total + " total items";
-            string s = "Currency: ";
-            foreach (PoECurrencyData d in currencies)
-            {
-                s += d.name + ", ";
-            }
-            CurrencyText.Text = s.Trim(new char[]{ ',',' '});
+            Title = "Plot: " + statname.Replace("[property] ", "");
             if (filter == null)
             {
                 FilterText.Text = "None";
@@ -51,31 +45,87 @@ namespace PoETheoryCraft.Controls.Graphs
                 }
                 FilterText.Text = string.Join("\n", filterstrings);
             }
+            PercentChart.AxisX[0].Title = statname.Replace("[property] ", "");
+            CostChart.AxisX[0].Title = statname.Replace("[property] ", "");
 
-            StatName.Title = statname.Replace("[property] ", "");
-            CDF = new ChartValues<StatPoint>();
-            if (dat.Count > 0)
+            PercentMapper = Mappers.Xy<StatPoint>();
+            PercentMapper.X(value => value.X);
+            PercentMapper.Y(value => (double)value.Count / value.Total);
+            CostMapper = Mappers.Xy<StatPoint>();
+            CostMapper.X(value => value.X);
+            CostMapper.Y(value => Math.Log(value.Total * value.Cost / value.Count, 10));
+            Min = double.NaN;
+            Max = double.NaN;
+            Incr = double.NaN;
+
+        }
+        public void AddSeries(List<double> dat, int total, string currencies, double cost)
+        {
+            currencies += ": " + cost.ToString("N1") + "c";
+            if (double.IsNaN(Min))
             {
-                double x = dat[0];
-                double incr = (dat[dat.Count - 1] - x) / 100;
-                CDF.Add(new StatPoint() { X = x, Count = dat.Count, Matches = dat.Count, Total = total, Cost = cost });
-                for (int i = 0; i < dat.Count; i++)
-                {
-                    double newx = dat[i];
-                    if (newx <= x + incr)
-                        continue;
-                    CDF.Add(new StatPoint() { X = newx, Count = dat.Count - i, Matches = dat.Count, Total = total, Cost = cost });
-                    x = newx;
-                }
+                Min = dat[0];
+                Max = dat[dat.Count - 1];
+                Incr = Math.Max((Max - Min) / 100, 0.01);
+                Incr = CleanIncrement(Incr);
+                Min = CleanMin(Min, Incr);
+                Max = CleanMax(Max, Incr);
             }
-
-            CartesianMapper<StatPoint> statmapper = Mappers.Xy<StatPoint>();
-            statmapper.X(value => value.X);
-            //statmapper.Y(value => Math.Log(value.Total * value.Cost / value.Count, 10));
-            statmapper.Y(value => (double)value.Count / value.Total);
-            Charting.For<StatPoint>(statmapper);
-
-            DataContext = this;
+            else
+            {
+                Min = Math.Min(Min, dat[0]);
+                Max = Math.Max(Max, dat[dat.Count - 1]);
+                Min = CleanMin(Min, Incr);
+                Max = CleanMax(Max, Incr);
+            }
+            ChartValues<StatPoint> p = new ChartValues<StatPoint>();
+            int i = 0;
+            for (double x = Min; x <= Max; x += Incr)
+            {
+                if (x + Incr <= dat[0])
+                    continue;
+                while (i < dat.Count && dat[i] < x)
+                {
+                    i++;
+                }
+                if (i >= dat.Count)
+                    break;
+                p.Add(new StatPoint() { X = x, Count = dat.Count - i, Total = total, Matches = dat.Count, Cost = cost });
+            }
+            PercentChart.Series.Add(new LineSeries(PercentMapper) { LineSmoothness = 0, Fill = Brushes.Transparent, Values = p, Title = currencies });
+            CostChart.Series.Add(new LineSeries(CostMapper) { LineSmoothness = 0, Fill = Brushes.Transparent, Values = p, Title = currencies });
+            GraphTabs.Height += 20;
+        }
+        //rounds increment to 1, 2, or 5 * 10^k
+        public static double CleanIncrement(double incr)
+        {
+            int power = 0;
+            while (incr <= 1)
+            {
+                incr *= 10;
+                power++;
+            }
+            while (incr > 10)
+            {
+                incr /= 10;
+                power--;
+            }
+            if (incr > 5)
+                return 10 / Math.Pow(10, power);
+            else if (incr > 2)
+                return 5 / Math.Pow(10, power);
+            else
+                return 2 / Math.Pow(10, power);
+        }
+        //rounds min down to nearest incr
+        public static double CleanMin(double min, double incr)
+        {
+            return Math.Floor(min / incr) * incr;
+        }
+        //rounds max up to nearest incr
+        public static double CleanMax(double max, double incr)
+        {
+            return Math.Ceiling(max / incr) * incr;
         }
         public string ChaosFormat(double v)
         {

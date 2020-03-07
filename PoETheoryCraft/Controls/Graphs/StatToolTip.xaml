@@ -13,37 +13,37 @@
         <local:TotalTooltipConverter x:Key="TotalTooltipConverter" />
         <local:CostTooltipConverter x:Key="CostTooltipConverter" />
     </UserControl.Resources>
-    <ItemsControl ItemsSource="{Binding Data.Points}" TextBlock.FontWeight="Bold">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="{x:Type wpf:DataPointViewModel}">
-                <Border BorderThickness="2" Background="White" BorderBrush="Black">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock>Value: >=</TextBlock>
-                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.X), StringFormat={}{0:0.##}}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <TextBlock Margin="0,0,3,0">Count:</TextBlock>
-                            <TextBlock Text="{Binding ChartPoint.Instance.(local:StatPoint.Count)}"/>
-                        </StackPanel>
-                        <!--<StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource MatchTooltipConverter}}"/>
-                        </StackPanel>-->
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource TotalTooltipConverter}}"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Orientation="Horizontal">
-                            <TextBlock Text="{Binding ChartPoint.Instance, Converter={StaticResource CostTooltipConverter}}"/>
-                        </StackPanel>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <Border BorderThickness="2" Background="White" BorderBrush="Black">
+        <StackPanel TextBlock.FontWeight="Bold">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="2,1,2,1">Value: >=</TextBlock>
+                <TextBlock Margin="2,1,2,1" Text="{Binding Data.SharedValue, StringFormat={}{0:0.##}}"/>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Data.Points}">
+            <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type wpf:DataPointViewModel}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Rectangle Margin="2,1,2,1" VerticalAlignment="Center" Width="10" Height="10" Stroke="{Binding Series.Stroke}" Fill="{Binding Series.Stroke}"></Rectangle>
+                                <TextBlock Margin="2,1,2,1" Text="{Binding ChartPoint.Instance.(local:StatPoint.Count)}"/>
+                                <TextBlock Margin="2,1,2,1">/</TextBlock>
+                                <TextBlock Margin="2,1,2,1" Text="{Binding ChartPoint.Instance.(local:StatPoint.Total)}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Margin="2,1,2,1" Text="{Binding ChartPoint.Instance, Converter={StaticResource TotalTooltipConverter}}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="2,1,2,1" Text="{Binding ChartPoint.Instance, Converter={StaticResource CostTooltipConverter}}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+    </Border>
 </UserControl>

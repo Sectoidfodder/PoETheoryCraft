@@ -69,7 +69,7 @@ namespace PoETheoryCraft.Controls.Graphs
                 return "???";
             double p = (double)s.Count * 100 / s.Total;
             double inv = 100 / p;
-            return p.ToString("N2") + "% of all rolls (1/" + (inv > 10 ? inv.ToString("N0") : inv.ToString("N1")) + ")";
+            return "Odds: " + p.ToString("N2") + "% (1/" + (inv > 10 ? inv.ToString("N0") : inv.ToString("N1")) + ")";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -84,7 +84,7 @@ namespace PoETheoryCraft.Controls.Graphs
                 return "???";
             double p = (double)s.Count * 100 / s.Total;
             double inv = 100 / p;
-            return "Avg cost: " + (inv * s.Cost).ToString("N1") + "c";
+            return "Cost: " + (inv * s.Cost).ToString("N1") + "c";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -1,7 +1,9 @@
-﻿v0.3.1 - Currency Prices
+﻿v0.4.0 - Expected Crafting Costs
 
-> You can import currency rates (chaos equivalents) from poe.ninja and edit them, via Options -> Currency Data.
-      Mass craft results and graphs show expected costs alongside probabilities
+> Import currency rates (chaos equiv) from PoE.ninja and edit them in Options -> Currency Data.
+> Bulk craft results show expected costs.
+> Stats are graphed by cost as well as probability.  The cost graph uses a log scale.
+> Results with different currencies are combined into one graph for comparison, as long as the targeted stat and filter are unchanged.
 
 Misc:
 > Items mods ordered prefixes before suffixes.

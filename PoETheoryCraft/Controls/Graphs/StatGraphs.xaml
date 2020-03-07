@@ -13,32 +13,48 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="5" Grid.Row="0" Name="CurrencyText">Currency: </TextBlock>
         <StackPanel Margin="5,0,5,5" Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Margin="0,0,5,0">Filters:</TextBlock>
+            <TextBlock Margin="0,0,5,0">Required:</TextBlock>
             <TextBlock Name="FilterText"></TextBlock>
         </StackPanel>
-        <lvc:CartesianChart Grid.Row="2" DisableAnimations="True" LegendLocation="None" Height="350" Width="700">
-            <lvc:CartesianChart.DataTooltip>
-                <local:StatTooltip></local:StatTooltip>
-            </lvc:CartesianChart.DataTooltip>
-            <lvc:CartesianChart.Series>
-                <lvc:LineSeries Title="Count:" Values="{Binding CDF}" LineSmoothness="0" Fill="Transparent"/>
-            </lvc:CartesianChart.Series>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis FontSize="18" FontWeight="Bold" Title="% of Results" LabelFormatter="PercentageFormat">
-                </lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-            <!--<lvc:CartesianChart.AxisY>
-                <lvc:LogarithmicAxis Base="10" FontSize="18" FontWeight="Bold" Title="Cost" LabelFormatter="ChaosFormat">
-                    <lvc:LogarithmicAxis.Separator>
-                        <lvc:Separator StrokeThickness="1" IsEnabled="True"></lvc:Separator>
-                    </lvc:LogarithmicAxis.Separator>
-                </lvc:LogarithmicAxis>
-            </lvc:CartesianChart.AxisY>-->
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis FontSize="18" FontWeight="Bold" Title="Stat" Name="StatName"></lvc:Axis>
-            </lvc:CartesianChart.AxisX>
-        </lvc:CartesianChart>
+        <TabControl Grid.Row="2" Height="370" Width="700" Name="GraphTabs">
+            <TabItem Header="Odds">
+                <lvc:CartesianChart Name="PercentChart" DisableAnimations="True" LegendLocation="Top">
+                    <lvc:CartesianChart.ChartLegend>
+                        <lvc:DefaultLegend Orientation="Vertical"/>
+                    </lvc:CartesianChart.ChartLegend>
+                    <lvc:CartesianChart.DataTooltip>
+                        <local:StatTooltip></local:StatTooltip>
+                    </lvc:CartesianChart.DataTooltip>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis FontSize="18" FontWeight="Bold" Title="% of Results" MinValue="0" LabelFormatter="PercentageFormat">
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis FontSize="18" FontWeight="Bold"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+            </TabItem>
+            <TabItem Header="Cost">
+                <lvc:CartesianChart Name="CostChart" DisableAnimations="True" LegendLocation="Top">
+                    <lvc:CartesianChart.ChartLegend>
+                        <lvc:DefaultLegend Orientation="Vertical"/>
+                    </lvc:CartesianChart.ChartLegend>
+                    <lvc:CartesianChart.DataTooltip>
+                        <local:StatTooltip></local:StatTooltip>
+                    </lvc:CartesianChart.DataTooltip>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:LogarithmicAxis Base="10" FontSize="18" FontWeight="Bold" Title="Expected Cost" LabelFormatter="ChaosFormat">
+                            <lvc:LogarithmicAxis.Separator>
+                                <lvc:Separator StrokeThickness="1" IsEnabled="True"></lvc:Separator>
+                            </lvc:LogarithmicAxis.Separator>
+                        </lvc:LogarithmicAxis>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis FontSize="18" FontWeight="Bold"></lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -63,6 +63,7 @@ namespace PoETheoryCraft.Controls
                     LoadPrices(w, "https://poe.ninja/api/data/ItemOverview?league=Metamorph&type=Fossil", dict);
                     LoadPrices(w, "https://poe.ninja/api/data/CurrencyOverview?league=Metamorph&type=Currency", dict, CraftingDatabase.CurrencyIndex);
                     LoadPrices(w, "https://poe.ninja/api/data/ItemOverview?league=Metamorph&type=Essence", dict);
+                    dict.Add("Chaos Orb", 1);
                 }
                 catch (Exception err)
                 {

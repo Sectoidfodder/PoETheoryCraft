@@ -13,7 +13,12 @@ namespace PoETheoryCraft.Controls
     /// </summary>
     public partial class BulkItemsView : UserControl
     {
-        private readonly IDictionary<string, StatGraphs> GraphWindows = new Dictionary<string, StatGraphs>();
+        private struct GraphData
+        {
+            public StatGraphs Window { get; set; }
+            public ISet<string> Methods { get; set; }
+        }
+        private readonly IDictionary<string, GraphData> GraphWindows = new Dictionary<string, GraphData>(); //tracks the crafting methods currently plotted for each stat
         private int DisplayIndex = 0;
         public static int ResultsPerPage { get; set; } = Properties.Settings.Default.ResultsPerPage;
         public IList<PoECurrencyData> CurrenciesUsed { get; set; }
@@ -34,19 +39,27 @@ namespace PoETheoryCraft.Controls
                 //    _sortasc = !_sortasc;
                 //}
                 _sortby = value;
-                if (_sortby != null && FilteredItems != null)
+                if (_sortby != null && FilteredItems != null && FilteredItems.Count > 0)
                 {
-                    if (GraphWindows.ContainsKey(_sortby) && GraphWindows[_sortby].IsLoaded)
+                    string cstring = GetCurrencyString();
+                    if (GraphWindows.ContainsKey(_sortby) && GraphWindows[_sortby].Window.IsLoaded)
                     {
-                        GraphWindows[_sortby].Focus();
+                        if (!GraphWindows[_sortby].Methods.Contains(cstring))
+                        {
+                            GraphWindows[_sortby].Window.AddSeries(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, cstring, GetCurrencyCost());
+                            GraphWindows[_sortby].Methods.Add(cstring);
+                        }
+                        GraphWindows[_sortby].Window.Focus();
                     }
                     else
                     {
-                        StatGraphs graph = new StatGraphs(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, _sortby, CurrenciesUsed, GetCurrencyCost(), Filter);
+                        StatGraphs graph = new StatGraphs(_sortby, Filter);
+                        graph.AddSeries(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, cstring, GetCurrencyCost());
+                        //StatGraphs graph = new StatGraphs(ItemParser.GetSortedValues(FilteredItems, _sortby), Items.Count, _sortby, CurrenciesUsed, GetCurrencyCost(), Filter);
                         if (GraphWindows.ContainsKey(_sortby))
-                            GraphWindows[_sortby] = graph;
+                            GraphWindows[_sortby] = new GraphData() { Window = graph, Methods = new HashSet<string>() { cstring } };
                         else
-                            GraphWindows.Add(_sortby, graph);
+                            GraphWindows.Add(_sortby, new GraphData() { Window = graph, Methods = new HashSet<string>() { cstring } });
                         graph.Show();
                     }
                 }
@@ -68,6 +81,7 @@ namespace PoETheoryCraft.Controls
                     FilterItems();
                     //SortItems();
                     UpdateDisplay();
+                    GraphWindows.Clear();   //if filter is changed, don't merge new series into old windows of the same stat
                 }
             }
         }
@@ -85,6 +99,10 @@ namespace PoETheoryCraft.Controls
                 FilterItems();
                 //SortItems();
                 UpdateDisplay();
+                foreach (string s in GraphWindows.Keys) //if items are rerolled, merge new series into old windows of the same stat even if the same currency was graphed before
+                {
+                    GraphWindows[s].Methods.Clear();
+                }
             }
         }
         private IList<ItemCraft> FilteredItems;
@@ -92,6 +110,18 @@ namespace PoETheoryCraft.Controls
         {
             InitializeComponent();
             //SortIndicator.Text = "Click on any stat to sort";
+        }
+        private string GetCurrencyString()
+        {
+            if (CurrenciesUsed == null)
+                return "None";
+            string cstring = "";
+            foreach (PoECurrencyData c in CurrenciesUsed)
+            {
+                cstring += c.name + ", ";
+            }
+            cstring = cstring.Trim(new char[] { ',', ' ' });
+            return cstring.Length > 0 ? cstring : "None";
         }
         private double GetCurrencyCost()
         {
@@ -136,7 +166,7 @@ namespace PoETheoryCraft.Controls
                     }
                 }
             }
-            GraphWindows.Clear();
+            //GraphWindows.Clear();
         }
         //private void SortItems()
         //{
@@ -156,23 +186,17 @@ namespace PoETheoryCraft.Controls
                 {
                     int max = Math.Min(FilteredItems.Count, DisplayIndex + ResultsPerPage);
                     double costperroll = GetCurrencyCost();
-                    StatBox.Text = "Currency: ";
-                    foreach (PoECurrencyData c in CurrenciesUsed)
-                    {
-                        StatBox.Text += c.name + ", ";
-                    }
-                    StatBox.Text = StatBox.Text.Trim(new char[] { ',', ' ' });
-                    StatBox.Text += ". Cost per roll: " + costperroll.ToString("0.#") + "c.";
+                    CurrencyBox.Text = "Currency: " + GetCurrencyString() + " (" + costperroll.ToString("0.#") + ")";
                     if (Filter != null)
                     {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";
                         double countpermatch = (double)Items.Count / FilteredItems.Count;
-                        StatBox.Text += " Match rate: 1/" + countpermatch.ToString("0.#") + ". Avg cost: " + (costperroll * countpermatch).ToString("0.#") + "c";
+                        StatBox.Text = "Match rate: 1/" + countpermatch.ToString("0.#") + " (" + (costperroll * countpermatch).ToString("0.#") + "c)";
                     }
                     else
                     {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " results";
-                        
+                        StatBox.Text = "Match rate: N/A";
                     }
                     
                     for (int k = DisplayIndex; k < max; k++)
