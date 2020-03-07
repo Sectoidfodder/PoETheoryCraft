@@ -73,16 +73,6 @@ Functions:
 > Currency tracker - Tallies currency spent (except when mass crafting), can be reset whenever.
 
 
-- In Progress (coming soon) -
-
-> Stash page; moving items between bench, mass craft results, and stash.
-> Trade-site-esque search/filter functions for mass craft results.
-> Ability to lock mods on an item while rolling.
-      Not like metamod locks, can't be ignored by essences/fossils.
-      Useful for simulating Awakener's Orb (force add, lock two influenced mods, then roll w/ chaos).
-      Also kinda usable for fractured mods, but the simulator is unlikely to ever support legacy rolls not in current game data.
-
-
 
 Dev Notes:
 

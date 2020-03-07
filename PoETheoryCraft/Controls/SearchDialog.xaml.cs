@@ -47,7 +47,9 @@ namespace PoETheoryCraft.Controls
             IList<FilterCondition> subconditions = new List<FilterCondition>();
             foreach (UIElement e in GroupsPanel.Children)
             {
-                subconditions.Add(((SearchGroup)e).GetFilterCondition());
+                FilterCondition fc = ((SearchGroup)e).GetFilterCondition();
+                if (fc != null)
+                    subconditions.Add(fc);
             }
             if (subconditions.Count > 0)
                 return new AndCondition() { Subconditions = subconditions };
