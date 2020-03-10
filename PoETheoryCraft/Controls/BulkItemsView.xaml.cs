@@ -141,7 +141,7 @@ namespace PoETheoryCraft.Controls
             if (FilteredItems != null && Filter != null)
             {
                 FilteredItems = new List<ItemCraft>();
-                if (Items.Count > Properties.Settings.Default.ProgressBarThreshold)
+                if (Items.Count >= Properties.Settings.Default.ProgressBarThreshold)
                 {
                     int i = 0;
                     ProgressDialog p = new ProgressDialog() { Title = "Filtering...", Steps = Items.Count, ReportStep = Math.Max(Items.Count / 100, 1) };
@@ -186,7 +186,7 @@ namespace PoETheoryCraft.Controls
                 {
                     int max = Math.Min(FilteredItems.Count, DisplayIndex + ResultsPerPage);
                     double costperroll = GetCurrencyCost();
-                    CurrencyBox.Text = "Currency: " + GetCurrencyString() + " (" + costperroll.ToString("0.#") + ")";
+                    CurrencyBox.Text = "Currency: " + GetCurrencyString() + " (" + costperroll.ToString("0.#") + "c)";
                     if (Filter != null)
                     {
                         PageHeader.Text = (DisplayIndex + 1) + "-" + max + " of " + FilteredItems.Count + " matches in " + Items.Count + " results";

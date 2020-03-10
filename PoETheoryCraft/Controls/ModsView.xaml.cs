@@ -18,24 +18,25 @@ namespace PoETheoryCraft.Controls
     public partial class ModsView : UserControl
     {
         //track and sync expanded groups across all instances
-        public static readonly bool DefaultExpand = Properties.Settings.Default.ExpandGroups;
-        public static readonly ISet<string> ExpandedGroups = new HashSet<string>();
+        //public static readonly bool DefaultExpand = Properties.Settings.Default.ExpandGroups;
+        //public static readonly ISet<string> ExpandedGroups = new HashSet<string>();
         public static int psum = 0;
         public static int ssum = 0;
+        public Predicate<object> Filter { get; set; }
         public ModsView()
         {
             InitializeComponent();
-            IsVisibleChanged += RefreshListViews;
+            IsVisibleChanged += On_Visible;
         }
-        //Shows a list of mods along with their weights
-        public void UpdateData(IDictionary<PoEModData, int> mods)
+        //split mods into prefix and suffix lists
+        public void UpdateData(IDictionary<PoEModData, object> mods)
         {
-            IDictionary<PoEModData, int> p = new Dictionary<PoEModData, int>();
-            IDictionary<PoEModData, int> s = new Dictionary<PoEModData, int>();
+            IDictionary<PoEModData, object> p = new Dictionary<PoEModData, object>();
+            IDictionary<PoEModData, object> s = new Dictionary<PoEModData, object>();
             if (mods != null)
             {
                 foreach (PoEModData m in mods.Keys)
-                { 
+                {
                     if (m.generation_type == ModLogic.Suffix)
                         s.Add(m, mods[m]);
                     else
@@ -48,46 +49,37 @@ namespace PoETheoryCraft.Controls
             CollectionViewSource.GetDefaultView(s).SortDescriptions.Add(new SortDescription("Key.group", ListSortDirection.Ascending));
             CollectionViewSource.GetDefaultView(p).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
             CollectionViewSource.GetDefaultView(s).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
+            if (Filter != null)
+            {
+                CollectionViewSource.GetDefaultView(p).Filter = Filter;
+                CollectionViewSource.GetDefaultView(s).Filter = Filter;
+            }
             PrefixList.ItemsSource = p;
             SuffixList.ItemsSource = s;
-            psum = 0;
-            ssum = 0;
-            foreach (int n in p.Values)
+            int ps = 0;
+            int ss = 0;
+            foreach (object o in p.Values)
             {
-                psum += n;
+                if (o is int n)
+                    ps += n;
             }
-            foreach (int n in s.Values)
+            foreach (object o in s.Values)
             {
-                ssum += n;
+                if (o is int n)
+                    ss += n;
             }
-            PrefixTally.Content = psum + " (" + ((double)psum * 100 / (psum + ssum)).ToString("N2") + "%)";
-            SuffixTally.Content = ssum + " (" + ((double)ssum * 100 / (psum + ssum)).ToString("N2") + "%)";
-        }
-        //Shows a list of mods along with their crafting costs
-        public void UpdateData(IDictionary<PoEModData, IDictionary<string, int>> mods)
-        {
-            IDictionary<PoEModData, IDictionary<string, int>> p = new Dictionary<PoEModData, IDictionary<string, int>>();
-            IDictionary<PoEModData, IDictionary<string, int>> s = new Dictionary<PoEModData, IDictionary<string, int>>();
-            if (mods != null)
+            if (ps > 0 || ss > 0)
             {
-                foreach (PoEModData m in mods.Keys)
-                {
-                    if (m.generation_type == ModLogic.Prefix)
-                        p.Add(m, mods[m]);
-                    else if (m.generation_type == ModLogic.Suffix)
-                        s.Add(m, mods[m]);
-                }
+                psum = ps;
+                ssum = ss;
+                PrefixTally.Content = psum + " (" + ((double)psum * 100 / (psum + ssum)).ToString("N2") + "%)";
+                SuffixTally.Content = ssum + " (" + ((double)ssum * 100 / (psum + ssum)).ToString("N2") + "%)";
             }
-            CollectionViewSource.GetDefaultView(p).GroupDescriptions.Add(new PropertyGroupDescription("Key.group"));
-            CollectionViewSource.GetDefaultView(s).GroupDescriptions.Add(new PropertyGroupDescription("Key.group"));
-            CollectionViewSource.GetDefaultView(p).SortDescriptions.Add(new SortDescription("Key.group", ListSortDirection.Ascending));
-            CollectionViewSource.GetDefaultView(s).SortDescriptions.Add(new SortDescription("Key.group", ListSortDirection.Ascending));
-            CollectionViewSource.GetDefaultView(p).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
-            CollectionViewSource.GetDefaultView(s).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
-            PrefixList.ItemsSource = p;
-            SuffixList.ItemsSource = s;
-            PrefixTally.Content = "";
-            SuffixTally.Content = "";
+            else
+            {
+                PrefixTally.Content = "";
+                SuffixTally.Content = "";
+            }
         }
         //Force one selected item between the two lists
         private void ModList_SelectionChanged(object sender, RoutedEventArgs e)
@@ -100,70 +92,84 @@ namespace PoETheoryCraft.Controls
                     PrefixList.UnselectAll();
             }
         }
-        private void LogExpanded(object sender, RoutedEventArgs e)
+        //private void LogExpanded(object sender, RoutedEventArgs e)
+        //{
+        //    if ((sender as Expander).Header is StackPanel p)
+        //    {
+        //        string s = (p.Children[0] as TextBlock).Text;
+        //        if (DefaultExpand)
+        //            ExpandedGroups.Remove(s);
+        //        else
+        //            ExpandedGroups.Add(s);
+        //    }
+        //}
+        //private void LogCollapsed(object sender, RoutedEventArgs e)
+        //{
+        //    if ((sender as Expander).Header is StackPanel p)
+        //    {
+        //        string s = (p.Children[0] as TextBlock).Text;
+        //        if (DefaultExpand)
+        //            ExpandedGroups.Add(s);
+        //        else
+        //            ExpandedGroups.Remove(s);
+        //    }
+        //}
+        private void On_Visible(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((sender as Expander).Header is StackPanel p)
-            {
-                string s = (p.Children[0] as TextBlock).Text;
-                if (DefaultExpand)
-                    ExpandedGroups.Remove(s);
-                else
-                    ExpandedGroups.Add(s);
-            }
+            RefreshListViews();
         }
-        private void LogCollapsed(object sender, RoutedEventArgs e)
+        public void RefreshListViews()
         {
-            if ((sender as Expander).Header is StackPanel p)
+            if (IsVisible)
             {
-                string s = (p.Children[0] as TextBlock).Text;
-                if (DefaultExpand)
-                    ExpandedGroups.Add(s);
-                else
-                    ExpandedGroups.Remove(s);
-            }
-        }
-        private void RefreshListViews(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            ModsView v = sender as ModsView;
-            if (v.IsVisible)
-            {
-                CollectionViewSource.GetDefaultView(v.PrefixList.ItemsSource)?.Refresh();
-                CollectionViewSource.GetDefaultView(v.SuffixList.ItemsSource)?.Refresh();
+                CollectionViewSource.GetDefaultView(PrefixList.ItemsSource)?.Refresh();
+                CollectionViewSource.GetDefaultView(SuffixList.ItemsSource)?.Refresh();
             }
         }
     }
-    public class ShouldExpandConverter : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ModsView.ExpandedGroups.Contains(value as string) ^ ModsView.DefaultExpand;
-        }
+    //public class ShouldExpandConverter : IValueConverter
+    //{
+    //    object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        return ModsView.ExpandedGroups.Contains(value as string) ^ ModsView.DefaultExpand;
+    //    }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
     public class ModDataToBrushConverter : IValueConverter
     {
         private static readonly SolidColorBrush WarlordBrush = new SolidColorBrush(Color.FromRgb(255, 255, 120));
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PoEModData data = value as PoEModData;
-            if (data.name == "Subterranean" || data.name == "of the Underground")
-                return Brushes.Gold;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Shaper).Contains(data.name))
-                return Brushes.DodgerBlue;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Elder).Contains(data.name))
-                return Brushes.Gray;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Redeemer).Contains(data.name))
-                return Brushes.LightBlue;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Hunter).Contains(data.name))
-                return Brushes.LightGreen;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Warlord).Contains(data.name))
-                return WarlordBrush;
-            if (Utils.EnumConverter.InfToNames(ItemInfluence.Crusader).Contains(data.name))
-                return Brushes.Pink;
+            KeyValuePair<PoEModData, object> kv = (KeyValuePair<PoEModData, object>)value;
+            PoEModData data = kv.Key;
+            if (kv.Value is string)
+            {
+                if (data.name == "Subterranean" || data.name == "of the Underground")
+                    return Brushes.Gold;
+                else
+                    return Brushes.Orchid;
+            }
+            else
+            {
+                if (data.name == "Subterranean" || data.name == "of the Underground")
+                    return Brushes.Gold;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Shaper).Contains(data.name))
+                    return Brushes.DodgerBlue;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Elder).Contains(data.name))
+                    return Brushes.Gray;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Redeemer).Contains(data.name))
+                    return Brushes.LightBlue;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Hunter).Contains(data.name))
+                    return Brushes.LightGreen;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Warlord).Contains(data.name))
+                    return WarlordBrush;
+                if (Utils.EnumConverter.InfToNames(ItemInfluence.Crusader).Contains(data.name))
+                    return Brushes.Pink;
+            }
             return Brushes.White;
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -210,10 +216,13 @@ namespace PoETheoryCraft.Controls
                 double p = (double)v * 100 / (ModsView.psum + ModsView.ssum);
                 objs.Add(new CostObject() { Label = v + " (" + p.ToString("N2") + "%)" });
             }
-            else if (value is IDictionary<string, int>)
+            else if (value is string s)
             {
-                IDictionary<string, int> costdict = (Dictionary<string, int>)value;
-                foreach (string k in costdict.Keys)
+                objs.Add(new CostObject() { Label = s });
+            }
+            else if (value is IDictionary<string, int> d)
+            {
+                foreach (string k in d.Keys)
                 {
                     BitmapImage icon = null;
                     if (CraftingDatabase.Currencies.ContainsKey(k))
@@ -222,7 +231,7 @@ namespace PoETheoryCraft.Controls
                         icon = CraftingDatabase.Fossils[k].icon;
                     else if (CraftingDatabase.Essences.ContainsKey(k))
                         icon = CraftingDatabase.Essences[k].icon;
-                    objs.Add(new CostObject() { Label = costdict[k] + "x", Icon = icon });
+                    objs.Add(new CostObject() { Label = d[k] + "x", Icon = icon });
                 }
             }
             else

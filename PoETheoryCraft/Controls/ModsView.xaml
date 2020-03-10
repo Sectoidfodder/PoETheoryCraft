@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <local:CostsToDisplayConverter x:Key="CostsToDisplayConverter" />
         <local:ModDataToTooltipConverter x:Key="ModDataToTooltipConverter" />
-        <local:ShouldExpandConverter x:Key="ShouldExpandConverter" />
+        <!--<local:ShouldExpandConverter x:Key="ShouldExpandConverter" />-->
         <local:ModDataToBrushConverter x:Key="ModDataToBrushConverter" />
     </UserControl.Resources>
     <Grid>
@@ -32,7 +32,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="PrefixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single" Background="AliceBlue">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Name="PrefixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -40,6 +40,18 @@
             </ListView.ItemContainerStyle>
             <ListView.GroupStyle>
                 <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontWeight="Bold" Background="AliceBlue" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding Name, Mode=OneTime}"></TextBlock>
+                                <TextBlock Margin="5,0,0,0">(</TextBlock>
+                                <TextBlock Text="{Binding ItemCount, Mode=OneTime}"></TextBlock>
+                                <TextBlock>)</TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+                <!--<GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="{x:Type GroupItem}">
                             <Setter Property="Template">
@@ -61,17 +73,17 @@
                             </Setter>
                         </Style>
                     </GroupStyle.ContainerStyle>
-                </GroupStyle>
+                </GroupStyle>-->
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Background="{Binding Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}" ToolTip="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <ItemsControl Background="Beige" Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"></StackPanel>
@@ -101,7 +113,7 @@
             </StackPanel>
             <Label Grid.Column="1" Name="SuffixTally" Margin="0,0,10,0"></Label>
         </Grid>
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single" Background="AliceBlue">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Name="SuffixList" SelectionChanged="ModList_SelectionChanged" SelectionMode="Single">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -109,6 +121,18 @@
             </ListView.ItemContainerStyle>
             <ListView.GroupStyle>
                 <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="2" Orientation="Horizontal" TextBlock.FontWeight="Bold" Background="AliceBlue" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding Name, Mode=OneTime}"></TextBlock>
+                                <TextBlock Margin="5,0,0,0">(</TextBlock>
+                                <TextBlock Text="{Binding ItemCount, Mode=OneTime}"></TextBlock>
+                                <TextBlock>)</TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+                <!--<GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="{x:Type GroupItem}">
                             <Setter Property="Template">
@@ -130,17 +154,17 @@
                             </Setter>
                         </Style>
                     </GroupStyle.ContainerStyle>
-                </GroupStyle>
+                </GroupStyle>-->
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Background="{Binding Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" Background="{Binding Path=Key, Mode=OneTime, Converter={StaticResource ModDataToBrushConverter}}"  ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
-                        <ItemsControl Background="Beige" Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
+                        <TextBlock Text="{Binding Path=Key, Mode=OneTime}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path=Key, Mode=OneWay, Converter={StaticResource ModDataToTooltipConverter}}"></TextBlock>
+                        <ItemsControl Grid.Column="1" ItemsSource="{Binding Path=Value, Mode=OneTime, Converter={StaticResource CostsToDisplayConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"></StackPanel>

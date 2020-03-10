@@ -43,6 +43,7 @@ namespace PoETheoryCraft
             CraftingDatabase.LoadEssences(@"Data\essences.min.json");
             CraftingDatabase.LoadFossils(@"Data\fossils.min.json");
             CraftingDatabase.LoadPrices("pricedata.json");
+            CraftingDatabase.LoadSpecialMods(@"Data\delve_droponly_mods.json", @"Data\incursion_droponly_mods.json");
 
             CurrencyBox.LoadEssences(CraftingDatabase.Essences.Values);
             CurrencyBox.LoadFossils(CraftingDatabase.Fossils.Values);
@@ -64,6 +65,7 @@ namespace PoETheoryCraft
         }
         private void ItemBaseButton_Click(object sender, RoutedEventArgs e)
         {
+            BigBox.Text = "";
             if (CraftingDatabase.CoreBaseItems == null)
                 return;
 
@@ -98,23 +100,24 @@ namespace PoETheoryCraft
             Bench.PostRoll = new PostRollOptions();
             PostCraftButton.ClearValue(Button.BackgroundProperty);
         }
-        private void ForceAdd_Click(object sender, RoutedEventArgs e)
+        private void ForceAddMod(object sender, ModsControl.AddModEventArgs e)
         {
-            object kv = ModPreview.GetSelected();
-            if (kv == null)
+            BigBox.Text = "";
+            object o = e.SelectedMod;
+            if (o == null)
                 return;
+            KeyValuePair<PoEModData, object> kv = (KeyValuePair<PoEModData, object>)o;
             string res = null;
-            if (kv is KeyValuePair<PoEModData, int> kvint)
+            if (kv.Value is int || kv.Value is string)
             {
-                if (kvint.Key.generation_type == ModLogic.Enchantment)
-                    Bench.BenchItem.AddEnchantment(kvint.Key);
+                if (kv.Key.generation_type == ModLogic.Enchantment)
+                    Bench.BenchItem.AddEnchantment(kv.Key);
                 else
-                    res = Bench.ForceAddMod(kvint.Key);
+                    res = Bench.ForceAddMod(kv.Key);
             }
-            else if (kv is KeyValuePair<PoEModData, IDictionary<string, int>> kvdict)
+            else if (kv.Value is IDictionary<string, int> dict)
             {
-
-                res = Bench.ForceAddMod(kvdict.Key, costs: kvdict.Value);
+                res = Bench.ForceAddMod(kv.Key, costs: dict);
             }
             else
             {
@@ -312,6 +315,7 @@ namespace PoETheoryCraft
         }
         private void PostCraftButton_Click(object sender, RoutedEventArgs e)
         {
+            BigBox.Text = "";
             if (Bench.BenchItem == null)
             {
                 BigBox.Text = "Bench is empty";
@@ -331,6 +335,7 @@ namespace PoETheoryCraft
         }
         private void Search_Click(object sender, RoutedEventArgs e)
         {
+            BigBox.Text = "";
             SearchDialog d = new SearchDialog(CraftingDatabase.StatTemplates, RepeatResults.Filter) { Owner = this };
             bool? res = d.ShowDialog();
             if (!res.HasValue || !res.Value)

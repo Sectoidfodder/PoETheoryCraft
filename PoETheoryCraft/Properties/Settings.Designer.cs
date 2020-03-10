@@ -169,7 +169,7 @@ namespace PoETheoryCraft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
         public int ProgressBarThreshold {
             get {
                 return ((int)(this["ProgressBarThreshold"]));

@@ -110,7 +110,7 @@ namespace PoETheoryCraft
             return null;
         }
         //Performs an action once on BenchItem, or many times on copies of it to build mass results
-        private void ApplyCurrency(CurrencyAction action, int count)
+        private void DoCurrencyRolls(CurrencyAction action, int count)
         {
             if (count == 1)
             {
@@ -119,7 +119,7 @@ namespace PoETheoryCraft
             else
             {
                 MassResults.Clear();
-                if (count > Properties.Settings.Default.ProgressBarThreshold)
+                if (count >= Properties.Settings.Default.ProgressBarThreshold)
                 {
                     ProgressDialog p = new ProgressDialog() {Title = "Rolling...", Steps = count, ReportStep = Math.Max(count / 100, 1) };
                     p.Increment = () =>
@@ -149,7 +149,7 @@ namespace PoETheoryCraft
             dummy.ClearMods();
             dummy.Rarity = targetrarity;
             IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(dummy, pool, op: ops);
-            ApplyCurrency((item) => 
+            DoCurrencyRolls((item) => 
             {
                 if (ignoremeta)
                     item.ClearCraftedMods();
@@ -177,7 +177,7 @@ namespace PoETheoryCraft
                 validatedpool = ModLogic.FilterForInfluence(validatedpool, inf.Value);
             if (validatedpool.Count == 0)
                 return false;
-            ApplyCurrency((item) =>
+            DoCurrencyRolls((item) =>
             {
                 if (inftag != null)
                     item.LiveTags.Add(inftag);
@@ -284,8 +284,8 @@ namespace PoETheoryCraft
                 //check that the item can roll a corrupted ess mod
                 ItemCraft clone = BenchItem.Copy();
                 clone.ClearMods();
-                PoEModData glyphicmod = ModLogic.RollGlyphicMod(clone, modweightgroups);
-                if (glyphicmod == null)
+                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(clone, modweightgroups);
+                if (glyphicmods.Count == 0)
                     return "Item cannot roll forced corrupted essence mods";
             }
             RollOptions ops = new RollOptions() { ForceMods = forcedmods, ModWeightGroups = modweightgroups, GlyphicCount = cesscount };
@@ -371,7 +371,7 @@ namespace PoETheoryCraft
                 case "Orb of Annulment":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.RemoveRandomMod();
                         if (item.QualityType != null)
@@ -381,13 +381,13 @@ namespace PoETheoryCraft
                 case "Divine Orb":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.RerollExplicits();
                     }, tries);
                     break;
                 case "Blessed Orb":
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.RerollImplicits();
                     }, tries);
@@ -395,7 +395,7 @@ namespace PoETheoryCraft
                 case "Orb of Scouring":
                     if (BenchItem.Rarity == ItemRarity.Normal)
                         return "Invalid item rarity for selected currency";
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.ClearMods();
                         item.Rarity = item.GetMinimumRarity();
@@ -403,14 +403,14 @@ namespace PoETheoryCraft
                     }, tries);
                     break;
                 case "Remove Crafted Mods":
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.ClearCraftedMods();
                     }, tries);
                     break;
                 case "Do Nothing":
                     IDictionary<PoEModData, int> validatedpool = ModLogic.FindValidMods(BenchItem, BaseValidMods);
-                    ApplyCurrency((item) => 
+                    DoCurrencyRolls((item) => 
                     {
                         DoPostRoll(item, new Dictionary<PoEModData, int>(validatedpool));
                     }, tries);
@@ -427,7 +427,7 @@ namespace PoETheoryCraft
                         return "Invalid item type for catalysts";
                     if (BenchItem.QualityType == c && BenchItem.BaseQuality >= 20)
                         return "Item already has max catalyst quality";
-                    ApplyCurrency((item) =>
+                    DoCurrencyRolls((item) =>
                     {
                         item.ApplyCatalyst(c);
                     }, tries);

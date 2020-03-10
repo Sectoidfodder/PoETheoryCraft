@@ -1,4 +1,10 @@
-﻿v0.4.0 - Expected Crafting Costs
+﻿v0.5.0
+
+> Delve-only and Incursion-only mods are shown in Mods View under the "special" tab.
+> Forced fossil and essence mods are shown in Mods View along with weighted mods.
+> Added a search box for Mods View; removed the group expanders so mods are always shown when not filtered by search.
+
+v0.4.0 - Expected Crafting Costs
 
 > Import currency rates (chaos equiv) from PoE.ninja and edit them in Options -> Currency Data.
 > Bulk craft results show expected costs.
@@ -75,6 +81,8 @@ Functions:
 
 
 Dev Notes:
+
+Text translation is much slower than normal on certain glyphic fossil mods on boots.  Figure out why.
 
 Need to know before implementing beastcrafting:
 > Remove catalyst quality?

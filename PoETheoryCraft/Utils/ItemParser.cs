@@ -68,7 +68,7 @@ namespace PoETheoryCraft.Utils
         public static List<double> GetSortedValues(IList<ItemCraft> items, string s, double defaultvalue = 0)
         {
             List<double> values = new List<double>();
-            if (items.Count > Properties.Settings.Default.ProgressBarThreshold)
+            if (items.Count >= Properties.Settings.Default.ProgressBarThreshold)
             {
                 int i = 0;
                 ProgressDialog p = new ProgressDialog() { Title = "Processing...", Steps = items.Count, ReportStep = Math.Max(items.Count / 100, 1) };

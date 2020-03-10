@@ -1,0 +1,209 @@
+{
+	"Amulet": [
+		"MaximumMinionCountAmuletZombieDelve",
+		"MaximumMinionCountAmuletSkeletonDelve__",
+		"ChaosDamageLifeLeechDelve",
+		"ColdDamageLifeLeechDelve",
+		"FireDamageLifeLeechDelve",
+		"LightningDamageLifeLeechDelve__",
+		"IncreasedDamagePerCurseDelve",
+		"AddedManaRegenerationDelve",
+		"MaximumManaIncreasePercentDelve_",
+		"MinionDamageDelve",
+		"PhysicalDamageLifeLeechDelve"
+	],
+	"Belt": [],
+	"Body Armour": [
+		"MaximumMinionCountZombieDelve",
+		"MaximumMinionCountSkeletonDelve",
+		"MaximumMinionCountSpectreDelve",
+		"ReducedPhysicalDamageTakenDelve",
+		"AdditionalCurseOnEnemiesDelve",
+		"ChaosDamageTakenDelve",
+		"FireDamageTakenDelve",
+		"ColdDamageTakenDelve",
+		"LightningDamageTakenDelve"
+	],
+	"Boots": [
+		"LocalIncreaseSocketedMinionGemLevelDelve",
+		"ManaRegenerationDelve",
+		"PercentDamageGoesToManaDelve"
+	],
+	"Bow": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Claw": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Dagger": [
+		"SpellAddedPhysicalDamageHybridDelve",
+		"SpellAddedFireDamageHybridDelve",
+		"SpellAddedColdDamageHybridDelve_",
+		"SpellAddedLightningDamageHybridDelve",
+		"SpellAddedChaosDamageHybridDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Rune Dagger": [
+		"SpellAddedPhysicalDamageHybridDelve",
+		"SpellAddedFireDamageHybridDelve",
+		"SpellAddedColdDamageHybridDelve_",
+		"SpellAddedLightningDamageHybridDelve",
+		"SpellAddedChaosDamageHybridDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Gloves": [
+		"AddedManaRegenerationDelve",
+		"BleedingDamageChanceDelve__",
+		"CorruptedBloodImmunityDelve",
+		"LocalIncreaseSocketedMinionGemLevelDelve",
+		"ManaRegenerationDelve",
+		"PercentDamageGoesToManaDelve"
+	],
+	"Helmet": [
+		"ReducedManaReservationsCostDelve_",
+		"PhysicalDamageTakenAsChaosDelve",
+		"PhysicalDamageTakenAsColdDelve",
+		"PhysicalDamageTakenAsFireDelve",
+		"PhysicalDamageTakenAsLightningDelve_",
+		"AddedManaRegenerationDelve",
+		"IncreaseSocketedCurseGemLevelDelve_",
+		"LocalIncreaseSocketedAuraLevelDelve",
+		"ManaRegenerationDelve",
+		"PercentDamageGoesToManaDelve"
+	],
+	"One Hand Axe": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"One Hand Mace": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"One Hand Sword": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Quiver": [],
+	"Ring": [
+		"CurseAreaOfEffectDelve",
+		"CurseDurationDelve",
+		"CurseOnHitLevelConductivityDelve",
+		"CurseOnHitLevelDespairDelve",
+		"CurseOnHitLevelFlammabilityDelve",
+		"CurseOnHitLevelFrostbiteDelve",
+		"CurseOnHitLevelVulnerabilityDelve",
+		"AddedManaRegenerationDelve",
+		"MaximumManaIncreasePercentDelve_",
+		"MinionDamageDelve"
+	],
+	"Sceptre": [
+		"SpellAddedFireDamageHybridDelve",
+		"SpellAddedColdDamageHybridDelve_",
+		"SpellAddedPhysicalDamageHybridDelve",
+		"SpellAddedLightningDamageHybridDelve",
+		"SpellAddedChaosDamageHybridDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Shield": [
+		"CorruptedBloodImmunityDelve",
+		"CurseEffectivenessDelve",
+		"LocalIncreaseSocketedAuraLevelDelve",
+		"MaximumChaosResistDelve",
+		"MaximumColdResistDelve",
+		"MaximumFireResistDelve",
+		"MaximumLightningResistDelve"
+	],
+	"Staff": [
+		"SpellAddedChaosDamageHybridTwoHandDelve",
+		"SpellAddedColdDamageHybridTwoHandDelve",
+		"SpellAddedFireDamageHybridTwoHandDelve",
+		"SpellAddedLightningDamageHybridTwoHandDelve",
+		"SpellAddedPhysicalDamageHybridTwoHandDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Warstaff": [
+		"SpellAddedChaosDamageHybridTwoHandDelve",
+		"SpellAddedColdDamageHybridTwoHandDelve",
+		"SpellAddedFireDamageHybridTwoHandDelve",
+		"SpellAddedLightningDamageHybridTwoHandDelve",
+		"SpellAddedPhysicalDamageHybridTwoHandDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Thrusting One Hand Sword": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	],
+	"Two Hand Axe": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Two Hand Mace": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Two Hand Sword": [
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridTwoHandDelve",
+		"LocalColdDamageHybridTwoHandDelve",
+		"LocalFireDamageHybridTwoHandDelve",
+		"LocalLightningDamageHybridTwoHandDelve"
+	],
+	"Wand": [
+		"SpellAddedFireDamageHybridDelve",
+		"SpellAddedColdDamageHybridDelve_",
+		"SpellAddedPhysicalDamageHybridDelve",
+		"SpellAddedLightningDamageHybridDelve",
+		"SpellAddedChaosDamageHybridDelve",
+		"DoubleDamageChanceDelve",
+		"LocalChaosDamageHybridDelve",
+		"LocalColdDamageHybridDelve",
+		"LocalFireDamageHybridDelve",
+		"LocalLightningDamageHybridDelve"
+	]
+}

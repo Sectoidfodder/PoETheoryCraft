@@ -13,6 +13,10 @@
         <local:ModDataToBrushConverter x:Key="ModDataToBrushConverter" />-->
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <TabControl Name="ModTabs">
             <TabItem Header="Weighted">
                 <local:ModsView x:Name="WeightedModsDisplay"></local:ModsView>
@@ -20,12 +24,12 @@
             <TabItem Header="Craftable">
                 <local:ModsView x:Name="CraftedModsDisplay"></local:ModsView>
             </TabItem>
+            <TabItem Header="Special">
+                <local:ModsView x:Name="SpecialModsDisplay"></local:ModsView>
+            </TabItem>
             <TabItem Header="Enchantment">
                 <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                        <TextBlock Margin="2" VerticalAlignment="Center">Search:</TextBlock>
-                        <TextBox Width="200" Margin="2" TextChanged="Enchantments_Filter" Name="EnchSearchBox"></TextBox>
-                    </StackPanel>
+
                     <ListView Name="EnchantmentsView" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -46,9 +50,12 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </DockPanel>
-                <!--<local:ModsView x:Name="EnchantmentsDisplay"></local:ModsView>-->
-                <!--<TextBlock>Not yet implemented. Will show delve and incursion exclusive mods, non-weighted mods from fossils and essences</TextBlock>-->
             </TabItem>
         </TabControl>
+        <StackPanel Grid.Row="1" DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock Margin="2" VerticalAlignment="Center">Mod Search:</TextBlock>
+            <TextBox Width="200" Margin="2" TextChanged="Mods_Filter" Name="EnchSearchBox"></TextBox>
+        </StackPanel>
+        <Button Grid.Row="1" Width="150" Name="ForceAddButton" Click="ForceAdd_Click">Add Mod</Button>
     </Grid>
 </UserControl>

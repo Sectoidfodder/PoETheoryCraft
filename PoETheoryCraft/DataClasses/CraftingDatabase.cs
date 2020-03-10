@@ -19,7 +19,7 @@ namespace PoETheoryCraft.DataClasses
         public static readonly IList<string> CurrencyIndex = new List<string>()        //names to look for in base_items.json to make up the Currencies dict
         {
             "Chaos Orb", "Orb of Alchemy", "Orb of Scouring", "Orb of Transmutation", "Orb of Alteration", "Orb of Augmentation", "Regal Orb", "Exalted Orb", "Orb of Annulment",
-            "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb", "Vaal Orb", "Orb of Chance",
+            "Divine Orb", "Blessed Orb", "Crusader's Exalted Orb", "Hunter's Exalted Orb", "Redeemer's Exalted Orb", "Warlord's Exalted Orb", "Vaal Orb", "Orb of Chance", "Glassblower's Bauble",
             "Imbued Catalyst", "Abrasive Catalyst", "Intrinsic Catalyst", "Tempering Catalyst", "Turbulent Catalyst", "Prismatic Catalyst", "Fertile Catalyst",
             "Remove Crafted Mods", "Do Nothing"
         };
@@ -35,6 +35,8 @@ namespace PoETheoryCraft.DataClasses
         public static IDictionary<string, PoECurrencyData> Currencies { get; private set; }
         public static ISet<string> StatTemplates { get; private set; }
         public static IDictionary<string, Dictionary<string, double>> PseudoStats { get; private set; }
+        public static IDictionary<string, List<string>> DelveDroponlyMods { get; private set; }
+        public static IDictionary<string, List<string>> IncursionDroponlyMods { get; private set; }
         public static int LoadPrices(string pricesfile)
         {
             try
@@ -104,6 +106,12 @@ namespace PoETheoryCraft.DataClasses
             {
                 StatTemplates.Add(k);
             }
+        }
+        public static int LoadSpecialMods(string delvefile, string incursionfile)
+        {
+            DelveDroponlyMods = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(File.ReadAllText(delvefile));
+            IncursionDroponlyMods = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(File.ReadAllText(incursionfile));
+            return DelveDroponlyMods.Count + IncursionDroponlyMods.Count;
         }
         //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
         //MUST BE DONE AFTER TRANSLATION DEFINITIONS ARE LOADED IN STATTRANSLATOR

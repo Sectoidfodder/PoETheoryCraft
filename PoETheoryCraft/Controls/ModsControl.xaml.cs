@@ -25,9 +25,18 @@ namespace PoETheoryCraft.Controls
     {
         public CraftingBench Bench { get; set; }
         public CurrencySelector Currency { get; set; }
+        public event EventHandler<AddModEventArgs> AddMod;
+        public class AddModEventArgs : EventArgs
+        {
+            public object SelectedMod { get; set; }
+        }
         public ModsControl()
         {
             InitializeComponent();
+            WeightedModsDisplay.Filter = FilterMods;
+            CraftedModsDisplay.Filter = FilterMods;
+            SpecialModsDisplay.Filter = FilterMods;
+            EnchantmentsView.IsVisibleChanged += Enchantments_OnVisible;
         }
         public void UpdateEnchantments()
         {
@@ -39,28 +48,54 @@ namespace PoETheoryCraft.Controls
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
             IDictionary<PoEModData, int> enchs = ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments);
-            //CollectionViewSource.GetDefaultView(enchs).GroupDescriptions.Add(new PropertyGroupDescription("Key.group"));
-            //CollectionViewSource.GetDefaultView(enchs).SortDescriptions.Add(new SortDescription("Key.group", ListSortDirection.Ascending));
-            //CollectionViewSource.GetDefaultView(enchs).SortDescriptions.Add(new SortDescription("Key.required_level", ListSortDirection.Ascending));
-            CollectionViewSource.GetDefaultView(enchs).Filter = FilterEnchantments;
-            EnchantmentsView.ItemsSource = enchs;
-            //EnchantmentsDisplay.UpdateData(ModLogic.FindValidEnchantments(itemtemplate, CraftingDatabase.Enchantments));
+            IDictionary<PoEModData, object> mods = new Dictionary<PoEModData, object>();
+            foreach (PoEModData d in enchs.Keys)
+            {
+                mods.Add(d, enchs[d]);
+            }
+            CollectionViewSource.GetDefaultView(mods).Filter = FilterMods;
+            EnchantmentsView.ItemsSource = mods;
         }
         public void UpdateCrafts()
         {
             if (Bench == null || Bench.BenchItem == null)
             {
-                CraftedModsDisplay.UpdateData(new Dictionary<PoEModData, int>());
+                CraftedModsDisplay.UpdateData(new Dictionary<PoEModData, object>());
+                SpecialModsDisplay.UpdateData(new Dictionary<PoEModData, object>());
                 return;
             }
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[Bench.BenchItem.SourceData];
-            CraftedModsDisplay.UpdateData(ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods));
+            IDictionary<PoEModData, IDictionary<string, int>> results = ModLogic.FindValidBenchMods(itemtemplate, CraftingDatabase.BenchOptions, CraftingDatabase.AllMods);
+            Dictionary<PoEModData, object> mods = new Dictionary<PoEModData, object>();
+            foreach (PoEModData d in results.Keys)
+            {
+                mods.Add(d, results[d]);
+            }
+            CraftedModsDisplay.UpdateData(mods);
+            IDictionary<PoEModData, object> specresults = new Dictionary<PoEModData, object>();
+            if (CraftingDatabase.DelveDroponlyMods.ContainsKey(itemtemplate.item_class))
+            {
+                foreach (string modid in CraftingDatabase.DelveDroponlyMods[itemtemplate.item_class])
+                {
+                    if (CraftingDatabase.AllMods.ContainsKey(modid))
+                        specresults.Add(CraftingDatabase.AllMods[modid], "Drop-only: Delve");
+                }
+            }
+            if (CraftingDatabase.IncursionDroponlyMods.ContainsKey(itemtemplate.item_class))
+            {
+                foreach (string modid in CraftingDatabase.IncursionDroponlyMods[itemtemplate.item_class])
+                {
+                    if (CraftingDatabase.AllMods.ContainsKey(modid))
+                        specresults.Add(CraftingDatabase.AllMods[modid], "Drop-only: Incursion");
+                }
+            }
+            SpecialModsDisplay.UpdateData(specresults);
         }
         public void UpdatePreviews()
         {
             if (Bench == null || Bench.BenchItem == null || Currency == null)
             {
-                WeightedModsDisplay.UpdateData(new Dictionary<PoEModData, int>());
+                WeightedModsDisplay.UpdateData(new Dictionary<PoEModData, object>());
                 return;
             }
             ItemCraft itemcopy = Bench.BenchItem.Copy();
@@ -69,11 +104,19 @@ namespace PoETheoryCraft.Controls
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[itemcopy.SourceData];
             //Shaper = null/invalid; inf and temp tags used for the 4 conquerors' exalts
             ItemInfluence inf = ItemInfluence.Shaper;
-
+            IList<PoEModData> forcedmods = new List<PoEModData>();
+            int cesscount = 0;
             object c = Currency.GetSelected();
-            if (c is PoEEssenceData)
+            if (c is PoEEssenceData e)
             {
-                ops.ILvlCap = ((PoEEssenceData)c).item_level_restriction ?? 200;
+                string itemclass = itemtemplate.item_class;
+                if (itemclass == "Rune Dagger")
+                    itemclass = "Dagger";
+                if (itemclass == "Warstaff")
+                    itemclass = "Staff";
+                if (e.mods.Keys.Contains(itemclass))
+                    forcedmods.Add(CraftingDatabase.CoreMods[e.mods[itemclass]]);
+                ops.ILvlCap = e.item_level_restriction ?? 200;
                 itemcopy.ClearCraftedMods();
                 itemcopy.ClearMods();
             }
@@ -110,7 +153,6 @@ namespace PoETheoryCraft.Controls
             {
                 IList<PoEFossilData> fossils = ((System.Collections.IList)c).Cast<PoEFossilData>().ToList();
                 ISet<IList<PoEModWeight>> modweightgroups = new HashSet<IList<PoEModWeight>>();
-                //ICollection<PoEModData> forcedmods = new List<PoEModData>();
                 foreach (PoEFossilData fossil in fossils)
                 {
                     foreach (string t in fossil.added_mods)
@@ -118,10 +160,15 @@ namespace PoETheoryCraft.Controls
                         if (!extendedpool.ContainsKey(CraftingDatabase.AllMods[t]))
                             extendedpool.Add(CraftingDatabase.AllMods[t], 0);
                     }
-                    //foreach (string t in fossil.forced_mods)
-                    //{
-                    //    forcedmods.Add(CraftingDatabase.MiscMods[t]);
-                    //}
+                    foreach (string t in fossil.forced_mods)
+                    {
+                        forcedmods.Add(CraftingDatabase.AllMods[t]);
+                    }
+                    forcedmods = new List<PoEModData>(ModLogic.FindBaseValidMods(itemtemplate, forcedmods, true).Keys);
+                    if (fossil.corrupted_essence_chance > 0)
+                    {
+                        cesscount += fossil.corrupted_essence_chance;
+                    }
                     modweightgroups.Add(fossil.negative_mod_weights);
                     modweightgroups.Add(fossil.positive_mod_weights);
                 }
@@ -129,45 +176,82 @@ namespace PoETheoryCraft.Controls
                 itemcopy.ClearCraftedMods();
                 itemcopy.ClearMods();
             }
-            
+            foreach (PoEModData d in forcedmods)
+            {
+                itemcopy.AddMod(d);
+            }
             IDictionary<PoEModData, int> validmods = ModLogic.FindValidMods(itemcopy, extendedpool, true, ops);
             if (inf != ItemInfluence.Shaper)    //if a conq exalt is selected, only show influenced mods
                 validmods = ModLogic.FilterForInfluence(validmods, inf);
-
-            WeightedModsDisplay.UpdateData(validmods);
-        }
-        public object GetSelected()
-        {
-            if (((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
+            IDictionary<PoEModData, object> mods = new Dictionary<PoEModData, object>();
+            foreach (PoEModData d in validmods.Keys)
             {
-                if (activeview.PrefixList.SelectedItem != null)
-                    return activeview.PrefixList.SelectedItem;
-                else
-                    return activeview.SuffixList.SelectedItem;
+                mods.Add(d, validmods[d]);
             }
-            else if (ModTabs.SelectedIndex == 2)
+            foreach (PoEModData d in forcedmods)
             {
-                return EnchantmentsView.SelectedItem;
+                mods.Add(d, "Always");
             }
-            return null;
-            
+            if (cesscount > 0)
+            {
+                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(itemcopy, ops.ModWeightGroups);
+                if (glyphicmods.Count > 0)
+                {
+                    int weightsum = 0;
+                    foreach (PoEModData d in glyphicmods.Keys)
+                    {
+                        weightsum += glyphicmods[d];
+                    }
+                    foreach (PoEModData d in glyphicmods.Keys)
+                    {
+                        mods.Add(d, "Special: " + ((double)cesscount / 100).ToString("0.#") + " x " + ((double)glyphicmods[d] * 100 / weightsum).ToString("N0") + "%");
+                    }
+                }
+            }
+            WeightedModsDisplay.UpdateData(mods);
         }
-        private bool FilterEnchantments(object o)
+        private bool FilterMods(object o)
         {
             if (String.IsNullOrEmpty(EnchSearchBox.Text))
                 return true;
             else
             {
-                KeyValuePair<PoEModData, int>? kv = o as KeyValuePair<PoEModData, int>?;
+                KeyValuePair<PoEModData, object>? kv = o as KeyValuePair<PoEModData, object>?;
                 if (kv == null)
                     return false;
                 else
                     return (kv.Value.Key.ToString().IndexOf(EnchSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
             } 
         }
-        private void Enchantments_Filter(object sender, TextChangedEventArgs e)
+        private void Mods_Filter(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(EnchantmentsView.ItemsSource).Refresh();
+            if (EnchantmentsView.IsVisible)
+                RefreshEnchantmentsView();
+            WeightedModsDisplay.RefreshListViews();
+            CraftedModsDisplay.RefreshListViews();
+            SpecialModsDisplay.RefreshListViews();
+        }
+        private void Enchantments_OnVisible(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            RefreshEnchantmentsView();
+        }
+        private void RefreshEnchantmentsView()
+        {
+            CollectionViewSource.GetDefaultView(EnchantmentsView.ItemsSource)?.Refresh();
+        }
+        private void ForceAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (((ModTabs.SelectedItem as TabItem).Content is ModsView activeview))
+            {
+                if (activeview.PrefixList.SelectedItem != null)
+                    AddMod?.Invoke(this, new AddModEventArgs() { SelectedMod = activeview.PrefixList.SelectedItem });
+                else
+                    AddMod?.Invoke(this, new AddModEventArgs() { SelectedMod = activeview.SuffixList.SelectedItem });
+            }
+            else if (ModTabs.SelectedIndex == 3)
+            {
+                AddMod?.Invoke(this, new AddModEventArgs() { SelectedMod = EnchantmentsView.SelectedItem });
+            }
         }
     }
 }

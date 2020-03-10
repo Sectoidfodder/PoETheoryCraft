@@ -104,7 +104,7 @@ namespace PoETheoryCraft.Controls
         private bool AllowedCurrencies(object o)
         {
             PoECurrencyData c = o as PoECurrencyData;
-            if (c.name == "Vaal Orb" || c.name == "Orb of Chance")
+            if (c.name == "Vaal Orb" || c.name == "Orb of Chance" || c.name == "Glassblower's Bauble")
                 return false;
             return true;
         }

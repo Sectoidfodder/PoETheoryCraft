@@ -66,10 +66,10 @@ namespace PoETheoryCraft.Utils
             {
                 for (int i = 0; i < op.GlyphicCount / 100 + ((RNG.Gen.Next(100) < op.GlyphicCount % 100) ? 1 : 0); i++)
                 {
-                    PoEModData glyphicmod = RollGlyphicMod(item, op.ModWeightGroups);
-                    if (glyphicmod == null)
+                    IDictionary<PoEModData, int> glyphicmods = FindGlyphicMods(item, op.ModWeightGroups);
+                    if (glyphicmods.Count == 0)
                         break;
-                    AddModAndTrim(item, basemods, glyphicmod);
+                    AddModAndTrim(item, basemods, ChooseMod(glyphicmods));
                 }
             }
 
@@ -154,8 +154,8 @@ namespace PoETheoryCraft.Utils
                 }
             }
         }
-        //rolls a corrupted fossil mod for the given item and fossil weight modifiers, or null if none possible
-        public static PoEModData RollGlyphicMod(ItemCraft item, ISet<IList<PoEModWeight>> weightmods)
+        //Finds valid corrupted essence mods and gives them (relative) weights based on the passed item and fossil weights
+        public static IDictionary<PoEModData, int> FindGlyphicMods(ItemCraft item, ISet<IList<PoEModWeight>> weightmods)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
             string itemclass = CraftingDatabase.AllBaseItems[item.SourceData].item_class;
@@ -192,10 +192,7 @@ namespace PoETheoryCraft.Utils
                         mods.Add(m, weight);
                 }
             }
-            if (mods.Count == 0)
-                return null;
-            else
-                return ChooseMod(mods);
+            return mods;
         }
         //adds one mod from basemods to item, updates rarity, destructively modifies basemods to reflect new rollable pool, returns false if no mod was able to be added
         public static void RollAddMod(ItemCraft item, IDictionary<PoEModData, int> basemods)
