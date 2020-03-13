@@ -54,7 +54,7 @@ namespace PoETheoryCraft.DataClasses
         public string full_translation { get; set; }
         public override string ToString()
         {
-            return full_translation ?? "missing translation";
+            return full_translation ?? name;
         }
     }
 }

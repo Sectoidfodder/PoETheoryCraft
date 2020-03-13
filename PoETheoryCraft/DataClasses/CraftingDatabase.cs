@@ -113,6 +113,7 @@ namespace PoETheoryCraft.DataClasses
             IncursionDroponlyMods = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(File.ReadAllText(incursionfile));
             return DelveDroponlyMods.Count + IncursionDroponlyMods.Count;
         }
+        public static readonly ISet<string> afflictionmods = new HashSet<string>();
         //build mod data templates from mods.min.json and mod_types.min.json, also builds search templates for stats used by relevant mods
         //MUST BE DONE AFTER TRANSLATION DEFINITIONS ARE LOADED IN STATTRANSLATOR
         public static int LoadMods(string modsfile, string typesfile)
@@ -122,6 +123,7 @@ namespace PoETheoryCraft.DataClasses
             CoreMods = new Dictionary<string, PoEModData>();
             Enchantments = new Dictionary<string, PoEModData>();
             InitStatTemplates();
+            afflictionmods.Clear();
             foreach (string k in AllMods.Keys)
             {
                 PoEModData d = AllMods[k];
@@ -134,14 +136,50 @@ namespace PoETheoryCraft.DataClasses
                 if (d.generation_type == ModLogic.Enchantment)
                     Enchantments.Add(k, AllMods[k]);
                 //flag relevant mods to move to core dictionary, "misc" domain is for regular jewels
-                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "undefined") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     CoreMods.Add(k, AllMods[k]);
                 //every mod worth translating into string templates to search by, doesn't include implicits because idk how to include them w/o also including a ton of useless unique item mods
-                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "undefined" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     IncludeTranslations(AllMods[k]);
+                if ((d.domain == "undefined") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                {
+                    foreach (PoEModWeight w in d.spawn_weights)
+                    {
+                        if (w.tag.Contains("affliction"))
+                            afflictionmods.Add(w.tag);
+                    }
+                }
             }
             Debug.WriteLine(CoreMods.Count + " core, " + Enchantments.Count + " enchantment, " + AllMods.Count + " total mods loaded");
             Debug.WriteLine(StatTemplates.Count + " statlines loaded");
+            IList<PoEModWeight> afflictionspawns = new List<PoEModWeight>
+            {
+                new PoEModWeight() { tag = "expansion_jewel_large", weight = 100 },
+                new PoEModWeight() { tag = "expansion_jewel_medium", weight = 100 },
+                new PoEModWeight() { tag = "expansion_jewel_small", weight = 100 },
+                new PoEModWeight() { tag = "default", weight = 0 }
+            };
+            foreach (string s in afflictionmods)
+            {
+                PoEModData afflictionmod = new PoEModData()
+                {
+                    adds_tags = new HashSet<string>() { s },
+                    domain = "item",
+                    generation_type = "enchantment",
+                    generation_weights = new List<PoEModWeight>(),
+                    group = "SmallPassiveGroup",
+                    is_essence_only = false,
+                    name = s.Replace("affliction", "small passives grant: "),
+                    required_level = 1,
+                    spawn_weights = afflictionspawns,
+                    stats = null,
+                    type = "SmallPassiveType",
+                    key = s,
+                    type_tags = new HashSet<string>()
+                };
+                Enchantments.Add(s, afflictionmod);
+                AllMods.Add(s, afflictionmod);
+            }
             return CoreMods.Count;
         }
 
@@ -159,7 +197,7 @@ namespace PoETheoryCraft.DataClasses
                 //set key field
                 AllBaseItems[k].key = k;
                 //flag relevant items to move to core dictionary, "misc" domain only contains regular jewels as of 3.9
-                if (AllBaseItems[k].domain == "item" || AllBaseItems[k].domain == "misc" || AllBaseItems[k].domain == "abyss_jewel")
+                if (AllBaseItems[k].domain == "item" || AllBaseItems[k].domain == "misc" || AllBaseItems[k].domain == "abyss_jewel" || (AllBaseItems[k].domain == "undefined" && AllBaseItems[k].item_class == "Jewel"))
                     CoreBaseItems.Add(k, AllBaseItems[k]);
                 //make currency or catalyst data if it's in the list of relevant currencies
                 if (CurrencyIndex.Contains(AllBaseItems[k].name))

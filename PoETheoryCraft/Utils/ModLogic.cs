@@ -239,6 +239,10 @@ namespace PoETheoryCraft.Utils
             ISet<string> extendedtags = new HashSet<string>(baseitem.tags) { "weapon_can_roll_minion_modifiers" };
             foreach (ItemInfluence inf in Enum.GetValues(typeof(ItemInfluence)))
                 extendedtags.Add(baseitem.item_class_properties[EnumConverter.InfToTag(inf)]);
+            foreach (string s in CraftingDatabase.afflictionmods)
+            {
+                extendedtags.Add(s);
+            }
             foreach (PoEModData mod in db)
             {
                 if (ignoredomain || mod.domain == baseitem.domain)

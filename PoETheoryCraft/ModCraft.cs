@@ -105,6 +105,8 @@ namespace PoETheoryCraft
                 return ToStringCache;
             //unlike its parent PoEModData, translation here is done live to allow roll-dependent syntax
             ToStringCache = StatTranslator.TranslateModCraft(this, Quality);
+            if (ToStringCache.Length <= 0)
+                ToStringCache = CraftingDatabase.AllMods[SourceData].name;
             Modified = false;
             return ToStringCache;
         }

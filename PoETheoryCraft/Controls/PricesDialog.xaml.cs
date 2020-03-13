@@ -59,10 +59,11 @@ namespace PoETheoryCraft.Controls
             {
                 try
                 {
-                    LoadPrices(w, "https://poe.ninja/api/data/ItemOverview?league=Delirium&type=Resonator", dict);
-                    LoadPrices(w, "https://poe.ninja/api/data/ItemOverview?league=Delirium&type=Fossil", dict);
-                    LoadPrices(w, "https://poe.ninja/api/data/CurrencyOverview?league=Delirium&type=Currency", dict, CraftingDatabase.CurrencyIndex);
-                    LoadPrices(w, "https://poe.ninja/api/data/ItemOverview?league=Delirium&type=Essence", dict);
+                    string league = ((ComboBoxItem)LeagueNameBox.SelectedItem).Content.ToString();
+                    LoadPrices(w, $"https://poe.ninja/api/data/ItemOverview?league={league}&type=Resonator", dict);
+                    LoadPrices(w, $"https://poe.ninja/api/data/ItemOverview?league={league}&type=Fossil", dict);
+                    LoadPrices(w, $"https://poe.ninja/api/data/CurrencyOverview?league={league}&type=Currency", dict, CraftingDatabase.CurrencyIndex);
+                    LoadPrices(w, $"https://poe.ninja/api/data/ItemOverview?league={league}&type=Essence", dict);
                     dict.Add("Chaos Orb", 1);
                 }
                 catch (Exception err)

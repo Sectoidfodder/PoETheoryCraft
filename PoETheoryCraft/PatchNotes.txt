@@ -1,8 +1,14 @@
-﻿v0.5.0
+﻿v0.4.1 - 3.10 data, Mod View improvements
 
-> Delve-only and Incursion-only mods are shown in Mods View under the "special" tab.
-> Forced fossil and essence mods are shown in Mods View along with weighted mods.
-> Added a search box for Mods View; removed the group expanders so mods are always shown when not filtered by search.
+> All mod data updated to 3.10.
+> Cluster Jewel crafting enabled
+    > YOU MUST ADD AN ENCHANTMENT in Mod View -> Enchantment tab in order to be able to roll notable mods.
+    > There is currently no restriction on the enchantment you add to a cluster, but in reality large clusters can only have damage enchants, medium clusters utility, small clusters defenses
+
+> Delve-only and Incursion-only mods are shown in Mod View under the "special" tab.
+> Forced fossil and essence mods are shown in Mod View along with weighted mods.
+> Added a search box for Mod View; removed the group expanders so mods are always shown when not filtered by search.
+> Added options to import currency prices from Standard or Delirium leagues.
 
 v0.4.0 - Expected Crafting Costs
 
@@ -81,6 +87,8 @@ Functions:
 
 
 Dev Notes:
+
+Add hardcore leagues to currency import options.
 
 Text translation is much slower than normal on certain glyphic fossil mods on boots.  Figure out why.
 

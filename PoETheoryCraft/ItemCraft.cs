@@ -354,7 +354,7 @@ namespace PoETheoryCraft
                 bool shouldremove = true;
                 for (int i = 0; i < LiveMods.Count; i++)
                 {
-                    if (i == n)
+                    if (LiveMods == modlist && i == n)
                         continue;
                     PoEModData othertemplate = CraftingDatabase.AllMods[LiveMods[i].SourceData];
                     if (othertemplate.adds_tags.Contains(tag))
@@ -365,6 +365,8 @@ namespace PoETheoryCraft
                 }
                 for (int i = 0; i < LiveImplicits.Count; i++)
                 {
+                    if (LiveImplicits == modlist && i == n)
+                        continue;
                     PoEModData othertemplate = CraftingDatabase.AllMods[LiveImplicits[i].SourceData];
                     if (othertemplate.adds_tags.Contains(tag))
                     {
@@ -374,6 +376,8 @@ namespace PoETheoryCraft
                 }
                 for (int i = 0; i < LiveEnchantments.Count; i++)
                 {
+                    if (LiveEnchantments == modlist && i == n)
+                        continue;
                     PoEModData othertemplate = CraftingDatabase.AllMods[LiveEnchantments[i].SourceData];
                     if (othertemplate.adds_tags.Contains(tag))
                     {

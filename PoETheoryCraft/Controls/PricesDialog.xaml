@@ -9,10 +9,14 @@
     <DockPanel>
         <Grid DockPanel.Dock="Top" Margin="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Width="140" HorizontalAlignment="Left" Click="GetPrices">Load from poe.ninja</Button>
+            <ComboBox Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Left" Name="LeagueNameBox" Width="80">
+                <ComboBoxItem>Delirium</ComboBoxItem>
+                <ComboBoxItem>Standard</ComboBoxItem>
+            </ComboBox>
             <!--<Button Grid.Column="1">Load from local file</Button>-->
         </Grid>
         <StackPanel Margin="2" DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
