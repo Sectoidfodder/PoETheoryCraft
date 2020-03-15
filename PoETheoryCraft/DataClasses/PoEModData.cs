@@ -52,6 +52,8 @@ namespace PoETheoryCraft.DataClasses
 
         //filled by the translator when template is deserialized
         public string full_translation { get; set; }
+        //reminder text appended to tooltip, used for cluster jewel notables
+        public string tooltip_reminder { get; set; }
         public override string ToString()
         {
             return full_translation ?? name;

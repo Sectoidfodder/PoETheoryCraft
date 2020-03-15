@@ -192,6 +192,8 @@ namespace PoETheoryCraft.Controls
                     s += "; meta-caster";
             }
             s += "; " + string.Join("," , data.type_tags);
+            if (data.tooltip_reminder != null && data.tooltip_reminder.Length > 0)
+                s += "\n" + data.tooltip_reminder;
             return s;
         }
 

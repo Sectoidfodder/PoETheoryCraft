@@ -124,6 +124,34 @@ namespace PoETheoryCraft.DataClasses
             Enchantments = new Dictionary<string, PoEModData>();
             InitStatTemplates();
             afflictionmods.Clear();
+            Dictionary<string, string> clusterreminders = new Dictionary<string, string>();
+            using (StreamReader r = File.OpenText(@"Data\ClusterText.txt"))
+            {
+                string line;
+                string name = null;
+                string desc = null;
+                while ((line = r.ReadLine()) != null)
+                {
+                    if (line.Length == 0 && name != null)
+                    {
+                        clusterreminders.Add(name, desc);
+                        name = null;
+                        desc = null;
+                        continue;
+                    }
+                    if (name == null)
+                        name = line;
+                    else if (desc == null)
+                        desc = line;
+                    else
+                        desc += "\n" + line;
+                }
+                if (name != null)
+                {
+                    clusterreminders.Add(name, desc);
+                }
+            }
+            //Dictionary<string, List<PoEModWeight>> afflictiondict = new Dictionary<string, List<PoEModWeight>>();
             foreach (string k in AllMods.Keys)
             {
                 PoEModData d = AllMods[k];
@@ -143,20 +171,63 @@ namespace PoETheoryCraft.DataClasses
                     IncludeTranslations(AllMods[k]);
                 if ((d.domain == "undefined") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                 {
+                    int notableindex = d.full_translation.IndexOf("Skill is");
+                    if (notableindex > 0 && !d.full_translation.Contains("Jewel Socket"))
+                    {
+                        string notablename = d.full_translation.Substring(notableindex + 9);
+                        d.tooltip_reminder = clusterreminders[notablename];
+                    }
                     foreach (PoEModWeight w in d.spawn_weights)
                     {
                         if (w.tag.Contains("affliction"))
+                        {
                             afflictionmods.Add(w.tag);
+                            //if (notableindex > 0 && !d.full_translation.Contains("Jewel Socket"))
+                            //{
+                            //    if (!afflictiondict.ContainsKey(w.tag))
+                            //        afflictiondict.Add(w.tag, new List<PoEModWeight>() { new PoEModWeight() { tag = k, weight = w.weight } });
+                            //    else
+                            //        afflictiondict[w.tag].Add(new PoEModWeight() { tag = k, weight = w.weight });
+                            //}
+                        }
                     }
                 }
             }
+            //using (StreamWriter w = File.CreateText("notables.csv"))
+            //{
+            //    foreach (string s in afflictiondict.Keys)
+            //    {
+            //        w.WriteLine(s);
+            //        foreach (PoEModWeight mw in afflictiondict[s])
+            //        {
+            //            PoEModData mod = AllMods[mw.tag];
+            //            w.WriteLine(mw.weight + ",\"" + mod.full_translation.Substring(mod.full_translation.IndexOf("Skill is") + 9) + "\",\"" + mod.tooltip_reminder + "\"");
+            //        }
+            //        w.WriteLine("");
+            //    }
+            //}
             Debug.WriteLine(CoreMods.Count + " core, " + Enchantments.Count + " enchantment, " + AllMods.Count + " total mods loaded");
             Debug.WriteLine(StatTemplates.Count + " statlines loaded");
-            IList<PoEModWeight> afflictionspawns = new List<PoEModWeight>
+            IList<string> mediumenchants = new List<string>() { "affliction_area_damage", "affliction_aura_effect", "affliction_brand_damage", "affliction_critical_chance", "affliction_curse_effect", "affliction_fire_damage_over_time_multiplier", "affliction_chaos_damage_over_time_multiplier", "affliction_physical_damage_over_time_multiplier", "affliction_cold_damage_over_time_multiplier", "affliction_damage_over_time_multiplier", "affliction_effect_of_non-damaging_ailments", "affliction_life_and_mana_recovery_from_flasks", "affliction_flask_duration", "affliction_damage_while_you_have_a_herald", "affliction_minion_damage_while_you_have_a_herald", "affliction_minion_damage", "affliction_minion_life", "affliction_projectile_damage", "affliction_totem_damage", "affliction_trap_and_mine_damage", "affliction_warcry_buff_effect" };
+            IList<string> smallenchants = new List<string>() { "affliction_maximum_life", "affliction_chance_to_dodge_attacks", "affliction_cold_resistance", "affliction_chaos_resistance", "affliction_armour", "affliction_evasion", "affliction_fire_resistance", "affliction_maximum_mana", "affliction_maximum_energy_shield", "affliction_lightning_resistance", "affliction_chance_to_block" };
+            IList<string> largeenchants = new List<string>() { "affliction_axe_and_sword_damage", "affliction_mace_and_staff_damage", "affliction_dagger_and_claw_damage", "affliction_bow_damage", "affliction_wand_damage", "affliction_damage_with_two_handed_melee_weapons", "affliction_attack_damage_while_dual_wielding_", "affliction_attack_damage_while_holding_a_shield", "affliction_attack_damage_", "affliction_spell_damage", "affliction_channelling_skill_damage", "affliction_chaos_damage", "affliction_cold_damage", "affliction_elemental_damage", "affliction_fire_damage", "affliction_lightning_damage", "affliction_physical_damage" };
+            IList<PoEModWeight> afflictionmediumspawns = new List<PoEModWeight>
+            {
+                new PoEModWeight() { tag = "expansion_jewel_medium", weight = 100 },
+                new PoEModWeight() { tag = "default", weight = 0 }
+            };
+            IList<PoEModWeight> afflictionsmallspawns = new List<PoEModWeight>
+            {
+                new PoEModWeight() { tag = "expansion_jewel_small", weight = 100 },
+                new PoEModWeight() { tag = "default", weight = 0 }
+            };
+            IList<PoEModWeight> afflictionlargespawns = new List<PoEModWeight>
             {
                 new PoEModWeight() { tag = "expansion_jewel_large", weight = 100 },
-                new PoEModWeight() { tag = "expansion_jewel_medium", weight = 100 },
-                new PoEModWeight() { tag = "expansion_jewel_small", weight = 100 },
+                new PoEModWeight() { tag = "default", weight = 0 }
+            };
+            IList<PoEModWeight> afflictionnospawns = new List<PoEModWeight>
+            {
                 new PoEModWeight() { tag = "default", weight = 0 }
             };
             foreach (string s in afflictionmods)
@@ -171,12 +242,19 @@ namespace PoETheoryCraft.DataClasses
                     is_essence_only = false,
                     name = s.Replace("affliction", "small passives grant: "),
                     required_level = 1,
-                    spawn_weights = afflictionspawns,
                     stats = null,
                     type = "SmallPassiveType",
                     key = s,
                     type_tags = new HashSet<string>()
                 };
+                if (mediumenchants.Contains(s))
+                    afflictionmod.spawn_weights = afflictionmediumspawns;
+                else if (smallenchants.Contains(s))
+                    afflictionmod.spawn_weights = afflictionsmallspawns;
+                else if (largeenchants.Contains(s))
+                    afflictionmod.spawn_weights = afflictionlargespawns;
+                else
+                    afflictionmod.spawn_weights = afflictionnospawns;
                 Enchantments.Add(s, afflictionmod);
                 AllMods.Add(s, afflictionmod);
             }
