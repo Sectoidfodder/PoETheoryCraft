@@ -321,6 +321,8 @@ namespace PoETheoryCraft.Utils
         }
         public static KeyValuePair<string, double> ParseLine(string s)
         {
+            if (s.Contains("1 Added Passive Skill"))
+                return new KeyValuePair<string, double>(s, 1);
             string rexpr = @"(\d+\.?\d*)\s+to\s+(\d+\.?\d*)";
             Match m = Regex.Match(s, rexpr);
             if (m.Success)
