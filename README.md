@@ -1,9 +1,5 @@
 # PoETheoryCraft - Crafting Simulator
 
-![Video demo - 0.3.0](https://www.youtube.com/watch?v=mwDopWiZaTs)
-
-![Album of search/filter examples - 0.2.0](https://imgur.com/a/qqjlVE8)
-
 ![](https://i.imgur.com/No4mEra.png)
 
 ## Supported Mechanics
