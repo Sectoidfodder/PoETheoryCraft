@@ -177,11 +177,15 @@ namespace PoETheoryCraft.DataClasses
                         string notablename = d.full_translation.Substring(notableindex + 9);
                         d.tooltip_reminder = clusterreminders[notablename];
                     }
+                    //if (d.full_translation.Contains("also grant"))
+                    //    Debug.WriteLine(d);
                     foreach (PoEModWeight w in d.spawn_weights)
                     {
                         if (w.tag.Contains("affliction"))
                         {
                             afflictionmods.Add(w.tag);
+                            //if (d.full_translation.Contains("also grant"))
+                            //    Debug.WriteLine(w.tag);
                             //if (notableindex > 0 && !d.full_translation.Contains("Jewel Socket"))
                             //{
                             //    if (!afflictiondict.ContainsKey(w.tag))
