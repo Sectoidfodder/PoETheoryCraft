@@ -1,0 +1,2230 @@
+Rarity: Rare
+Plague Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++36 to Strength
++118 to maximum Life
++38% to Cold Resistance
+
+Rarity: Rare
+Fate Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++24 to Strength
++20 to maximum Life
+Regenerate 24.6 Life per second
+Reflects 24 Physical Damage to Melee Attackers
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Bramble Shelter
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++77 to maximum Life
++21% to Cold Resistance
+19% increased Stun and Block Recovery
+Reflects 23 Physical Damage to Melee Attackers
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Honour Hide
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++37 to Strength
++28 to maximum Life
++11% to Fire Resistance
++20% to Lightning Resistance
+Reflects 13 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Sorrow Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++22 to Strength
++65 to maximum Life
++33% to Fire Resistance
++34% to Lightning Resistance
+Reflects 2 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Plague Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++36 to maximum Life
+Regenerate 11.9 Life per second
++44% to Fire Resistance
++16% to Cold Resistance
+
+Rarity: Rare
+Bramble Shroud
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++105 to maximum Life
++46% to Cold Resistance
+27% increased Stun and Block Recovery
+Reflects 22 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Empyrean Cloak
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++48 to Strength
++86 to maximum Life
++23% to Cold Resistance
++20% to Chaos Resistance
+Reflects 46 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Storm Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 66
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++7 to maximum Life
+Regenerate 19.4 Life per second
++17% to Lightning Resistance
+12% increased Stun and Block Recovery
+Reflects 23 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Vortex Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++112 to maximum Life
++8% to Fire Resistance
++48% to Cold Resistance
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Hypnotic Pelt
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++127 to maximum Life
++41% to Fire Resistance
++19% to Chaos Resistance
+18% increased Stun and Block Recovery
+
+Rarity: Rare
+Viper Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++25 to Strength
++64 to maximum Life
++10% to Lightning Resistance
+15% increased Stun and Block Recovery
+
+Rarity: Rare
+Rapture Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++40 to Strength
++58 to maximum Life
+Regenerate 15.8 Life per second
+12% increased Stun and Block Recovery
+Reflects 3 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Woe Cloak
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++64 to maximum Life
++47% to Fire Resistance
++28% to Lightning Resistance
+20% increased Stun and Block Recovery
+
+Rarity: Rare
+Dusk Suit
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++127 to maximum Life
++33% to Lightning Resistance
+28% increased Stun and Block Recovery
+Reflects 44 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Brimstone Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++106 to maximum Life
+Regenerate 14 Life per second
++47% to Fire Resistance
++41% to Cold Resistance
+
+Rarity: Rare
+Gale Ward
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++49 to Strength
++9 to maximum Life
+Regenerate 12.3 Life per second
++35% to Chaos Resistance
+
+Rarity: Rare
+Cataclysm Jack
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++17 to maximum Life
++23% to Fire Resistance
++45% to Lightning Resistance
+19% increased Stun and Block Recovery
+
+Rarity: Rare
+Pandemonium Shelter
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++24 to Strength
++29 to maximum Life
+Regenerate 6.6 Life per second
++20% to Chaos Resistance
+Reflects 8 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Rune Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 63
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++77 to maximum Life
+Regenerate 2.9 Life per second
++35% to Fire Resistance
+27% increased Stun and Block Recovery
+Reflects 2 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Oblivion Coat
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++126 to maximum Life
++20% to Chaos Resistance
+17% increased Stun and Block Recovery
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Beast Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++117 to maximum Life
++44% to Lightning Resistance
+16% increased Stun and Block Recovery
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Horror Guardian
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++43 to maximum Life
++41% to Cold Resistance
+14% increased Stun and Block Recovery
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Sorrow Coat
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++38 to Strength
++118 to maximum Life
+Regenerate 8.3 Life per second
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Havoc Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++83 to maximum Life
++27% to Fire Resistance
++47% to Cold Resistance
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Corpse Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++47 to Strength
++118 to maximum Life
++28% to Cold Resistance
++28% to Lightning Resistance
+
+Rarity: Rare
+Doom Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 65
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++53 to Strength
++85 to maximum Life
++41% to Fire Resistance
++17% to Cold Resistance
+
+Rarity: Rare
+Skull Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++47 to maximum Life
++35% to Fire Resistance
++45% to Cold Resistance
+21% increased Stun and Block Recovery
+
+Rarity: Rare
+Rapture Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++124 to maximum Life
++13% to Fire Resistance
++39% to Cold Resistance
++24% to Lightning Resistance
+Reflects 3 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Glyph Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 63
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++28 to maximum Life
+Regenerate 12 Life per second
++35% to Fire Resistance
+26% increased Stun and Block Recovery
+
+Rarity: Rare
+Golem Jack
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++55 to Strength
++128 to maximum Life
+Regenerate 12.9 Life per second
+
+Rarity: Rare
+Blood Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++20 to maximum Life
++47% to Fire Resistance
+22% increased Stun and Block Recovery
+Reflects 37 Physical Damage to Melee Attackers
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Morbid Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++89 to maximum Life
++40% to Fire Resistance
++45% to Lightning Resistance
+17% increased Stun and Block Recovery
+
+Rarity: Rare
+Empyrean Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++41 to Strength
++27 to maximum Life
+Regenerate 3.1 Life per second
++23% to Cold Resistance
+
+Rarity: Rare
+Armageddon Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 63
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++59 to maximum Life
+Regenerate 8.9 Life per second
++25% to Chaos Resistance
+28% increased Stun and Block Recovery
+
+Rarity: Rare
+Rune Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 65
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++54 to Strength
++7 to maximum Life
++45% to Fire Resistance
+17% increased Stun and Block Recovery
+
+Rarity: Rare
+Havoc Shroud
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 63
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++41 to Strength
++46 to maximum Life
+28% increased Stun and Block Recovery
+Reflects 4 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Grim Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++109 to maximum Life
+Regenerate 14.7 Life per second
++23% to Lightning Resistance
+Reflects 49 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Plague Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++128 to maximum Life
+Regenerate 16.9 Life per second
++13% to Fire Resistance
++20% to Cold Resistance
+Reflects 2 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Dread Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++99 to maximum Life
+Regenerate 15.9 Life per second
++20% to Fire Resistance
+Reflects 4 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Corruption Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++98 to maximum Life
+Regenerate 11.2 Life per second
++9% to Fire Resistance
++44% to Lightning Resistance
+
+Rarity: Rare
+Hate Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++6 to maximum Life
+Regenerate 9.7 Life per second
++44% to Lightning Resistance
+16% increased Stun and Block Recovery
+
+Rarity: Rare
+Cataclysm Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++38 to maximum Life
++37% to Cold Resistance
++30% to Chaos Resistance
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Vengeance Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++14 to Strength
++126 to maximum Life
++47% to Cold Resistance
++44% to Lightning Resistance
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Blight Shelter
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++9 to Strength
++127 to maximum Life
++29% to Cold Resistance
+13% increased Stun and Block Recovery
+
+Rarity: Rare
+Oblivion Shroud
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++62 to maximum Life
++28% to Fire Resistance
++48% to Cold Resistance
+Reflects 21 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Sol Suit
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++37 to Strength
++64 to maximum Life
+Regenerate 23.3 Life per second
+21% increased Stun and Block Recovery
+Reflects 21 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Corruption Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++7 to maximum Life
++11% to Cold Resistance
++16% to Lightning Resistance
+22% increased Stun and Block Recovery
+
+Rarity: Rare
+Dusk Shelter
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++18 to maximum Life
+Regenerate 21.3 Life per second
++45% to Lightning Resistance
+22% increased Stun and Block Recovery
+
+Rarity: Rare
+Vortex Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++119 to maximum Life
+Regenerate 3.8 Life per second
++47% to Fire Resistance
++15% to Chaos Resistance
+
+Rarity: Rare
+Corruption Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++82 to maximum Life
++17% to Fire Resistance
++48% to Lightning Resistance
+
+Rarity: Rare
+Empyrean Hide
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++27 to maximum Life
++41% to Fire Resistance
++37% to Cold Resistance
++39% to Lightning Resistance
+
+Rarity: Rare
+Maelström Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++36 to Strength
++43 to maximum Life
+Regenerate 8.4 Life per second
++8% to Cold Resistance
+Reflects 18 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Havoc Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++10 to Strength
++7 to maximum Life
+Regenerate 15.6 Life per second
++28% to Lightning Resistance
+
+Rarity: Rare
+Onslaught Jack
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++87 to maximum Life
++45% to Cold Resistance
++34% to Chaos Resistance
+13% increased Stun and Block Recovery
+
+Rarity: Rare
+Hate Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++99 to maximum Life
++44% to Lightning Resistance
+19% increased Stun and Block Recovery
+3% additional Physical Damage Reduction
+
+Rarity: Rare
+Sorrow Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++68 to maximum Life
++44% to Fire Resistance
++45% to Cold Resistance
+13% increased Stun and Block Recovery
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Golem Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++118 to maximum Life
+Regenerate 3.9 Life per second
++40% to Cold Resistance
+Reflects 39 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Maelström Carapace
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++11 to Strength
++128 to maximum Life
++13% to Cold Resistance
+18% increased Stun and Block Recovery
+Reflects 22 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Behemoth Guardian
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++107 to maximum Life
+Regenerate 8.8 Life per second
++43% to Lightning Resistance
+Reflects 3 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Fate Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 65
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++55 to Strength
++98 to maximum Life
+Regenerate 3.7 Life per second
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Victory Shroud
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++105 to maximum Life
+Regenerate 11.9 Life per second
++17% to Fire Resistance
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Grim Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++38 to maximum Life
+Regenerate 7.6 Life per second
++35% to Cold Resistance
+Reflects 24 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Beast Jack
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++37 to Strength
++129 to maximum Life
++48% to Cold Resistance
++41% to Lightning Resistance
+
+Rarity: Rare
+Spirit Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++78 to maximum Life
+Regenerate 9.9 Life per second
++48% to Fire Resistance
++21% to Cold Resistance
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Dusk Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++22 to Strength
++116 to maximum Life
++40% to Fire Resistance
++34% to Cold Resistance
+
+Rarity: Rare
+Empyrean Suit
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++77 to maximum Life
++41% to Lightning Resistance
+Reflects 48 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Carrion Shelter
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 147 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+18% reduced Attribute Requirements
++26 to Strength
++96 to maximum Life
++20% to Lightning Resistance
+
+Rarity: Rare
+Pandemonium Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 66
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++104 to maximum Life
+Regenerate 19.3 Life per second
++34% to Fire Resistance
+25% increased Stun and Block Recovery
+Reflects 23 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Dragon Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++58 to maximum Life
++39% to Cold Resistance
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Doom Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++19 to maximum Life
+Regenerate 8 Life per second
++22% to Fire Resistance
++41% to Cold Resistance
+
+Rarity: Rare
+Eagle Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++46 to maximum Life
+Regenerate 9.2 Life per second
++45% to Lightning Resistance
+
+Rarity: Rare
+Rune Shell
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++107 to maximum Life
++10% to Fire Resistance
++29% to Cold Resistance
++26% to Lightning Resistance
+
+Rarity: Rare
+Agony Guardian
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++50 to Strength
++16 to maximum Life
+Regenerate 6.9 Life per second
++26% to Chaos Resistance
+
+Rarity: Rare
+Foe Carapace
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++49 to Strength
++12 to maximum Life
+Regenerate 11.7 Life per second
++31% to Chaos Resistance
+
+Rarity: Rare
+Rune Jack
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 63
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++35 to Strength
++66 to maximum Life
++27% to Lightning Resistance
+28% increased Stun and Block Recovery
+
+Rarity: Rare
+Vengeance Cloak
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++69 to maximum Life
++30% to Cold Resistance
++48% to Lightning Resistance
+Reflects 43 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Honour Coat
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++34 to Strength
++33 to maximum Life
+Regenerate 22.4 Life per second
++40% to Fire Resistance
+
+Rarity: Rare
+Miracle Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++111 to maximum Life
++33% to Fire Resistance
++28% to Cold Resistance
+Reflects 19 Physical Damage to Melee Attackers
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Hate Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++21 to maximum Life
+Regenerate 19.7 Life per second
++48% to Fire Resistance
+4% additional Physical Damage Reduction
+
+Rarity: Rare
+Corpse Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++48 to Strength
++95 to maximum Life
+Regenerate 4.5 Life per second
+Reflects 23 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Loath Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++37 to Strength
++64 to maximum Life
+Regenerate 11.9 Life per second
++26% to Cold Resistance
+
+Rarity: Rare
+Damnation Suit
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++25 to Strength
++9 to maximum Life
+Regenerate 24.6 Life per second
+28% increased Stun and Block Recovery
+
+Rarity: Rare
+Blood Veil
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++47 to Strength
++106 to maximum Life
+Regenerate 9.9 Life per second
++34% to Fire Resistance
+
+Rarity: Rare
+Fate Guardian
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 68
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++59 to maximum Life
+Regenerate 23.1 Life per second
++48% to Fire Resistance
+25% increased Stun and Block Recovery
+Reflects 48 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Maelström Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++27 to maximum Life
++48% to Cold Resistance
+28% increased Stun and Block Recovery
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Behemoth Hide
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++42 to Strength
++21 to maximum Life
++44% to Fire Resistance
++29% to Lightning Resistance
+Reflects 23 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Phoenix Keep
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++14 to maximum Life
+Regenerate 11.1 Life per second
++20% to Fire Resistance
+25% increased Stun and Block Recovery
+Reflects 10 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Rune Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++19 to maximum Life
++34% to Fire Resistance
++45% to Lightning Resistance
+22% increased Stun and Block Recovery
+
+Rarity: Rare
+Storm Carapace
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++68 to maximum Life
++23% to Cold Resistance
++35% to Lightning Resistance
+Reflects 42 Physical Damage to Melee Attackers
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Vengeance Skin
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 122 (augmented)
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
+32% reduced Attribute Requirements
++104 to maximum Life
++47% to Cold Resistance
++17% to Chaos Resistance
+
+Rarity: Rare
+Kraken Cloak
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 67
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++92 to maximum Life
++48% to Cold Resistance
++13% to Lightning Resistance
+16% increased Stun and Block Recovery
+Reflects 44 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Oblivion Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 66
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++104 to maximum Life
+Regenerate 18.1 Life per second
++45% to Fire Resistance
++9% to Lightning Resistance
+Reflects 48 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Vortex Salvation
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++107 to maximum Life
++16% to Fire Resistance
++35% to Lightning Resistance
+Reflects 4 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Kraken Curtain
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 64
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++13 to Strength
++117 to maximum Life
++23% to Fire Resistance
+2% additional Physical Damage Reduction
+
+Rarity: Rare
+Kraken Mantle
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++22 to Strength
++35 to maximum Life
++44% to Fire Resistance
++45% to Lightning Resistance
+
+Rarity: Rare
+Blight Suit
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++106 to maximum Life
+Regenerate 7.8 Life per second
++45% to Cold Resistance
++36% to Lightning Resistance
+
+Rarity: Rare
+Chimeric Wrap
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++96 to maximum Life
++45% to Lightning Resistance
+19% increased Stun and Block Recovery
+Reflects 40 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Hate Hide
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 65
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++55 to Strength
++66 to maximum Life
++28% to Chaos Resistance
+Reflects 16 Physical Damage to Melee Attackers
+
+Rarity: Rare
+Havoc Sanctuary
+Astral Plate
+--------
+Quality: +20% (augmented)
+Armour: 853 (augmented)
+--------
+Requirements:
+Level: 62
+Str: 180
+--------
+Sockets: R-R R-R 
+--------
+Item Level: 100
+--------
++12% to all Elemental Resistances (implicit)
+--------
++50 to Strength
++33 to maximum Life
++39% to Fire Resistance
++16% to Cold Resistance
+
