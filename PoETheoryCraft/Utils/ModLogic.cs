@@ -14,6 +14,7 @@ namespace PoETheoryCraft.Utils
         public ISet<IList<PoEModWeight>> ModWeightGroups { get; set; }  //first matching tag of each list is applied
         public int ILvlCap { get; set; } = 200;                         //if lower than item's ilvl, use this instead
         public int GlyphicCount { get; set; } = 0;                      //100 if glyphic, 10 if tangled, 110 if both
+        public bool Sanctified { get; set; } = false;
     }
     public static class ModLogic
     {
@@ -59,17 +60,17 @@ namespace PoETheoryCraft.Utils
             {
                 foreach (PoEModData f in op.ForceMods)
                 {
-                    AddModAndTrim(item, basemods, f);
+                    AddModAndTrim(item, basemods, f, op==null ? false : op.Sanctified);
                 }
             }
             if (op != null && op.GlyphicCount > 0)
             {
                 for (int i = 0; i < op.GlyphicCount / 100 + ((RNG.Gen.Next(100) < op.GlyphicCount % 100) ? 1 : 0); i++)
                 {
-                    IDictionary<PoEModData, int> glyphicmods = FindGlyphicMods(item, op.ModWeightGroups);
+                    IDictionary<PoEModData, int> glyphicmods = FindGlyphicMods(item, op.ModWeightGroups, op == null ? false : op.Sanctified);
                     if (glyphicmods.Count == 0)
                         break;
-                    AddModAndTrim(item, basemods, ChooseMod(glyphicmods));
+                    AddModAndTrim(item, basemods, ChooseMod(glyphicmods), op == null ? false : op.Sanctified);
                 }
             }
 
@@ -79,13 +80,13 @@ namespace PoETheoryCraft.Utils
                 PoEModData mod = ChooseMod(basemods);
                 if (mod == null)
                     break;
-                AddModAndTrim(item, basemods, mod);
+                AddModAndTrim(item, basemods, mod, op == null ? false : op.Sanctified);
             }
             return true;
         }
 
         //Adds mod to item, destructively modifies basemods to reflect the new rollable pool
-        public static void AddModAndTrim(ItemCraft item, IDictionary<PoEModData, int> basemods, PoEModData mod)
+        public static void AddModAndTrim(ItemCraft item, IDictionary<PoEModData, int> basemods, PoEModData mod, bool lucky = false)
         {
             ISet<string> newtags = new HashSet<string>(mod.adds_tags);
             ISet<string> oldtags = new HashSet<string>(item.LiveTags);
@@ -94,7 +95,7 @@ namespace PoETheoryCraft.Utils
                 newtags.Remove(s);
             }
             string addedgroup = mod.group;
-            item.AddMod(mod);
+            item.AddMod(mod, lucky);
             string affixfill = null;
             if (mod.generation_type == Prefix && item.ModCountByType(Prefix) >= item.GetAffixLimit())
                 affixfill = Prefix;
@@ -155,7 +156,7 @@ namespace PoETheoryCraft.Utils
             }
         }
         //Finds valid corrupted essence mods and gives them (relative) weights based on the passed item and fossil weights
-        public static IDictionary<PoEModData, int> FindGlyphicMods(ItemCraft item, ISet<IList<PoEModWeight>> weightmods)
+        public static IDictionary<PoEModData, int> FindGlyphicMods(ItemCraft item, ISet<IList<PoEModWeight>> weightmods, bool sanctified = false)
         {
             IDictionary<PoEModData, int> mods = new Dictionary<PoEModData, int>();
             string itemclass = CraftingDatabase.AllBaseItems[item.SourceData].item_class;
@@ -187,7 +188,7 @@ namespace PoETheoryCraft.Utils
                         continue;
                     if (groups.Contains(m.group))
                         continue;
-                    int weight = CalcGenWeight(m, item.LiveTags, weightmods, catalysttags, item.BaseQuality, 1000);
+                    int weight = CalcGenWeight(m, item.LiveTags, weightmods, catalysttags, item.BaseQuality, sanctified, 1000);
                     if (weight > 0)
                         mods.Add(m, weight);
                 }
@@ -281,7 +282,7 @@ namespace PoETheoryCraft.Utils
                 IList<string> catalysttags = null;
                 if (item.QualityType != null && CatalystTags.ContainsKey(item.QualityType))
                     catalysttags = CatalystTags[item.QualityType];
-                int w = CalcGenWeight(mod, item.LiveTags, op?.ModWeightGroups, catalysttags, item.BaseQuality);
+                int w = CalcGenWeight(mod, item.LiveTags, op?.ModWeightGroups, catalysttags, item.BaseQuality, op == null ? false : op.Sanctified);
                 if (w > 0)
                     mods.Add(mod, w);
             }
@@ -343,7 +344,7 @@ namespace PoETheoryCraft.Utils
             return 0;
         }
         //baseweightoverride used for corrupted essence mods from glyphic/tangled because their templates have no base weights
-        private static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null, IList<string> catalysttags = null, int catalystquality = 0, int? baseweightoverride = null)
+        private static int CalcGenWeight(PoEModData mod, ISet<string> tags, ISet<IList<PoEModWeight>> weightgroups = null, IList<string> catalysttags = null, int catalystquality = 0, bool sanctified = false, int? baseweightoverride = null)
         {
             int weight = 0;
             if (mod.spawn_weights != null)
@@ -408,6 +409,10 @@ namespace PoETheoryCraft.Utils
                 }
                 weight = weight * Math.Max(sumadds, 100) / 100;
                 weight = (int)(weight / Math.Max(sumnegs, 1));
+            }
+            if (sanctified)
+            {
+                weight = weight * (60 + mod.required_level) / 100;
             }
             return weight;
         }

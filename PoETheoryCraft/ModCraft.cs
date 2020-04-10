@@ -22,6 +22,13 @@ namespace PoETheoryCraft
             Min = stat.min;
             Roll = RNG.Gen.Next(Min, Max + 1);
         }
+        public ModRoll(PoEModStat stat, bool lucky)
+        {
+            ID = stat.id ?? "";
+            Max = stat.max;
+            Min = stat.min;
+            Roll = lucky ? Math.Max(RNG.Gen.Next(Min, Max + 1), RNG.Gen.Next(Min, Max + 1)) : RNG.Gen.Next(Min, Max + 1);
+        }
         private ModRoll(ModRoll r)
         {
             ID = r.ID;
@@ -63,6 +70,20 @@ namespace PoETheoryCraft
                 foreach (PoEModStat s in data.stats)
                 {
                     Stats.Add(new ModRoll(s));
+                }
+            }
+            IsLocked = false;
+            Quality = 0;
+        }
+        public ModCraft(PoEModData data, bool lucky)
+        {
+            SourceData = data.key;
+            Stats = new List<ModRoll>();
+            if (data.stats != null)
+            {
+                foreach (PoEModStat s in data.stats)
+                {
+                    Stats.Add(new ModRoll(s, lucky));
                 }
             }
             IsLocked = false;

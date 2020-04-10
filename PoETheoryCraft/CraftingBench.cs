@@ -228,6 +228,7 @@ namespace PoETheoryCraft
             int cesscount = 0;                                          //glyphic/tangled corrupted mod count
             IDictionary<PoEModData, int> extendedpool = new Dictionary<PoEModData, int>(BaseValidMods); //extra rollable mods
             PoEBaseItemData itemtemplate = CraftingDatabase.AllBaseItems[BenchItem.SourceData];
+            bool rollslucky = false;
             foreach (PoEFossilData fossil in fossils)
             {
                 foreach (string t in fossil.forbidden_tags)
@@ -249,6 +250,8 @@ namespace PoETheoryCraft
                     if (!allowed)
                         return "Invalid item class for one or more selected fossils";
                 }
+                if (fossil.rolls_lucky)
+                    rollslucky = true;
                 foreach (string t in fossil.added_mods)
                 {
                     if (!extendedpool.ContainsKey(CraftingDatabase.AllMods[t]))
@@ -284,11 +287,11 @@ namespace PoETheoryCraft
                 //check that the item can roll a corrupted ess mod
                 ItemCraft clone = BenchItem.Copy();
                 clone.ClearMods();
-                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(clone, modweightgroups);
+                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(clone, modweightgroups, rollslucky);
                 if (glyphicmods.Count == 0)
                     return "Item cannot roll forced corrupted essence mods";
             }
-            RollOptions ops = new RollOptions() { ForceMods = forcedmods, ModWeightGroups = modweightgroups, GlyphicCount = cesscount };
+            RollOptions ops = new RollOptions() { ForceMods = forcedmods, ModWeightGroups = modweightgroups, GlyphicCount = cesscount, Sanctified = rollslucky };
             if (tries == 1)
             {
                 foreach (PoEFossilData fossil in fossils)

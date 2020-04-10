@@ -248,9 +248,9 @@ namespace PoETheoryCraft
                     RemoveModAt(LiveMods, i);
             }
         }
-        public void AddMod(PoEModData data)
+        public void AddMod(PoEModData data, bool lucky = false)
         {
-            InsertMod(LiveMods, data);
+            InsertMod(LiveMods, data, lucky);
         }
         public void AddImplicit(PoEModData data)
         {
@@ -330,9 +330,9 @@ namespace PoETheoryCraft
             else
                 return ItemRarity.Rare;
         }
-        private void InsertMod(IList<ModCraft> modlist, PoEModData template)
+        private void InsertMod(IList<ModCraft> modlist, PoEModData template, bool lucky = false)
         {
-            ModCraft m = new ModCraft(template);
+            ModCraft m = new ModCraft(template, lucky);
             int i = 0;
             while (i < modlist.Count)
             {
@@ -341,7 +341,7 @@ namespace PoETheoryCraft
                     break;
                 i++;
             }
-            modlist.Insert(i, new ModCraft(template));
+            modlist.Insert(i, m);
             LiveTags.UnionWith(template.adds_tags);
             UpdateModQuality(m, QualityType);
         }

@@ -155,6 +155,8 @@ namespace PoETheoryCraft.Controls
                 ISet<IList<PoEModWeight>> modweightgroups = new HashSet<IList<PoEModWeight>>();
                 foreach (PoEFossilData fossil in fossils)
                 {
+                    if (fossil.rolls_lucky)
+                        ops.Sanctified = true;
                     foreach (string t in fossil.added_mods)
                     {
                         if (!extendedpool.ContainsKey(CraftingDatabase.AllMods[t]))
@@ -194,7 +196,7 @@ namespace PoETheoryCraft.Controls
             }
             if (cesscount > 0)
             {
-                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(itemcopy, ops.ModWeightGroups);
+                IDictionary<PoEModData, int> glyphicmods = ModLogic.FindGlyphicMods(itemcopy, ops.ModWeightGroups, ops.Sanctified);
                 if (glyphicmods.Count > 0)
                 {
                     int weightsum = 0;

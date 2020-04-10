@@ -1,0 +1,84 @@
++# to maximum Life,1,51
++# to maximum Life,5,46
++# to maximum Life,11,54
++# to maximum Life,18,54
++# to maximum Life,24,57
++# to maximum Life,30,66
++# to maximum Life,36,81
++# to maximum Life,44,82
++# to maximum Life,54,88
++# to maximum Life,64,81
++# to maximum Life,73,103
++# to maximum Life,81,113
++# to maximum Life,86,124
+Reflects # Physical Damage to Melee Attackers,1,86
+Reflects # Physical Damage to Melee Attackers,10,96
+Reflects # Physical Damage to Melee Attackers,20,116
+Reflects # Physical Damage to Melee Attackers,35,139
++# to Strength,1,25
++# to Strength,11,20
++# to Strength,22,47
++# to Strength,33,47
++# to Strength,44,45
++# to Strength,55,62
++# to Strength,66,66
++# to Strength,74,73
++# to Strength,82,68
+Regenerate # Life per second,1,25
+Regenerate # Life per second,18,47
+Regenerate # Life per second,30,43
+Regenerate # Life per second,44,60
+Regenerate # Life per second,59,63
+Regenerate # Life per second,78,80
+Regenerate # Life per second,83,74
+Regenerate # Life per second,86,70
++#% to Fire Resistance,1,35
++#% to Fire Resistance,12,41
++#% to Fire Resistance,24,41
++#% to Fire Resistance,36,50
++#% to Fire Resistance,48,60
++#% to Fire Resistance,60,62
++#% to Fire Resistance,72,68
++#% to Fire Resistance,84,75
++#% to Cold Resistance,1,31
++#% to Cold Resistance,14,31
++#% to Cold Resistance,26,47
++#% to Cold Resistance,38,46
++#% to Cold Resistance,50,55
++#% to Cold Resistance,60,66
++#% to Cold Resistance,72,64
++#% to Cold Resistance,84,90
++#% to Lightning Resistance,1,38
++#% to Lightning Resistance,13,33
++#% to Lightning Resistance,25,32
++#% to Lightning Resistance,37,66
++#% to Lightning Resistance,49,57
++#% to Lightning Resistance,60,56
++#% to Lightning Resistance,72,65
++#% to Lightning Resistance,84,60
++#% to Chaos Resistance,16,5
++#% to Chaos Resistance,30,11
++#% to Chaos Resistance,44,23
++#% to Chaos Resistance,56,20
++#% to Chaos Resistance,65,24
++#% to Chaos Resistance,81,19
+#% increased Stun and Block Recovery,1,39
+#% increased Stun and Block Recovery,17,39
+#% increased Stun and Block Recovery,28,56
+#% increased Stun and Block Recovery,42,53
+#% increased Stun and Block Recovery,56,64
+#% increased Stun and Block Recovery,79,85
+#% reduced Attribute Requirements,36,40
+#% reduced Attribute Requirements,60,60
+#% additional Physical Damage Reduction,25,97
+#% additional Physical Damage Reduction,85,83
+0.0,13
+1.0,34
+2.0,45
+3.0,65
+4.0,95
+5.0,93
+6.0,112
+7.0,146
+8.0,158
+9.0,188

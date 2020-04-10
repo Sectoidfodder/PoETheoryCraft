@@ -99,7 +99,7 @@ namespace PoETheoryCraft.Controls
         private bool AllowedFossils(object o)
         {
             PoEFossilData f = o as PoEFossilData;
-            return (!f.changes_quality && !f.enchants && !f.mirrors && !f.rolls_lucky && !f.rolls_white_sockets && f.sell_price_mods.Count == 0);
+            return (!f.changes_quality && !f.enchants && !f.mirrors && !f.rolls_white_sockets && f.sell_price_mods.Count == 0);
         }
         private bool AllowedCurrencies(object o)
         {
