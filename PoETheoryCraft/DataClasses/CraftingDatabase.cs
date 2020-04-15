@@ -164,12 +164,12 @@ namespace PoETheoryCraft.DataClasses
                 if (d.generation_type == ModLogic.Enchantment)
                     Enchantments.Add(k, AllMods[k]);
                 //flag relevant mods to move to core dictionary, "misc" domain is for regular jewels
-                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "undefined") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "affliction_jewel") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     CoreMods.Add(k, AllMods[k]);
                 //every mod worth translating into string templates to search by, doesn't include implicits because idk how to include them w/o also including a ton of useless unique item mods
-                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "undefined" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "item" || d.domain == "abyss_jewel" || d.domain == "misc" || d.domain == "affliction_jewel" || d.domain == "crafted" || d.domain == "delve") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                     IncludeTranslations(AllMods[k]);
-                if ((d.domain == "undefined") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
+                if ((d.domain == "affliction_jewel") && (d.generation_type == ModLogic.Prefix || d.generation_type == ModLogic.Suffix))
                 {
                     int notableindex = d.full_translation.IndexOf("Skill is");
                     if (notableindex > 0 && !d.full_translation.Contains("Jewel Socket"))
@@ -279,7 +279,7 @@ namespace PoETheoryCraft.DataClasses
                 //set key field
                 AllBaseItems[k].key = k;
                 //flag relevant items to move to core dictionary, "misc" domain only contains regular jewels as of 3.9
-                if (AllBaseItems[k].domain == "item" || AllBaseItems[k].domain == "misc" || AllBaseItems[k].domain == "abyss_jewel" || (AllBaseItems[k].domain == "undefined" && AllBaseItems[k].item_class == "Jewel"))
+                if (AllBaseItems[k].domain == "item" || AllBaseItems[k].domain == "misc" || AllBaseItems[k].domain == "abyss_jewel" || AllBaseItems[k].domain == "affliction_jewel")
                     CoreBaseItems.Add(k, AllBaseItems[k]);
                 //make currency or catalyst data if it's in the list of relevant currencies
                 if (CurrencyIndex.Contains(AllBaseItems[k].name))
