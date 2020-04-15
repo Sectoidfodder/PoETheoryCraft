@@ -6,8 +6,7 @@
 
 * All craftable gear bases, jewels, and abyss jewels
 * Crafting currencies
-  * All Essences
-  * Fossils except Sanctified
+  * All Essences and Fossils
   * Tentative support for Catalysts, giving 1% bonus mod weight per 1% quality
 * All bench mods and interactions with metamods
 
