@@ -1,55 +1,3 @@
-Disciple of Kitava
-Every second, Consume a nearby Corpse to Recover 5% of Life and Mana
-10% more Damage taken if you haven't Consumed a Corpse Recently
-(Recently refers to the past 4 seconds)
-All are invited to his feast, one way or another.
-
-Lone Messenger
-You can only have one Herald
-50% more Effect of Herald Buffs on you
-100% more Damage with Hits from Herald Skills
-50% more Damage Over Time with Herald Skills
-Minions from Herald Skills deal 25% more Damage
-Your Aura Skills are Disabled
-Some tasks are too important to entrust to others.
-
-Nature's Patience
-Gain 2 Grasping Vines each second while stationary
-2% chance to deal Double Damage per Grasping Vine
-1% less Damage taken per Grasping Vine
-(Up to 10 Vines can grasp you, inflicting 8% less Movement Speed per Vine. Broken by moving)
-To win, all you must do is outlast.
-
-Secrets of Suffering
-Cannot Ignite, Chill, Freeze or Shock
-Critical Strikes inflict Scorch, Brittle and Sapped
-(Scorched Enemies have their Elemental Resistances lowered by up to 30%, based on the Fire Damage of the Hit, for 4 seconds)
-(Hits have up to +15% Critical Strike Chance against Brittle Enemies, based on the Cold Damage of the Hit which inflicted Brittle, for 4 seconds)
-(Sapped Enemies deal up to 20% less Damage, based on the Lightning Damage of the Hit, for 4 seconds)
-Even within the realm of torture, there are subtle intricacies.
-
-Kineticism
-Attack Projectiles always inflict Bleeding and Maim, and Knock Back Enemies
-Projectiles cannot Pierce, Fork or Chain
-(Bleeding deals Physical Damage over time, based on the base Physical Damage of the Skill. Damage is higher while moving)
-(Maimed enemies have 30% reduced Movement Speed)
-No force wasted, no time wasted.
-
-Veteran's Awareness
-+10% to all Elemental Resistances and maximum Elemental Resistances while affected by a Non-Vaal Guard Skill
-20% more Damage taken if a Non-Vaal Guard Buff was lost Recently
-20% additional Physical Damage Reduction while affected by a Non-Vaal Guard Skill
-(Maximum Resistances cannot be raised above 90%)
-(Recently refers to the past 4 seconds)
-Know when you'll be hit, and you'll barely feel it.
-
-Hollow Palm Technique
-You count as Dual Wielding while you are Unencumbered
-60% more Attack Speed while you are Unencumbered
-14 to 20 Added Attack Physical Damage per 10 Dexterity while you are Unencumbered
-(You are Unencumbered while you have no Equipped Gloves, Main Hand Item, or Off Hand Item)
-"The mastodons of yore were each born with two weapons greater than any sword. So, too, were you." - Maraketh Proverb
-
 Prodigious Defence
 3% Chance to Block Spell Damage
 30% increased Attack Damage while holding a Shield
@@ -68,7 +16,6 @@ Strike Leader
 Attack Skills deal 30% increased Damage while holding a Shield
 +2% Chance to Block Attack Damage
 +2 to Melee Strike Range while Holding a Shield
-(Affects Melee Strikes, including the Default Attack. Does not apply to Areas of Effect)
 
 Powerful Ward
 20% chance to gain a Power Charge when you Block
@@ -83,26 +30,21 @@ Attack Skills deal 25% increased Damage while holding a Shield
 5% increased maximum Life
 
 Precise Retaliation
-80% increased Critical Strike Chance if you havenâ€™t Blocked Recently
-+40% to Critical Strike Multiplier if you have Blocked Recently
-(Recently refers to the past 4 seconds)
+60% increased Critical Strike Chance if you haven’t Blocked Recently
++30% to Critical Strike Multiplier if you have Blocked Recently
 
 Veteran Defender
 +15 to all Attributes
 +15% Elemental Resistances while holding a Shield
 60% increased Defences from Equipped Shield
-(Attributes are Strength, Dexterity, and Intelligence)
-(Defences are Armour, Evasion Rating and Energy Shield)
 
 Iron Breaker
-Enemies have -10% to Total Physical Damage Reduction against your Hits
+Overwhelm 10% Physical Damage Reduction
 35% increased Physical Damage
-(Physical Damage Reduction cannot be negative)
 
 Deep Cuts
 15% chance to Impale Enemies on Hit with Attacks
 Impales you inflict last 1 additional Hit
-(When an Impaled enemy is hit, the Impale reflects 10% of the physical damage of the Impaling hit to that enemy. Impale lasts for 5 hits)
 
 Master the Fundamentals
 +10% to all Elemental Resistances
@@ -121,8 +63,6 @@ Vicious Skewering
 Attacks have 10% chance to cause Bleeding
 10% chance to Impale Enemies on Hit with Attacks
 15% increased Effect of Impales inflicted by Hits that also inflict Bleeding
-(Bleeding deals Physical Damage over time, based on the base Physical Damage of the Skill. Damage is higher while moving)
-(When an Impaled enemy is hit, the Impale reflects 10% of the physical damage of the Impaling hit to that enemy. Impale lasts for 5 hits)
 
 Grim Oath
 Gain 10% of Physical Damage as Extra Chaos Damage
@@ -133,9 +73,7 @@ Battle-Hardened
 
 Replenishing Presence
 8% increased effect of Non-Curse Auras from your Skills
-Auras from your Skills grant 0.2% of Life Regenerated per second to
-you and Allies
-(Auras can only grant bonuses to things they affect)
+You and nearby Allies Regenerate 1.00% of Life per second
 
 Master of Command
 50% reduced Mana Reservation of Banner Skills
@@ -146,17 +84,17 @@ First Among Equals
 Non-Curse Aura Skills have 20% increased Duration
 
 Purposeful Harbinger
-10% increased Effect of Auras on You for each Herald affecting you
+Aura Buffs from Skills have 8% increased Effect on you for each Herald affecting you, up to 40%
 
 Precise Commander
-You and nearby Allies have 50% increased Critical Strike Chance
-You and nearby Allies have +15% to Critical Strike Multiplier
+You and nearby Allies have 30% increased Critical Strike Chance
+You and nearby Allies have +12% to Critical Strike Multiplier
 
 Pure Commander
 Purity of Elements has 30% increased Aura Effect
-Purity of Fire has 30% increased Aura Effect
-Purity of Ice has 30% increased Aura Effect
-Purity of Lightning has 30% increased Aura Effect
+Purity of Fire has 10% increased Aura Effect
+Purity of Ice has 10% increased Aura Effect
+Purity of Lightning has 10% increased Aura Effect
 
 Stalwart Commander
 Grace has 30% increased Aura Effect
@@ -170,16 +108,14 @@ Hatred has 30% increased Aura Effect
 
 Skullbreaker
 8% reduced Enemy Stun Threshold
-+20% to Critical Strike Multiplier
-(The Stun Threshold determines how much Damage can Stun something)
++15% to Critical Strike Multiplier
 
 Pressure Points
 Your Critical Strikes have a 5% chance to deal Double Damage
-40% increased Critical Strike Chance
+30% increased Critical Strike Chance
 
 Overwhelming Malice
 10% chance to gain Unholy Might for 4 seconds on Critical Strike
-(Unholy Might grants 30% of Physical Damage as extra Chaos Damage)
 
 Magnifier
 10% increased Area of Effect
@@ -187,9 +123,8 @@ Magnifier
 +10% to Critical Strike Multiplier
 
 Savage Response
-+50% to Critical Strike Multiplier if you've taken a Savage Hit Recently
-40% increased Critical Strike Chance
-(Recently refers to the past 4 seconds)
++30% to Critical Strike Multiplier if you've taken a Savage Hit Recently
+30% increased Critical Strike Chance
 
 Eye of the Storm
 +20% to Damage over Time Multiplier for Ignite from Critical Strikes
@@ -205,13 +140,9 @@ Quick Getaway
 5% increased Attack and Cast Speed
 5% increased Movement Speed if you've dealt a Critical Strike Recently
 25% increased Critical Strike Chance
-(Recently refers to the past 4 seconds)
 
 Assert Dominance
-10% increased Area Damage
-15% increased Area of Effect if you've Killed Recently
-10% increased Area of Effect if you've Killed at least 5 Enemies Recently
-(Recently refers to the past 4 seconds)
+25% increased Area of Effect if you've Killed at least 5 Enemies Recently
 
 Vast Power
 20% increased Area Damage
@@ -220,7 +151,6 @@ Vast Power
 Powerful Assault
 20% increased Area Damage
 Area Skills have 10% chance to Knock Enemies Back on Hit
-(Knockback pushes Enemies away when Hit)
 
 Intensity
 10% increased Area Damage
@@ -231,14 +161,12 @@ Titanic Swings
 15% increased Area of Effect while wielding a Two Handed Melee Weapon
 
 Towering Threat
-5% increased maximum Life
+8% increased maximum Life
 10% increased Area of Effect
-3% increased Character Size
 
 Ancestral Echo
 20% increased Totem Placement speed
 10% increased Attack and Cast Speed if you've summoned a Totem Recently
-(Recently refers to the past 4 seconds)
 
 Ancestral Reach
 25% increased Totem Damage
@@ -258,12 +186,10 @@ Totems gain +40% to Chaos Resistance
 Snaring Spirits
 30% increased Totem Damage
 Totems Hinder Enemies near them when Summoned, with 25% reduced Movement Speed
-(Hindered enemies have reduced movement speed)
 
 Sleepless Sentries
-20% increased Totem Damage
 20% increased Totem Duration
-Attack Skills have +1 to maximum number of Summoned Ballista Totems
+You have Onslaught if you've Summoned a Totem Recently
 
 Ancestral Guidance
 30% increased Effect of Buffs granted by your Active Ancestor Totems
@@ -272,7 +198,6 @@ Totems' Action Speed cannot be modified to below base value
 Ancestral Inspiration
 Gain Arcane Surge when you Summon a Totem
 Spells cast by Totems deal 25% increased Damage
-(Arcane Surge grants 10% more Spell Damage, 10% increased Cast Speed, and 0.5% of maximum Mana Regenerated per second, for 4 seconds)
 
 Vital Focus
 Channelling Skills deal 30% increased Damage
@@ -292,23 +217,22 @@ Channelling Skills deal 25% increased Damage
 25% chance to gain an Endurance Charge each second while Channelling
 
 Precise Focus
-50% increased Critical Strike Chance while Channelling
-+30% to Critical Strike Multiplier if you've been Channelling for at least 1 second
+30% increased Critical Strike Chance while Channelling
++20% to Critical Strike Multiplier if you've been Channelling for at least 1 second
 
 Stoic Focus
-+4% Chance to Block Attack Damage while Channelling
-+4% Chance to Block Spell Damage while Channelling
++3% Chance to Block Attack Damage while Channelling
++3% Chance to Block Spell Damage while Channelling
 Channelling Skills deal 25% increased Damage
 
 Hex Breaker
 8% increased Attack and Cast Speed while Channelling
-Immune to Curses while Channelling
+Remove a Curse after Channelling for 2 seconds
 
 Arcane Adept
 5% increased Attack and Cast Speed while Channelling
 Channelling Skills deal 20% increased Damage
 Gain Arcane Surge after Channelling for 1 second
-(Arcane Surge grants 10% more Spell Damage, 10% increased Cast Speed, and 0.5% of maximum Mana Regenerated per second, for 4 seconds)
 
 Distilled Perfection
 25% increased Life Recovery from Flasks
@@ -316,8 +240,8 @@ Distilled Perfection
 20% increased Flask Effect Duration
 
 Spiked Concoction
-Flasks applied to you have 10% increased Effect
 5% increased Attack and Cast Speed during any Flask Effect
+Gain Alchemist's Genius when you use a Flask
 
 Fasting
 20% increased Flask Charges gained
@@ -333,86 +257,61 @@ Special Reserve
 Regenerate 2% of Life per second during any Flask Effect
 
 Numbing Elixir
-25% increased Life Recovery from Flasks
-25% increased Mana Recovery from Flasks
-3% additional Physical Damage Reduction during Effect of any Life or Mana Flask
+40% reduced Effect of Curses on you during Effect of any Life or Mana Flask
+40% reduced Effect of non-Damaging Ailments on you during Effect of any Life or Mana Flask
 
 Mob Mentality
-20% increased Warcry Cooldown Recovery Speed
-You and nearby Party members gain 5 Rage when you Warcry
-(Inherent effects from having Rage are:
-1% increased Attack Damage per 1 Rage
-1% increased Attack Speed per 2 Rage
-1% increased Movement Speed per 5 Rage)
+Exerted Attacks deal 25% increased Damage
+Warcries have 5% Chance to grant an Endurance, Frenzy or Power Charge per Power
 
 Cry Wolf
-30% increased Warcry Duration
-Warcries count as having 10 additional nearby Enemies
-30% increased Warcry Buff Effect
+Exerted Attacks deal 25% increased Damage
+Warcries have minimum of 10 Power
 
 Haunting Shout
-20% increased Warcry Cooldown Recovery Speed
 Enemies Taunted by your Warcries are Intimidated
-Enemies Taunted by your Warcries are Unnerved
-(Intimidated enemies take 10% increased Attack Damage)
-(Unnerved enemies take 10% increased Spell Damage)
 
 Lead By Example
-4% additional Physical Damage Reduction if you've Warcried in the past 8 seconds
-4% chance to deal Double Damage if you've Warcried in the past 8 seconds
+When you Warcry, you and nearby Allies gain Onslaught for 4 seconds
++10 to Strength and Dexterity
 
 Provocateur
 40% increased Critical Strike Chance against Taunted Enemies
-+15% to Critical Strike Multiplier against Taunted Enemies
-15% increased Warcry Buff Effect
++10% to Critical Strike Multiplier against Taunted Enemies
 
 Warning Call
-20% increased Warcry Cooldown Recovery Speed
-50% increased Melee Critical Strike Chance if you've Warcried Recently
-+35% to Melee Critical Strike Multiplier if you've Warcried Recently
-(Recently refers to the past 4 seconds)
+Gain 25% increased Armour per 5 Power for 8 seconds when you Warcry, up to a maximum of 100%
 
 Rattling Bellow
-Enemies Taunted by you take 5% increased Damage
-Warcry Skills have 40% increased Area of Effect
+Exerted Attacks have 8% chance to deal Double Damage
++20 to Strength
 
 Bloodscent
 Attacks with Axes or Swords grant 1 Rage on Hit, no more than once every second
-(Inherent effects from having Rage are:
-1% increased Attack Damage per 1 Rage
-1% increased Attack Speed per 2 Rage
-1% increased Movement Speed per 5 Rage)
 
 Run Through
 Axe or Sword Attacks deal 15% increased Damage with Ailments
 10% increased Impale Effect
 10% chance to Impale Enemies on Hit with Axes or Swords
 15% increased Physical Damage with Axes or Swords
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Wound Aggravation
 Axe or Sword Attacks deal 20% increased Damage with Ailments
 20% increased Physical Damage with Axes or Swords
 +10% to Physical Damage over Time Multiplier while wielding an Axe or Sword
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Overlord
 30% increased Damage with Maces, Sceptres or Staves
 Gain Fortify for 6 seconds on Melee Hit with a Mace, Sceptre or Staff
-(Warstaves are considered Staves)
 
 Expansive Might
 Mace, Sceptre or Staff Attacks deal 20% increased Damage with Hits and Ailments
 While stationary, gain 10% increased Area of Effect every second, up to a maximum of 50%
-(Warstaves are considered Staves)
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Weight Advantage
 Mace, Sceptre or Staff Attacks deal 30% increased Damage with Hits and Ailments
 4% chance to deal Double Damage while wielding a Mace, Sceptre or Staff
 +20 to Strength
-(Warstaves are considered Staves)
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Wind-up
 +15% to Critical Strike Multiplier with Claws or Daggers
@@ -434,19 +333,17 @@ Tempered Arrowheads
 Bow Skills have +10% to Damage over Time Multiplier
 Bow Skills have 20% increased Skill Effect Duration
 10% increased Duration of Ailments inflicted while wielding a Bow
-(Ailments are Bleeding, Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, Sapped, and Poisoned)
 
 Broadside
 Bow Skills have 25% increased Area of Effect
 
 Explosive Force
-Enemies killed by your Wand Hits have a 10% chance to Explode, dealing a quarter of their Life as Chaos Damage
+Enemies Killed with Wand Hits have a 10% chance to Explode, dealing a quarter of their Life as Chaos Damage
 Gain 10% of Wand Physical Damage as Extra Chaos Damage
 
 Opportunistic Fusilade
 50% increased Critical Strike Chance with Wands
 35% increased Damage with Wands if you've dealt a Critical Strike Recently
-(Recently refers to the past 4 seconds)
 
 Storm's Hand
 Gain 10% of Wand Physical Damage as Extra Lightning Damage
@@ -456,9 +353,6 @@ Battlefield Dominator
 Attacks with Two Handed Weapons deal 25% increased Damage with Hits and Ailments
 10% reduced Enemy Stun Threshold
 15% increased Area of Effect if you've Stunned an Enemy with a Two Handed Melee Weapon Recently
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
-(The Stun Threshold determines how much Damage can Stun something)
-(Recently refers to the past 4 seconds)
 
 Martial Mastery
 10% increased Attack Speed with Two Handed Melee Weapons
@@ -467,8 +361,7 @@ Martial Mastery
 
 Surefooted Striker
 40% increased Critical Strike Chance with Two Handed Melee Weapons
-8% chance to deal Double Damage if you've dealt a Critical Strike with a Two Handed Melee Weapon Recently
-(Recently refers to the past 4 seconds)
+5% chance to deal Double Damage if you've dealt a Critical Strike with a Two Handed Melee Weapon Recently
 
 Graceful Execution
 5% increased Attack Speed with Two Handed Melee Weapons
@@ -477,22 +370,21 @@ Graceful Execution
 +15 to Dexterity and Intelligence
 
 Brutal Infamy
+Attacks with Two Handed Melee Weapons deal 20% increased Damage with Hits and Ailments
 40% increased Damage with Hits and Ailments against Unique Enemies
 
 Fearsome Warrior
+Attacks with Two Handed Melee Weapons deal 25% increased Damage with Hits and Ailments
 8% increased Area of Effect
 25% chance to Intimidate nearby Enemies for 4 seconds on Melee Kill
-(Intimidated enemies take 10% increased Attack Damage)
 
 Combat Rhythm
 10% increased Attack Speed if you've Hit with your Main Hand Weapon Recently
 10% increased Movement Speed if you've Hit with your Off Hand Weapon Recently
-(Recently refers to the past 4 seconds)
 
 Hit and Run
-Attack Skills deal 20% increased Damage while Dual Wielding
-4% chance to Dodge Attack or Spell Hits if you've Hit an Enemy Recently
-(Recently refers to the past 4 seconds)
+Attack Skills deal 25% increased Damage while Dual Wielding
+3% chance to Dodge Attack or Spell Hits if you've Hit an Enemy Recently
 
 Insatiable Killer
 Attack Skills deal 20% increased Damage while Dual Wielding
@@ -508,7 +400,6 @@ Martial Momentum
 8% increased Attack Speed while Dual Wielding
 16% increased Accuracy Rating while Dual Wielding
 32% increased Damage if you've used a Travel Skill Recently
-(Recently refers to the past 4 seconds)
 
 Deadly Repartee
 +5% Chance to Block Attack Damage while Dual Wielding
@@ -522,55 +413,43 @@ Quick and Deadly
 Smite the Weak
 40% increased Attack Damage against Maimed Enemies
 Attacks have 10% chance to Maim on Hit
-(Maimed enemies have 30% reduced Movement Speed)
 
 Heavy Hitter
 30% increased Attack Damage
 10% reduced Enemy Stun Threshold
 20% chance to double Stun Duration
 30% increased Damage with Ailments from Attack Skills
-(The Stun Threshold determines how much Damage can Stun something)
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Martial Prowess
 20% increased Attack Damage
 6% increased Attack Speed
 15% increased Global Accuracy Rating
 20% increased Damage with Ailments from Attack Skills
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
 
 Calamitous
 10% chance to Freeze, Shock and Ignite
 30% increased Elemental Damage with Attack Skills
 15% increased Effect of Non-Damaging Ailments
-(Freeze lowers Enemy Action Speed to zero, preventing them from acting. Duration is based on the Cold Damage of the Hit)
-(Shock increases Damage taken by up to 50%, depending on the amount of Lightning Damage in the hit, for 2 seconds)
-(Ignite deals Fire Damage over time, based on the base Fire Damage of the Skill, for 4 seconds)
-(Ailments that do not deal Damage are Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
 
 Devastator
 20% increased Attack Damage
 20% increased Damage with Ailments from Attack Skills
-Enemies killed by your Attack Hits have a 15% chance to Explode, dealing a tenth of their maximum Life as Physical Damage
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
+Enemies Killed with Attack Hits have a 15% chance to Explode, dealing a tenth of their Life as Physical Damage
 
 Fuel the Fight
 8% increased Attack Speed
 0.4% of Attack Damage Leeched as Mana
 20% increased Damage while Leeching
-(Leeched Mana is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Drive the Destruction
 0.8% of Attack Damage Leeched as Life
-20% increased Maximum total Recovery per second from Life Leech
-20% increased total Recovery per second from Life Leech
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
+25% increased Attack Damage when on Full Life
+Attacks have 10% chance to Maim on Hit
 
 Feed the Fury
 0.4% of Attack Damage Leeched as Life
 30% increased Damage while Leeching
 15% increased Attack Speed while Leeching
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Seal Mender
 Skills Supported by Unleash have 30% increased Seal gain frequency
@@ -578,12 +457,10 @@ Skills Supported by Unleash have 30% increased Seal gain frequency
 Conjured Wall
 25% increased Spell Damage
 +6% Chance to Block Spell Damage if you've Cast a Spell Recently
-(Recently refers to the past 4 seconds)
 
 Arcane Heroism
 30% increased Effect of Arcane Surge on you
 10% chance to gain Arcane Surge when you Hit a Unique enemy
-(Arcane Surge grants 10% more Spell Damage, 10% increased Cast Speed, and 0.5% of maximum Mana Regenerated per second, for 4 seconds)
 
 Practiced Caster
 20% increased Spell Damage
@@ -596,47 +473,37 @@ Burden Projection
 
 Thaumophage
 0.6% of Spell Damage Leeched as Energy Shield
-20% increased Maximum total Recovery per second from Energy Shield Leech
+25% increased Spell Damage while on Full Energy Shield
 10% chance to Hinder Enemies on Hit with Spells, with 30% reduced Movement Speed
-(Leeched Energy Shield is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
-(Hindered enemies have reduced movement speed)
 
 Essence Rush
 40% increased Damage while Leeching Energy Shield
 0.3% of Spell Damage Leeched as Energy Shield
 5% increased Attack and Cast Speed while Leeching Energy Shield
-(Leeched Energy Shield is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Sap Psyche
 20% increased Spell Damage
 30% increased Mana Regeneration Rate
-Regenerate 1% of Energy Shield per second if youâ€™ve Cursed an Enemy Recently
-(Recently refers to the past 4 seconds)
+Regenerate 1% of Energy Shield per second if you’ve Cursed an Enemy Recently
 
 Sadist
 15% increased Elemental Damage if you've Chilled an Enemy Recently
 20% increased Elemental Damage if you've Ignited an Enemy Recently
 25% increased Elemental Damage if you've Shocked an Enemy Recently
-(Recently refers to the past 4 seconds)
 
 Corrosive Elements
 15% increased Elemental Damage
 Cold Skills have a 25% chance to apply Cold Exposure on Hit
 Fire Skills have a 25% chance to apply Fire Exposure on Hit
 Lightning Skills have a 25% chance to apply Lightning Exposure on Hit
-(Cold Exposure applies -10% to Cold Resistance for 4 seconds)
-(Fire Exposure applies -10% to Fire Resistance for 4 seconds)
-(Lightning Exposure applies -10% to Lightning Resistance for 4 seconds)
 
 Doryani's Lesson
 0.2% of Elemental Damage Leeched as Life
 25% increased Elemental Damage
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Disorienting Display
 25% increased Elemental Damage
 10% chance to Blind nearby Enemies when you use an Elemental Skill
-(Blinded enemies have their Chance to Hit halved)
 
 Prismatic Heart
 +10% to all Elemental Resistances
@@ -648,7 +515,6 @@ Widespread Destruction
 
 Master of Fire
 Nearby Enemies have Fire Exposure
-(Fire Exposure applies -10% to Fire Resistance for 4 seconds)
 
 Smoking Remains
 35% increased Fire Damage
@@ -664,13 +530,11 @@ Gain 10% of Lightning Damage as Extra Cold Damage against Chilled Enemies
 Storm Drinker
 Damage Penetrates 8% Lightning Resistance
 0.5% of Lightning Damage Leeched as Energy Shield
-(Leeched Energy Shield is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Paralysis
 30% increased Lightning Damage
 10% chance to double Stun Duration
 Lightning Skills have 10% reduced Enemy Stun Threshold
-(The Stun Threshold determines how much Damage can Stun something)
 
 Supercharge
 Lightning Damage with Non-Critical Strikes is Lucky
@@ -684,13 +548,12 @@ Cold to the Core
 1% increased Cold Damage per 25 Strength
 
 Cold-Blooded Killer
-20% increased Cold Damage
-Recover 2% of Life on Kill
++8% to Cold Damage over Time Multiplier
+Recover 2% of Life on Killing a Chilled Enemy
 
 Touch of Cruelty
 Chaos Skills have 10% chance to Hinder Enemies on Hit, with 30% reduced Movement Speed
 Enemies Hindered by you take 10% increased Chaos Damage
-(Hindered enemies have reduced movement speed)
 
 Unwaveringly Evil
 30% increased Chaos Damage
@@ -708,7 +571,7 @@ Unholy Grace
 
 Wicked Pall
 35% increased Chaos Damage
-20% increased Skill Effect Duration
+10% increased Skill Effect Duration
 
 Renewal
 Minions Regenerate 1% of Life per second
@@ -732,13 +595,12 @@ Summoned Skeletons have 10% chance to Wither Enemies for 2 seconds on Hit
 Summoned Skeletons have 30% of Physical Damage Converted to Chaos Damage
 
 Hulking Corpses
-Minions have 20% increased maximum Life
-20% increased Raised Zombie Size
+Minions have 25% increased maximum Life
 Raised Zombies have 5% chance to Taunt Enemies on Hit
 
 Vicious Bite
 Minions have 50% increased Critical Strike Chance
-Raised Spectres, Raised Zombies, and Summoned Skeletons have +50% to Critical Strike Multiplier
+Minions have +20% to Critical Strike Multiplier
 
 Primordial Bond
 10% increased Damage per Summoned Golem
@@ -747,7 +609,6 @@ Golems have 25% increased Maximum Life
 
 Blowback
 Ignites you inflict deal Damage 15% faster
-(They will deal the same total damage over a shorter duration)
 
 Fan the Flames
 Ignites you inflict spread to other Enemies within a Radius of 15
@@ -755,7 +616,6 @@ Ignites you inflict spread to other Enemies within a Radius of 15
 Cooked Alive
 15% chance to Ignite
 Enemies Ignited by you have -10% to Fire Resistance
-(Ignite deals Fire Damage over time, based on the base Fire Damage of the Skill, for 4 seconds)
 
 Burning Bright
 +8% to Fire Damage over Time Multiplier
@@ -763,15 +623,14 @@ Burning Bright
 8% increased Area of Effect
 
 Wrapped in Flame
-20% increased Burning Damage
-+15% to Fire Damage over Time Multiplier while Burning
-Regenerate 1.50% of Life per second while Burning
+20% increased Fire Damage
+Cannot be Chilled while Burning
+5% chance to Cover Enemies in Ash on Hit while you are Burning
 
 Vivid Hues
 +12% to Damage over Time Multiplier for Bleeding
 2% of Attack Damage Leeched as Life against Bleeding Enemies
 20% increased total Recovery per second from Life Leech
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Rend
 +12% to Damage over Time Multiplier for Bleeding
@@ -780,7 +639,6 @@ Rend
 Disorienting Wounds
 25% increased Damage with Bleeding
 25% chance to Blind with Hits against Bleeding Enemies
-(Blinded enemies have their Chance to Hit halved)
 
 Compound Injury
 50% increased Damage with Bleeding you inflict on Maimed Enemies
@@ -789,7 +647,6 @@ Septic Spells
 8% increased Cast Speed
 Spell Skills have +10% to Damage over Time Multiplier for Poison
 20% chance to Poison on Hit with Spell Damage
-(Poison deals Chaos Damage over time, based on the base Physical and Chaos Damage of the Skill. Multiple instances of Poison stack)
 
 Low Tolerance
 +8% to Damage over Time Multiplier for Poison
@@ -802,8 +659,8 @@ Steady Torment
 +10% to Damage over Time Multiplier for Poison you inflict on Bleeding Enemies
 
 Eternal Suffering
-+5% to Chaos Damage over Time Multiplier
-Chaos Skills have 30% increased Skill Effect Duration
+25% increased Chaos Damage
+50% chance to inflict Withered for two seconds on Hit if there are 5 or fewer Withered Debuffs on Enemy
 
 Eldritch Inspiration
 +8% to Chaos Damage over Time Multiplier
@@ -813,8 +670,6 @@ Eldritch Inspiration
 Wasting Affliction
 20% increased Damage with Ailments
 Damaging Ailments deal damage 10% faster
-(Ailments that deal Damage are Bleeding, Ignited, and Poisoned)
-(They will deal the same total damage over a shorter duration)
 
 Haemorrhage
 +18% to Damage over Time Multiplier for Ailments from Critical Strikes
@@ -837,14 +692,11 @@ Recover 1% of Energy Shield on Kill
 Vile Reinvigoration
 24% increased Damage over Time
 6% increased maximum Energy Shield
-Regenerate 2% of Energy Shield per second if youâ€™ve Killed an Enemy Recently
-(Recently refers to the past 4 seconds)
+Regenerate 2% of Energy Shield per second if you’ve Killed an Enemy Recently
 
 Circling Oblivion
-20% increased Damage over Time
-20% increased Duration of Ailments on Enemies
-15% increased Skill Effect Duration
-(Ailments are Bleeding, Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, Sapped, and Poisoned)
+25% increased Damage over Time
+25% increased Duration of Ailments on Enemies
 
 Brewed for Potency
 24% increased Damage over Time
@@ -855,9 +707,6 @@ Astonishing Affliction
 20% increased Duration of Elemental Ailments on Enemies
 20% increased Damage with Hits and Ailments against Enemies affected by Ailments
 20% increased Effect of Non-Damaging Ailments
-(Elemental Ailments are Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
-(Ailments are Bleeding, Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, Sapped, and Poisoned)
-(Ailments that do not deal Damage are Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
 
 Cold Conduction
 Enemies Chilled by your Hits are Shocked
@@ -868,12 +717,9 @@ Inspired Oppression
 30% increased Mana Regeneration Rate if you have Frozen an Enemy Recently
 30% increased Mana Regeneration Rate if you have Shocked an Enemy Recently
 10% increased Effect of Non-Damaging Ailments
-(Recently refers to the past 4 seconds)
-(Ailments that do not deal Damage are Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
 
 Chilling Presence
 Nearby Enemies are Chilled
-(Chill reduces Enemy Action Speed by 10%)
 
 Deep Chill
 +10% to Cold Damage over Time Multiplier
@@ -900,46 +746,41 @@ Your Shocks can increase Damage taken by up to a maximum of 60%
 
 Evil Eye
 Enemies you Curse take 5% increased Damage
-5% chance to Dodge Attack Hits from Cursed Enemies
+Non-Cursed Enemies you inflict Non-Aura Curses on are Blinded for 4 seconds
 
 Whispers of Death
 5% increased Effect of your Curses
 20% increased Damage if you've Killed a Cursed Enemy Recently
-(Recently refers to the past 4 seconds)
 
 Forbidden Words
-25% increased Area of Effect of Curse Skills
 5% increased Effect of your Curses
-Curse Skills have 5% reduced Mana Reservation
+25% increased Area of Effect of Curse Aura Skills
+4% reduced Mana Reservation of Curse Auras
 
 Dark Discourse
 10% increased Effect of your Curses
 Enemies you Curse are Hindered, with 15% reduced Movement Speed
-Regenerate 1% of Energy Shield per second if youâ€™ve Killed an Enemy Recently
-(Hindered enemies have reduced movement speed)
-(Recently refers to the past 4 seconds)
+Regenerate 1% of Energy Shield per second if you’ve Killed an Enemy Recently
 
 Victim Maker
-Curse Skills have 50% increased Skill Effect Duration
-25% increased Damage with Hits and Ailments against Cursed Enemies
+Curse Skills have 8% increased Cast Speed
+Enemies Cursed by you have Malediction if 33% of Curse Duration expired
 
 Master of Fear
-Enemies you Curse are Intimidated
 Enemies you Curse are Unnerved
-(Intimidated enemies take 10% increased Attack Damage)
-(Unnerved enemies take 10% increased Spell Damage)
 
 Wish for Death
 You have Culling Strike against Cursed Enemies
 Curse Skills have 20% increased Skill Effect Duration
-(Culling Strike means enemies that are on 10% or lower life after your Hit are Killed)
 
 Heraldry
-20% increased Effect of Herald Buffs on you
-10% reduced Mana Reservation of Herald Skills
+Nearby Enemies have Cold Exposure while you are affected by Herald of Ice
+Nearby Enemies have Fire Exposure while you are affected by Herald of Ash
+Nearby Enemies have Lightning Exposure while you are affected by Herald of Thunder
 
 Endbringer
-25% increased Damage for each Herald affecting you
+5% increased Damage for each Herald affecting you
+20% increased Damage while affected by a Herald
 
 Cult-Leader
 Minions deal 35% increased Damage while you are affected by a Herald
@@ -962,23 +803,19 @@ Herald Skills deal 50% increased Damage over Time
 
 Self-Fulfilling Prophecy
 +1% to Critical Strike Chance of Herald Skills
-+25% to Critical Strike Multiplier if you dealt a Critical Strike with a Herald Skill Recently
-(Recently refers to the past 4 seconds)
++15% to Critical Strike Multiplier if you dealt a Critical Strike with a Herald Skill Recently
 
 Invigorating Portents
 Minions deal 20% increased Damage while you are affected by a Herald
 Minions have 10% increased Movement Speed for each Herald affecting you
 
 Pure Agony
-+1 to maximum number of Sentinels of Purity
 +5 to Maximum Virulence
 Minions deal 20% increased Damage while you are affected by a Herald
 
 Disciples
-1% additional Physical Damage Reduction per Summoned Sentinel of Purity
-You lose Virulence 30% slower
 Minions deal 20% increased Damage while you are affected by a Herald
-(Virulence is granted by the Herald of Agony Skill)
+Summoned Sentinels have 25% increased Cooldown Recovery Speed
 
 Dread March
 Minions have 10% increased maximum Life
@@ -989,19 +826,16 @@ Minions have +10% to Chaos Resistance
 Blessed Rebirth
 Minions have 20% increased maximum Life
 Minions created Recently cannot be Damaged
-(Recently refers to the past 4 seconds)
 
 Life from Death
 Minions have 15% increased maximum Life
 Regenerate 2% of Life per second if a Minion has Died Recently
 Minions Recover 4% of Life on Minion Death
-(Recently refers to the past 4 seconds)
 
 Feasting Fiends
 Minions have 10% increased maximum Life
 Minions deal 10% increased Damage
 Minions Leech 0.4% of Damage as Life
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Bodyguards
 Minions have 10% increased maximum Life
@@ -1017,7 +851,6 @@ Streamlined
 Shrieking Bolts
 35% increased Projectile Damage
 10% chance to Taunt Enemies on Projectile Hit
-(Enemies you Taunt can only target you, and deal 10% less damage to anyone else. Taunt lasts for 3 seconds)
 
 Eye to Eye
 25% increased Projectile Damage
@@ -1033,17 +866,16 @@ Projectiles Pierce an additional Target
 10% increased Projectile Damage
 
 Chip Away
-25% increased Brand Activation Frequency if you haven't used a Brand Skill Recently
-20% increased Brand Attachment range
-(Recently refers to the past 4 seconds)
+Brand Recall grants 20% increased Brand Attachment range to recalled Brands
+Brand Recall has 4% increased Cooldown Recovery Speed per Brand, up to a maximum of 40%
 
 Seeker Runes
-25% increased Damage with Brand Skills
-Unattached Brands gain 20% increased Brand Attachment Range per second
+25% increased Brand Damage
+Unattached Brands gain 20% increased Brand Attachment Range per second, up to 100%
 
 Remarkable
-You can Cast an additional Brand
-12% increased Cast Speed with Brand Skills
+8% increased Cast Speed with Brand Skills
+Skills which create Brands have 35% chance to create an additional Brand
 
 Brand Loyalty
 Enemies take 5% increased Damage for each of your Brands Attached to them
@@ -1051,13 +883,12 @@ Enemies take 5% increased Damage for each of your Brands Attached to them
 
 Holy Conquest
 5% increased Movement Speed
-20% increased Damage with Brand Skills
-10% increased Brand Activation frequency
+Brands Attach to a new Enemy each time they Activate, no more than once every 0.3 seconds
+10% increased Cast Speed with Brand Skills
 
 Grand Design
-You can Cast an additional Brand
-Brand Skills have 20% increased Duration
-10% increased Brand Activation frequency
+10% increased Cast Speed with Brand Skills
+Brand Skills have 10% increased Duration
 20% increased Brand Attachment range
 
 Set and Forget
@@ -1067,9 +898,8 @@ Set and Forget
 40% increased Trap Trigger Area of Effect
 
 Expert Sabotage
-30% increased Mine Damage
-Can have up to 2 additional Remote Mines placed at a time
 Mines have 20% increased Detonation Speed
+Mines have a 10% chance to be Detonated an Additional Time
 
 Guerilla Tactics
 20% increased Trap Damage
@@ -1077,22 +907,19 @@ Guerilla Tactics
 10% increased Trap Throwing Speed
 10% increased Mine Throwing Speed
 5% increased Movement Speed if you've thrown a Trap or Mine Recently
-(Recently refers to the past 4 seconds)
 
 Expendability
 10% chance to throw up to 1 additional Trap or Mine
-(Throwing Mines takes 10% more time for each additional Mine thrown)
 
 Arcane Pyrotechnics
 20% increased Trap Damage
 20% increased Mine Damage
 Gain Arcane Surge when your Mine is Detonated targeting an Enemy
 Gain Arcane Surge when your Trap is Triggered by an Enemy
-(Arcane Surge grants 10% more Spell Damage, 10% increased Cast Speed, and 0.5% of maximum Mana Regenerated per second, for 4 seconds)
 
 Surprise Sabotage
-+15% to Critical Strike Multiplier with Traps
-+15% to Critical Strike Multiplier with Mines
++10% to Critical Strike Multiplier with Traps
++10% to Critical Strike Multiplier with Mines
 Trap Damage Penetrates 5% Elemental Resistances
 Mine Damage Penetrates 5% Elemental Resistances
 
@@ -1114,7 +941,6 @@ Feast of Flesh
 8% increased maximum Life
 0.4% of Attack Damage Leeched as Life
 +10 Life gained for each Enemy hit by your Attacks
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Sublime Sensation
 10% increased maximum Energy Shield
@@ -1127,12 +953,12 @@ Every 5 seconds, Regenerate 10% of Life over one second
 
 Peace Amidst Chaos
 8% increased maximum Life
-2% additional Physical Damage Reduction while stationary
+20% increased Armour while stationary
 Regenerate 2% of Life per second while stationary
 
 Adrenaline
 6% increased maximum Life
-15% increased Maximum total Recovery per second from Life Leech
+10% increased Maximum total Recovery per second from Life Leech
 6% increased Attack Speed while Leeching
 
 Wall of Muscle
@@ -1146,7 +972,7 @@ Mindfulness
 Liquid Inspiration
 15% increased maximum Mana
 30% increased Mana Recovery from Flasks
-5% increased Mana Recovery Rate during Effect of any Mana Flask
+25% chance to gain a Power Charge when you use a Mana Flask
 
 Openness
 +30 to maximum Mana
@@ -1155,7 +981,6 @@ Openness
 Daring Ideas
 18% increased maximum Mana
 0.4% of Attack Damage Leeched as Mana
-(Leeched Mana is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Clarity of Purpose
 15% increased maximum Mana
@@ -1181,7 +1006,7 @@ Improvisor
 Stubborn Student
 20% increased Armour
 15% increased maximum Mana
-4% additional Physical Damage Reduction
++1 Armour per 10 Unreserved Maximum Mana
 
 Savour the Moment
 10% increased maximum Energy Shield
@@ -1194,15 +1019,14 @@ Will Shaper
 Gain 5% of Maximum Mana as Extra Maximum Energy Shield
 
 Spring Back
-6% increased maximum Energy Shield
-10% faster start of Energy Shield Recharge
+8% increased maximum Energy Shield
+5% faster start of Energy Shield Recharge
 15% increased Energy Shield Recharge Rate
 
 Conservation of Energy
 8% increased maximum Energy Shield
 0.3% of Spell Damage Leeched as Energy Shield
-20% increased Maximum total Recovery per second from Energy Shield Leech
-(Leeched Energy Shield is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
+10% increased Maximum total Recovery per second from Energy Shield Leech
 
 Heart of Iron
 Gain 10% of Maximum Life as Extra Armour
@@ -1210,7 +1034,6 @@ Gain 10% of Maximum Life as Extra Armour
 Prismatic Carapace
 30% increased Armour
 +1% to all maximum Elemental Resistances
-(Maximum Resistances cannot be raised above 90%)
 
 Militarism
 30% increased Armour
@@ -1224,17 +1047,15 @@ Second Skin
 Dragon Hunter
 30% increased Armour
 +20% to Fire Resistance
-5% additional Physical Damage Reduction
+15% chance to Defend with Double Armour
 
 Enduring Composure
 30% increased Armour
-Gain an Endurance Charge every second if you've been Hit Recently
-(Recently refers to the past 4 seconds)
+Gain 1 Endurance Charge every second if you've been Hit Recently
 
 Prismatic Dance
 30% increased Evasion Rating
 +1% to all maximum Elemental Resistances
-(Maximum Resistances cannot be raised above 90%)
 
 Natural Vigour
 30% increased Evasion Rating
@@ -1249,32 +1070,30 @@ Shifting Shadow
 20% increased Evasion Rating
 +20 to Dexterity
 10% chance to Blind Enemies on Hit
-(Blinded enemies have their Chance to Hit halved)
 
 Readiness
-+4% chance to Evade Attack Hits if you haven't been Hit Recently
-(Recently refers to the past 4 seconds)
+30% chance to avoid Bleeding
+30% chance to avoid being Impaled
+30% increased Evasion Rating if you haven't been Hit Recently
 
 Confident Combatant
 1% increased Damage per 1% Chance to Block Attack Damage
 
 Flexible Sentry
 3% Chance to Block Spell Damage
-25% chance to Avoid Elemental Ailments
+25% reduced Elemental Ailment Duration on you
 +3% Chance to Block Attack Damage
-(Elemental Ailments are Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
+25% reduced Effect of Non-Damaging Ailments on you
 
 Vicious Guard
 0.4% of Attack Damage Leeched as Life
 Regenerate 1.5% of Life per second
 +4% Chance to Block Attack Damage
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Mystical Ward
 4% Chance to Block Spell Damage
 0.3% of Spell Damage Leeched as Energy Shield
 Regenerate 1.5% of Energy Shield per second
-(Leeched Energy Shield is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Rote Reinforcement
 +20 to maximum Life
@@ -1294,7 +1113,6 @@ One with the Shield
 Recover 50 Life when you Block
 50% increased Defences from Equipped Shield
 +5% Chance to Block Attack Damage while holding a Shield
-(Defences are Armour, Evasion Rating and Energy Shield)
 
 Aerialist
 3% chance to Dodge Attack Hits
@@ -1305,7 +1123,6 @@ Elegant Form
 30% chance to Avoid Elemental Ailments
 3% chance to Dodge Attack Hits
 3% chance to Dodge Spell Hits
-(Elemental Ailments are Ignited, Scorched, Chilled, Frozen, Brittle, Shocked, and Sapped)
 
 Darting Movements
 5% increased Movement Speed
@@ -1314,16 +1131,15 @@ Darting Movements
 No Witnesses
 10% chance to gain Elusive on Kill
 25% increased Elusive Effect
-(Elusive initially grants 15% chance to Dodge Spell or Attack Hits, and 30% increased Movement Speed. The buff reduces its effect over time, removing itself at 0% effect. If you already have an Elusive buff, you cannot gain Elusive)
 
 Molten One's Mark
 +2% to maximum Fire Resistance
 Regenerate 1% of Life per second
-(Maximum Resistances cannot be raised above 90%)
 
 Fire Attunement
-40% reduced Ignite Duration on you
-50% reduced Extra Damage taken from Critical Strikes while Ignited
+30% reduced Ignite Duration on you
+You cannot be Ignited if you've been Ignited Recently
+Unaffected by Burning Ground
 
 Pure Might
 40% increased Stun and Block Recovery
@@ -1334,27 +1150,26 @@ Blacksmith
 25% increased Armour
 +20% to Fire Resistance
 0.4% of Fire Damage Leeched as Life
-(Leeched Life is recovered over time. Multiple Leeches can occur simultaneously, up to a maximum rate)
 
 Non-Flammable
++1% to maximum Fire Resistance
 +20% to Fire Resistance
-40% chance to Avoid being Ignited
-6% chance to Avoid Fire Damage from Hits
+30% chance to Avoid being Ignited
 
 Winter Prowler
 +2% to maximum Cold Resistance
 6% increased Movement Speed
-(Maximum Resistances cannot be raised above 90%)
 
 Hibernator
-40% reduced Freeze Duration on you
-15% additional Physical Damage Reduction while Frozen
+30% reduced Effect of Chill on you
+30% reduced Freeze Duration on you
+You cannot be Frozen if you've been Frozen Recently
+Unaffected by Chilled Ground
 
 Pure Guile
 Purity of Ice has 30% reduced Mana Reservation
 +20 to Dexterity
 5% chance to Blind Enemies on Hit
-(Blinded enemies have their Chance to Hit halved)
 
 Alchemist
 +20% to Cold Resistance
@@ -1362,18 +1177,18 @@ Alchemist
 20% increased Life Recovery from Flasks
 
 Antifreeze
++1% to maximum Cold Resistance
 +20% to Cold Resistance
-40% chance to Avoid being Frozen
-6% chance to Avoid Cold Damage from Hits
+30% chance to Avoid being Frozen
 
 Wizardry
 8% increased maximum Mana
 +2% to maximum Lightning Resistance
-(Maximum Resistances cannot be raised above 90%)
 
 Capacitor
-12% increased Movement Speed while Shocked
-40% reduced Effect of Shock on you
+You cannot be Shocked if you've been Shocked Recently
+30% reduced Effect of Shock on you
+Unaffected by Shocked Ground
 
 Pure Aptitude
 Regenerate 1% of Energy Shield per second
@@ -1386,18 +1201,17 @@ Sage
 Regenerate 1.5% of Life per second
 
 Insulated
++1% to maximum Lightning Resistance
 +20% to Lightning Resistance
-40% chance to Avoid being Shocked
-6% chance to Avoid Lightning Damage from Hits
+30% chance to Avoid being Shocked
 
 Born of Chaos
 +3% to maximum Chaos Resistance
-(Maximum Resistances cannot be raised above 90%)
 
 Antivenom
-+17% to Chaos Resistance
-Unaffected by Poison
-(Debuffs you are Unaffected by can still be placed on you, but will not actually apply their effect)
++1% to maximum Chaos Resistance
++23% to Chaos Resistance
+30% chance to Avoid being Poisoned
 
 Rot-Resistant
 +13% to Chaos Resistance
@@ -1413,3 +1227,48 @@ Blessed
 Student of Decay
 25% increased Damage over Time
 +13% to Chaos Resistance
+
+Lord of Drought
+10% increased Area of Effect
+25% increased Flammability Curse Effect
+
+Blizzard Caller
+25% increased Frostbite Curse Effect
+15% increased Critical Strike Chance
+
+Tempt the Storm
+5% increased Cast Speed
+25% increased Conductivity Curse Effect
+
+Misery Everlasting
+10% increased Skill Effect Duration
+25% increased Despair Curse Effect
+
+Exploit Weakness
+25% increased Vulnerability Curse Effect
+15% increased Physical Damage
+
+Self-Control
+15% increased Mana Regeneration Rate
+Discipline has 30% reduced Mana Reservation
+
+Uncompromising
+10% increased Stun Threshold
+Determination has 30% reduced Mana Reservation
+
+Sublime Form
++5% to all Elemental Resistances
+Grace has 30% reduced Mana Reservation
+
+Summer Commander
+8% increased Armour
+Purity of Fire has 30% increased Aura Effect
+
+Winter Commander
+4% increased Movement Speed
+Purity of Ice has 30% increased Aura Effect
+
+Grounded Commander
+Purity of Lightning has 30% increased Aura Effect
++10 to Intelligence
+

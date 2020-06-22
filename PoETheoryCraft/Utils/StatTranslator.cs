@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -19,9 +20,14 @@ namespace PoETheoryCraft.Utils
         public bool hidden { get; set; } = false;
         public IList<string> ids { get; set; }  //stat ids that match this chunk, may be a subset or superset partial match for mod template's stats
     }
+    public class MinMax
+    {
+        public int? min { set; get; }
+        public int? max { set; get; }
+    }
     public class LocalizationDefinition //represents one possible translation for a chunk
     {
-        public IList<IDictionary<string, int>> condition { set; get; }  //min/max for each number in a stat for this to apply
+        public IList<MinMax> condition { set; get; }  //min/max for each number in a stat for this to apply
         public IList<string> format { set; get; }                       //format for each number in a stat, or "ignore"
         public IList<IList<string>> index_handlers { set; get; }        //special operations for each number "negate", "divide_by_one_hundred", etc
         [JsonPropertyName("string")]
@@ -158,22 +164,17 @@ namespace PoETheoryCraft.Utils
             }
             return string.Join("\n", lines);
         }
-        private static bool MeetsCondition(IList<int> rolls, IList<IDictionary<string, int>> conds)
+        private static bool MeetsCondition(IList<int> rolls, IList<MinMax> conds)
         {
             for (int i=0; i<rolls.Count; i++)
             {
-                foreach (string req in conds[i].Keys)
+                if (conds[i].min != null && rolls[i] < conds[i].min)
                 {
-                    if (req == "min")
-                    {
-                        if (rolls[i] < conds[i][req])
-                            return false;
-                    }
-                    else if (req == "max")
-                    {
-                        if (rolls[i] > conds[i][req])
-                            return false;
-                    }
+                    return false;
+                }
+                if (conds[i].max != null && rolls[i] > conds[i].max)
+                {
+                    return false;
                 }
             }
             return true;

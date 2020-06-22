@@ -296,7 +296,7 @@ namespace PoETheoryCraft.Utils
                 return mods;
             foreach (PoEBenchOption b in benchops)
             {
-                if (!b.item_classes.Contains(item.item_class))
+                if (b.mod_id == null || !b.item_classes.Contains(item.item_class))
                     continue;
                 PoEModData mod = db[b.mod_id];
                 mods.Add(mod, b.cost);
