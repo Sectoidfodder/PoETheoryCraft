@@ -341,6 +341,11 @@ namespace PoETheoryCraft.DataClasses
         public static int LoadBenchOptions(string benchfile)
         {
             BenchOptions = JsonSerializer.Deserialize<HashSet<PoEBenchOption>>(File.ReadAllText(benchfile));
+            foreach (PoEBenchOption op in BenchOptions)
+            {
+                if (op.actions != null)
+                    op.mod_id = op.actions.add_mod;
+            }
             Debug.WriteLine(BenchOptions.Count + " crafting bench options loaded");
             return BenchOptions.Count;
         }

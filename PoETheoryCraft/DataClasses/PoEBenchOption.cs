@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PoETheoryCraft.DataClasses
 {
+    public class IDProxy
+    {
+        public string add_mod { get; set; }
+    }
     public class PoEBenchOption
     {
         //deserialized directly from crafting_bench_options.min.json
@@ -15,5 +19,6 @@ namespace PoETheoryCraft.DataClasses
         public ISet<string> item_classes { get; set; }      //corresponds to PoEBaseItemData.item_class for allowed craft targets
         public string master { get; set; }
         public string mod_id { get; set; }                  //key to the corresponding mod in mod dict
+        public IDProxy actions { get; set; }                //new data format for mod_id
     }
 }
