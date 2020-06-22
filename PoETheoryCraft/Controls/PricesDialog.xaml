@@ -14,7 +14,7 @@
             </Grid.ColumnDefinitions>
             <Button Width="140" HorizontalAlignment="Left" Click="GetPrices">Load from poe.ninja</Button>
             <ComboBox Grid.Column="1" SelectedIndex="0" HorizontalAlignment="Left" Name="LeagueNameBox" Width="80">
-                <ComboBoxItem>Delirium</ComboBoxItem>
+                <ComboBoxItem>Harvest</ComboBoxItem>
                 <ComboBoxItem>Standard</ComboBoxItem>
             </ComboBox>
             <!--<Button Grid.Column="1">Load from local file</Button>-->
